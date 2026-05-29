@@ -112,11 +112,14 @@
 
 	function verifyIncomePassword() {
 		const pass = $('#income-password-input').val();
-		if (pass === 'safwan@123') {
+		$.post("{{ route('income-report.unlock') }}", {
+			password: pass,
+			_token: $('meta[name="csrf-token"]').attr('content')
+		}).done(function(response) {
 			$('#modal-income-password').modal('hide');
-			window.location.href = "{{ route('income-report') }}?auth=safwan";
-		} else {
+			window.location.href = response.redirect;
+		}).fail(function() {
 			$('#income-password-error').show();
-		}
+		});
 	}
   </script>

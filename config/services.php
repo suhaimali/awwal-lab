@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'income_report' => [
+        'password' => env('INCOME_REPORT_PASSWORD'),
+    ],
+
 ];

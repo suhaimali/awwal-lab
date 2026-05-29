@@ -28,7 +28,6 @@
                     <div class="box mb-0 border-0 shadow-sm overflow-hidden" style="border-radius: 15px;">
                         <div class="box-body py-20 bg-white">
                             <form action="{{ route('income-report') }}" method="GET" class="row align-items-end g-3">
-                                <input type="hidden" name="auth" value="safwan">
                                 <div class="col-12 col-md-4">
                                     <label class="form-label fw-600 text-fade small uppercase">Start Date</label>
                                     <div class="input-group border rounded-pill overflow-hidden">
@@ -46,7 +45,7 @@
                                 <div class="col-12 col-md-4">
                                     <div class="d-flex gap-2">
                                         <button type="submit" class="btn btn-primary rounded-pill px-25 flex-fill fw-600"><i class="fa fa-filter me-2"></i> Apply Filter</button>
-                                        <a href="{{ route('income-report') }}?auth=safwan" class="btn btn-light rounded-pill px-25 flex-fill fw-600 border"><i class="fa fa-refresh me-2"></i> Reset</a>
+                                        <a href="{{ route('income-report') }}" class="btn btn-light rounded-pill px-25 flex-fill fw-600 border"><i class="fa fa-refresh me-2"></i> Reset</a>
                                     </div>
                                 </div>
                             </form>

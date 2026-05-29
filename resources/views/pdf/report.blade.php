@@ -166,15 +166,27 @@
             font-size: 15px;
         }
 
-        .param-col { width: 38%; }
-        .value-col { width: 28%; }
-        .ref-col { width: 34%; }
+        .param-col { width: 35%; }
+        .value-col { width: 25%; }
+        .ref-col { width: 30%; }
+        .flag-col { width: 10%; }
 
         .observed-number {
             font-weight: 700;
         }
 
         .section-row td {
+            font-weight: 700;
+        }
+
+        .flag-critical {
+            color: #d00000;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .flag-cell {
+            text-align: center;
             font-weight: 700;
         }
 
@@ -266,11 +278,12 @@
             <table class="results-table">
                 <thead>
                     <tr>
-                        <th class="param-col">Parameter</th>
-                        <th class="value-col">Observed Value</th>
-                        <th class="ref-col">Reference Value</th>
-                    </tr>
-                </thead>
+	                            <th class="param-col">Parameter</th>
+	                            <th class="value-col">Observed Value</th>
+	                            <th class="ref-col">Reference Value</th>
+	                            <th class="flag-col">Flag</th>
+	                        </tr>
+	                    </thead>
                 <tbody>
                     @php $lastSubheading = null; @endphp
                     @foreach ($results as $r)
@@ -282,10 +295,11 @@
 
                         @if ($subheading !== '' && $subheading !== $lastSubheading)
                             <tr class="section-row">
-                                <td>{{ strtoupper($subheading) }}</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+	                                <td>{{ strtoupper($subheading) }}</td>
+	                                <td></td>
+	                                <td></td>
+	                                <td></td>
+	                            </tr>
                             @php $lastSubheading = $subheading; @endphp
                         @endif
 
@@ -297,8 +311,9 @@
                                     &nbsp;{{ $unit }}
                                 @endif
                             </td>
-                            <td>{!! nl2br(e($r['normal_value'] ?? $r['biological_reference'] ?? '')) !!}</td>
-                        </tr>
+	                            <td>{!! nl2br(e($r['normal_value'] ?? $r['biological_reference'] ?? '')) !!}</td>
+	                            <td class="{{ ($r['flag'] ?? '') === 'C' ? 'flag-critical' : 'flag-cell' }}">{{ $r['flag'] ?? '' }}</td>
+	                        </tr>
                     @endforeach
                 </tbody>
             </table>

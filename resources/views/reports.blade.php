@@ -9,11 +9,14 @@
 					<h4 class="page-title">Test Reports</h4>
 
 				</div>
-				<div class="ms-auto w-100 w-md-auto d-flex align-items-center gap-3">
-					<button type="button" class="btn btn-primary btn-sm w-100 w-md-auto mt-2 mt-md-0 d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#modal-add-report">
-						<i class="fa fa-plus-circle me-1"></i> Add New Report
-					</button>
-				</div>
+					<div class="ms-auto w-100 w-md-auto d-flex align-items-center gap-3">
+						<a href="{{ route('reports.trash') }}" class="btn btn-light btn-sm w-100 w-md-auto mt-2 mt-md-0 d-flex align-items-center justify-content-center">
+							<i class="fa fa-archive me-1"></i> Trash
+						</a>
+						<button type="button" class="btn btn-primary btn-sm w-100 w-md-auto mt-2 mt-md-0 d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#modal-add-report">
+							<i class="fa fa-plus-circle me-1"></i> Add New Report
+						</button>
+					</div>
 			</div>
 		</div>  
 
@@ -443,7 +446,7 @@
 							<select class="form-select" name="patient_id" id="add-patient-id" required>
 								<option value="">-- Select Patient --</option>
 								@foreach($patients as $patient)
-									<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
+										<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
 								@endforeach
 							</select>
 						</div>
@@ -525,8 +528,11 @@
                                         data-male-min="{{ $test->parameter->male_min ?? '' }}"
                                         data-male-max="{{ $test->parameter->male_max ?? '' }}"
                                         data-female-min="{{ $test->parameter->female_min ?? '' }}"
-                                        data-female-max="{{ $test->parameter->female_max ?? '' }}"
-                                        data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
+	                                        data-female-max="{{ $test->parameter->female_max ?? '' }}"
+	                                        data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
+	                                        data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
+		                                        data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+	                                        data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                         data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
                                         data-normal="{{ $test->description }}">{{ $test->name }}</option>
                                 @endforeach
@@ -586,7 +592,7 @@
 							<select class="form-select" name="patient_id" id="edit-patient-id" required>
 								<option value="">-- Select Patient --</option>
 								@foreach($patients as $patient)
-									<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
+										<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
 								@endforeach
 							</select>
 						</div>
@@ -839,6 +845,9 @@
                                 data-male-max="{{ $test->parameter->male_max ?? '' }}"
                                 data-female-min="{{ $test->parameter->female_min ?? '' }}"
                                 data-female-max="{{ $test->parameter->female_max ?? '' }}"
+                                data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
+                                data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
+                                data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
                                 data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                 data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
                                 data-normal="{{ $test->description }}">{{ $test->name }}</option>
@@ -872,16 +881,18 @@
           // Auto-fill Normal Value from Select & Handle Auto-calc Logic
           $(document).on('change', '.test-selector-dynamic', function() {
               let selected = $(this).find(':selected');
-              let row = $(this).closest('.test-item-row');
-              let modal = $(this).closest('.modal');
-              let gender = modal.find('select[name="patient_id"] :selected').data('gender') || 'M/F';
-              
-              // Set Unit
-              row.find('select[name="test_unit[]"]').val(selected.data('unit') || '');
-              
-              // Set Reference Interval based on Gender
-              let ref = gender === 'Male' ? selected.data('male-ref') : selected.data('female-ref');
-              if (!ref) ref = selected.data('male-ref') || selected.data('female-ref') || selected.data('normal') || '';
+	              let row = $(this).closest('.test-item-row');
+	              let modal = $(this).closest('.modal');
+	              let gender = modal.find('select[name="patient_id"] :selected').data('gender') || 'M/F';
+	              let age = parseInt(modal.find('select[name="patient_id"] :selected').data('age'), 10);
+	              
+	              // Set Unit
+	              row.find('select[name="test_unit[]"]').val(selected.data('unit') || '');
+	              
+	              // Set Reference Interval based on Gender
+	              let ageInterval = getMatchingReferenceInterval(selected, gender, age);
+	              let ref = ageInterval ? ageInterval.reference_text : (gender === 'Male' ? selected.data('male-ref') : selected.data('female-ref'));
+	              if (!ref) ref = selected.data('male-ref') || selected.data('female-ref') || selected.data('normal') || '';
               
               row.find('.normal-val-dynamic').val(ref);
               
@@ -896,20 +907,34 @@
           // Keep hidden flag values compatible with older saved reports.
           $(document).on('input', '.observed-value-input', function() {
               let val = parseFloat($(this).val());
-              let row = $(this).closest('.test-item-row');
-              let selected = row.find('.test-selector-dynamic :selected');
-              let modal = $(this).closest('.modal');
-              let gender = modal.find('select[name="patient_id"] :selected').data('gender') || 'Male';
-              let flagSelector = row.find('.flag-selector');
+	              let row = $(this).closest('.test-item-row');
+	              let selected = row.find('.test-selector-dynamic :selected');
+	              let modal = $(this).closest('.modal');
+	              let gender = modal.find('select[name="patient_id"] :selected').data('gender') || 'Male';
+	              let age = parseInt(modal.find('select[name="patient_id"] :selected').data('age'), 10);
+	              let flagSelector = row.find('.flag-selector');
               
               if (isNaN(val)) {
                   flagSelector.val('');
                   return;
               }
 
-              let isImmuno = selected.data('is-immunoassay') == 1;
-              let min = gender === 'Male' ? selected.data('male-min') : selected.data('female-min');
-              let max = gender === 'Male' ? selected.data('male-max') : selected.data('female-max');
+	              let isImmuno = selected.data('is-immunoassay') == 1;
+	              let criticalLow = parseFloat(selected.data('critical-low'));
+	              let criticalHigh = parseFloat(selected.data('critical-high'));
+	              let ageInterval = getMatchingReferenceInterval(selected, gender, age);
+	              let min = ageInterval ? ageInterval.min_value : (gender === 'Male' ? selected.data('male-min') : selected.data('female-min'));
+	              let max = ageInterval ? ageInterval.max_value : (gender === 'Male' ? selected.data('male-max') : selected.data('female-max'));
+
+	              if (!isNaN(criticalLow) && val <= criticalLow) {
+	                  flagSelector.val('C');
+	                  return;
+	              }
+
+	              if (!isNaN(criticalHigh) && val >= criticalHigh) {
+	                  flagSelector.val('C');
+	                  return;
+	              }
 
               if (isImmuno) {
                   // Immunoassay logic: <0.9 Neg, 0.9-1.1 Bord, >1.1 Pos
@@ -918,11 +943,25 @@
                   else if (val > 1.1) flagSelector.val('P');
               } else if (min !== undefined && max !== undefined) {
                   // Standard Min-Max logic
-                  if (val < min) flagSelector.val('L');
-                  else if (val > max) flagSelector.val('H');
-                  else flagSelector.val('N');
-              }
-          });
+	                  if (val < min) flagSelector.val('L');
+	                  else if (val > max) flagSelector.val('H');
+	                  else flagSelector.val('N');
+	              }
+	          });
+
+	          function getMatchingReferenceInterval(selected, gender, age) {
+	              let intervals = selected.data('reference-intervals') || [];
+	              if (!Array.isArray(intervals) || isNaN(age)) return null;
+	              gender = (gender || '').toLowerCase();
+	              return intervals
+	                  .filter(interval => {
+	                      let intervalGender = (interval.gender || '').toLowerCase();
+	                      let min = interval.age_min === null ? 0 : parseInt(interval.age_min, 10);
+	                      let max = interval.age_max === null ? 999 : parseInt(interval.age_max, 10);
+	                      return (!intervalGender || intervalGender === gender) && age >= min && age <= max;
+	                  })
+	                  .sort((a, b) => parseInt(b.age_min || 0, 10) - parseInt(a.age_min || 0, 10))[0] || null;
+	          }
 
           // Re-trigger calculation when patient (gender) changes
           $(document).on('change', 'select[name="patient_id"]', function() {
@@ -1062,8 +1101,11 @@
                                 data-male-min="{{ $test->parameter->male_min ?? '' }}"
                                 data-male-max="{{ $test->parameter->male_max ?? '' }}"
                                 data-female-min="{{ $test->parameter->female_min ?? '' }}"
-                                data-female-max="{{ $test->parameter->female_max ?? '' }}"
-                                data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
+	                                data-female-max="{{ $test->parameter->female_max ?? '' }}"
+	                                data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
+	                                data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
+		                                data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+	                                data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                 data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
                                 data-normal="{{ $test->description }}" ${item.name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
                            @endforeach
@@ -1408,9 +1450,10 @@
               const pageH = doc.internal.pageSize.getHeight();
               const left = 21;
               const tableW = 173;
-              const col1 = 65;
-              const col2 = 48;
-              const col3 = tableW - col1 - col2;
+	              const col1 = 61;
+	              const col2 = 44;
+	              const col4 = 14;
+	              const col3 = tableW - col1 - col2 - col4;
               const footerTop = 269;
               let pageNo = 1;
 
@@ -1482,20 +1525,22 @@
               function drawTableHeader(y) {
                   doc.setFont('times', 'bold');
                   doc.setFontSize(11);
-                  doc.rect(left, y, tableW, 8);
-                  doc.line(left + col1, y, left + col1, y + 8);
-                  doc.line(left + col1 + col2, y, left + col1 + col2, y + 8);
-                  doc.text('Parameter', left + 5, y + 5.5);
-                  doc.text('Observed Value', left + col1 + col2 / 2, y + 5.5, { align: 'center' });
-                  doc.text('Reference Value', left + col1 + col2 + col3 / 2, y + 5.5, { align: 'center' });
-                  return y + 8;
-              }
+	                  doc.rect(left, y, tableW, 8);
+	                  doc.line(left + col1, y, left + col1, y + 8);
+	                  doc.line(left + col1 + col2, y, left + col1 + col2, y + 8);
+	                  doc.line(left + col1 + col2 + col3, y, left + col1 + col2 + col3, y + 8);
+	                  doc.text('Parameter', left + 5, y + 5.5);
+	                  doc.text('Observed Value', left + col1 + col2 / 2, y + 5.5, { align: 'center' });
+	                  doc.text('Reference Value', left + col1 + col2 + col3 / 2, y + 5.5, { align: 'center' });
+	                  doc.text('Flag', left + col1 + col2 + col3 + col4 / 2, y + 5.5, { align: 'center' });
+	                  return y + 8;
+	              }
 
-              function drawCellRow(y, name, observed, reference, boldFirst = false) {
-                  doc.setFontSize(11);
-                  const nameLines = doc.splitTextToSize(name || '', col1 - 4);
-                  const observedLines = doc.splitTextToSize(observed || '', col2 - 4);
-                  const refLines = doc.splitTextToSize(reference || '', col3 - 4);
+	              function drawCellRow(y, name, observed, reference, flag = '', boldFirst = false) {
+	                  doc.setFontSize(11);
+	                  const nameLines = doc.splitTextToSize(name || '', col1 - 4);
+	                  const observedLines = doc.splitTextToSize(observed || '', col2 - 4);
+	                  const refLines = doc.splitTextToSize(reference || '', col3 - 4);
                   const lineCount = Math.max(nameLines.length, observedLines.length, refLines.length, 1);
                   const rowH = Math.max(6, lineCount * 5.2);
 
@@ -1504,18 +1549,23 @@
                       y = drawTableHeader(y);
                   }
 
-                  doc.rect(left, y, tableW, rowH);
-                  doc.line(left + col1, y, left + col1, y + rowH);
-                  doc.line(left + col1 + col2, y, left + col1 + col2, y + rowH);
+	                  doc.rect(left, y, tableW, rowH);
+	                  doc.line(left + col1, y, left + col1, y + rowH);
+	                  doc.line(left + col1 + col2, y, left + col1 + col2, y + rowH);
+	                  doc.line(left + col1 + col2 + col3, y, left + col1 + col2 + col3, y + rowH);
 
                   doc.setFont('times', boldFirst ? 'bold' : 'normal');
                   doc.text(nameLines, left + 2, y + 4.5);
                   doc.setFont('times', 'bold');
                   doc.text(observedLines, left + col1 + 2, y + 4.5);
-                  doc.setFont('times', 'normal');
-                  doc.text(refLines, left + col1 + col2 + 2, y + 4.5);
-                  return y + rowH;
-              }
+	                  doc.setFont('times', 'normal');
+	                  doc.text(refLines, left + col1 + col2 + 2, y + 4.5);
+	                  doc.setFont('times', 'bold');
+	                  if (flag === 'C') doc.setTextColor(208, 0, 0);
+	                  doc.text(flag || '', left + col1 + col2 + col3 + col4 / 2, y + 4.5, { align: 'center' });
+	                  doc.setTextColor(0);
+	                  return y + rowH;
+	              }
 
               addShell(true);
 
@@ -1534,16 +1584,16 @@
 
                   let lastSubheading = null;
                   groupedResults[cat].forEach(r => {
-                      const subheading = (r.subcategory || '').trim();
-                      if (subheading && subheading !== lastSubheading) {
-                          y = drawCellRow(y, subheading.toUpperCase(), '', '', true);
-                          lastSubheading = subheading;
-                      }
+	                      const subheading = (r.subcategory || '').trim();
+	                      if (subheading && subheading !== lastSubheading) {
+	                          y = drawCellRow(y, subheading.toUpperCase(), '', '', '', true);
+	                          lastSubheading = subheading;
+	                      }
 
-                      const observed = `${r.observed_value || ''}${r.unit ? '  ' + r.unit : ''}`.trim();
-                      const reference = r.normal_value || r.biological_reference || '';
-                      y = drawCellRow(y, r.name || '', observed, reference);
-                  });
+	                      const observed = `${r.observed_value || ''}${r.unit ? '  ' + r.unit : ''}`.trim();
+	                      const reference = r.normal_value || r.biological_reference || '';
+	                      y = drawCellRow(y, r.name || '', observed, reference, r.flag || '');
+	                  });
 
                   y += 8;
               });

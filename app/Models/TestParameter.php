@@ -16,6 +16,8 @@ class TestParameter extends Model
         'male_max',
         'female_min',
         'female_max',
+        'critical_low',
+        'critical_high',
         'is_immunoassay',
     ];
 

@@ -12,14 +12,6 @@ class LabTest extends Model
         'description',
         'category_id',
         'sub_category_id',
-        'unit',
-        'male_reference',
-        'female_reference',
-        'male_min',
-        'male_max',
-        'female_min',
-        'female_max',
-        'is_immunoassay',
     ];
 
     public function category()
@@ -40,5 +32,10 @@ class LabTest extends Model
     public function parameter()
     {
         return $this->hasOne(TestParameter::class, 'lab_test_id');
+    }
+
+    public function referenceIntervals()
+    {
+        return $this->hasMany(ReferenceInterval::class);
     }
 }

@@ -62,6 +62,8 @@
                                                     data-male_max="{{ $test->parameter->male_max ?? '' }}"
                                                     data-female_min="{{ $test->parameter->female_min ?? '' }}"
                                                     data-female_max="{{ $test->parameter->female_max ?? '' }}"
+                                                    data-critical_low="{{ $test->parameter->critical_low ?? '' }}"
+                                                    data-critical_high="{{ $test->parameter->critical_high ?? '' }}"
                                                     data-is_immuno="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                                     data-bio_ref="{{ $test->parameter->biological_reference ?? '' }}"
                                                     data-bs-toggle="modal" data-bs-target="#modal-edit-params">
@@ -95,10 +97,15 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Measurement Unit</label>
-							<input type="text" class="form-control" name="unit" id="setup-unit" placeholder="e.g. mg/dl">
+								<label class="form-label">Measurement Unit</label>
+								<select class="form-select" name="unit" id="setup-unit">
+									<option value="">Select unit</option>
+									@foreach($units as $unit)
+										<option value="{{ $unit->name }}">{{ $unit->name }}</option>
+									@endforeach
+								</select>
+							</div>
 						</div>
-					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="form-label">Calculation Logic</label>
@@ -108,9 +115,25 @@
 							</select>
 						</div>
 					</div>
-				</div>
+					</div>
 
-				<h5 class="text-primary border-bottom pb-2 mt-4">Reference Intervals (Biological)</h5>
+					<h5 class="text-danger border-bottom pb-2 mt-4">Critical / Panic Values</h5>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-label">Critical Low</label>
+								<input type="number" step="0.01" class="form-control" name="critical_low" id="setup-critical-low">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-label">Critical High</label>
+								<input type="number" step="0.01" class="form-control" name="critical_high" id="setup-critical-high">
+							</div>
+						</div>
+					</div>
+
+					<h5 class="text-primary border-bottom pb-2 mt-4">Reference Intervals (Biological)</h5>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="box box-outline-primary shadow-none mb-0">
@@ -189,9 +212,11 @@
 			  $('#setup-female-ref').val($(this).data('female_ref'));
 			  $('#setup-male-min').val($(this).data('male_min'));
 			  $('#setup-male-max').val($(this).data('male_max'));
-			  $('#setup-female-min').val($(this).data('female_min'));
-			  $('#setup-female-max').val($(this).data('female_max'));
-			  $('#setup-is-immuno').val($(this).data('is_immuno'));
+				  $('#setup-female-min').val($(this).data('female_min'));
+				  $('#setup-female-max').val($(this).data('female_max'));
+				  $('#setup-critical-low').val($(this).data('critical_low'));
+				  $('#setup-critical-high').val($(this).data('critical_high'));
+				  $('#setup-is-immuno').val($(this).data('is_immuno'));
 			  $('#setup-bio-ref').val($(this).data('bio_ref'));
 		  });
 

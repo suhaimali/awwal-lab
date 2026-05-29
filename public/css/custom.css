@@ -216,7 +216,7 @@ a {
 	}
 }
 
-@media only screen and (max-width: 835) {
+@media only screen and (max-width: 835px) {
 	.dr-image-box{
 		height: 300px;
 	}
@@ -250,5 +250,414 @@ a {
 	}
 	.share-img-3{
 		height: 6.5rem;
+	}
+}
+
+/*=========================Responsive App Shell=======================*/
+html,
+body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+img,
+svg,
+canvas,
+video {
+	max-width: 100%;
+	height: auto;
+}
+
+.wrapper,
+.content-wrapper,
+.container-full,
+.content,
+.box,
+.modal-content {
+	max-width: 100%;
+}
+
+.content-wrapper {
+	min-height: 100vh;
+}
+
+.content {
+	padding-left: clamp(12px, 2vw, 24px);
+	padding-right: clamp(12px, 2vw, 24px);
+}
+
+.content-header {
+	padding-left: clamp(12px, 2vw, 24px);
+	padding-right: clamp(12px, 2vw, 24px);
+}
+
+.content-header > .d-flex,
+.box-header,
+.modal-footer,
+.modal-footer-uniform {
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.page-title,
+.box-title,
+.modal-title {
+	overflow-wrap: anywhere;
+}
+
+.main-header .navbar {
+	min-width: 0;
+}
+
+.main-header .navbar .nav,
+.navbar-custom-menu,
+.navbar-custom-menu .navbar-nav {
+	min-width: 0;
+}
+
+.main-header .logo,
+.main-header .logo-box {
+	min-width: 0;
+}
+
+.main-header .logo-lg span {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.dropdown-menu {
+	max-width: calc(100vw - 24px);
+}
+
+.sidebar-menu span {
+	white-space: normal;
+}
+
+/* Forms and action controls */
+.form-control,
+.form-select,
+.input-group,
+.select2-container,
+textarea {
+	max-width: 100%;
+}
+
+.input-group {
+	flex-wrap: nowrap;
+}
+
+.btn,
+button,
+a {
+	overflow-wrap: anywhere;
+}
+
+.d-flex.gap-2,
+.d-flex.gap-3 {
+	flex-wrap: wrap;
+}
+
+.text-end .d-flex,
+td .d-flex {
+	flex-wrap: wrap;
+}
+
+.btn[style*="width: 32px"],
+.btn[style*="width:32px"] {
+	flex: 0 0 32px;
+}
+
+/* Tables stay usable on narrow screens even when a page has no custom mobile table style. */
+.table-responsive {
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.table {
+	min-width: 640px;
+}
+
+.table th,
+.table td {
+	vertical-align: middle;
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+.card-table .table {
+	min-width: 0;
+}
+
+/* Modals */
+.modal-dialog {
+	max-width: min(96vw, var(--bs-modal-width, 500px));
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.modal-dialog.modal-lg {
+	max-width: min(96vw, 800px);
+}
+
+.modal-dialog.modal-xl {
+	max-width: min(98vw, 1140px);
+}
+
+.modal-body {
+	max-height: calc(100vh - 160px);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.modal-footer > * {
+	margin: 0;
+}
+
+/* Dynamic report/test rows */
+.test-item-row {
+	row-gap: 10px;
+}
+
+.test-item-row .form-control,
+.test-item-row .form-select {
+	min-height: 38px;
+}
+
+/* Dashboard and income cards */
+.box {
+	border-radius: min(15px, 4vw);
+}
+
+.box-body {
+	min-width: 0;
+}
+
+.apexcharts-canvas,
+.apexcharts-svg,
+.chart,
+[id*="chart"] {
+	max-width: 100% !important;
+}
+
+@media (max-width: 1199.98px) {
+	.content-header .ms-auto,
+	.content-header .me-auto {
+		width: 100%;
+	}
+
+	.content-header .ms-auto {
+		display: flex;
+		justify-content: flex-start;
+	}
+}
+
+@media (max-width: 991.98px) {
+	body.fixed .wrapper {
+		overflow-x: hidden;
+	}
+
+	.main-header {
+		position: sticky;
+		top: 0;
+		z-index: 1030;
+	}
+
+	.main-header .logo-box {
+		width: auto;
+		max-width: 150px;
+		padding-right: 8px;
+	}
+
+	.main-header .logo-mini {
+		width: 34px !important;
+		min-width: 34px;
+	}
+
+	.main-header .logo-mini img {
+		width: 34px;
+		height: 34px;
+		object-fit: contain;
+	}
+
+	.main-header .logo-lg {
+		max-width: 90px;
+	}
+
+	.main-header .navbar {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.main-header .navbar-custom-menu .user-menu .text-end {
+		display: none;
+	}
+
+	.content {
+		padding-top: 12px;
+	}
+
+	.modal-dialog {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.content-header {
+		padding-top: 14px;
+		padding-bottom: 8px;
+	}
+
+	.content-header > .d-flex {
+		align-items: stretch !important;
+	}
+
+	.content-header .btn,
+	.content-header a.btn,
+	.content-header button.btn {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.page-title {
+		font-size: 20px;
+		line-height: 1.25;
+	}
+
+	.box-header,
+	.box-body {
+		padding-left: 14px !important;
+		padding-right: 14px !important;
+	}
+
+	.table {
+		min-width: 560px;
+	}
+
+	.modal-dialog,
+	.modal-dialog.modal-lg,
+	.modal-dialog.modal-xl {
+		max-width: calc(100vw - 16px);
+	}
+
+	.modal-content {
+		border-radius: 10px;
+	}
+
+	.modal-header,
+	.modal-body,
+	.modal-footer,
+	.modal-footer-uniform {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.modal-body {
+		max-height: calc(100vh - 130px);
+	}
+
+	.modal-footer,
+	.modal-footer-uniform {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.modal-footer .btn,
+	.modal-footer-uniform .btn {
+		width: 100%;
+	}
+
+	.input-group {
+		flex-wrap: wrap;
+	}
+
+	.input-group > .form-control,
+	.input-group > .form-select {
+		min-width: 0;
+		flex: 1 1 auto;
+	}
+
+	.input-group > .btn {
+		flex: 0 0 auto;
+	}
+
+	.card-table tbody td::before {
+		padding-right: 12px;
+	}
+
+	.card-table tbody td {
+		gap: 12px;
+	}
+
+	.text-end {
+		text-align: left !important;
+	}
+
+	td.text-end,
+	th.text-end {
+		text-align: right !important;
+	}
+
+	.test-item-row {
+		padding: 12px !important;
+		border-radius: 8px !important;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.content,
+	.content-header {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.main-header .logo-lg {
+		display: none;
+	}
+
+	.main-header .logo-box {
+		max-width: 60px;
+	}
+
+	.main-header .navbar .nav-link {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.main-header .avatar {
+		width: 34px !important;
+		height: 34px !important;
+	}
+
+	.box {
+		margin-bottom: 14px;
+	}
+
+	.btn {
+		min-height: 38px;
+	}
+
+	.table {
+		min-width: 520px;
+	}
+
+	.patient-info-grid,
+	.report-header,
+	.signature-section {
+		display: block !important;
+	}
+
+	.signature-box {
+		width: 100% !important;
+		margin-top: 30px;
 	}
 }

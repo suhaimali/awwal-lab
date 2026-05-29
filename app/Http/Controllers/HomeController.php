@@ -57,13 +57,19 @@ class HomeController extends Controller
     {
         $reports = \App\Models\TestReport::with('patient')->latest()->get();
         $patients = \App\Models\Patient::orderBy('first_name')->get();
-        $tests = \App\Models\LabTest::with('parameter')->orderBy('name')->get();
+        $tests = \App\Models\LabTest::with(['parameter', 'referenceIntervals'])->orderBy('name')->get();
         $categories = \App\Models\Category::orderBy('name')->get();
         $subCategories = \App\Models\SubCategory::orderBy('name')->get();
         $units = \App\Models\Unit::orderBy('name')->get();
         $templates = \App\Models\ResultTemplate::orderBy('name')->get();
 
         return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates'));
+    }
+
+    public function reportsTrash()
+    {
+        $reports = \App\Models\TestReport::onlyTrashed()->with('patient')->latest('deleted_at')->get();
+        return view('reports_trash', compact('reports'));
     }
 
     public function storeReport(\Illuminate\Http\Request $request)
@@ -77,31 +83,20 @@ class HomeController extends Controller
             'observed_value.*' => 'required',
         ]);
 
-        $results = [];
-        if ($request->has('test_name')) {
-            foreach ($request->test_name as $key => $name) {
-                $results[] = [
-                    'category' => $request->test_category[$key] ?? 'General',
-                    'subcategory' => $request->test_subcategory[$key] ?? '',
-                    'name' => $name,
-                    'observed_value' => $request->observed_value[$key],
-                    'unit' => $request->test_unit[$key] ?? '',
-                    'normal_value' => $request->normal_value[$key] ?? '',
-                    'biological_reference' => $request->biological_reference[$key] ?? '',
-                    'flag' => $request->test_flag[$key] ?? '',
-                ];
-            }
-        }
+        $patient = \App\Models\Patient::findOrFail($request->patient_id);
+        $items = $this->buildReportItems($request, $patient);
 
-        \App\Models\TestReport::create([
+        $report = \App\Models\TestReport::create([
             'patient_id' => $request->patient_id,
             'doctor_name' => $request->doctor_name,
             'sample_received_on' => $request->sample_received_on,
             'report_released_on' => $request->report_released_on,
             'barcode' => rand(100000, 999999),
             'status' => $request->status ?? 'Completed',
-            'results' => $results,
         ]);
+
+        $report->items()->createMany($items);
+        $this->auditReport($report, 'created', null, $this->reportSnapshot($report->fresh(['patient', 'items'])));
 
         // Update appointment status for these tests
         if ($request->has('test_name')) {
@@ -127,21 +122,9 @@ class HomeController extends Controller
             'observed_value.*' => 'required',
         ]);
 
-        $results = [];
-        if ($request->has('test_name')) {
-            foreach ($request->test_name as $key => $name) {
-                $results[] = [
-                    'category' => $request->test_category[$key] ?? 'General',
-                    'subcategory' => $request->test_subcategory[$key] ?? '',
-                    'name' => $name,
-                    'observed_value' => $request->observed_value[$key],
-                    'unit' => $request->test_unit[$key] ?? '',
-                    'normal_value' => $request->normal_value[$key] ?? '',
-                    'biological_reference' => $request->biological_reference[$key] ?? '',
-                    'flag' => $request->test_flag[$key] ?? '',
-                ];
-            }
-        }
+        $oldData = $this->reportSnapshot($report->load(['patient', 'items']));
+        $patient = \App\Models\Patient::findOrFail($request->patient_id);
+        $items = $this->buildReportItems($request, $patient);
 
         $report->update([
             'patient_id' => $request->patient_id,
@@ -149,32 +132,48 @@ class HomeController extends Controller
             'sample_received_on' => $request->sample_received_on,
             'report_released_on' => $request->report_released_on,
             'status' => $request->status ?? 'Completed',
-            'results' => $results,
         ]);
+        $report->items()->delete();
+        $report->items()->createMany($items);
+        $this->auditReport($report, 'updated', $oldData, $this->reportSnapshot($report->fresh(['patient', 'items'])));
 
         return response()->json(['success' => 'Test report updated successfully!']);
     }
 
     public function getReport($id)
     {
-        $report = \App\Models\TestReport::with('patient')->findOrFail($id);
-        return response()->json($report);
+        $report = \App\Models\TestReport::with(['patient', 'items'])->findOrFail($id);
+        $payload = $report->toArray();
+        $payload['results'] = $report->items->map(fn ($item) => $this->serializeReportItem($item))->values();
+        return response()->json($payload);
     }
 
     public function deleteReport($id)
     {
-        \App\Models\TestReport::findOrFail($id)->delete();
+        $report = \App\Models\TestReport::with(['patient', 'items'])->findOrFail($id);
+        $this->auditReport($report, 'deleted', $this->reportSnapshot($report), null);
+        $report->delete();
         return response()->json(['success' => 'Report deleted successfully!']);
+    }
+
+    public function restoreReport($id)
+    {
+        $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
+        $report->restore();
+        $this->auditReport($report, 'restored', null, $this->reportSnapshot($report->fresh(['patient', 'items'])));
+
+        return response()->json(['success' => 'Report restored successfully!']);
     }
 
     public function downloadPDF($id)
     {
-        $report = \App\Models\TestReport::with('patient')->findOrFail($id);
+        $report = \App\Models\TestReport::with(['patient', 'items'])->findOrFail($id);
         $patient = $report->patient;
         
         // Group results by category
         $groupedResults = [];
-        foreach ($report->results as $result) {
+        foreach ($report->items as $item) {
+            $result = $this->serializeReportItem($item);
             $cat = strtoupper($result['category'] ?? 'GENERAL');
             $groupedResults[$cat][] = $result;
         }
@@ -469,8 +468,7 @@ class HomeController extends Controller
 
     public function incomeReport(\Illuminate\Http\Request $request)
     {
-        // Simple password check via query param to protect the page
-        if ($request->query('auth') !== 'safwan') {
+        if (!$request->session()->get('income_report_unlocked')) {
             return redirect()->route('dashboard')->with('error', 'Unauthorized access.');
         }
 
@@ -518,6 +516,23 @@ class HomeController extends Controller
         ));
     }
 
+    public function unlockIncomeReport(\Illuminate\Http\Request $request)
+    {
+        $request->validate(['password' => 'required|string']);
+
+        $expected = config('services.income_report.password');
+        if (!$expected || !hash_equals($expected, $request->password)) {
+            return response()->json(['message' => 'Invalid password.'], 422);
+        }
+
+        $request->session()->put('income_report_unlocked', true);
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('income-report'),
+        ]);
+    }
+
     public function updateReportStatus(\Illuminate\Http\Request $request, $id)
     {
         $report = \App\Models\TestReport::findOrFail($id);
@@ -537,14 +552,6 @@ class HomeController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'nullable',
-            'unit' => 'nullable',
-            'male_reference' => 'nullable',
-            'female_reference' => 'nullable',
-            'male_min' => 'nullable|numeric',
-            'male_max' => 'nullable|numeric',
-            'female_min' => 'nullable|numeric',
-            'female_max' => 'nullable|numeric',
-            'is_immunoassay' => 'nullable|boolean',
         ]);
 
         \App\Models\LabTest::create($validated);
@@ -560,14 +567,6 @@ class HomeController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'nullable',
-            'unit' => 'nullable',
-            'male_reference' => 'nullable',
-            'female_reference' => 'nullable',
-            'male_min' => 'nullable|numeric',
-            'male_max' => 'nullable|numeric',
-            'female_min' => 'nullable|numeric',
-            'female_max' => 'nullable|numeric',
-            'is_immunoassay' => 'nullable|boolean',
         ]);
 
         $test->update($validated);
@@ -725,8 +724,9 @@ class HomeController extends Controller
 
     public function testParameters()
     {
-        $tests = \App\Models\LabTest::with('parameter')->orderBy('name')->get();
-        return view('test_parameters', compact('tests'));
+        $tests = \App\Models\LabTest::with(['parameter', 'referenceIntervals'])->orderBy('name')->get();
+        $units = \App\Models\Unit::orderBy('name')->get();
+        return view('test_parameters', compact('tests', 'units'));
     }
 
     public function storeTestParameter(\Illuminate\Http\Request $request)
@@ -740,16 +740,212 @@ class HomeController extends Controller
             'male_max' => 'nullable|numeric',
             'female_min' => 'nullable|numeric',
             'female_max' => 'nullable|numeric',
+            'critical_low' => 'nullable|numeric',
+            'critical_high' => 'nullable|numeric',
             'biological_reference' => 'nullable',
             'is_immunoassay' => 'nullable|boolean',
         ]);
 
-        \App\Models\TestParameter::updateOrCreate(
+        $parameter = \App\Models\TestParameter::updateOrCreate(
             ['lab_test_id' => $validated['lab_test_id']],
             $validated
         );
 
+        $this->upsertDefaultReferenceInterval($parameter, 'Male');
+        $this->upsertDefaultReferenceInterval($parameter, 'Female');
+
         return response()->json(['success' => 'Parameters updated successfully!']);
     }
-}
 
+    private function buildReportItems(\Illuminate\Http\Request $request, \App\Models\Patient $patient): array
+    {
+        $tests = \App\Models\LabTest::with(['parameter', 'referenceIntervals'])->get()->keyBy('name');
+        $items = [];
+
+        foreach ($request->test_name ?? [] as $key => $name) {
+            $labTest = $tests->get($name);
+            $parameter = $labTest?->parameter;
+            $reference = $this->resolveReferenceInterval($labTest, $patient);
+            $normalValue = $reference['text']
+                ?? ($request->normal_value[$key] ?? $request->biological_reference[$key] ?? '');
+            $unit = $request->test_unit[$key] ?? $parameter?->unit ?? '';
+            $flag = $this->calculateResultFlag(
+                $request->observed_value[$key] ?? null,
+                $parameter,
+                $reference,
+                $patient->gender
+            ) ?? ($request->test_flag[$key] ?? '');
+
+            $items[] = [
+                'lab_test_id' => $labTest?->id,
+                'category' => ($request->test_category[$key] ?? '') ?: 'General',
+                'subcategory' => $request->test_subcategory[$key] ?? '',
+                'name' => $name,
+                'observed_value' => $request->observed_value[$key],
+                'unit' => $unit,
+                'normal_value' => $normalValue,
+                'biological_reference' => $request->biological_reference[$key] ?? $normalValue,
+                'flag' => $flag,
+                'sort_order' => $key,
+            ];
+        }
+
+        return $items;
+    }
+
+    private function resolveReferenceInterval(?\App\Models\LabTest $labTest, \App\Models\Patient $patient): array
+    {
+        if (!$labTest) {
+            return [];
+        }
+
+        $age = (int) $patient->age;
+        $gender = strtolower((string) $patient->gender);
+        $interval = $labTest->referenceIntervals
+            ->filter(function ($interval) use ($age, $gender) {
+                $genderMatches = !$interval->gender || strtolower($interval->gender) === $gender;
+                $minMatches = $interval->age_min === null || $age >= (int) $interval->age_min;
+                $maxMatches = $interval->age_max === null || $age <= (int) $interval->age_max;
+                return $genderMatches && $minMatches && $maxMatches;
+            })
+            ->sortByDesc('age_min')
+            ->first();
+
+        if ($interval) {
+            return [
+                'text' => $interval->reference_text,
+                'min' => $interval->min_value,
+                'max' => $interval->max_value,
+            ];
+        }
+
+        $parameter = $labTest->parameter;
+        if (!$parameter) {
+            return [];
+        }
+
+        if ($gender === 'female') {
+            return [
+                'text' => $parameter->female_reference ?: $parameter->biological_reference,
+                'min' => $parameter->female_min,
+                'max' => $parameter->female_max,
+            ];
+        }
+
+        return [
+            'text' => $parameter->male_reference ?: $parameter->biological_reference,
+            'min' => $parameter->male_min,
+            'max' => $parameter->male_max,
+        ];
+    }
+
+    private function calculateResultFlag(mixed $observedValue, ?\App\Models\TestParameter $parameter, array $reference, ?string $gender): ?string
+    {
+        if (!$parameter || !is_numeric($observedValue)) {
+            return null;
+        }
+
+        $value = (float) $observedValue;
+
+        if ($parameter->critical_low !== null && $value <= (float) $parameter->critical_low) {
+            return 'C';
+        }
+
+        if ($parameter->critical_high !== null && $value >= (float) $parameter->critical_high) {
+            return 'C';
+        }
+
+        if ($parameter->is_immunoassay) {
+            if ($value < 0.9) {
+                return 'N';
+            }
+            if ($value <= 1.1) {
+                return 'B';
+            }
+            return 'P';
+        }
+
+        $min = $reference['min'] ?? null;
+        $max = $reference['max'] ?? null;
+
+        if ($min === null && $max === null) {
+            $isFemale = strtolower((string) $gender) === 'female';
+            $min = $isFemale ? $parameter->female_min : $parameter->male_min;
+            $max = $isFemale ? $parameter->female_max : $parameter->male_max;
+        }
+
+        if ($min !== null && $value < (float) $min) {
+            return 'L';
+        }
+
+        if ($max !== null && $value > (float) $max) {
+            return 'H';
+        }
+
+        return ($min !== null || $max !== null) ? 'N' : null;
+    }
+
+    private function serializeReportItem(\App\Models\TestReportItem $item): array
+    {
+        return [
+            'category' => $item->category,
+            'subcategory' => $item->subcategory,
+            'name' => $item->name,
+            'observed_value' => $item->observed_value,
+            'unit' => $item->unit,
+            'normal_value' => $item->normal_value,
+            'biological_reference' => $item->biological_reference,
+            'flag' => $item->flag,
+        ];
+    }
+
+    private function reportSnapshot(\App\Models\TestReport $report): array
+    {
+        if (!$report->relationLoaded('items')) {
+            $report->load('items');
+        }
+
+        return [
+            'report' => $report->only([
+                'id',
+                'patient_id',
+                'doctor_name',
+                'sample_received_on',
+                'report_released_on',
+                'barcode',
+                'status',
+            ]),
+            'results' => $report->items->map(fn ($item) => $this->serializeReportItem($item))->values()->all(),
+        ];
+    }
+
+    private function auditReport(\App\Models\TestReport $report, string $action, ?array $oldData, ?array $newData): void
+    {
+        \App\Models\TestReportAudit::create([
+            'test_report_id' => $report->id,
+            'user_id' => auth()->id(),
+            'action' => $action,
+            'old_data' => $oldData,
+            'new_data' => $newData,
+        ]);
+    }
+
+    private function upsertDefaultReferenceInterval(\App\Models\TestParameter $parameter, string $gender): void
+    {
+        $isFemale = strtolower($gender) === 'female';
+
+        \App\Models\ReferenceInterval::updateOrCreate(
+            [
+                'lab_test_id' => $parameter->lab_test_id,
+                'gender' => $gender,
+                'age_min' => 0,
+                'age_max' => 200,
+            ],
+            [
+                'reference_text' => $isFemale ? $parameter->female_reference : $parameter->male_reference,
+                'min_value' => $isFemale ? $parameter->female_min : $parameter->male_min,
+                'max_value' => $isFemale ? $parameter->female_max : $parameter->male_max,
+            ]
+        );
+    }
+}

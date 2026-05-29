@@ -19,10 +19,11 @@
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('css/vendors_css.css') }}?v=2">
 	  
-	<!-- Style-->  
-	<link rel="stylesheet" href="{{ asset('css/style.css') }}?v=2">
-	<link rel="stylesheet" href="{{ asset('css/skin_color.css') }}?v=2">
-    @stack('styles')
+		<!-- Style-->
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}?v=2">
+		<link rel="stylesheet" href="{{ asset('css/skin_color.css') }}?v=2">
+		<link rel="stylesheet" href="{{ asset('css/custom.css') }}?v=3">
+		@stack('styles')
     
     <!-- Icon CDNs to fix 404/CORS errors -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

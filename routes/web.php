@@ -20,11 +20,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function() { return redirect()->route('dashboard'); });
     Route::get('/appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('/reports', [HomeController::class, 'reports'])->name('reports');
+    Route::get('/reports-trash', [HomeController::class, 'reportsTrash'])->name('reports.trash');
     Route::post('/reports', [HomeController::class, 'storeReport'])->name('reports.store');
     Route::get('/reports/{id}', [HomeController::class, 'getReport'])->name('reports.show');
     Route::put('/reports/{id}', [HomeController::class, 'updateReport'])->name('reports.update');
     Route::get('/reports/{id}/pdf', [HomeController::class, 'downloadPDF'])->name('reports.pdf');
     Route::delete('/reports/{id}', [HomeController::class, 'deleteReport'])->name('reports.delete');
+    Route::post('/reports/{id}/restore', [HomeController::class, 'restoreReport'])->name('reports.restore');
     
 
     Route::get('/patients', [HomeController::class, 'patients'])->name('patients');
@@ -38,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Income Report
     Route::get('/income-report', [HomeController::class, 'incomeReport'])->name('income-report');
+    Route::post('/income-report/unlock', [HomeController::class, 'unlockIncomeReport'])->name('income-report.unlock');
 
     // Patient AJAX Routes
     Route::post('/patients/store', [HomeController::class, 'storePatient'])->name('patients.store');

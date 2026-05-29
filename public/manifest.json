@@ -1,0 +1,17 @@
+{
+  "name": "Awwal Lab Software",
+  "short_name": "Awwal Lab",
+  "description": "Professional Laboratory Management System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0052cc",
+  "icons": [
+    {
+      "src": "/images/logo-pwa.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

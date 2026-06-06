@@ -190,16 +190,43 @@
             font-weight: 700;
         }
 
-        .note {
-            margin-top: 36px;
+        .report-closing {
+            width: 100%;
+            margin-top: 34px;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        .report-note {
+            width: 62%;
+            vertical-align: top;
             font-size: 14px;
+            line-height: 1.35;
+        }
+
+        .report-note-label {
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .signature {
-            text-align: right;
-            margin-top: 245px;
-            padding-right: 45px;
+            width: 38%;
+            text-align: center;
+            vertical-align: bottom;
+            padding-right: 6px;
             font-size: 14px;
+        }
+
+        .signature img {
+            max-width: 150px;
+            max-height: 58px;
+            object-fit: contain;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .signature-name {
+            font-weight: 700;
         }
     </style>
 </head>
@@ -319,8 +346,24 @@
             </table>
         @endforeach
 
-        <div class="note">Note :</div>
-        <div class="signature">Medi Technician</div>
+        <table class="report-closing">
+            <tr>
+                <td class="report-note">
+                    <div class="report-note-label">Note :</div>
+                    @if($report->notes)
+                        <div>{!! nl2br(e($report->notes)) !!}</div>
+                    @endif
+                </td>
+                <td class="signature">
+                    @if($report->signature && is_file($report->signature->imageAbsolutePath()))
+                        <img src="{{ $report->signature->imageAbsolutePath() }}" alt="{{ $report->signature->name }}">
+                        <div class="signature-name">{{ $report->signature->name }}</div>
+                    @else
+                        <div class="signature-name">Medi Technician</div>
+                    @endif
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="page-footer">

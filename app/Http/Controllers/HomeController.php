@@ -62,14 +62,83 @@ class HomeController extends Controller
         $subCategories = \App\Models\SubCategory::orderBy('name')->get();
         $units = \App\Models\Unit::orderBy('name')->get();
         $templates = \App\Models\ResultTemplate::orderBy('name')->get();
+        $signatures = \App\Models\ReportSignature::orderBy('name')->get();
 
-        return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates'));
+        return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates', 'signatures'));
     }
 
     public function reportsTrash()
     {
         $reports = \App\Models\TestReport::onlyTrashed()->with('patient')->latest('deleted_at')->get();
         return view('reports_trash', compact('reports'));
+    }
+
+    public function reportSignatures()
+    {
+        $signatures = \App\Models\ReportSignature::latest()->get();
+        return view('report_signatures', compact('signatures'));
+    }
+
+    public function storeReportSignature(\Illuminate\Http\Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'signature_image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'pin' => 'required|string|min:4|max:20',
+        ]);
+
+        $path = $request->file('signature_image')->store('report-signatures', 'public');
+
+        \App\Models\ReportSignature::create([
+            'name' => $validated['name'],
+            'image_path' => $path,
+            'pin_hash' => \Illuminate\Support\Facades\Hash::make($validated['pin']),
+        ]);
+
+        return redirect()->route('report-signatures.index')->with('success', 'Signature added successfully.');
+    }
+
+    public function updateReportSignature(\Illuminate\Http\Request $request, $id)
+    {
+        $signature = \App\Models\ReportSignature::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'signature_image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'pin' => 'nullable|string|min:4|max:20',
+        ]);
+
+        $payload = ['name' => $validated['name']];
+
+        if ($request->hasFile('signature_image')) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($signature->image_path);
+            $payload['image_path'] = $request->file('signature_image')->store('report-signatures', 'public');
+        }
+
+        if (!empty($validated['pin'])) {
+            $payload['pin_hash'] = \Illuminate\Support\Facades\Hash::make($validated['pin']);
+        }
+
+        $signature->update($payload);
+
+        return redirect()->route('report-signatures.index')->with('success', 'Signature updated successfully.');
+    }
+
+    public function deleteReportSignature($id)
+    {
+        $signature = \App\Models\ReportSignature::findOrFail($id);
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($signature->image_path);
+        $signature->delete();
+
+        return response()->json(['success' => 'Signature deleted successfully.']);
+    }
+
+    public function reportSignatureImage($id)
+    {
+        $signature = \App\Models\ReportSignature::findOrFail($id);
+        abort_unless(\Illuminate\Support\Facades\Storage::disk('public')->exists($signature->image_path), 404);
+
+        return response()->file($signature->imageAbsolutePath());
     }
 
     public function storeReport(\Illuminate\Http\Request $request)
@@ -79,12 +148,16 @@ class HomeController extends Controller
             'doctor_name' => 'required',
             'sample_received_on' => 'required|date',
             'report_released_on' => 'required|date',
+            'notes' => 'nullable|string',
+            'report_signature_id' => 'nullable|exists:report_signatures,id',
+            'signature_pin' => 'required_with:report_signature_id|nullable|string',
             'test_name.*' => 'required',
             'observed_value.*' => 'required',
         ]);
 
         $patient = \App\Models\Patient::findOrFail($request->patient_id);
         $items = $this->buildReportItems($request, $patient);
+        $signatureId = $this->verifiedSignatureId($request);
 
         $report = \App\Models\TestReport::create([
             'patient_id' => $request->patient_id,
@@ -93,10 +166,12 @@ class HomeController extends Controller
             'report_released_on' => $request->report_released_on,
             'barcode' => rand(100000, 999999),
             'status' => $request->status ?? 'Completed',
+            'notes' => $request->notes,
+            'report_signature_id' => $signatureId,
         ]);
 
         $report->items()->createMany($items);
-        $this->auditReport($report, 'created', null, $this->reportSnapshot($report->fresh(['patient', 'items'])));
+        $this->auditReport($report, 'created', null, $this->reportSnapshot($report->fresh(['patient', 'items', 'signature'])));
 
         // Update appointment status for these tests
         if ($request->has('test_name')) {
@@ -118,13 +193,17 @@ class HomeController extends Controller
             'doctor_name' => 'required',
             'sample_received_on' => 'required|date',
             'report_released_on' => 'required|date',
+            'notes' => 'nullable|string',
+            'report_signature_id' => 'nullable|exists:report_signatures,id',
+            'signature_pin' => 'required_with:report_signature_id|nullable|string',
             'test_name.*' => 'required',
             'observed_value.*' => 'required',
         ]);
 
-        $oldData = $this->reportSnapshot($report->load(['patient', 'items']));
+        $oldData = $this->reportSnapshot($report->load(['patient', 'items', 'signature']));
         $patient = \App\Models\Patient::findOrFail($request->patient_id);
         $items = $this->buildReportItems($request, $patient);
+        $signatureId = $this->verifiedSignatureId($request);
 
         $report->update([
             'patient_id' => $request->patient_id,
@@ -132,25 +211,28 @@ class HomeController extends Controller
             'sample_received_on' => $request->sample_received_on,
             'report_released_on' => $request->report_released_on,
             'status' => $request->status ?? 'Completed',
+            'notes' => $request->notes,
+            'report_signature_id' => $signatureId,
         ]);
         $report->items()->delete();
         $report->items()->createMany($items);
-        $this->auditReport($report, 'updated', $oldData, $this->reportSnapshot($report->fresh(['patient', 'items'])));
+        $this->auditReport($report, 'updated', $oldData, $this->reportSnapshot($report->fresh(['patient', 'items', 'signature'])));
 
         return response()->json(['success' => 'Test report updated successfully!']);
     }
 
     public function getReport($id)
     {
-        $report = \App\Models\TestReport::with(['patient', 'items'])->findOrFail($id);
+        $report = \App\Models\TestReport::with(['patient', 'items', 'signature'])->findOrFail($id);
         $payload = $report->toArray();
         $payload['results'] = $report->items->map(fn ($item) => $this->serializeReportItem($item))->values();
+        $payload['signature'] = $this->serializeReportSignature($report->signature);
         return response()->json($payload);
     }
 
     public function deleteReport($id)
     {
-        $report = \App\Models\TestReport::with(['patient', 'items'])->findOrFail($id);
+        $report = \App\Models\TestReport::with(['patient', 'items', 'signature'])->findOrFail($id);
         $this->auditReport($report, 'deleted', $this->reportSnapshot($report), null);
         $report->delete();
         return response()->json(['success' => 'Report deleted successfully!']);
@@ -160,14 +242,14 @@ class HomeController extends Controller
     {
         $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
         $report->restore();
-        $this->auditReport($report, 'restored', null, $this->reportSnapshot($report->fresh(['patient', 'items'])));
+        $this->auditReport($report, 'restored', null, $this->reportSnapshot($report->fresh(['patient', 'items', 'signature'])));
 
         return response()->json(['success' => 'Report restored successfully!']);
     }
 
     public function downloadPDF($id)
     {
-        $report = \App\Models\TestReport::with(['patient', 'items'])->findOrFail($id);
+        $report = \App\Models\TestReport::with(['patient', 'items', 'signature'])->findOrFail($id);
         $patient = $report->patient;
         
         // Group results by category
@@ -899,10 +981,50 @@ class HomeController extends Controller
         ];
     }
 
+    private function verifiedSignatureId(\Illuminate\Http\Request $request): ?int
+    {
+        if (!$request->filled('report_signature_id')) {
+            return null;
+        }
+
+        $signature = \App\Models\ReportSignature::findOrFail($request->report_signature_id);
+        if (!\Illuminate\Support\Facades\Hash::check((string) $request->signature_pin, $signature->pin_hash)) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'signature_pin' => 'Invalid signature PIN.',
+            ]);
+        }
+
+        return $signature->id;
+    }
+
+    private function serializeReportSignature(?\App\Models\ReportSignature $signature): ?array
+    {
+        if (!$signature) {
+            return null;
+        }
+
+        $path = $signature->imageAbsolutePath();
+        $imageData = null;
+        if (is_file($path)) {
+            $mime = mime_content_type($path) ?: 'image/png';
+            $imageData = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($path));
+        }
+
+        return [
+            'id' => $signature->id,
+            'name' => $signature->name,
+            'image_url' => route('report-signatures.image', $signature->id),
+            'image_data' => $imageData,
+        ];
+    }
+
     private function reportSnapshot(\App\Models\TestReport $report): array
     {
         if (!$report->relationLoaded('items')) {
             $report->load('items');
+        }
+        if (!$report->relationLoaded('signature')) {
+            $report->load('signature');
         }
 
         return [
@@ -914,7 +1036,10 @@ class HomeController extends Controller
                 'report_released_on',
                 'barcode',
                 'status',
+                'notes',
+                'report_signature_id',
             ]),
+            'signature' => $report->signature ? $report->signature->only(['id', 'name', 'image_path']) : null,
             'results' => $report->items->map(fn ($item) => $this->serializeReportItem($item))->values()->all(),
         ];
     }

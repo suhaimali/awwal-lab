@@ -38,6 +38,7 @@
                     display: flex;
                     flex-direction: column;
                     height: 100vh;
+                    height: 100dvh;
                     background: linear-gradient(135deg, #0a0a1a 0%, #0f1729 40%, #0a1628 100%);
                     overflow: hidden;
                     font-family: 'Inter', sans-serif;
@@ -262,8 +263,7 @@
                     flex: 1;
                     overflow: auto;
                     padding: 36px 24px;
-                    display: flex;
-                    justify-content: center;
+                    display: block;
                     scroll-behavior: smooth;
                     scrollbar-width: thin;
                     scrollbar-color: rgba(99,102,241,0.4) transparent;
@@ -283,14 +283,18 @@
 
                 /* ── PDF PAGE (3D shadow lift) ─────────────────── */
                 .pdf-page-container {
-                    transform-origin: top center;
-                    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: max-content;
+                    max-width: none;
+                    margin: 0 auto;
+                    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 #pdf-canvas-container {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 24px;
+                    width: max-content;
+                    max-width: none;
                 }
                 .pdf-canvas-wrapper {
                     line-height: 0;
@@ -303,6 +307,10 @@
                         0 2px 8px rgba(0,0,0,0.4);
                     transition: box-shadow 0.3s ease;
                 }
+                .pdf-canvas-wrapper canvas {
+                    display: block;
+                    height: auto;
+                }
                   @media (max-width: 991px) {
                     .pdf-toolbar { height: auto; padding: 16px; flex-direction: column; gap: 16px; background: rgba(15,23,42,1); }
                     .pdf-toolbar-center { position: static; transform: none; width: 100%; justify-content: center; margin: 5px 0; background: rgba(255,255,255,0.05); }
@@ -310,9 +318,9 @@
                     .toolbar-section .d-flex { gap: 8px !important; }
                     #viewer-filename-link { max-width: 130px; font-size: 12px; }
                     .pdf-viewport { padding: 10px 5px; background: #0f172a; }
-                    .pdf-page-container { transform-origin: top center; width: 100% !important; display: flex; flex-direction: column; align-items: center; }
-                    .pdf-canvas-wrapper { margin-bottom: 10px; width: 100% !important; }
-                    canvas { width: 100% !important; height: auto !important; }
+                    .pdf-page-container { margin: 0 auto; }
+                    .pdf-canvas-wrapper { margin-bottom: 10px; }
+                    canvas { height: auto !important; }
                     .pdf-btn span { font-size: 11px; }
                     .pdf-btn { padding: 8px 10px; }
                     
@@ -480,6 +488,32 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label">Report Notes</label>
+							<textarea class="form-control" name="notes" rows="3" placeholder="Notes to show in the PDF"></textarea>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="form-label">Authorized Signature</label>
+							<select class="form-select report-signature-select" name="report_signature_id">
+								<option value="">No signature</option>
+								@foreach($signatures as $signature)
+									<option value="{{ $signature->id }}">{{ $signature->name }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="form-label">PIN</label>
+							<input type="password" class="form-control signature-pin-input" name="signature_pin" autocomplete="new-password" placeholder="PIN">
+						</div>
+					</div>
+				</div>
+
                 <div class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
                     <h4 class="text-primary mb-0">Dynamic Test Results</h4>
                     <button type="button" class="btn btn-sm btn-success" id="btn-add-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
@@ -626,6 +660,32 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label">Report Notes</label>
+							<textarea class="form-control" name="notes" id="edit-report-notes" rows="3" placeholder="Notes to show in the PDF"></textarea>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="form-label">Authorized Signature</label>
+							<select class="form-select report-signature-select" name="report_signature_id" id="edit-report-signature-id">
+								<option value="">No signature</option>
+								@foreach($signatures as $signature)
+									<option value="{{ $signature->id }}">{{ $signature->name }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="form-label">PIN</label>
+							<input type="password" class="form-control signature-pin-input" name="signature_pin" id="edit-signature-pin" autocomplete="new-password" placeholder="Required">
+						</div>
+					</div>
+				</div>
+
                 <div class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
                     <h4 class="text-primary mb-0">Dynamic Test Results</h4>
                     <button type="button" class="btn btn-sm btn-success" id="btn-add-edit-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
@@ -765,8 +825,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
       // Initialize PDF.js
-      var pdfjsLib = window['pdfjs-dist/build/pdf'];
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      var pdfjsLib = window['pdfjs-dist/build/pdf'] || window.pdfjsLib;
+      if (pdfjsLib) {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          window.pdfjsLib = pdfjsLib;
+      }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
@@ -969,6 +1032,25 @@
               modal.find('.test-selector-dynamic').trigger('change');
           });
 
+          function updateSignaturePinRequirement(select) {
+              const modal = $(select).closest('.modal');
+              const pinInput = modal.find('.signature-pin-input');
+              const hasSignature = !!$(select).val();
+              pinInput.prop('required', hasSignature);
+              pinInput.attr('placeholder', hasSignature ? 'Required' : 'PIN');
+              if (!hasSignature) {
+                  pinInput.val('');
+              }
+          }
+
+          $(document).on('change', '.report-signature-select', function() {
+              updateSignaturePinRequirement(this);
+          });
+
+          $('.report-signature-select').each(function() {
+              updateSignaturePinRequirement(this);
+          });
+
           $('#btn-add-test-row, #btn-add-edit-test-row').click(function() {
               let target = $(this).attr('id') === 'btn-add-test-row' ? '#dynamic-tests-container' : '#edit-dynamic-tests-container';
               $(target).append(trTemplate);
@@ -1076,6 +1158,10 @@
                   $('#edit-report-doctor').val(data.doctor_name);
                   $('#edit-sample-date').val(moment(data.sample_received_on).format('YYYY-MM-DDTHH:mm'));
                   $('#edit-release-date').val(moment(data.report_released_on).format('YYYY-MM-DDTHH:mm'));
+                  $('#edit-report-notes').val(data.notes || '');
+                  $('#edit-report-signature-id').val(data.report_signature_id || '');
+                  $('#edit-signature-pin').val('');
+                  updateSignaturePinRequirement($('#edit-report-signature-id')[0]);
                   
                   let container = $('#edit-dynamic-tests-container');
                   container.empty();
@@ -1196,7 +1282,7 @@
           let currentZoom = 1;
           const ZOOM_STEP = 0.1;
           const MAX_ZOOM = 2.0;
-          const MIN_ZOOM = 0.5;
+          const MIN_ZOOM = 0.25;
 
           // ── Header Toggle ──────────────────────────────────────
           let showReportHeader = true;
@@ -1222,6 +1308,8 @@
                   const doc = createPDFDocument(data, showReportHeader);
                   const pdfBlob = doc.output('blob');
                   renderPDF(URL.createObjectURL(pdfBlob));
+              }).fail(function(xhr) {
+                  $('#pdf-canvas-container').html(`<div class="alert alert-danger m-20">Could not reload report preview. ${xhr.responseJSON?.message || 'Please try again.'}</div>`);
               });
           });
           // ──────────────────────────────────────────────────────
@@ -1273,11 +1361,17 @@
                           $('#fit-width').click();
                       }
                   });
-			  });
+			  }).fail(function(xhr) {
+                  $('#pdf-canvas-container').html(`<div class="alert alert-danger m-20">Could not load report preview. ${xhr.responseJSON?.message || 'Please try again.'}</div>`);
+              });
 		  });
 
           async function renderPDF(url) {
               try {
+                  if (!window.pdfjsLib) {
+                      throw new Error('PDF preview engine did not load.');
+                  }
+
                   const loadingTask = pdfjsLib.getDocument(url);
                   const pdf = await loadingTask.promise;
                   const container = document.getElementById('pdf-canvas-container');
@@ -1294,6 +1388,8 @@
                       const context = canvas.getContext('2d');
                       canvas.height = viewport.height;
                       canvas.width = viewport.width;
+                      canvas.dataset.baseWidth = viewport.width;
+                      canvas.style.width = `${viewport.width * currentZoom}px`;
 
                       const renderContext = {
                           canvasContext: context,
@@ -1305,6 +1401,8 @@
                       
                       await page.render(renderContext).promise;
                   }
+
+                  applyZoom();
               } catch (error) {
                   console.error('PDF Rendering Error:', error);
                   $('#pdf-canvas-container').html(`<div class="alert alert-danger m-20">Error rendering PDF: ${error.message}</div>`);
@@ -1313,7 +1411,11 @@
 
           // Zoom Functions
           function applyZoom() {
-              $('#pdf-page-container').css('transform', `scale(${currentZoom})`);
+              $('#pdf-page-container').css('transform', 'none');
+              $('#pdf-canvas-container canvas').each(function() {
+                  const baseWidth = parseFloat(this.dataset.baseWidth || this.width || 794);
+                  $(this).css('width', `${baseWidth * currentZoom}px`);
+              });
               $('#zoom-text').text(`${Math.round(currentZoom * 100)}%`);
           }
 
@@ -1332,8 +1434,9 @@
           });
 
           $('#fit-width').click(function() {
-              let containerWidth = $('#pdf-viewport').width() - 80;
-              let pageWidth = $('#pdf-canvas-container canvas').first().width() || 794; 
+              let containerWidth = $('#pdf-viewport').width() - (window.innerWidth < 768 ? 14 : 80);
+              let firstCanvas = $('#pdf-canvas-container canvas').first()[0];
+              let pageWidth = parseFloat(firstCanvas?.dataset.baseWidth || firstCanvas?.width || 794);
               currentZoom = containerWidth / pageWidth;
               if (currentZoom > MAX_ZOOM) currentZoom = MAX_ZOOM;
               if (currentZoom < MIN_ZOOM) currentZoom = MIN_ZOOM;
@@ -1430,7 +1533,7 @@
           function generateAndOpenPDF(reportId) {
               const { jsPDF } = window.jspdf;
               $.get("/reports/" + reportId, function(data) {
-                  const doc = createPDFDocument(data);
+                  const doc = createPDFDocument(data, showReportHeader);
                   window.open(doc.output('bloburl'), '_blank');
               });
           }
@@ -1445,6 +1548,8 @@
               const sex = (p.gender || '').toUpperCase();
               const reportDate = moment(data.sample_received_on).format('DD-MMM-YYYY - hh:mm:ss A');
               const printedDate = moment().format('DD-MMM-YYYY - hh:mm:ss A');
+              const reportNotes = (data.notes || '').trim();
+              const signature = data.signature || null;
 
               const pageW = doc.internal.pageSize.getWidth();
               const pageH = doc.internal.pageSize.getHeight();
@@ -1567,6 +1672,14 @@
 	                  return y + rowH;
 	              }
 
+              function imageFormatFromDataUrl(dataUrl) {
+                  if (!dataUrl || dataUrl.indexOf('image/jpeg') !== -1 || dataUrl.indexOf('image/jpg') !== -1) {
+                      return 'JPEG';
+                  }
+
+                  return 'PNG';
+              }
+
               addShell(true);
 
               let groupedResults = {};
@@ -1602,7 +1715,27 @@
               doc.setFont('times', 'normal');
               doc.setFontSize(11);
               doc.text('Note :', left, y + 5);
-              doc.text('Medi Technician', 174, footerTop - 8, { align: 'center' });
+
+              if (reportNotes) {
+                  const noteLines = doc.splitTextToSize(reportNotes, 116);
+                  if (y + 8 + noteLines.length * 5 > footerTop - 18) {
+                      y = addNewPage();
+                      doc.text('Note :', left, y + 5);
+                  }
+                  doc.text(noteLines, left + 13, y + 5);
+              }
+
+              if (signature && signature.image_data) {
+                  try {
+                      doc.addImage(signature.image_data, imageFormatFromDataUrl(signature.image_data), 154, footerTop - 34, 38, 18, undefined, 'FAST');
+                  } catch (error) {
+                      console.warn('Could not add signature image:', error);
+                  }
+              }
+
+              doc.setFont('times', 'bold');
+              doc.text(signature?.name || 'Medi Technician', 174, footerTop - 8, { align: 'center' });
+              doc.setFont('times', 'normal');
               if (pageNo > 1) {
                   doc.setFontSize(9);
                   doc.text(`Page No :${pageNo}`, 12, 36);

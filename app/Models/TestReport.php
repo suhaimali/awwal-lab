@@ -16,6 +16,8 @@ class TestReport extends Model
         'report_released_on',
         'barcode',
         'status',
+        'notes',
+        'report_signature_id',
     ];
 
     protected $casts = [
@@ -36,5 +38,10 @@ class TestReport extends Model
     public function audits()
     {
         return $this->hasMany(TestReportAudit::class);
+    }
+
+    public function signature()
+    {
+        return $this->belongsTo(ReportSignature::class, 'report_signature_id');
     }
 }

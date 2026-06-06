@@ -55,6 +55,12 @@
 					<span>Test Reports</span>
 				  </a>
 				</li>
+				<li class="{{ request()->routeIs('report-signatures*') ? 'active' : '' }}">
+				  <a href="{{ route('report-signatures.index') }}" class="{{ request()->routeIs('report-signatures*') ? 'active' : '' }}">
+					<i class="fa fa-pencil-square-o"></i>
+					<span>Report Signatures</span>
+				  </a>
+				</li>
 				<li class="{{ request()->routeIs('payments*') ? 'active' : '' }}">
 				  <a href="{{ route('payments') }}" class="{{ request()->routeIs('payments*') ? 'active' : '' }}">
 					<i class="fa fa-money"></i>

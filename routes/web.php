@@ -27,6 +27,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reports/{id}/pdf', [HomeController::class, 'downloadPDF'])->name('reports.pdf');
     Route::delete('/reports/{id}', [HomeController::class, 'deleteReport'])->name('reports.delete');
     Route::post('/reports/{id}/restore', [HomeController::class, 'restoreReport'])->name('reports.restore');
+
+    // Report Signatures
+    Route::get('/report-signatures', [HomeController::class, 'reportSignatures'])->name('report-signatures.index');
+    Route::post('/report-signatures', [HomeController::class, 'storeReportSignature'])->name('report-signatures.store');
+    Route::get('/report-signatures/{id}/image', [HomeController::class, 'reportSignatureImage'])->name('report-signatures.image');
+    Route::put('/report-signatures/{id}', [HomeController::class, 'updateReportSignature'])->name('report-signatures.update');
+    Route::delete('/report-signatures/{id}', [HomeController::class, 'deleteReportSignature'])->name('report-signatures.delete');
     
 
     Route::get('/patients', [HomeController::class, 'patients'])->name('patients');

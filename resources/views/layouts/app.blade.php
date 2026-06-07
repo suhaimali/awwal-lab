@@ -681,6 +681,17 @@
     </script>
 
     @stack('scripts')
+    <script>
+        // Security: Remove all legacy local storage data bases to ensure full MySQL security
+        const legacyKeys = ['awal_bookings', 'awal_tests', 'ims_bookings', 'lab_bookings_v2', 'lab_patients'];
+        legacyKeys.forEach(key => {
+            if (localStorage.getItem(key)) {
+                localStorage.removeItem(key);
+                console.log('Cleared legacy local storage key: ' + key);
+            }
+        });
+    </script>
 </body>
 </html>
+
 

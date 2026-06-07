@@ -198,7 +198,7 @@
         <div class="aw-card-title"><i class="fa fa-list" style="color:var(--primary);"></i> All Bookings</div>
         <div style="position:relative;">
             <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-            <input type="text" id="booking-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search bookings..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            <input type="text" id="booking-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search bookings..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" name="name_1000">
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
@@ -273,8 +273,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Select Patient</label>
-							<select class="form-select" name="patient_id" required>
+							<label for="field_1001" class="form-label">Select Patient</label>
+							<select class="form-select" name="patient_id" required autocomplete="off" id="field_1001">
 								<option value="">-- Select Patient --</option>
 								@foreach($patients as $patient)
 									<option value="{{ $patient->id }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
@@ -284,9 +284,9 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Reference Doctor</label>
+							<label for="field_1002" class="form-label">Reference Doctor</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select reference-dr-select" name="doctor_name">
+								<select class="form-select reference-dr-select" name="doctor_name" autocomplete="off" id="field_1002">
 									<option value="">-- Select Doctor --</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
@@ -298,9 +298,9 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label text-primary">Test Name</label>
+							<label for="book-test-name" class="form-label text-primary">Test Name</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select book-test-select" name="test_name" id="book-test-name" required>
+								<select class="form-select book-test-select" name="test_name" id="book-test-name" required autocomplete="off">
 									<option value="">-- Select Test --</option>
 									@foreach($tests as $test)
 										<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-unit="{{ $test->parameter->unit ?? '' }}" data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}">{{ $test->name }}</option>
@@ -313,14 +313,14 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label class="form-label text-primary">Price (₹)</label>
-							<input type="number" step="0.01" class="form-control" id="book-test-price" name="test_price" placeholder="0.00" required>
+							<label for="book-test-price" class="form-label text-primary">Price (₹)</label>
+							<input type="number" step="0.01" class="form-control" id="book-test-price" name="test_price" placeholder="0.00" required autocomplete="off">
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label class="form-label text-danger">Discount (₹)</label>
-							<input type="number" step="0.01" class="form-control" id="book-test-discount" name="discount" value="0.00">
+							<label for="book-test-discount" class="form-label text-danger">Discount (₹)</label>
+							<input type="number" step="0.01" class="form-control" id="book-test-discount" name="discount" value="0.00" autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -333,14 +333,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Booking Date</label>
-							<input type="date" class="form-control" name="appointment_date" value="{{ date('Y-m-d') }}" required>
+							<label for="field_1003" class="form-label">Booking Date</label>
+							<input type="date" class="form-control" name="appointment_date" value="{{ date('Y-m-d') }}" required autocomplete="off" id="field_1003">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Booking Time</label>
-							<input type="time" class="form-control" name="appointment_time" value="{{ date('H:i') }}" required>
+							<label for="field_1004" class="form-label">Booking Time</label>
+							<input type="time" class="form-control" name="appointment_time" value="{{ date('H:i') }}" required autocomplete="off" id="field_1004">
 						</div>
 					</div>
 				</div>
@@ -348,8 +348,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Status</label>
-							<select class="form-select" name="status">
+							<label for="field_1005" class="form-label">Status</label>
+							<select class="form-select" name="status" autocomplete="off" id="field_1005">
 								<option value="Pending">Pending</option>
 								<option value="Completed">Completed</option>
 								<option value="Cancelled">Cancelled</option>
@@ -359,8 +359,8 @@
 				</div>
 
 				<div class="form-group">
-					<label class="form-label">Notes / Instructions</label>
-					<textarea rows="2" class="form-control" name="notes" placeholder="Any special instructions..."></textarea>
+					<label for="field_1006" class="form-label">Notes / Instructions</label>
+					<textarea rows="2" class="form-control" name="notes" placeholder="Any special instructions..." autocomplete="off" id="field_1006"></textarea>
 				</div>
 			</form>
 		  </div>
@@ -386,8 +386,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Select Patient</label>
-							<select class="form-select" name="patient_id" id="edit-patient-id" required>
+							<label for="edit-patient-id" class="form-label">Select Patient</label>
+							<select class="form-select" name="patient_id" id="edit-patient-id" required autocomplete="off">
 								<option value="">-- Select Patient --</option>
 								@foreach($patients as $patient)
 									<option value="{{ $patient->id }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
@@ -397,9 +397,9 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Reference Doctor</label>
+							<label for="edit-doctor-name" class="form-label">Reference Doctor</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select reference-dr-select" name="doctor_name" id="edit-doctor-name">
+								<select class="form-select reference-dr-select" name="doctor_name" id="edit-doctor-name" autocomplete="off">
 									<option value="">-- Select Doctor --</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
@@ -413,9 +413,9 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label text-primary">Test Name</label>
+							<label for="edit-test-name" class="form-label text-primary">Test Name</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select book-test-select" name="test_name" id="edit-test-name" required>
+								<select class="form-select book-test-select" name="test_name" id="edit-test-name" required autocomplete="off">
 									<option value="">-- Select Test --</option>
 									@foreach($tests as $test)
 										<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-unit="{{ $test->parameter->unit ?? '' }}" data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}">{{ $test->name }}</option>
@@ -428,14 +428,14 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label class="form-label text-primary">Price (₹)</label>
-							<input type="number" step="0.01" class="form-control" id="edit-test-price" name="test_price" placeholder="0.00" required>
+							<label for="edit-test-price" class="form-label text-primary">Price (₹)</label>
+							<input type="number" step="0.01" class="form-control" id="edit-test-price" name="test_price" placeholder="0.00" required autocomplete="off">
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label class="form-label text-danger">Discount (₹)</label>
-							<input type="number" step="0.01" class="form-control" id="edit-test-discount" name="discount" value="0.00">
+							<label for="edit-test-discount" class="form-label text-danger">Discount (₹)</label>
+							<input type="number" step="0.01" class="form-control" id="edit-test-discount" name="discount" value="0.00" autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -448,14 +448,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Booking Date</label>
-							<input type="date" class="form-control" name="appointment_date" id="edit-appointment-date" required>
+							<label for="edit-appointment-date" class="form-label">Booking Date</label>
+							<input type="date" class="form-control" name="appointment_date" id="edit-appointment-date" required autocomplete="off">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Booking Time</label>
-							<input type="time" class="form-control" name="appointment_time" id="edit-appointment-time" required>
+							<label for="edit-appointment-time" class="form-label">Booking Time</label>
+							<input type="time" class="form-control" name="appointment_time" id="edit-appointment-time" required autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -463,8 +463,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Status</label>
-							<select class="form-select" name="status" id="edit-status">
+							<label for="edit-status" class="form-label">Status</label>
+							<select class="form-select" name="status" id="edit-status" autocomplete="off">
 								<option value="Pending">Pending</option>
 								<option value="Completed">Completed</option>
 								<option value="Cancelled">Cancelled</option>
@@ -474,8 +474,8 @@
 				</div>
 
 				<div class="form-group">
-					<label class="form-label">Notes / Instructions</label>
-					<textarea rows="2" class="form-control" name="notes" id="edit-notes" placeholder="Any special instructions..."></textarea>
+					<label for="edit-notes" class="form-label">Notes / Instructions</label>
+					<textarea rows="2" class="form-control" name="notes" id="edit-notes" placeholder="Any special instructions..." autocomplete="off"></textarea>
 				</div>
 			</form>
 		  </div>
@@ -500,7 +500,7 @@
             </div>
             <div class="modal-body">
                 <p style="color:var(--text-muted);">Are you sure you want to delete this booking? This will remove all associated data.</p>
-                <input type="hidden" id="delete-booking-id">
+                <input type="hidden" id="delete-booking-id" name="name_1007">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
@@ -521,20 +521,20 @@
 	  <div class="modal-body">
 		<form id="form-add-doctor">
 			<div class="form-group">
-				<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
-				<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe">
+				<label for="field_1008" class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+				<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe" autocomplete="off" id="field_1008">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Qualification</label>
-				<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD">
+				<label for="field_1009" class="form-label-aw">Qualification</label>
+				<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD" autocomplete="off" id="field_1009">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Phone No</label>
-				<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number">
+				<label for="field_1010" class="form-label-aw">Phone No</label>
+				<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number" autocomplete="off" id="field_1010">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Email</label>
-				<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password">
+				<label for="field_1011" class="form-label-aw">Email</label>
+				<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password" id="field_1011">
 			</div>
 		</form>
 	  </div>
@@ -558,19 +558,19 @@
 		<form id="form-edit-doctor">
 			<input type="hidden" name="doctor_id" id="edit-doc-id">
 			<div class="form-group">
-				<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
-				<input type="text" class="form-control-aw" name="name" id="edit-doc-name" required>
+				<label for="edit-doc-name" class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+				<input type="text" class="form-control-aw" name="name" id="edit-doc-name" required autocomplete="off">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Qualification</label>
-				<input type="text" class="form-control-aw" name="qualification" id="edit-doc-qualification">
+				<label for="edit-doc-qualification" class="form-label-aw">Qualification</label>
+				<input type="text" class="form-control-aw" name="qualification" id="edit-doc-qualification" autocomplete="off">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Phone No</label>
-				<input type="text" class="form-control-aw" name="phone" id="edit-doc-phone">
+				<label for="edit-doc-phone" class="form-label-aw">Phone No</label>
+				<input type="text" class="form-control-aw" name="phone" id="edit-doc-phone" autocomplete="off">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Email</label>
+				<label for="edit-doc-email" class="form-label-aw">Email</label>
 				<input type="email" class="form-control-aw" name="email" id="edit-doc-email" autocomplete="new-password">
 			</div>
 		</form>
@@ -595,16 +595,16 @@
 		<form id="form-add-booking-test">
 			@csrf
 			<div class="form-group">
-				<label class="form-label-aw">Test/Parameter Name <span class="text-danger">*</span></label>
-				<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Glucose Fasting">
+				<label for="field_1012" class="form-label-aw">Test/Parameter Name <span class="text-danger">*</span></label>
+				<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Glucose Fasting" autocomplete="off" id="field_1012">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Price (₹) <span class="text-danger">*</span></label>
-				<input type="number" step="0.01" class="form-control-aw" name="price" required placeholder="e.g. 250.00">
+				<label for="field_1013" class="form-label-aw">Price (₹) <span class="text-danger">*</span></label>
+				<input type="number" step="0.01" class="form-control-aw" name="price" required placeholder="e.g. 250.00" autocomplete="off" id="field_1013">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Measurement Unit</label>
-				<select class="form-select form-control-aw" name="unit">
+				<label for="field_1014" class="form-label-aw">Measurement Unit</label>
+				<select class="form-select form-control-aw" name="unit" autocomplete="off" id="field_1014">
 					<option value="">-- Select Unit --</option>
 					@foreach($units as $u)
 						<option value="{{ $u->name }}">{{ $u->name }}</option>
@@ -612,8 +612,8 @@
 				</select>
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Biological Reference</label>
-				<input type="text" class="form-control-aw" name="biological_reference" placeholder="e.g. 70 - 110">
+				<label for="field_1015" class="form-label-aw">Biological Reference</label>
+				<input type="text" class="form-control-aw" name="biological_reference" placeholder="e.g. 70 - 110" autocomplete="off" id="field_1015">
 			</div>
 		</form>
 	  </div>
@@ -638,16 +638,16 @@
 			@csrf
 			<input type="hidden" name="test_id" id="edit-booking-test-id">
 			<div class="form-group">
-				<label class="form-label-aw">Test/Parameter Name <span class="text-danger">*</span></label>
-				<input type="text" class="form-control-aw" name="name" id="edit-booking-test-name" required>
+				<label for="edit-booking-test-name" class="form-label-aw">Test/Parameter Name <span class="text-danger">*</span></label>
+				<input type="text" class="form-control-aw" name="name" id="edit-booking-test-name" required autocomplete="off">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Price (₹) <span class="text-danger">*</span></label>
-				<input type="number" step="0.01" class="form-control-aw" name="price" id="edit-booking-test-price-val" required>
+				<label for="edit-booking-test-price-val" class="form-label-aw">Price (₹) <span class="text-danger">*</span></label>
+				<input type="number" step="0.01" class="form-control-aw" name="price" id="edit-booking-test-price-val" required autocomplete="off">
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Measurement Unit</label>
-				<select class="form-select form-control-aw" name="unit" id="edit-booking-test-unit">
+				<label for="edit-booking-test-unit" class="form-label-aw">Measurement Unit</label>
+				<select class="form-select form-control-aw" name="unit" id="edit-booking-test-unit" autocomplete="off">
 					<option value="">-- Select Unit --</option>
 					@foreach($units as $u)
 						<option value="{{ $u->name }}">{{ $u->name }}</option>
@@ -655,8 +655,8 @@
 				</select>
 			</div>
 			<div class="form-group mt-3">
-				<label class="form-label-aw">Biological Reference</label>
-				<input type="text" class="form-control-aw" name="biological_reference" id="edit-booking-test-bio">
+				<label for="edit-booking-test-bio" class="form-label-aw">Biological Reference</label>
+				<input type="text" class="form-control-aw" name="biological_reference" id="edit-booking-test-bio" autocomplete="off">
 			</div>
 		</form>
 	  </div>

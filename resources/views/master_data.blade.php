@@ -23,7 +23,7 @@
                     <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($units) }} units</span>
                     <div style="position:relative;">
                         <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
-                        <input type="text" id="unit-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search units...">
+                        <input type="text" id="unit-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search units..." autocomplete="off" name="name_1024">
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <form id="form-add-unit" class="mb-4">
                     @csrf
                     <div style="display:flex; gap:10px;">
-                        <input type="text" name="name" class="form-control-aw" placeholder="Add new unit (e.g. mg/dl)" required>
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new unit (e.g. mg/dl)" required autocomplete="off" id="field_1025">
                         <button type="submit" class="btn-aw-primary" style="flex-shrink:0;"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </form>
@@ -84,7 +84,7 @@
                     <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($templates) }} templates</span>
                     <div style="position:relative;">
                         <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
-                        <input type="text" id="template-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search templates...">
+                        <input type="text" id="template-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search templates..." autocomplete="off" name="name_1026">
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <form id="form-add-template" class="mb-4">
                     @csrf
                     <div style="display:flex; gap:10px;">
-                        <input type="text" name="name" class="form-control-aw" placeholder="Add new result (e.g. Positive)" required>
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new result (e.g. Positive)" required autocomplete="off" id="field_1027">
                         <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#059669;"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </form>
@@ -147,7 +147,7 @@
                     <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($referenceTemplates) }} templates</span>
                     <div style="position:relative;">
                         <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
-                        <input type="text" id="reference-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search references...">
+                        <input type="text" id="reference-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search references..." autocomplete="off" name="name_1028">
                     </div>
                 </div>
             </div>
@@ -155,7 +155,7 @@
                 <form id="form-add-reference" class="mb-4">
                     @csrf
                     <div style="display:flex; gap:10px;">
-                        <input type="text" name="name" class="form-control-aw" placeholder="Add new reference (e.g. 70 - 110)" required>
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new reference (e.g. 70 - 110)" required autocomplete="off" id="field_1029">
                         <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#2563eb;"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </form>
@@ -208,7 +208,7 @@
                     <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($flagTemplates) }} flags</span>
                     <div style="position:relative;">
                         <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
-                        <input type="text" id="flag-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search flags...">
+                        <input type="text" id="flag-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search flags..." autocomplete="off" name="name_1030">
                     </div>
                 </div>
             </div>
@@ -216,7 +216,7 @@
                 <form id="form-add-flag" class="mb-4">
                     @csrf
                     <div style="display:flex; gap:10px;">
-                        <input type="text" name="name" class="form-control-aw" placeholder="Add new flag (e.g. H, L, C)" required>
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new flag (e.g. H, L, C)" required autocomplete="off" id="field_1031">
                         <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#d97706;"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </form>
@@ -271,11 +271,11 @@
             </div>
             <div class="modal-body">
                 <form id="form-edit-master">
-                    <input type="hidden" id="edit-id">
-                    <input type="hidden" id="edit-type">
+                    <input type="hidden" id="edit-id" name="name_1032">
+                    <input type="hidden" id="edit-type" name="name_1033">
                     <div class="mb-3">
-                        <label class="form-label-aw">Name / Value</label>
-                        <input type="text" id="edit-name" name="name" class="form-control-aw" required>
+                        <label for="edit-name" class="form-label-aw">Name / Value</label>
+                        <input type="text" id="edit-name" name="name" class="form-control-aw" required autocomplete="off">
                     </div>
                 </form>
             </div>

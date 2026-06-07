@@ -1318,3 +1318,5 @@ class HomeController extends Controller
         return response()->json(['success' => 'Report permanently deleted!']);
     }
 }
+
+

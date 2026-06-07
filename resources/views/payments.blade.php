@@ -21,7 +21,7 @@
             <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($payments) }} records</span>
             <div style="position:relative;">
                 <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-                <input type="text" id="payment-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:210px;" placeholder="Search payments..." autocomplete="off">
+                <input type="text" id="payment-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:210px;" placeholder="Search payments..." autocomplete="off" name="name_1097">
             </div>
         </div>
     </div>
@@ -98,8 +98,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="form-label">Patient</label>
-                <select class="form-select" name="patient_id" required>
+                <label for="field_1098" class="form-label">Patient</label>
+                <select class="form-select" name="patient_id" required autocomplete="off" id="field_1098">
                   <option value="">-- Select Patient --</option>
                   @foreach($patients as $patient)
                     <option value="{{ $patient->id }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
@@ -111,14 +111,14 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Bill Date</label>
-                <input type="date" class="form-control" name="bill_date" value="{{ date('Y-m-d') }}" required>
+                <label for="field_1099" class="form-label">Bill Date</label>
+                <input type="date" class="form-control" name="bill_date" value="{{ date('Y-m-d') }}" required autocomplete="off" id="field_1099">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Payment Status</label>
-                <select class="form-select" name="payment_status" required>
+                <label for="field_1100" class="form-label">Payment Status</label>
+                <select class="form-select" name="payment_status" required autocomplete="off" id="field_1100">
                   <option value="Unpaid">Unpaid</option>
                   <option value="Partial">Partial</option>
                   <option value="Paid">Paid</option>
@@ -129,28 +129,28 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Total Amount (₹)</label>
-                <input type="number" step="0.01" class="form-control calc-input" name="total_amount" id="add-total" required>
+                <label for="add-total" class="form-label">Total Amount (₹)</label>
+                <input type="number" step="0.01" class="form-control calc-input" name="total_amount" id="add-total" required autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Discount (₹)</label>
-                <input type="number" step="0.01" class="form-control calc-input" name="discount" id="add-discount" value="0.00">
+                <label for="add-discount" class="form-label">Discount (₹)</label>
+                <input type="number" step="0.01" class="form-control calc-input" name="discount" id="add-discount" value="0.00" autocomplete="off">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Advance Paid (₹)</label>
-                <input type="number" step="0.01" class="form-control calc-input" name="advance_paid" id="add-advance" value="0.00">
+                <label for="add-advance" class="form-label">Advance Paid (₹)</label>
+                <input type="number" step="0.01" class="form-control calc-input" name="advance_paid" id="add-advance" value="0.00" autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Payment Method</label>
-                <select class="form-select" name="payment_method" required>
+                <label for="field_1101" class="form-label">Payment Method</label>
+                <select class="form-select" name="payment_method" required autocomplete="off" id="field_1101">
                   <option value="Cash">Cash</option>
                   <option value="UPI">UPI</option>
                   <option value="Card">Card</option>
@@ -163,8 +163,8 @@
             <h5 class="mb-0 fw-bold">Balance Due: ₹<span id="add-balance">0.00</span></h5>
           </div>
           <div class="form-group">
-            <label class="form-label">Remarks</label>
-            <textarea class="form-control" name="remarks" rows="2"></textarea>
+            <label for="field_1102" class="form-label">Remarks</label>
+            <textarea class="form-control" name="remarks" rows="2" autocomplete="off" id="field_1102"></textarea>
           </div>
         </form>
       </div>
@@ -190,8 +190,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="form-label">Patient</label>
-                <select class="form-select" name="patient_id" id="edit-patient-id" required>
+                <label for="edit-patient-id" class="form-label">Patient</label>
+                <select class="form-select" name="patient_id" id="edit-patient-id" required autocomplete="off">
                   <option value="">-- Select Patient --</option>
                   @foreach($patients as $patient)
                     <option value="{{ $patient->id }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
@@ -203,14 +203,14 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Bill Date</label>
-                <input type="date" class="form-control" name="bill_date" id="edit-bill-date" required>
+                <label for="edit-bill-date" class="form-label">Bill Date</label>
+                <input type="date" class="form-control" name="bill_date" id="edit-bill-date" required autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Payment Status</label>
-                <select class="form-select" name="payment_status" id="edit-status" required>
+                <label for="edit-status" class="form-label">Payment Status</label>
+                <select class="form-select" name="payment_status" id="edit-status" required autocomplete="off">
                   <option value="Unpaid">Unpaid</option>
                   <option value="Partial">Partial</option>
                   <option value="Paid">Paid</option>
@@ -221,28 +221,28 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Total Amount (₹)</label>
-                <input type="number" step="0.01" class="form-control calc-input-edit" name="total_amount" id="edit-total" required>
+                <label for="edit-total" class="form-label">Total Amount (₹)</label>
+                <input type="number" step="0.01" class="form-control calc-input-edit" name="total_amount" id="edit-total" required autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Discount (₹)</label>
-                <input type="number" step="0.01" class="form-control calc-input-edit" name="discount" id="edit-discount">
+                <label for="edit-discount" class="form-label">Discount (₹)</label>
+                <input type="number" step="0.01" class="form-control calc-input-edit" name="discount" id="edit-discount" autocomplete="off">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Advance Paid (₹)</label>
-                <input type="number" step="0.01" class="form-control calc-input-edit" name="advance_paid" id="edit-advance">
+                <label for="edit-advance" class="form-label">Advance Paid (₹)</label>
+                <input type="number" step="0.01" class="form-control calc-input-edit" name="advance_paid" id="edit-advance" autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="form-label">Payment Method</label>
-                <select class="form-select" name="payment_method" id="edit-method" required>
+                <label for="edit-method" class="form-label">Payment Method</label>
+                <select class="form-select" name="payment_method" id="edit-method" required autocomplete="off">
                   <option value="Cash">Cash</option>
                   <option value="UPI">UPI</option>
                   <option value="Card">Card</option>
@@ -255,8 +255,8 @@
             <h5 class="mb-0 fw-bold">Balance Due: ₹<span id="edit-balance">0.00</span></h5>
           </div>
           <div class="form-group">
-            <label class="form-label">Remarks</label>
-            <textarea class="form-control" name="remarks" id="edit-remarks" rows="2"></textarea>
+            <label for="edit-remarks" class="form-label">Remarks</label>
+            <textarea class="form-control" name="remarks" id="edit-remarks" rows="2" autocomplete="off"></textarea>
           </div>
         </form>
       </div>
@@ -280,7 +280,7 @@
         <i class="fa fa-warning" style="font-size:48px;color:#dc2626;display:block;margin-bottom:16px;"></i>
         <h5 style="font-weight:700;">Confirm Deletion</h5>
         <p style="color:var(--text-muted);">Are you sure you want to delete this payment record? This action cannot be undone.</p>
-        <input type="hidden" id="delete-id">
+        <input type="hidden" id="delete-id" name="name_1103">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>

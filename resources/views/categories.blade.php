@@ -98,7 +98,7 @@
         <div class="aw-card-title"><i class="fa fa-list" style="color:var(--primary);"></i> All Categories</div>
         <div style="position:relative;">
             <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-            <input type="text" id="category-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search categories..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            <input type="text" id="category-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search categories..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" name="name_1016">
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
@@ -181,12 +181,12 @@
             <div class="modal-body">
                 <form id="form-add-category">
                     <div class="mb-3">
-                        <label class="form-label-aw">Category Name</label>
-                        <input type="text" class="form-control-aw" name="name" placeholder="e.g. Hematology" required>
+                        <label for="field_1017" class="form-label-aw">Category Name</label>
+                        <input type="text" class="form-control-aw" name="name" placeholder="e.g. Hematology" required autocomplete="off" id="field_1017">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Description (Optional)</label>
-                        <textarea rows="3" class="form-control-aw" name="description" placeholder="Details about this category..."></textarea>
+                        <label for="field_1018" class="form-label-aw">Description (Optional)</label>
+                        <textarea rows="3" class="form-control-aw" name="description" placeholder="Details about this category..." autocomplete="off" id="field_1018"></textarea>
                     </div>
                 </form>
             </div>
@@ -208,14 +208,14 @@
             </div>
             <div class="modal-body">
                 <form id="form-edit-category">
-                    <input type="hidden" id="edit-id">
+                    <input type="hidden" id="edit-id" name="name_1019">
                     <div class="mb-3">
-                        <label class="form-label-aw">Category Name</label>
-                        <input type="text" class="form-control-aw" id="edit-name" name="name" required>
+                        <label for="edit-name" class="form-label-aw">Category Name</label>
+                        <input type="text" class="form-control-aw" id="edit-name" name="name" required autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Description</label>
-                        <textarea rows="3" class="form-control-aw" id="edit-description" name="description"></textarea>
+                        <label for="edit-description" class="form-label-aw">Description</label>
+                        <textarea rows="3" class="form-control-aw" id="edit-description" name="description" autocomplete="off"></textarea>
                     </div>
                 </form>
             </div>
@@ -238,7 +238,7 @@
             <div class="modal-body">
                 <p style="color:var(--text-muted);">Are you sure you want to remove: <strong id="delete-category-name" style="color:#dc2626;"></strong>?</p>
                 <p style="font-size:12px;color:var(--text-muted);">Deleting a category may affect reports using it.</p>
-                <input type="hidden" id="delete-id">
+                <input type="hidden" id="delete-id" name="name_1020">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>

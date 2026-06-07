@@ -12,9 +12,7 @@
         </div>
     </div>
     <div class="d-flex align-items-center gap-2">
-        <a href="{{ route('reports.trash') }}" class="btn-aw-outline" style="color: #dc2626; border-color: #fca5a5; display: inline-flex; align-items: center; gap: 7px; text-decoration: none;">
-            <i class="fa fa-trash-alt"></i> View Trash
-        </a>
+        
         <button type="button" class="btn-aw-primary" data-bs-toggle="modal" data-bs-target="#modal-add-report">
             <i class="fa fa-plus-circle"></i> Add New Report
         </button>
@@ -557,7 +555,7 @@
         <div class="aw-card-title"><i class="fa fa-list" style="color:var(--primary);"></i> Reports List</div>
         <div style="position:relative;">
             <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-            <input type="text" id="report-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search reports..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            <input type="text" id="report-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search reports..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" name="name_1104">
         </div>
     </div>
     <div class="aw-card-body p-0">
@@ -621,9 +619,9 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Select Patient</label>
+							<label for="add-patient-id" class="form-label">Select Patient</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select" name="patient_id" id="add-patient-id" required>
+								<select class="form-select" name="patient_id" id="add-patient-id" required autocomplete="off">
 									<option value="">-- Select Patient --</option>
 									@foreach($patients as $patient)
 											<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
@@ -635,9 +633,9 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Referring Doctor</label>
+							<label for="add-report-doctor" class="form-label">Referring Doctor</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select report-doctor-select" name="doctor_name" id="add-report-doctor" required>
+								<select class="form-select report-doctor-select" name="doctor_name" id="add-report-doctor" required autocomplete="off">
 									<option value="">-- Select Doctor --</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-report-doctor" title="Add New Doctor"><i class="fa fa-plus"></i></button>
@@ -650,14 +648,14 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Sample Received On</label>
-							<input type="datetime-local" class="form-control" name="sample_received_on" required>
+							<label  class="form-label">Sample Received On</label>
+							<input type="datetime-local" class="form-control" name="sample_received_on" required autocomplete="off" id="field_1105">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Report Released On</label>
-							<input type="datetime-local" class="form-control" name="report_released_on" required>
+							<label  class="form-label">Report Released On</label>
+							<input type="datetime-local" class="form-control" name="report_released_on" required autocomplete="off" id="field_1106">
 						</div>
 					</div>
 				</div>
@@ -665,9 +663,9 @@
 				<div class="row mb-3">
 					<div class="col-md-6 col-12">
 						<div class="form-group">
-							<label class="form-label">Authorized Signature</label>
+							<label  class="form-label">Authorized Signature</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select report-signature-select" name="report_signature_id">
+								<select class="form-select report-signature-select" name="report_signature_id" autocomplete="off" id="field_1107">
 									<option value="">No signature</option>
 									@foreach($signatures as $signature)
 										<option value="{{ $signature->id }}" data-name="{{ $signature->name }}" data-image="{{ route('report-signatures.image', $signature->id) }}">{{ $signature->name }}</option>
@@ -679,8 +677,8 @@
 					</div>
 					<div class="col-md-6 col-12">
 						<div class="form-group">
-							<label class="form-label">PIN</label>
-							<input type="password" class="form-control signature-pin-input" name="signature_pin" autocomplete="new-password" placeholder="PIN">
+							<label  class="form-label">PIN</label>
+							<input type="password" class="form-control signature-pin-input" name="signature_pin" autocomplete="new-password" placeholder="PIN" id="field_1108">
 						</div>
 					</div>
 				</div>
@@ -688,8 +686,8 @@
 				<div class="row mt-2">
 					<div class="col-12">
 						<div class="form-group">
-							<label class="form-label">Report Notes</label>
-							<textarea class="form-control" name="notes" rows="2" placeholder="Notes to show in the PDF"></textarea>
+							<label  class="form-label">Report Notes</label>
+							<textarea class="form-control" name="notes" rows="2" placeholder="Notes to show in the PDF" autocomplete="off" id="field_1109"></textarea>
 						</div>
 					</div>
 				</div>
@@ -728,9 +726,9 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Select Patient</label>
+							<label for="edit-patient-id" class="form-label">Select Patient</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select" name="patient_id" id="edit-patient-id" required>
+								<select class="form-select" name="patient_id" id="edit-patient-id" required autocomplete="off">
 									<option value="">-- Select Patient --</option>
 									@foreach($patients as $patient)
 											<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
@@ -742,9 +740,9 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Referring Doctor</label>
+							<label for="edit-report-doctor" class="form-label">Referring Doctor</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select report-doctor-select" name="doctor_name" id="edit-report-doctor" required>
+								<select class="form-select report-doctor-select" name="doctor_name" id="edit-report-doctor" required autocomplete="off">
 									<option value="">-- Select Doctor --</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-report-doctor" title="Add New Doctor"><i class="fa fa-plus"></i></button>
@@ -757,14 +755,14 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Sample Received On</label>
-							<input type="datetime-local" class="form-control" name="sample_received_on" id="edit-sample-date" required>
+							<label for="edit-sample-date" class="form-label">Sample Received On</label>
+							<input type="datetime-local" class="form-control" name="sample_received_on" id="edit-sample-date" required autocomplete="off">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Report Released On</label>
-							<input type="datetime-local" class="form-control" name="report_released_on" id="edit-release-date" required>
+							<label for="edit-release-date" class="form-label">Report Released On</label>
+							<input type="datetime-local" class="form-control" name="report_released_on" id="edit-release-date" required autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -772,9 +770,9 @@
 				<div class="row mb-3">
 					<div class="col-md-6 col-12">
 						<div class="form-group">
-							<label class="form-label">Authorized Signature</label>
+							<label for="edit-report-signature-id" class="form-label">Authorized Signature</label>
 							<div class="input-group flex-nowrap">
-								<select class="form-select report-signature-select" name="report_signature_id" id="edit-report-signature-id">
+								<select class="form-select report-signature-select" name="report_signature_id" id="edit-report-signature-id" autocomplete="off">
 									<option value="">No signature</option>
 									@foreach($signatures as $signature)
 										<option value="{{ $signature->id }}" data-name="{{ $signature->name }}" data-image="{{ route('report-signatures.image', $signature->id) }}">{{ $signature->name }}</option>
@@ -786,7 +784,7 @@
 					</div>
 					<div class="col-md-6 col-12">
 						<div class="form-group">
-							<label class="form-label">PIN</label>
+							<label for="edit-signature-pin" class="form-label">PIN</label>
 							<input type="password" class="form-control signature-pin-input" name="signature_pin" id="edit-signature-pin" autocomplete="new-password" placeholder="Required">
 						</div>
 					</div>
@@ -795,8 +793,8 @@
 				<div class="row mt-2">
 					<div class="col-12">
 						<div class="form-group">
-							<label class="form-label">Report Notes</label>
-							<textarea class="form-control" name="notes" id="edit-report-notes" rows="2" placeholder="Notes to show in the PDF"></textarea>
+							<label for="edit-report-notes" class="form-label">Report Notes</label>
+							<textarea class="form-control" name="notes" id="edit-report-notes" rows="2" placeholder="Notes to show in the PDF" autocomplete="off"></textarea>
 						</div>
 					</div>
 				</div>
@@ -1006,9 +1004,9 @@
                     <button type="button" class="btn btn-sm btn-light text-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-times"></i></button>
                     <div class="row g-3 align-items-end">
                         <div class="col-md-4 col-sm-6">
-                            <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
+                            <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-category-select" name="test_category[]">
+                                <select class="form-select report-category-select" name="test_category[]" autocomplete="off" id="field_1110">
                                     <option value="">Sub</option>
                                     @foreach($categories as $cat)
                                         <option value="{{ $cat->name }}" data-id="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -1019,9 +1017,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
+                            <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-subcategory-select" name="test_subcategory[]">
+                                <select class="form-select report-subcategory-select" name="test_subcategory[]" autocomplete="off" id="field_1111">
                                     <option value="">None</option>
                                     @foreach($subCategories as $sub)
                                         <option value="{{ $sub->name }}" data-id="{{ $sub->id }}">{{ $sub->name }}</option>
@@ -1032,9 +1030,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
-                            <label class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
+                            <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required>
+                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1112">
                                     <option value="">-- Select Test --</option>
                                     @foreach($tests as $test)
                                         <option value="{{ $test->name }}" 
@@ -1060,9 +1058,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
+                            <label  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-observed-select" name="observed_value[]" required>
+                                <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1113">
                                     <option value="">-- Select Observed --</option>
                                     @foreach($templates as $tmpl)
                                         <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>
@@ -1073,9 +1071,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
+                            <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-unit-select" name="test_unit[]">
+                                <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off" id="field_1114">
                                     <option value="">Unit</option>
                                     @foreach($units as $u)
                                         <option value="{{ $u->name }}" data-id="{{ $u->id }}">{{ $u->name }}</option>
@@ -1086,9 +1084,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
-                            <label class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Ref. Template</label>
+                            <label  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Ref. Template</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select normal-val-dynamic" name="normal_value[]">
+                                <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1115">
                                     <option value="">-- Select --</option>
                                     @foreach($referenceTemplates as $ref)
                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
@@ -1099,9 +1097,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
+                            <label  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select flag-selector" name="test_flag[]">
+                                <select class="form-select flag-selector" name="test_flag[]" autocomplete="off" id="field_1116">
                                     <option value="">-- Select --</option>
                                     @foreach($flagTemplates as $flg)
                                         <option value="{{ $flg->name }}" data-id="{{ $flg->id }}">{{ $flg->name }}</option>
@@ -1112,9 +1110,9 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12">
-                            <label class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
+                            <label  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select bio-val-dynamic" name="biological_reference[]">
+                                <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off" id="field_1117">
                                     <option value="">-- Select --</option>
                                     @foreach($referenceTemplates as $ref)
                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
@@ -2058,9 +2056,9 @@
                      <button type="button" class="btn btn-sm btn-light text-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-times"></i></button>
                      <div class="row g-3 align-items-end">
                          <div class="col-md-4 col-sm-6">
-                             <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
+                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select report-category-select" name="test_category[]">
+                                 <select class="form-select report-category-select" name="test_category[]" autocomplete="off" id="field_1118">
                                      \${catOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2068,9 +2066,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
+                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select report-subcategory-select" name="test_subcategory[]">
+                                 <select class="form-select report-subcategory-select" name="test_subcategory[]" autocomplete="off" id="field_1119">
                                      \${subOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2078,9 +2076,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-12">
-                             <label class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
+                             <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required>
+                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1120">
                                      \${testOptions}
                                      <option value="Immunoassay Test" \${item.name == 'Immunoassay Test' ? 'selected' : ''}>Immunoassay Test (Auto-calc)</option>
                                  </select>
@@ -2089,9 +2087,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
+                             <label  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select report-observed-select" name="observed_value[]" required>
+                                 <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1121">
                                      <option value="">-- Select Observed --</option>
                                      @foreach($templates as $tmpl)
                                          <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}" \${item.observed_value == '{{ $tmpl->name }}' ? 'selected' : ''}>{{ $tmpl->name }}</option>
@@ -2102,9 +2100,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
+                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select report-unit-select" name="test_unit[]">
+                                 <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off" id="field_1122">
                                      <option value="">Unit</option>
                                      @foreach($units as $u)
                                          <option value="{{ $u->name }}" data-id="{{ $u->id }}" \${item.unit == '{{ $u->name }}' ? 'selected' : ''}>{{ $u->name }}</option>
@@ -2115,9 +2113,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-12">
-                             <label class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
+                             <label  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select normal-val-dynamic" name="normal_value[]">
+                                 <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1123">
                                      <option value="">-- Select --</option>
                                      @foreach($referenceTemplates as $ref)
                                          <option value="{{ $ref->name }}" data-id="{{ $ref->id }}" \${item.normal_value == '{{ $ref->name }}' ? 'selected' : ''}>{{ $ref->name }}</option>
@@ -2128,9 +2126,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
+                             <label  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select flag-selector" name="test_flag[]">
+                                 <select class="form-select flag-selector" name="test_flag[]" autocomplete="off" id="field_1124">
                                      \${flagOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2138,9 +2136,9 @@
                              </div>
                          </div>
                          <div class="col-md-8 col-sm-12">
-                             <label class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range (Display)</label>
+                             <label  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range (Display)</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select bio-val-dynamic" name="biological_reference[]">
+                                 <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off" id="field_1125">
                                      <option value="">-- Select --</option>
                                      @foreach($referenceTemplates as $ref)
                                          <option value="{{ $ref->name }}" data-id="{{ $ref->id }}" \${item.biological_reference == '{{ $ref->name }}' ? 'selected' : ''}>{{ $ref->name }}</option>
@@ -2772,20 +2770,20 @@
 			<form id="form-add-report-doctor">
 				@csrf
 				<div class="form-group">
-					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe">
+					<label  class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe" autocomplete="off" id="field_1126">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Qualification</label>
-					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD">
+					<label  class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD" autocomplete="off" id="field_1127">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Phone No</label>
-					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number">
+					<label  class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number" autocomplete="off" id="field_1128">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Email</label>
-					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password">
+					<label  class="form-label-aw">Email</label>
+					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password" id="field_1129">
 				</div>
 			</form>
 		  </div>
@@ -2810,19 +2808,19 @@
 				@csrf
 				<input type="hidden" name="doctor_id" id="edit-report-doc-id">
 				<div class="form-group">
-					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-report-doc-name" required>
+					<label for="edit-report-doc-name" class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-doc-name" required autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Qualification</label>
-					<input type="text" class="form-control-aw" name="qualification" id="edit-report-doc-qualification">
+					<label for="edit-report-doc-qualification" class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" id="edit-report-doc-qualification" autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Phone No</label>
-					<input type="text" class="form-control-aw" name="phone" id="edit-report-doc-phone">
+					<label for="edit-report-doc-phone" class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" id="edit-report-doc-phone" autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Email</label>
+					<label for="edit-report-doc-email" class="form-label-aw">Email</label>
 					<input type="email" class="form-control-aw" name="email" id="edit-report-doc-email" autocomplete="new-password">
 				</div>
 			</form>
@@ -2847,8 +2845,8 @@
 			<form id="form-add-report-category">
 				@csrf
 				<div class="form-group">
-					<label class="form-label-aw">Category Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. BIOCHEMISTRY">
+					<label  class="form-label-aw">Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. BIOCHEMISTRY" autocomplete="off" id="field_1130">
 				</div>
 			</form>
 		  </div>
@@ -2872,8 +2870,8 @@
 			<form id="form-edit-report-category">
 				@csrf
 				<div class="form-group">
-					<label class="form-label-aw">Category Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-report-cat-name" required>
+					<label for="edit-report-cat-name" class="form-label-aw">Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-cat-name" required autocomplete="off">
 				</div>
                 <input type="hidden" name="category_id" id="edit-report-cat-id">
 			</form>
@@ -2898,8 +2896,8 @@
 			<form id="form-add-report-subcategory">
 				@csrf
 				<div class="form-group">
-					<label class="form-label-aw">Category <span class="text-danger">*</span></label>
-					<select class="form-select" name="category_id" id="add-report-sub-category-id" required>
+					<label for="add-report-sub-category-id" class="form-label-aw">Category <span class="text-danger">*</span></label>
+					<select class="form-select" name="category_id" id="add-report-sub-category-id" required autocomplete="off">
 						<option value="">-- Select Category --</option>
 						@foreach($categories as $cat)
 							<option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -2907,8 +2905,8 @@
 					</select>
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. SEROLOGY">
+					<label  class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. SEROLOGY" autocomplete="off" id="field_1131">
 				</div>
 			</form>
 		  </div>
@@ -2932,8 +2930,8 @@
 			<form id="form-edit-report-subcategory">
 				@csrf
 				<div class="form-group">
-					<label class="form-label-aw">Category <span class="text-danger">*</span></label>
-					<select class="form-select" name="category_id" id="edit-report-sub-category-id" required>
+					<label for="edit-report-sub-category-id" class="form-label-aw">Category <span class="text-danger">*</span></label>
+					<select class="form-select" name="category_id" id="edit-report-sub-category-id" required autocomplete="off">
 						<option value="">-- Select Category --</option>
 						@foreach($categories as $cat)
 							<option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -2941,8 +2939,8 @@
 					</select>
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-report-sub-name" required>
+					<label for="edit-report-sub-name" class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-sub-name" required autocomplete="off">
 				</div>
                 <input type="hidden" name="subcategory_id" id="edit-report-sub-id">
 			</form>
@@ -2968,8 +2966,8 @@
                    <form id="form-add-report-reference">
                        @csrf
                        <div class="form-group">
-                           <label class="form-label">Template Name</label>
-                           <input type="text" class="form-control" name="name" required placeholder="e.g. 70 - 110 mg/dl">
+                           <label  class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" required placeholder="e.g. 70 - 110 mg/dl" autocomplete="off" id="field_1132">
                        </div>
                    </form>
                </div>
@@ -2992,10 +2990,10 @@
                <div class="modal-body">
                    <form id="form-edit-report-reference">
                        @csrf
-                       <input type="hidden" id="edit-report-reference-id">
+                       <input type="hidden" id="edit-report-reference-id" name="name_1133">
                        <div class="form-group">
-                           <label class="form-label">Template Name</label>
-                           <input type="text" class="form-control" name="name" id="edit-report-reference-name" required>
+                           <label for="edit-report-reference-name" class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" id="edit-report-reference-name" required autocomplete="off">
                        </div>
                    </form>
                </div>
@@ -3019,8 +3017,8 @@
                    <form id="form-add-report-flag">
                        @csrf
                        <div class="form-group">
-                           <label class="form-label">Flag Name</label>
-                           <input type="text" class="form-control" name="name" required placeholder="e.g. H, L, N">
+                           <label  class="form-label">Flag Name</label>
+                           <input type="text" class="form-control" name="name" required placeholder="e.g. H, L, N" autocomplete="off" id="field_1134">
                        </div>
                    </form>
                </div>
@@ -3043,10 +3041,10 @@
                <div class="modal-body">
                    <form id="form-edit-report-flag">
                        @csrf
-                       <input type="hidden" id="edit-report-flag-id">
+                       <input type="hidden" id="edit-report-flag-id" name="name_1135">
                        <div class="form-group">
-                           <label class="form-label">Flag Name</label>
-                           <input type="text" class="form-control" name="name" id="edit-report-flag-name" required>
+                           <label for="edit-report-flag-name" class="form-label">Flag Name</label>
+                           <input type="text" class="form-control" name="name" id="edit-report-flag-name" required autocomplete="off">
                        </div>
                    </form>
                </div>
@@ -3068,8 +3066,8 @@
                    <form id="form-add-report-observed">
                        @csrf
                        <div class="form-group">
-                           <label class="form-label">Template Name</label>
-                           <input type="text" class="form-control" name="name" required placeholder="e.g. Negative, Positive, Trace">
+                           <label  class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" required placeholder="e.g. Negative, Positive, Trace" autocomplete="off" id="field_1136">
                        </div>
                    </form>
                </div>
@@ -3092,10 +3090,10 @@
                <div class="modal-body">
                    <form id="form-edit-report-observed">
                        @csrf
-                       <input type="hidden" id="edit-report-observed-id">
+                       <input type="hidden" id="edit-report-observed-id" name="name_1137">
                        <div class="form-group">
-                           <label class="form-label">Template Name</label>
-                           <input type="text" class="form-control" name="name" id="edit-report-observed-name" required>
+                           <label for="edit-report-observed-name" class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" id="edit-report-observed-name" required autocomplete="off">
                        </div>
                    </form>
                </div>
@@ -3118,12 +3116,12 @@
 			<form id="form-add-report-test">
 				@csrf
 				<div class="form-group mb-3">
-					<label class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Glucose Fasting">
+					<label  class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Glucose Fasting" autocomplete="off" id="field_1138">
 				</div>
 				<div class="form-group mb-3">
-					<label class="form-label-aw">Unit</label>
-					<select class="form-select form-control-aw" name="unit">
+					<label  class="form-label-aw">Unit</label>
+					<select class="form-select form-control-aw" name="unit" autocomplete="off" id="field_1139">
 						<option value="">-- Select Unit --</option>
 						@foreach($units as $u)
 							<option value="{{ $u->name }}">{{ $u->name }}</option>
@@ -3131,8 +3129,8 @@
 					</select>
 				</div>
 				<div class="form-group mb-3">
-					<label class="form-label-aw">Biological Reference</label>
-					<input type="text" class="form-control-aw" name="biological_reference" placeholder="e.g. 70 - 110">
+					<label  class="form-label-aw">Biological Reference</label>
+					<input type="text" class="form-control-aw" name="biological_reference" placeholder="e.g. 70 - 110" autocomplete="off" id="field_1140">
 				</div>
 			</form>
 		  </div>
@@ -3156,12 +3154,12 @@
 			<form id="form-edit-report-test">
 				@csrf
 				<div class="form-group mb-3">
-					<label class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-report-test-name" required>
+					<label for="edit-report-test-name" class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-test-name" required autocomplete="off">
 				</div>
 				<div class="form-group mb-3">
-					<label class="form-label-aw">Unit</label>
-					<select class="form-select form-control-aw" name="unit" id="edit-report-test-unit">
+					<label for="edit-report-test-unit" class="form-label-aw">Unit</label>
+					<select class="form-select form-control-aw" name="unit" id="edit-report-test-unit" autocomplete="off">
 						<option value="">-- Select Unit --</option>
 						@foreach($units as $u)
 							<option value="{{ $u->name }}">{{ $u->name }}</option>
@@ -3169,8 +3167,8 @@
 					</select>
 				</div>
 				<div class="form-group mb-3">
-					<label class="form-label-aw">Biological Reference</label>
-					<input type="text" class="form-control-aw" name="biological_reference" id="edit-report-test-bio">
+					<label for="edit-report-test-bio" class="form-label-aw">Biological Reference</label>
+					<input type="text" class="form-control-aw" name="biological_reference" id="edit-report-test-bio" autocomplete="off">
 				</div>
                 <input type="hidden" name="test_id" id="edit-report-test-id">
 			</form>
@@ -3195,8 +3193,8 @@
 			<form id="form-add-report-unit">
 				@csrf
 				<div class="form-group">
-					<label class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. mg/dL">
+					<label  class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. mg/dL" autocomplete="off" id="field_1141">
 				</div>
 			</form>
 		  </div>
@@ -3221,10 +3219,10 @@
 		  <div class="modal-body">
 			<form id="form-edit-report-unit">
 				@csrf
-				<input type="hidden" id="edit-report-unit-id">
+				<input type="hidden" id="edit-report-unit-id" name="name_1142">
 				<div class="form-group">
-					<label class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-report-unit-name" required placeholder="e.g. mg/dL">
+					<label for="edit-report-unit-name" class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-unit-name" required placeholder="e.g. mg/dL" autocomplete="off">
 				</div>
 			</form>
 		  </div>
@@ -3687,5 +3685,7 @@
   @endpush
 
 @endsection
+
+
 
 

@@ -116,8 +116,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label class="form-label-aw">Enter Password to Access Income Report</label>
-                <input type="password" id="income-password-input" class="form-control-aw" placeholder="Enter password...">
+                <label for="income-password-input" class="form-label-aw">Enter Password to Access Income Report</label>
+                <input type="password" id="income-password-input" class="form-control-aw" placeholder="Enter password..." autocomplete="off" name="name_1021">
                 <div id="income-password-error" class="mt-2" style="display:none; color:#dc2626; font-size:13px;">
                     <i class="fa fa-circle-exclamation me-1"></i>Incorrect password. Please try again.
                 </div>

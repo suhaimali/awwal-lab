@@ -366,7 +366,7 @@
             <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ $patients->count() }} total patients</span>
             <div style="position:relative;">
                 <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-                <input type="text" id="patient-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search patients..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+                <input type="text" id="patient-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search patients..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" name="name_1034">
             </div>
         </div>
     </div>
@@ -521,36 +521,36 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Patient ID</label>
-							<input type="text" class="form-control" name="patient_id" placeholder="Auto-generated if blank" autocomplete="new-password">
+							<label for="field_1035" class="form-label">Patient ID</label>
+							<input type="text" class="form-control" name="patient_id" placeholder="Auto-generated if blank" autocomplete="new-password" id="field_1035">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Phone No</label>
-							<input type="text" class="form-control" name="phone" placeholder="Phone Number">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="form-label">First Name</label>
-							<input type="text" class="form-control" name="first_name" placeholder="First Name">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="form-label">Last Name</label>
-							<input type="text" class="form-control" name="last_name" placeholder="Last Name">
+							<label for="field_1036" class="form-label">Phone No</label>
+							<input type="text" class="form-control" name="phone" placeholder="Phone Number" autocomplete="off" id="field_1036">
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Gender</label>
-							<select class="form-select" name="gender">
+							<label for="field_1037" class="form-label">First Name</label>
+							<input type="text" class="form-control" name="first_name" placeholder="First Name" autocomplete="off" id="field_1037">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="field_1038" class="form-label">Last Name</label>
+							<input type="text" class="form-control" name="last_name" placeholder="Last Name" autocomplete="off" id="field_1038">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="field_1039" class="form-label">Gender</label>
+							<select class="form-select" name="gender" autocomplete="off" id="field_1039">
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
 								<option value="Other">Other</option>
@@ -559,22 +559,22 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Age</label>
-							<input type="number" class="form-control" name="age" placeholder="Age">
+							<label for="field_1040" class="form-label">Age</label>
+							<input type="number" class="form-control" name="age" placeholder="Age" autocomplete="off" id="field_1040">
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Email</label>
-							<input type="email" class="form-control" name="email" placeholder="Email (Optional)" autocomplete="new-password">
+							<label for="field_1041" class="form-label">Email</label>
+							<input type="email" class="form-control" name="email" placeholder="Email (Optional)" autocomplete="new-password" id="field_1041">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Status</label>
-							<select class="form-select" name="status">
+							<label for="field_1042" class="form-label">Status</label>
+							<select class="form-select" name="status" autocomplete="off" id="field_1042">
 								<option value="Active">Active</option>
 								<option value="Inactive">Inactive</option>
 							</select>
@@ -584,11 +584,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label class="form-label">Reference Dr.</label>
+							<label for="field_1043" class="form-label">Reference Dr.</label>
 							<div class="reference-dr-container">
-								<input type="hidden" class="reference-dr-value" name="reference_dr" value="">
+								<input type="hidden" class="reference-dr-value" name="reference_dr" value="" id="field_1043">
 								<div class="input-group flex-nowrap reference-dr-input-group">
-									<select class="form-select reference-dr-select">
+									<select class="form-select reference-dr-select" autocomplete="off" id="field_1044" name="name_1045">
 										<option value="">-- Select Doctor --</option>
 									</select>
 									<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
@@ -597,7 +597,7 @@
 								</div>
 								<div class="reference-dr-custom-wrap" style="display:none;">
 									<div class="input-group">
-										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name">
+										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name" autocomplete="off" id="field_1046" name="name_1047">
 										<button type="button" class="btn btn-outline-secondary btn-back-to-dr-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
 									</div>
 								</div>
@@ -619,8 +619,8 @@
 					<div class="row test-row mb-2 align-items-center">
 						<div class="col-md-5 col-12">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-                            <input type="hidden" class="test-name-value" name="test_name[]" value="">
-							<select class="form-select add-patient-test-name test-name-select">
+                            <input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1048">
+							<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1049" name="name_1050">
 								<option value="">-- Select Test --</option>
 								@foreach($labTests as $test)
 									<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
@@ -629,18 +629,18 @@
 							</select>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
-                                    <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+                                    <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1051" name="name_1052">
                                     <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
                                 </div>
                             </div>
 						</div>
 						<div class="col-md-3 col-6">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
-							<input type="number" step="0.01" class="form-control add-patient-test-price" name="test_price[]" placeholder="0.00">
+							<input type="number" step="0.01" class="form-control add-patient-test-price" name="test_price[]" placeholder="0.00" autocomplete="off" id="field_1053">
 						</div>
 						<div class="col-md-3 col-6">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
-							<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00">
+							<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00" autocomplete="off" id="field_1054">
 						</div>
 						<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
 							<button type="button" class="btn btn-success btn-sm btn-add-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>
@@ -652,8 +652,8 @@
 				</div>
 
 				<div class="form-group">
-					<label class="form-label">Address</label>
-					<textarea rows="2" class="form-control" name="address" placeholder="Address"></textarea>
+					<label for="field_1055" class="form-label">Address</label>
+					<textarea rows="2" class="form-control" name="address" placeholder="Address" autocomplete="off" id="field_1055"></textarea>
 				</div>
 
 			</form>
@@ -740,36 +740,36 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label text-primary">Patient ID</label>
-							<input type="text" class="form-control" id="edit-patient-id" name="patient_id" placeholder="Patient ID" readonly>
+							<label for="edit-patient-id" class="form-label text-primary">Patient ID</label>
+							<input type="text" class="form-control" id="edit-patient-id" name="patient_id" placeholder="Patient ID" readonly autocomplete="off">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Phone No</label>
-							<input type="text" class="form-control" id="edit-phone" name="phone" placeholder="Phone No">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="form-label">First Name</label>
-							<input type="text" class="form-control" id="edit-first-name" name="first_name" placeholder="First Name">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="form-label">Last Name</label>
-							<input type="text" class="form-control" id="edit-last-name" name="last_name" placeholder="Last Name">
+							<label for="edit-phone" class="form-label">Phone No</label>
+							<input type="text" class="form-control" id="edit-phone" name="phone" placeholder="Phone No" autocomplete="off">
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Gender</label>
-							<select class="form-select" id="edit-gender" name="gender">
+							<label for="edit-first-name" class="form-label">First Name</label>
+							<input type="text" class="form-control" id="edit-first-name" name="first_name" placeholder="First Name" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="edit-last-name" class="form-label">Last Name</label>
+							<input type="text" class="form-control" id="edit-last-name" name="last_name" placeholder="Last Name" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="edit-gender" class="form-label">Gender</label>
+							<select class="form-select" id="edit-gender" name="gender" autocomplete="off">
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
 								<option value="Other">Other</option>
@@ -778,22 +778,22 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Age</label>
-							<input type="number" class="form-control" id="edit-age" name="age" placeholder="Age">
+							<label for="edit-age" class="form-label">Age</label>
+							<input type="number" class="form-control" id="edit-age" name="age" placeholder="Age" autocomplete="off">
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Email</label>
+							<label for="edit-email" class="form-label">Email</label>
 							<input type="email" class="form-control" id="edit-email" name="email" placeholder="Email" autocomplete="new-password">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="form-label">Status</label>
-							<select class="form-select" id="edit-status" name="status">
+							<label for="edit-status" class="form-label">Status</label>
+							<select class="form-select" id="edit-status" name="status" autocomplete="off">
 								<option value="Active">Active</option>
 								<option value="Inactive">Inactive</option>
 							</select>
@@ -803,11 +803,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label class="form-label">Reference Dr.</label>
+							<label for="field_1056" class="form-label">Reference Dr.</label>
 							<div class="reference-dr-container">
-								<input type="hidden" class="reference-dr-value" name="reference_dr" value="">
+								<input type="hidden" class="reference-dr-value" name="reference_dr" value="" id="field_1056">
 								<div class="input-group flex-nowrap reference-dr-input-group">
-									<select class="form-select reference-dr-select" id="edit-reference-dr">
+									<select class="form-select reference-dr-select" id="edit-reference-dr" autocomplete="off" name="name_1057">
 										<option value="">-- Select Doctor --</option>
 									</select>
 									<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
@@ -816,7 +816,7 @@
 								</div>
 								<div class="reference-dr-custom-wrap" style="display:none;">
 									<div class="input-group">
-										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name">
+										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name" autocomplete="off" id="field_1058" name="name_1059">
 										<button type="button" class="btn btn-outline-secondary btn-back-to-dr-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
 									</div>
 								</div>
@@ -842,8 +842,8 @@
 				</div>
 
 				<div class="form-group">
-					<label class="form-label">Address</label>
-					<textarea rows="2" class="form-control" id="edit-address" name="address" placeholder="Address"></textarea>
+					<label for="edit-address" class="form-label">Address</label>
+					<textarea rows="2" class="form-control" id="edit-address" name="address" placeholder="Address" autocomplete="off"></textarea>
 				</div>
 
 			</form>
@@ -868,7 +868,7 @@
 			<i class="fa fa-warning fa-4x text-danger mb-15"></i>
 			<h4 class="mb-10">Confirm Deletion</h4>
 			<p>Are you sure you want to delete this patient record? This action cannot be undone and will remove all associated history.</p>
-			<input type="hidden" id="delete-id">
+			<input type="hidden" id="delete-id" name="name_1060">
 		  </div>
 		  <div class="modal-footer modal-footer-uniform">
 			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -890,8 +890,8 @@
 			<form id="form-quick-book">
 				<input type="hidden" name="patient_id" id="quick-book-patient-id">
 				<div class="form-group">
-					<label class="form-label">Test Name</label>
-					<select class="form-select" name="test_name" id="quick-book-test-name" required>
+					<label for="quick-book-test-name" class="form-label">Test Name</label>
+					<select class="form-select" name="test_name" id="quick-book-test-name" required autocomplete="off">
 						<option value="">-- Select Test --</option>
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
@@ -901,14 +901,14 @@
 				<div class="row">
 					<div class="col-6">
 						<div class="form-group">
-							<label class="form-label">Price (₹)</label>
-							<input type="number" step="0.01" class="form-control" name="test_price" id="quick-book-price" required>
+							<label for="quick-book-price" class="form-label">Price (₹)</label>
+							<input type="number" step="0.01" class="form-control" name="test_price" id="quick-book-price" required autocomplete="off">
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-group">
-							<label class="form-label text-danger">Discount (₹)</label>
-							<input type="number" step="0.01" class="form-control" name="test_discount" id="quick-book-discount" value="0.00">
+							<label for="quick-book-discount" class="form-label text-danger">Discount (₹)</label>
+							<input type="number" step="0.01" class="form-control" name="test_discount" id="quick-book-discount" value="0.00" autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -918,14 +918,14 @@
 				<div class="row">
 					<div class="col-6">
 						<div class="form-group">
-							<label class="form-label">Date</label>
-							<input type="date" class="form-control" name="appointment_date" value="{{ date('Y-m-d') }}" required>
+							<label for="field_1061" class="form-label">Date</label>
+							<input type="date" class="form-control" name="appointment_date" value="{{ date('Y-m-d') }}" required autocomplete="off" id="field_1061">
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-group">
-							<label class="form-label">Status</label>
-							<select class="form-select" name="status">
+							<label for="field_1062" class="form-label">Status</label>
+							<select class="form-select" name="status" autocomplete="off" id="field_1062">
 								<option value="Scheduled">Scheduled</option>
 								<option value="Pending">Pending</option>
 								<option value="Completed">Completed</option>
@@ -954,20 +954,20 @@
 		  <div class="modal-body">
 			<form id="form-add-doctor">
 				<div class="form-group">
-					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe">
+					<label for="field_1063" class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe" autocomplete="off" id="field_1063">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Qualification</label>
-					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD">
+					<label for="field_1064" class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD" autocomplete="off" id="field_1064">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Phone No</label>
-					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number">
+					<label for="field_1065" class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number" autocomplete="off" id="field_1065">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Email</label>
-					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password">
+					<label for="field_1066" class="form-label-aw">Email</label>
+					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password" id="field_1066">
 				</div>
 			</form>
 		  </div>
@@ -991,19 +991,19 @@
 			<form id="form-edit-doctor">
 				<input type="hidden" name="doctor_id" id="edit-doc-id">
 				<div class="form-group">
-					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-doc-name" required>
+					<label for="edit-doc-name" class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-doc-name" required autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Qualification</label>
-					<input type="text" class="form-control-aw" name="qualification" id="edit-doc-qualification">
+					<label for="edit-doc-qualification" class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" id="edit-doc-qualification" autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Phone No</label>
-					<input type="text" class="form-control-aw" name="phone" id="edit-doc-phone">
+					<label for="edit-doc-phone" class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" id="edit-doc-phone" autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Email</label>
+					<label for="edit-doc-email" class="form-label-aw">Email</label>
 					<input type="email" class="form-control-aw" name="email" id="edit-doc-email" autocomplete="new-password">
 				</div>
 			</form>
@@ -1455,27 +1455,27 @@
 
                           testRowsHtml += `
                             <div class="row test-row mb-2 align-items-center">
-                                <input type="hidden" name="appointment_id[]" value="${app.id}">
+                                <input type="hidden" name="appointment_id[]" value="${app.id}" id="field_1067">
                                 <div class="col-md-5 col-12">
                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-                                    <input type="hidden" class="test-name-value" name="test_name[]" value="${testName}">
-                                    <select class="form-select edit-patient-test-name test-name-select" ${isCustom ? 'style="display:none;"' : ''}>
+                                    <input type="hidden" class="test-name-value" name="test_name[]" value="${testName}" id="field_1068">
+                                    <select class="form-select edit-patient-test-name test-name-select" ${isCustom ? 'style="display:none;"' : ''} autocomplete="off" id="field_1069" name="name_1070">
                                         ${optionsHtml}
                                     </select>
                                     <div class="test-name-custom-wrap" ${isCustom ? '' : 'style="display:none;"'}>
                                         <div class="input-group">
-                                            <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" value="${isCustom ? testName : ''}">
+                                            <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" value="${isCustom ? testName : ''}" autocomplete="off" id="field_1071" name="name_1072">
                                             <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
-                                    <input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" value="${parseFloat(app.test_price).toFixed(2)}">
+                                    <input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" value="${parseFloat(app.test_price).toFixed(2)}" autocomplete="off" id="field_1073">
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
-                                    <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="${parseFloat(app.discount).toFixed(2)}">
+                                    <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="${parseFloat(app.discount).toFixed(2)}" autocomplete="off" id="field_1074">
                                 </div>
                                 <div class="col-md-1 col-12 text-center pt-md-0 pt-2">
                                     ${index === 0 ? '<button type="button" class="btn btn-success btn-sm btn-edit-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>' : '<button type="button" class="btn btn-danger btn-sm btn-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>'}
@@ -1494,24 +1494,24 @@
                         <div class="row test-row mb-2 align-items-center">
                             <div class="col-md-5 col-12">
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-                                <input type="hidden" class="test-name-value" name="test_name[]" value="">
-                                <select class="form-select edit-patient-test-name test-name-select">
+                                <input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1075">
+                                <select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1076" name="name_1077">
                                     ${emptyOptions}
                                 </select>
                                 <div class="test-name-custom-wrap" style="display:none;">
                                     <div class="input-group">
-                                        <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+                                        <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1078" name="name_1079">
                                         <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
-                                <input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" placeholder="0.00">
+                                <input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" placeholder="0.00" autocomplete="off" id="field_1080">
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
-                                <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" placeholder="0.00" value="0.00">
+                                <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" placeholder="0.00" value="0.00" autocomplete="off" id="field_1081">
                             </div>
                             <div class="col-md-1 col-12 text-center pt-md-0 pt-2">
                                 <button type="button" class="btn btn-success btn-sm btn-edit-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>
@@ -1530,8 +1530,8 @@
 			<div class="row test-row mb-2 align-items-center">
 				<div class="col-md-5 col-12">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-					<input type="hidden" class="test-name-value" name="test_name[]" value="">
-					<select class="form-select add-patient-test-name test-name-select">
+					<input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1082">
+					<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1083" name="name_1084">
 						<option value="">-- Select Test --</option>
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
@@ -1540,18 +1540,18 @@
 					</select>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
-							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1085" name="name_1086">
 							<button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
-					<input type="number" step="0.01" class="form-control add-patient-test-price" name="test_price[]" placeholder="0.00">
+					<input type="number" step="0.01" class="form-control add-patient-test-price" name="test_price[]" placeholder="0.00" autocomplete="off" id="field_1087">
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
-					<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00">
+					<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00" autocomplete="off" id="field_1088">
 				</div>
 				<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
 					<button type="button" class="btn btn-danger btn-sm btn-add-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>
@@ -1571,11 +1571,11 @@
 		  // Dynamic row logic for Edit Patient modal
 		  const editTestRowTemplate = `
 			<div class="row test-row mb-2 align-items-center">
-				<input type="hidden" name="appointment_id[]" value="">
+				<input type="hidden" name="appointment_id[]" value="" id="field_1089">
 				<div class="col-md-5 col-12">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-					<input type="hidden" class="test-name-value" name="test_name[]" value="">
-					<select class="form-select edit-patient-test-name test-name-select">
+					<input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1090">
+					<select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1091" name="name_1092">
 						<option value="">-- Select Test --</option>
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
@@ -1584,18 +1584,18 @@
 					</select>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
-							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1093" name="name_1094">
 							<button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
-					<input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" placeholder="0.00">
+					<input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" placeholder="0.00" autocomplete="off" id="field_1095">
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
-					<input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="0.00">
+					<input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="0.00" autocomplete="off" id="field_1096">
 				</div>
 				<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
 					<button type="button" class="btn btn-danger btn-sm btn-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>

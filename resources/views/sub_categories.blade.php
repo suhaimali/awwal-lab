@@ -95,7 +95,7 @@
         <div class="aw-card-title"><i class="fa fa-list" style="color:var(--primary);"></i> All Sub-Categories</div>
         <div style="position:relative;">
             <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-            <input type="text" id="subcategory-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search sub-categories..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            <input type="text" id="subcategory-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search sub-categories..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" name="name_1149">
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
@@ -181,8 +181,8 @@
             <div class="modal-body">
                 <form id="form-add-subcategory">
                     <div class="mb-3">
-                        <label class="form-label-aw">Parent Category</label>
-                        <select class="form-select" name="category_id" required>
+                        <label for="field_1150" class="form-label-aw">Parent Category</label>
+                        <select class="form-select" name="category_id" required autocomplete="off" id="field_1150">
                             <option value="">Select Category</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -190,12 +190,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Sub-Category Name</label>
-                        <input type="text" class="form-control-aw" name="name" placeholder="e.g. Lipid Profile" required>
+                        <label for="field_1151" class="form-label-aw">Sub-Category Name</label>
+                        <input type="text" class="form-control-aw" name="name" placeholder="e.g. Lipid Profile" required autocomplete="off" id="field_1151">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Description (Optional)</label>
-                        <textarea rows="3" class="form-control-aw" name="description" placeholder="Details..."></textarea>
+                        <label for="field_1152" class="form-label-aw">Description (Optional)</label>
+                        <textarea rows="3" class="form-control-aw" name="description" placeholder="Details..." autocomplete="off" id="field_1152"></textarea>
                     </div>
                 </form>
             </div>
@@ -217,22 +217,22 @@
             </div>
             <div class="modal-body">
                 <form id="form-edit-subcategory">
-                    <input type="hidden" id="edit-id">
+                    <input type="hidden" id="edit-id" name="name_1153">
                     <div class="mb-3">
-                        <label class="form-label-aw">Parent Category</label>
-                        <select class="form-select" id="edit-category_id" name="category_id" required>
+                        <label for="edit-category_id" class="form-label-aw">Parent Category</label>
+                        <select class="form-select" id="edit-category_id" name="category_id" required autocomplete="off">
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Sub-Category Name</label>
-                        <input type="text" class="form-control-aw" id="edit-name" name="name" required>
+                        <label for="edit-name" class="form-label-aw">Sub-Category Name</label>
+                        <input type="text" class="form-control-aw" id="edit-name" name="name" required autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Description</label>
-                        <textarea rows="3" class="form-control-aw" id="edit-description" name="description"></textarea>
+                        <label for="edit-description" class="form-label-aw">Description</label>
+                        <textarea rows="3" class="form-control-aw" id="edit-description" name="description" autocomplete="off"></textarea>
                     </div>
                 </form>
             </div>
@@ -254,7 +254,7 @@
             </div>
             <div class="modal-body">
                 <p style="color:var(--text-muted);">Are you sure you want to remove: <strong id="delete-sub-name" style="color:#dc2626;"></strong>?</p>
-                <input type="hidden" id="delete-id">
+                <input type="hidden" id="delete-id" name="name_1154">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>

@@ -27,9 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function() { return redirect()->route('dashboard'); });
     Route::get('/appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('/reports', [HomeController::class, 'reports'])->name('reports');
-    Route::get('/reports/trash', [HomeController::class, 'reportsTrash'])->name('reports.trash');
-    Route::post('/reports/{id}/restore', [HomeController::class, 'restoreReport'])->name('reports.restore');
-    Route::delete('/reports/{id}/force-delete', [HomeController::class, 'forceDeleteReport'])->name('reports.force-delete');
     Route::post('/reports', [HomeController::class, 'storeReport'])->name('reports.store');
     Route::get('/reports/{id}', [HomeController::class, 'getReport'])->name('reports.show');
     Route::put('/reports/{id}', [HomeController::class, 'updateReport'])->name('reports.update');
@@ -82,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/test-parameters', [HomeController::class, 'testParameters'])->name('test-parameters.index');
     Route::post('/test-parameters', [HomeController::class, 'storeTestParameter'])->name('test-parameters.store');
 
+    Route::post('/test-parameters/{id}/intervals', [HomeController::class, 'storeReferenceInterval'])->name('reference-intervals.store');
+    Route::get('/test-parameters/{id}/intervals', [HomeController::class, 'getReferenceIntervals'])->name('reference-intervals.get');
+    Route::delete('/test-parameters/intervals/{id}', [HomeController::class, 'deleteReferenceInterval'])->name('reference-intervals.delete');
     // Category Routes
     Route::get('/categories', [HomeController::class, 'categories'])->name('categories.index');
     Route::post('/categories', [HomeController::class, 'storeCategory'])->name('categories.store');
@@ -123,4 +123,5 @@ Route::get('/doctors/suggestions', [HomeController::class, 'getDoctorSuggestions
 Route::post('/doctors', [HomeController::class, 'storeDoctor'])->name('doctors.store');
 Route::put('/doctors/{id}', [HomeController::class, 'updateDoctor'])->name('doctors.update');
 Route::delete('/doctors/{id}', [HomeController::class, 'deleteDoctor'])->name('doctors.delete');
+
 

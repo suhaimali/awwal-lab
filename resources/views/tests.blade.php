@@ -41,7 +41,7 @@
         <div class="aw-card-title"><i class="fa fa-list" style="color:var(--primary);"></i> Laboratory Tests</div>
         <div style="position:relative;">
             <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
-            <input type="text" id="test-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search tests..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            <input type="text" id="test-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search tests..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" name="name_1155">
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
@@ -126,18 +126,18 @@
 		  <div class="modal-body">
 			<form id="form-add-test">
 				<div class="form-group">
-					<label class="form-label">Test Name</label>
-					<input type="text" class="form-control" name="name" placeholder="e.g. Blood Sugar Level" required>
+					<label for="field_1156" class="form-label">Test Name</label>
+					<input type="text" class="form-control" name="name" placeholder="e.g. Blood Sugar Level" required autocomplete="off" id="field_1156">
 				</div>
 				<div class="form-group">
-					<label class="form-label">Price (₹)</label>
-					<input type="number" class="form-control" name="price" placeholder="e.g. 500" required>
+					<label for="field_1157" class="form-label">Price (₹)</label>
+					<input type="number" class="form-control" name="price" placeholder="e.g. 500" required autocomplete="off" id="field_1157">
 				</div>
 
 
 				<div class="form-group">
-					<label class="form-label">Description (Optional)</label>
-					<textarea rows="2" class="form-control" name="description" placeholder="Short details about the test..."></textarea>
+					<label for="field_1158" class="form-label">Description (Optional)</label>
+					<textarea rows="2" class="form-control" name="description" placeholder="Short details about the test..." autocomplete="off" id="field_1158"></textarea>
 				</div>
 			</form>
 		  </div>
@@ -159,20 +159,20 @@
             </div>
 		  <div class="modal-body">
 			<form id="form-edit-test">
-				<input type="hidden" id="edit-id">
+				<input type="hidden" id="edit-id" name="name_1159">
 				<div class="form-group">
-					<label class="form-label">Test Name</label>
-					<input type="text" class="form-control" id="edit-name" name="name" required>
+					<label for="edit-name" class="form-label">Test Name</label>
+					<input type="text" class="form-control" id="edit-name" name="name" required autocomplete="off">
 				</div>
 				<div class="form-group">
-					<label class="form-label">Price (₹)</label>
-					<input type="number" class="form-control" id="edit-price" name="price" required>
+					<label for="edit-price" class="form-label">Price (₹)</label>
+					<input type="number" class="form-control" id="edit-price" name="price" required autocomplete="off">
 				</div>
 
 
 				<div class="form-group">
-					<label class="form-label">Description</label>
-					<textarea rows="2" class="form-control" id="edit-description" name="description"></textarea>
+					<label for="edit-description" class="form-label">Description</label>
+					<textarea rows="2" class="form-control" id="edit-description" name="description" autocomplete="off"></textarea>
 				</div>
 			</form>
 		  </div>
@@ -195,7 +195,7 @@
             <div class="modal-body">
                 <p style="color:var(--text-muted);">Are you sure you want to remove the test: <strong id="delete-test-name" style="color:#dc2626;"></strong>?</p>
                 <p style="font-size:12px;color:var(--text-muted);">This action cannot be undone and may affect existing patient records.</p>
-                <input type="hidden" id="delete-id">
+                <input type="hidden" id="delete-id" name="name_1160">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>

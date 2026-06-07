@@ -35,17 +35,17 @@
                 <form action="{{ route('report-signatures.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label-aw">Name <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control-aw" value="{{ old('name') }}" required placeholder="e.g. Dr. Jane Doe">
+                        <label for="field_1144" class="form-label-aw">Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control-aw" value="{{ old('name') }}" required placeholder="e.g. Dr. Jane Doe" autocomplete="off" id="field_1144">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Signature Image <span class="text-danger">*</span></label>
-                        <input type="file" name="signature_image" class="form-control-aw" accept="image/png,image/jpeg" required>
+                        <label for="field_1145" class="form-label-aw">Signature Image <span class="text-danger">*</span></label>
+                        <input type="file" name="signature_image" class="form-control-aw" accept="image/png,image/jpeg" required autocomplete="off" id="field_1145">
                         <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Recommended format: Transparent PNG image</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">PIN <span class="text-danger">*</span></label>
-                        <input type="password" name="pin" class="form-control-aw" required minlength="4" maxlength="20" autocomplete="new-password" placeholder="4 digits or more">
+                        <label for="field_1146" class="form-label-aw">PIN <span class="text-danger">*</span></label>
+                        <input type="password" name="pin" class="form-control-aw" required minlength="4" maxlength="20" autocomplete="new-password" placeholder="4 digits or more" id="field_1146">
                         <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Secure PIN to authorize report generation</div>
                     </div>
                     <button type="submit" class="btn-aw-primary w-100 mt-2">
@@ -127,17 +127,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label-aw">Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control-aw" name="name" id="edit-signature-name" required>
+                        <label for="edit-signature-name" class="form-label-aw">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control-aw" name="name" id="edit-signature-name" required autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">Replace Image</label>
-                        <input type="file" class="form-control-aw" name="signature_image" accept="image/png,image/jpeg">
+                        <label for="field_1147" class="form-label-aw">Replace Image</label>
+                        <input type="file" class="form-control-aw" name="signature_image" accept="image/png,image/jpeg" autocomplete="off" id="field_1147">
                         <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Leave blank to keep current signature image</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label-aw">New PIN</label>
-                        <input type="password" class="form-control-aw" name="pin" minlength="4" maxlength="20" autocomplete="new-password" placeholder="PIN">
+                        <label for="field_1148" class="form-label-aw">New PIN</label>
+                        <input type="password" class="form-control-aw" name="pin" minlength="4" maxlength="20" autocomplete="new-password" placeholder="PIN" id="field_1148">
                         <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Leave blank to keep current PIN</div>
                     </div>
                 </div>

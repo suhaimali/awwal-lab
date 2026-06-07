@@ -551,8 +551,8 @@
                 </div>
 				
                 <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3">
-                    <div class="col-sub">Sub</div>
-                    <div class="col-unit-dept">Unit</div>
+                    <div class="col-sub">Master Category</div>
+                    <div class="col-unit-dept">Sub Category </div>
                     <div class="col-param">Parameter</div>
                     <div class="col-observed">Observed</div>
                     <div class="col-unit-meas">Unit</div>
@@ -921,7 +921,7 @@
 
           // Fix overlapping modal backdrops z-index
           $(document).on('show.bs.modal', '.modal', function () {
-              const zIndex = 1040 + (10 * $('.modal:visible').length);
+              const zIndex = 1060 + (10 * $('.modal:visible').length);
               $(this).css('z-index', zIndex);
               setTimeout(function() {
                   $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');

@@ -1,60 +1,136 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Awwal Lab
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern Laravel web application built with Laravel 12, Tailwind CSS v4, Vite, and SQLite.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ⚡ Quick Start (Recommended)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+If you have PHP, Composer, and Node.js installed, you can set up the entire project with a single command:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/awwal-lab.in.git
+cd awwal-lab.in
 
-## Learning Laravel
+# 2. Run the automated setup script
+composer setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+# 3. Start the unified development environment
+composer dev
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The `composer dev` command will concurrently run:
+*   **Laravel Local Server** (on `http://127.0.0.1:8000`)
+*   **Vite Dev Server** (for Tailwind CSS and frontend assets hot-reloads)
+*   **Queue Worker** (to process background jobs)
+*   **Laravel Pail** (to tail local logs directly in the console)
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Step-by-Step Manual Setup
 
-### Premium Partners
+If you prefer to run the setup steps individually, follow the guide below:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 1. Prerequisites
 
-## Contributing
+Ensure you have the following installed on your machine:
+*   **PHP** >= 8.2 (with SQLite extensions enabled: `pdo_sqlite` and `sqlite3`)
+*   **Composer** (PHP Package Manager)
+*   **Node.js** & **NPM** (for compiling frontend assets)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. Install Dependencies
 
-## Code of Conduct
+Install the PHP and Node packages:
+```bash
+composer install
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Environment Configuration
 
-## Security Vulnerabilities
+Copy the example environment file:
+```bash
+# On Linux/macOS
+cp .env.example .env
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# On Windows (CMD)
+copy .env.example .env
 
-## License
+# On Windows (PowerShell)
+Copy-Item .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# awwal-lab.in
+### 4. Generate Application Key
+
+Laravel requires a unique application key to encrypt user sessions and other sensitive data:
+```bash
+php artisan key:generate
+```
+
+### 5. Database Setup
+
+The project uses a lightweight **SQLite** database by default.
+1. Create an empty SQLite file:
+   ```bash
+   # On Windows (PowerShell)
+   New-Item -ItemType File -Path database/database.sqlite -Force
+   
+   # On Linux/macOS/Git Bash
+   touch database/database.sqlite
+   ```
+2. Run migrations to build the schema:
+   ```bash
+   php artisan migrate
+   ```
+3. (Optional) Seed the database with initial/test data (creates a default user: `test@example.com`):
+   ```bash
+   php artisan db:seed
+   ```
+
+### 6. Compile Assets
+
+To build frontend assets using Vite and Tailwind CSS v4:
+
+*   **For Development (Live updates):**
+    ```bash
+    npm run dev
+    ```
+*   **For Production:**
+    ```bash
+    npm run build
+    ```
+
+---
+
+## 🚀 Running the Project
+
+You can run the project components individually if you do not want to use the unified `composer dev` command:
+
+1. **Start the Laravel Server:**
+   ```bash
+   php artisan serve
+   ```
+   *The application will be accessible at `http://127.0.0.1:8000`.*
+
+2. **Start the Vite Dev Server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Start the Queue Listener:**
+   ```bash
+   php artisan queue:listen
+   ```
+
+---
+
+## 🧪 Testing
+
+To run the automated PHPUnit tests:
+
+```bash
+composer test
+# or
+php artisan test
+```

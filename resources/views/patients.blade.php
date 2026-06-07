@@ -615,7 +615,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="form-label">Email</label>
-							<input type="email" class="form-control" name="email" placeholder="Email" autocomplete="new-password">
+							<input type="email" class="form-control" name="email" placeholder="Email (Optional)" autocomplete="new-password">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -1491,10 +1491,12 @@
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
 					<select class="form-select add-patient-test-name" name="test_name[]">
 						<option value="">-- Select Test --</option>
+						<option value="Custom">-- Custom Test (Enter) --</option>
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
 						@endforeach
 					</select>
+                    <input type="text" class="form-control add-patient-custom-test mt-1 d-none" placeholder="Enter Test Name" name="custom_test_name[]">
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>

@@ -280,7 +280,7 @@
             <span class="live-dot"></span>
             System Online
         </div>
-        <h1>Welcome Back 👋</h1>
+        <h1>Welcome Back</h1>
         <p>Sign in to access your lab dashboard</p>
     </div>
 

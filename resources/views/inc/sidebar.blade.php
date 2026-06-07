@@ -103,7 +103,7 @@
     </nav>
 
     <div class="sidebar-footer">
-        <strong>Awwal Lab Software</strong><br>© 2026 All Rights Reserved
+        <strong></strong><br>
     </div>
 </aside>
 

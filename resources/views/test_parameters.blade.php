@@ -15,58 +15,10 @@
     </a>
 </div>
 <style>
-    .patients-table-container {
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid #f1f5f9;
-        margin: 10px 0;
-    }
 
-    .table-patients {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 0;
-    }
-
-    .table-patients thead th {
-        background: #f8fafc;
-        color: #475569;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        padding: 16px 20px;
-        border-bottom: 2px solid #f1f5f9;
-        white-space: nowrap;
-    }
-
-    .table-patients tbody tr {
-        border-bottom: 1px solid #f1f5f9;
-        transition: all 0.2s ease;
-    }
-
-    .table-patients tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    .table-patients tbody tr:hover {
-        background-color: #f8fafc;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-    }
-
-    .table-patients tbody td {
-        padding: 16px 20px;
-        vertical-align: middle;
-        font-size: 14px;
-        color: #334155;
-    }
 
     @media (max-width: 767px) {
-        .patients-table-container { border: none; margin: 0; }
-        .table-patients thead { display: none; }
-        .table-patients tbody tr { display: block; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px; border-radius: 16px; padding: 20px; background: #fff !important; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative; }
-        .table-patients tbody td { display: flex; justify-content: space-between; align-items: center; border: none !important; padding: 10px 0 !important; text-align: right; border-bottom: 1px dashed #f1f5f9 !important; }
+    
         .table-patients tbody td:last-child { border-bottom: none !important; }
         .table-patients tbody td::before { content: attr(data-label); font-weight: 700; text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
         .table-patients .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 15px !important; }
@@ -86,9 +38,9 @@
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
-        <div class="table-responsive">
-            <div class="patients-table-container">
-                <table class="table-patients" id="parameters-table">
+        <div class="table-responsive-modern">
+            
+                <table class="table-modern" id="parameters-table">
                     <thead>
                         <tr>
                             <th>Sl. No.</th>
@@ -347,3 +299,6 @@
 @endpush
 
 @endsection
+
+
+

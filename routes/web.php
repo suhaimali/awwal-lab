@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function() { return redirect()->route('dashboard'); });
     Route::get('/appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('/reports', [HomeController::class, 'reports'])->name('reports');
+    Route::get('/reports/trash', [HomeController::class, 'reportsTrash'])->name('reports.trash');
+    Route::post('/reports/{id}/restore', [HomeController::class, 'restoreReport'])->name('reports.restore');
+    Route::delete('/reports/{id}/force-delete', [HomeController::class, 'forceDeleteReport'])->name('reports.force-delete');
     Route::post('/reports', [HomeController::class, 'storeReport'])->name('reports.store');
     Route::get('/reports/{id}', [HomeController::class, 'getReport'])->name('reports.show');
     Route::put('/reports/{id}', [HomeController::class, 'updateReport'])->name('reports.update');
@@ -97,14 +100,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/units', [HomeController::class, 'storeUnit'])->name('units.store');
     Route::put('/units/{id}', [HomeController::class, 'updateUnit'])->name('units.update');
     Route::delete('/units/{id}', [HomeController::class, 'deleteUnit'])->name('units.delete');
-    Route::post('/result-templates', [HomeController::class, 'storeResultTemplate'])->name('result-templates.store');
-    Route::put('/result-templates/{id}', [HomeController::class, 'updateResultTemplate'])->name('result-templates.update');
-    Route::delete('/result-templates/{id}', [HomeController::class, 'deleteResultTemplate'])->name('result-templates.delete');
-
+    Route::get('/reference-templates', [HomeController::class, 'apiReferenceTemplates'])->name('reference-templates.index');
     Route::post('/reference-templates', [HomeController::class, 'storeReferenceTemplate'])->name('reference-templates.store');
     Route::put('/reference-templates/{id}', [HomeController::class, 'updateReferenceTemplate'])->name('reference-templates.update');
     Route::delete('/reference-templates/{id}', [HomeController::class, 'deleteReferenceTemplate'])->name('reference-templates.delete');
 
+    Route::get('/result-templates', [HomeController::class, 'apiResultTemplates'])->name('result-templates.index');
+    Route::post('/result-templates', [HomeController::class, 'storeResultTemplate'])->name('result-templates.store');
+    Route::put('/result-templates/{id}', [HomeController::class, 'updateResultTemplate'])->name('result-templates.update');
+    Route::delete('/result-templates/{id}', [HomeController::class, 'deleteResultTemplate'])->name('result-templates.delete');
+
+    Route::get('/flag-templates', [HomeController::class, 'apiFlagTemplates'])->name('flag-templates.index');
     Route::post('/flag-templates', [HomeController::class, 'storeFlagTemplate'])->name('flag-templates.store');
     Route::put('/flag-templates/{id}', [HomeController::class, 'updateFlagTemplate'])->name('flag-templates.update');
     Route::delete('/flag-templates/{id}', [HomeController::class, 'deleteFlagTemplate'])->name('flag-templates.delete');

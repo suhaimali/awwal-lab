@@ -15,51 +15,7 @@
     </button>
 </div>
 <style>
-    .patients-table-container {
-        border-radius: 0;
-        overflow: hidden;
-        border: none;
-        margin: 0;
-        background: transparent;
-    }
 
-    .table-patients {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 0;
-    }
-
-    .table-patients thead th {
-        background: #f8fafc;
-        color: #64748b;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        padding: 16px 24px;
-        border-bottom: 1px solid #e2e8f0;
-        white-space: nowrap;
-    }
-
-    .table-patients tbody tr {
-        transition: all 0.2s ease;
-        border-bottom: 1px solid #f1f5f9;
-    }
-
-    .table-patients tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    .table-patients tbody tr:hover {
-        background-color: #f8fafc;
-    }
-
-    .table-patients tbody td {
-        padding: 16px 24px;
-        vertical-align: middle;
-        font-size: 14px;
-        color: #334155;
-    }
 
     .cat-icon-box {
         width: 40px;
@@ -119,26 +75,7 @@
     }
 
     @media (max-width: 767px) {
-        .patients-table-container { border: none; margin: 0; background: transparent; }
-        .table-patients thead { display: none; }
-        .table-patients tbody tr { 
-            display: block; 
-            border: 1px solid #e2e8f0; 
-            margin-bottom: 16px; 
-            border-radius: 16px; 
-            padding: 16px; 
-            background: #fff !important; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-        }
-        .table-patients tbody td { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border: none !important; 
-            padding: 12px 0 !important; 
-            text-align: right; 
-            border-bottom: 1px dashed #e2e8f0 !important; 
-        }
+    
         .table-patients tbody td:last-child { border-bottom: none !important; }
         .table-patients tbody td::before { 
             content: attr(data-label); 
@@ -265,9 +202,9 @@
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
-        <div class="table-responsive">
-<div class="patients-table-container">
-    <table class="table-patients" id="booking-table">
+        <div class="table-responsive-modern">
+
+    <table class="table-modern" id="booking-table">
         <thead>
             <tr>
                 <th class="d-none d-md-table-cell">Booking ID</th>
@@ -282,7 +219,7 @@
         <tbody>
         @forelse($appointments as $booking)
         <tr>
-            <td class="d-none d-md-table-cell" data-label="Booking ID"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#B-{{ $booking->id }}</span></td>
+            <td class="d-none d-md-table-cell" data-label="SL No"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#B-{{ $booking->id }}</span></td>
             <td data-label="Patient Name" style="font-weight:600; color:#1e293b;">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div class="cat-icon-box" style="width:32px;height:32px;font-size:14px;"><i class="fa fa-user"></i></div>
@@ -667,7 +604,12 @@
 			</div>
 			<div class="form-group mt-3">
 				<label class="form-label-aw">Measurement Unit</label>
-				<input type="text" class="form-control-aw" name="unit" placeholder="e.g. mg/dL">
+				<select class="form-select form-control-aw" name="unit">
+					<option value="">-- Select Unit --</option>
+					@foreach($units as $u)
+						<option value="{{ $u->name }}">{{ $u->name }}</option>
+					@endforeach
+				</select>
 			</div>
 			<div class="form-group mt-3">
 				<label class="form-label-aw">Biological Reference</label>
@@ -705,7 +647,12 @@
 			</div>
 			<div class="form-group mt-3">
 				<label class="form-label-aw">Measurement Unit</label>
-				<input type="text" class="form-control-aw" name="unit" id="edit-booking-test-unit">
+				<select class="form-select form-control-aw" name="unit" id="edit-booking-test-unit">
+					<option value="">-- Select Unit --</option>
+					@foreach($units as $u)
+						<option value="{{ $u->name }}">{{ $u->name }}</option>
+					@endforeach
+				</select>
 			</div>
 			<div class="form-group mt-3">
 				<label class="form-label-aw">Biological Reference</label>
@@ -728,6 +675,37 @@
 		  $.ajaxSetup({
 			  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 		  });
+
+          // Select2 initialization function
+          function initDynamicSelect2() {
+              $('#modal-add-booking select').each(function() {
+                  if ($(this).hasClass('select2-hidden-accessible')) {
+                      $(this).select2('destroy');
+                  }
+                  $(this).select2({
+                      theme: 'bootstrap-5',
+                      width: '100%',
+                      dropdownParent: $('#modal-add-booking')
+                  });
+              });
+
+              $('#modal-edit-booking select').each(function() {
+                  if ($(this).hasClass('select2-hidden-accessible')) {
+                      $(this).select2('destroy');
+                  }
+                  $(this).select2({
+                      theme: 'bootstrap-5',
+                      width: '100%',
+                      dropdownParent: $('#modal-edit-booking')
+                  });
+              });
+          }
+
+          $(document).on('shown.bs.modal', '#modal-add-booking, #modal-edit-booking', function() {
+              initDynamicSelect2();
+          });
+
+          initDynamicSelect2();
 
           // Fix overlapping modal backdrops z-index
           $(document).on('show.bs.modal', '.modal', function () {
@@ -759,11 +737,9 @@
                       let currentVal = $(this).val();
                       $(this).html(options);
                       if (selectedValue && $(this).hasClass('active-test-select')) {
-                          $(this).val(selectedValue);
-                          $(this).removeClass('active-test-select');
-                          $(this).trigger('change');
+                          $(this).val(selectedValue).removeClass('active-test-select').trigger('change');
                       } else {
-                          $(this).val(currentVal);
+                          $(this).val(currentVal).trigger('change');
                       }
                   });
               });
@@ -853,7 +829,9 @@
 				  });
 				  $('.reference-dr-select').html(options);
 				  if (selectedValue) {
-					  $('.reference-dr-select').val(selectedValue);
+					  $('.reference-dr-select').val(selectedValue).trigger('change');
+				  } else {
+					  $('.reference-dr-select').trigger('change');
 				  }
 			  });
 		  }
@@ -1010,9 +988,9 @@
 			  let id = $(this).data('id');
 			  $.get("/appointments/" + id, function(data) {
 				  $('#edit-booking-id').val(data.id);
-				  $('#edit-patient-id').val(data.patient_id);
-				  $('#edit-doctor-name').val(data.doctor_name);
-				  $('#edit-test-name').val(data.test_name);
+				  $('#edit-patient-id').val(data.patient_id).trigger('change');
+				  $('#edit-doctor-name').val(data.doctor_name).trigger('change');
+				  $('#edit-test-name').val(data.test_name).trigger('change');
 				  $('#edit-test-price').val(data.test_price);
 				  $('#edit-test-discount').val(data.discount);
 				  $('#edit-appointment-date').val(data.appointment_date ? data.appointment_date.split(' ')[0] : '');
@@ -1091,3 +1069,6 @@
 @endpush
 
 @endsection
+
+
+

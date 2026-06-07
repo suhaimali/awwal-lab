@@ -26,11 +26,11 @@
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
-        <div class="table-responsive">
-<table class="table-awlab" id="payments-table">
+        <div class="table-responsive-modern">
+<table class="table table-modern" id="payments-table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>SL No</th>
             <th class="d-none d-sm-table-cell">Bill Date</th>
             <th>Patient</th>
             <th class="d-none d-md-table-cell">Total</th>
@@ -382,3 +382,5 @@
 </script>
 @endpush
 @endsection
+
+

@@ -335,24 +335,81 @@
         }
         .stat-text .stat-lbl { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
 
-        /* ── TABLES ── */
-        .table-awlab { width: 100%; border-collapse: separate; border-spacing: 0; }
-        .table-awlab thead th {
-            background: var(--primary-light);
-            color: #000000;
-            font-size: 11px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            padding: 12px 16px;
-            border-bottom: 2px solid #c7d8fb;
-            white-space: nowrap;
+        /* ── TABLES (MODERN REDESIGN) ── */
+        .table-responsive-modern {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            background: var(--white);
+            margin-bottom: 15px;
         }
-        .table-awlab tbody tr { transition: background 0.15s; }
-        .table-awlab tbody tr:hover { background: #f8faff; }
-        .table-awlab tbody td {
-            padding: 11px 16px;
-            font-size: 13.5px;
-            border-bottom: 1px solid var(--border-color);
+        .table-modern { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0; 
+            margin: 0 !important;
+        }
+        .table-modern thead th {
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-size: 11.5px; 
+            font-weight: 700;
+            text-transform: uppercase; 
+            letter-spacing: 0.8px;
+            padding: 16px 20px;
+            border-bottom: 2px solid #e2e8f0;
+            white-space: nowrap;
             vertical-align: middle;
+        }
+        .table-modern tbody tr { 
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+        .table-modern tbody tr:hover { 
+            background: #f1f5f9; 
+            transform: scale(1.001);
+        }
+        .table-modern tbody td {
+            padding: 16px 20px;
+            font-size: 13.5px;
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+        .table-modern tbody tr:last-child td {
+            border-bottom: none;
+        }
+        /* DataTables Overrides for Modern Look */
+        div.dataTables_wrapper div.dataTables_filter input {
+            border-radius: 20px;
+            padding: 6px 16px;
+            border: 1px solid #cbd5e1;
+            font-size: 13px;
+        }
+        div.dataTables_wrapper div.dataTables_filter input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26,86,219,0.12);
+            outline: none;
+        }
+        div.dataTables_wrapper div.dataTables_length select {
+            border-radius: 8px;
+            padding: 4px 30px 4px 10px;
+            border: 1px solid #cbd5e1;
+        }
+        .pagination .page-item .page-link {
+            border: none;
+            color: var(--text-muted);
+            border-radius: 8px;
+            margin: 0 2px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(26,86,219,0.2);
         }
 
         /* ── BUTTONS ── */
@@ -530,6 +587,15 @@
             border-color: var(--primary) !important;
             box-shadow: 0 0 0 3px rgba(26,86,219,0.12) !important;
         }
+        /* Fix Select2 inside Bootstrap input-groups */
+        .input-group > .select2-container--bootstrap-5 {
+            flex: 1 1 auto;
+            width: 1% !important;
+        }
+        .input-group > .select2-container--bootstrap-5 .select2-selection {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
     </style>
 </head>
 <body>
@@ -617,3 +683,4 @@
     @stack('scripts')
 </body>
 </html>
+

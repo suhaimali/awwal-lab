@@ -148,8 +148,8 @@
                 <span class="badge-aw badge-green">{{ count($recentTransactions) }} Records</span>
             </div>
             <div class="aw-card-body p-0">
-                <div class="table-responsive">
-                    <table class="table-awlab">
+                <div class="table-responsive-modern">
+                    <table class="table table-modern">
                         <thead>
                             <tr>
                                 <th>Patient</th>
@@ -205,8 +205,8 @@
         <div class="aw-card-title"><i class="fa fa-chart-bar" style="color:var(--primary);"></i> Daily Income Analysis</div>
     </div>
     <div class="aw-card-body p-0">
-        <div class="table-responsive">
-            <table class="table-awlab">
+        <div class="table-responsive-modern">
+            <table class="table table-modern">
                 <thead>
                     <tr>
                         <th>Billing Date</th>
@@ -268,3 +268,4 @@
 </style>
 @endpush
 @endsection
+

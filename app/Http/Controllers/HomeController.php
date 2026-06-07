@@ -50,7 +50,8 @@ class HomeController extends Controller
 
         $patients = \App\Models\Patient::all(); 
         $tests = \App\Models\LabTest::all();
-        return view('appointments', compact('appointments', 'patients', 'tests'));
+        $units = \App\Models\Unit::orderBy('name')->get();
+        return view('appointments', compact('appointments', 'patients', 'tests', 'units'));
     }
 
     public function reports()
@@ -834,9 +835,9 @@ class HomeController extends Controller
             'description' => 'nullable',
         ]);
 
-        \App\Models\Category::create($validated);
+        $category = \App\Models\Category::create($validated);
 
-        return response()->json(['success' => 'Category added successfully!']);
+        return response()->json(['success' => 'Category added successfully!', 'category' => $category]);
     }
 
     public function updateCategory(\Illuminate\Http\Request $request, $id)
@@ -880,9 +881,9 @@ class HomeController extends Controller
             'description' => 'nullable',
         ]);
 
-        \App\Models\SubCategory::create($validated);
+        $subCategory = \App\Models\SubCategory::create($validated);
 
-        return response()->json(['success' => 'Sub-Category added successfully!']);
+        return response()->json(['success' => 'Sub-Category added successfully!', 'subCategory' => $subCategory]);
     }
 
     public function updateSubCategory(\Illuminate\Http\Request $request, $id)
@@ -912,7 +913,9 @@ class HomeController extends Controller
     {
         $units = \App\Models\Unit::orderBy('name')->get();
         $templates = \App\Models\ResultTemplate::orderBy('name')->get();
-        return view('master_data', compact('units', 'templates'));
+        $referenceTemplates = \App\Models\ReferenceTemplate::orderBy('name')->get();
+        $flagTemplates = \App\Models\FlagTemplate::orderBy('name')->get();
+        return view('master_data', compact('units', 'templates', 'referenceTemplates', 'flagTemplates'));
     }
 
     public function apiUnits()
@@ -1003,6 +1006,21 @@ class HomeController extends Controller
     {
         \App\Models\FlagTemplate::destroy($id);
         return response()->json(['success' => 'Template removed!']);
+    }
+
+    public function apiReferenceTemplates()
+    {
+        return response()->json(\App\Models\ReferenceTemplate::orderBy('name')->get());
+    }
+
+    public function apiResultTemplates()
+    {
+        return response()->json(\App\Models\ResultTemplate::orderBy('name')->get());
+    }
+
+    public function apiFlagTemplates()
+    {
+        return response()->json(\App\Models\FlagTemplate::orderBy('name')->get());
     }
 
     public function testParameters()
@@ -1273,5 +1291,30 @@ class HomeController extends Controller
                 'max_value' => $isFemale ? $parameter->female_max : $parameter->male_max,
             ]
         );
+    }
+
+    public function reportsTrash()
+    {
+        $reports = \App\Models\TestReport::onlyTrashed()->with('patient')->latest()->get();
+        return view('reports_trash', compact('reports'));
+    }
+
+    public function restoreReport($id)
+    {
+        $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
+        $report->restore();
+        
+        $this->auditReport($report, 'restored', null, $this->reportSnapshot($report->fresh(['patient', 'items', 'signature'])));
+
+        return response()->json(['success' => 'Report restored successfully!']);
+    }
+
+    public function forceDeleteReport($id)
+    {
+        $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
+        $this->auditReport($report, 'permanently_deleted', $this->reportSnapshot($report), null);
+        $report->forceDelete();
+
+        return response()->json(['success' => 'Report permanently deleted!']);
     }
 }

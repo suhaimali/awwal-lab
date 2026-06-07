@@ -13,53 +13,6 @@
         overflow: hidden;
     }
 
-    .patients-table-container {
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid #f1f5f9;
-        margin: 10px 0;
-    }
-
-    .table-patients {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 0;
-    }
-
-    .table-patients thead th {
-        background: #f8fafc;
-        color: #475569;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        padding: 16px 20px;
-        border-bottom: 2px solid #f1f5f9;
-        white-space: nowrap;
-    }
-
-    .table-patients tbody tr {
-        border-bottom: 1px solid #f1f5f9;
-        transition: all 0.2s ease;
-    }
-
-    .table-patients tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    .table-patients tbody tr:hover {
-        background-color: #f8fafc;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-    }
-
-    .table-patients tbody td {
-        padding: 16px 20px;
-        vertical-align: middle;
-        font-size: 14px;
-        color: #334155;
-    }
-
     /* Avatar style */
     .patient-avatar {
         width: 40px;
@@ -418,12 +371,12 @@
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
-        <div class="table-responsive">
-            <div class="patients-table-container">
-                <table class="table-patients" id="patient-table">
+        <div class="table-responsive-modern">
+            
+                <table class="table-modern" id="patient-table">
                     <thead>
                         <tr>
-                            <th class="d-none d-md-table-cell">ID</th>
+                            <th class="d-none d-md-table-cell">SL No</th>
                             <th>Patient Details</th>
                             <th class="d-none d-sm-table-cell">Contact</th>
                             <th class="d-none d-md-table-cell">Financial Status</th>
@@ -1076,6 +1029,22 @@
 			  }
 		  });
 
+          // Select2 initialization function
+          function initDynamicSelect2() {
+              // Revert all select elements inside the patient modals to standard native HTML selects
+              $('#modal-add-patient select, #modal-edit-patient select, #modal-patient-book-test select').each(function() {
+                  if ($(this).hasClass('select2-hidden-accessible')) {
+                      $(this).select2('destroy');
+                  }
+              });
+          }
+
+          $(document).on('shown.bs.modal', '#modal-add-patient, #modal-edit-patient, #modal-patient-book-test', function() {
+              initDynamicSelect2();
+          });
+
+          initDynamicSelect2();
+
 		  // Live Search for Patients
 		  $("#patient-search").on("keyup", function() {
 			  var value = $(this).val().toLowerCase();
@@ -1251,7 +1220,9 @@
 				  options += '<option value="__custom__">✏️ Custom (type below)</option>';
 				  $('.reference-dr-select').html(options);
                    if (selectedValue) {
-                       $('.reference-dr-select').val(selectedValue);
+                       $('.reference-dr-select').val(selectedValue).trigger('change');
+                   } else {
+                       $('.reference-dr-select').trigger('change');
                    }
 			  });
 		  }
@@ -1452,15 +1423,15 @@
 				  let isCustomDr = refDr !== '' && !refDrSelect.find(`option[value="${refDr}"]`).length;
 				  
 				  if (isCustomDr) {
-					  refDrSelect.val('__custom__').closest('.reference-dr-input-group').hide();
+					  refDrSelect.val('__custom__').trigger('change').closest('.reference-dr-input-group').hide();
 					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-wrap').show();
 					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-input').val(refDr);
 				  } else {
-					  refDrSelect.val(refDr).closest('.reference-dr-input-group').show();
+					  refDrSelect.val(refDr).trigger('change').closest('.reference-dr-input-group').show();
 					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-wrap').hide();
 				  }
 				  refDrSelect.closest('.reference-dr-container').find('.reference-dr-value').val(refDr);
-				  $('#edit-status').val(data.status);
+				  $('#edit-status').val(data.status).trigger('change');
 				  $('#edit-address').val(data.address);
 
                   // Collect known test names from server (rendered by Blade)
@@ -1549,6 +1520,7 @@
                   }
 
                   $('#edit-patient-tests-container').html(testRowsHtml);
+                  initDynamicSelect2();
                   calculateNetPayable('edit');
 			  });
 		  });
@@ -1588,6 +1560,7 @@
 
 		  $(document).on('click', '.btn-add-add-test-row', function() {
 			  $('#add-patient-tests-container').append(addTestRowTemplate);
+              initDynamicSelect2();
 		  });
 
 		  $(document).on('click', '.btn-add-remove-test-row', function() {
@@ -1631,6 +1604,7 @@
 
 		  $(document).on('click', '.btn-edit-add-test-row', function() {
 			  $('#edit-patient-tests-container').append(editTestRowTemplate);
+              initDynamicSelect2();
 		  });
 
 		  $(document).on('click', '.btn-remove-test-row', function() {
@@ -1784,3 +1758,6 @@
   @endpush
 
 @endsection
+
+
+

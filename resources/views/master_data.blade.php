@@ -8,7 +8,7 @@
         <div class="title-icon"><i class="fa fa-database"></i></div>
         <div>
             <div>Master Data Management</div>
-            <div style="font-size:13px; font-weight:400; color:var(--text-muted); margin-top:2px;">Manage laboratory measurement units and result templates</div>
+            <div style="font-size:13px; font-weight:400; color:var(--text-muted); margin-top:2px;">Manage laboratory measurement units, result templates, reference range templates, and flag templates</div>
         </div>
     </div>
 </div>
@@ -35,8 +35,8 @@
                         <button type="submit" class="btn-aw-primary" style="flex-shrink:0;"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </form>
-                <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
-                    <table class="table-awlab" id="units-table">
+                <div class="table-responsive-modern" style="max-height: 420px; overflow-y: auto;">
+                    <table class="table table-modern" id="units-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -51,10 +51,10 @@
                                 <td style="font-weight:600;">{{ $unit->name }}</td>
                                 <td class="text-end">
                                     <div class="d-flex justify-content-end gap-2">
-                                        <button class="btn-aw-primary btn-aw-sm btn-edit-unit" data-id="{{ $unit->id }}" data-name="{{ $unit->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit">
+                                        <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-unit" data-id="{{ $unit->id }}" data-name="{{ $unit->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <button class="btn-aw-danger btn-aw-sm btn-delete-unit" data-id="{{ $unit->id }}" title="Delete">
+                                        <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-unit" data-id="{{ $unit->id }}" title="Delete">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </div>
@@ -96,8 +96,8 @@
                         <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#059669;"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </form>
-                <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
-                    <table class="table-awlab" id="templates-table">
+                <div class="table-responsive-modern" style="max-height: 420px; overflow-y: auto;">
+                    <table class="table table-modern" id="templates-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -112,10 +112,10 @@
                                 <td style="font-weight:600; color:#059669;">{{ $template->name }}</td>
                                 <td class="text-end">
                                     <div class="d-flex justify-content-end gap-2">
-                                        <button class="btn-aw-primary btn-aw-sm btn-edit-template" data-id="{{ $template->id }}" data-name="{{ $template->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit">
+                                        <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-template" data-id="{{ $template->id }}" data-name="{{ $template->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit" style="background:#059669;">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <button class="btn-aw-danger btn-aw-sm btn-delete-template" data-id="{{ $template->id }}" title="Delete">
+                                        <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-template" data-id="{{ $template->id }}" title="Delete">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </div>
@@ -126,6 +126,130 @@
                                 <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
                                     <i class="fa fa-list-check" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
                                     No result templates added yet.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-2">
+    <!-- Reference Range Templates Section -->
+    <div class="col-xl-6 col-12">
+        <div class="aw-card">
+            <div class="aw-card-header">
+                <div class="aw-card-title"><i class="fa fa-file-medical" style="color:#2563eb;"></i> Reference Range Templates</div>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($referenceTemplates) }} templates</span>
+                    <div style="position:relative;">
+                        <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
+                        <input type="text" id="reference-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search references...">
+                    </div>
+                </div>
+            </div>
+            <div class="aw-card-body">
+                <form id="form-add-reference" class="mb-4">
+                    @csrf
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new reference (e.g. 70 - 110)" required>
+                        <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#2563eb;"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </form>
+                <div class="table-responsive-modern" style="max-height: 420px; overflow-y: auto;">
+                    <table class="table table-modern" id="references-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Template Value</th>
+                                <th class="text-end" style="width: 120px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($referenceTemplates as $i => $ref)
+                            <tr>
+                                <td><span class="badge-aw text-primary" style="background:#e0f2fe;">{{ $i + 1 }}</span></td>
+                                <td style="font-weight:600; color:#2563eb;">{{ $ref->name }}</td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-reference" data-id="{{ $ref->id }}" data-name="{{ $ref->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit" style="background:#2563eb;">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-reference" data-id="{{ $ref->id }}" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
+                                    <i class="fa fa-file-medical" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
+                                    No reference templates added yet.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flag Templates Section -->
+    <div class="col-xl-6 col-12">
+        <div class="aw-card">
+            <div class="aw-card-header">
+                <div class="aw-card-title"><i class="fa fa-flag" style="color:#d97706;"></i> Flag Templates</div>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($flagTemplates) }} flags</span>
+                    <div style="position:relative;">
+                        <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
+                        <input type="text" id="flag-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search flags...">
+                    </div>
+                </div>
+            </div>
+            <div class="aw-card-body">
+                <form id="form-add-flag" class="mb-4">
+                    @csrf
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new flag (e.g. H, L, C)" required>
+                        <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#d97706;"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </form>
+                <div class="table-responsive-modern" style="max-height: 420px; overflow-y: auto;">
+                    <table class="table table-modern" id="flags-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Flag Value</th>
+                                <th class="text-end" style="width: 120px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($flagTemplates as $i => $flg)
+                            <tr>
+                                <td><span class="badge-aw text-warning" style="background:#fef3c7;">{{ $i + 1 }}</span></td>
+                                <td style="font-weight:600; color:#d97706;">{{ $flg->name }}</td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-flag" data-id="{{ $flg->id }}" data-name="{{ $flg->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit" style="background:#d97706;">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-flag" data-id="{{ $flg->id }}" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
+                                    <i class="fa fa-flag" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
+                                    No flag templates added yet.
                                 </td>
                             </tr>
                             @endforelse
@@ -183,6 +307,22 @@
             });
         });
 
+        // Live search — References
+        $('#reference-search').on('keyup', function() {
+            let val = $(this).val().toLowerCase();
+            $('#references-table tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+            });
+        });
+
+        // Live search — Flags
+        $('#flag-search').on('keyup', function() {
+            let val = $(this).val().toLowerCase();
+            $('#flags-table tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+            });
+        });
+
         // ADD Unit
         $('#form-add-unit').submit(function(e) {
             e.preventDefault();
@@ -209,6 +349,32 @@
             }
         });
 
+        // ADD Reference Template
+        $('#form-add-reference').submit(function(e) {
+            e.preventDefault();
+            $.post("{{ route('reference-templates.store') }}", $(this).serialize(), function() { location.reload(); });
+        });
+
+        // DELETE Reference Template
+        $(document).on('click', '.btn-delete-reference', function() {
+            if(confirm('Remove this reference template?')) {
+                $.ajax({ url: "/reference-templates/" + $(this).data('id'), type: 'DELETE', success: function() { location.reload(); } });
+            }
+        });
+
+        // ADD Flag Template
+        $('#form-add-flag').submit(function(e) {
+            e.preventDefault();
+            $.post("{{ route('flag-templates.store') }}", $(this).serialize(), function() { location.reload(); });
+        });
+
+        // DELETE Flag Template
+        $(document).on('click', '.btn-delete-flag', function() {
+            if(confirm('Remove this flag template?')) {
+                $.ajax({ url: "/flag-templates/" + $(this).data('id'), type: 'DELETE', success: function() { location.reload(); } });
+            }
+        });
+
         // POPULATE Edit Modal — Unit
         $(document).on('click', '.btn-edit-unit', function() {
             $('#edit-id').val($(this).data('id'));
@@ -225,11 +391,36 @@
             $('.modal-title').html('<i class="fa fa-pen me-2"></i>Edit Result Template');
         });
 
+        // POPULATE Edit Modal — Reference Template
+        $(document).on('click', '.btn-edit-reference', function() {
+            $('#edit-id').val($(this).data('id'));
+            $('#edit-name').val($(this).data('name'));
+            $('#edit-type').val('reference-template');
+            $('.modal-title').html('<i class="fa fa-pen me-2"></i>Edit Reference Template');
+        });
+
+        // POPULATE Edit Modal — Flag Template
+        $(document).on('click', '.btn-edit-flag', function() {
+            $('#edit-id').val($(this).data('id'));
+            $('#edit-name').val($(this).data('name'));
+            $('#edit-type').val('flag-template');
+            $('.modal-title').html('<i class="fa fa-pen me-2"></i>Edit Flag Template');
+        });
+
         // UPDATE Logic
         $('#btn-update-master').click(function() {
             let id = $('#edit-id').val();
             let type = $('#edit-type').val();
-            let url = type === 'unit' ? "/units/" + id : "/result-templates/" + id;
+            let url;
+            if (type === 'unit') {
+                url = "/units/" + id;
+            } else if (type === 'template') {
+                url = "/result-templates/" + id;
+            } else if (type === 'reference-template') {
+                url = "/reference-templates/" + id;
+            } else if (type === 'flag-template') {
+                url = "/flag-templates/" + id;
+            }
             $.ajax({
                 url: url,
                 type: 'PUT',
@@ -242,3 +433,6 @@
 </script>
 @endpush
 @endsection
+
+
+

@@ -63,8 +63,8 @@
                 <div class="aw-card-title"><i class="fa fa-list" style="color:#059669;"></i> Saved Signatures</div>
             </div>
             <div class="aw-card-body p-0">
-                <div class="table-responsive">
-                    <table class="table-awlab">
+                <div class="table-responsive-modern">
+                    <table class="table table-modern">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -174,3 +174,4 @@
 </script>
 @endpush
 @endsection
+

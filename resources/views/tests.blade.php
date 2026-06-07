@@ -15,140 +15,23 @@
     </button>
 </div>
 <style>
-    .patients-table-container {
-        border-radius: 0;
-        overflow: hidden;
-        border: none;
-        margin: 0;
-        background: transparent;
-    }
-
-    .table-patients {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 0;
-    }
-
-    .table-patients thead th {
-        background: #f8fafc;
-        color: #64748b;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        padding: 16px 24px;
-        border-bottom: 1px solid #e2e8f0;
-        white-space: nowrap;
-    }
-
-    .table-patients tbody tr {
-        transition: all 0.2s ease;
-        border-bottom: 1px solid #f1f5f9;
-    }
-
-    .table-patients tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    .table-patients tbody tr:hover {
-        background-color: #f8fafc;
-    }
-
-    .table-patients tbody td {
-        padding: 16px 24px;
-        vertical-align: middle;
-        font-size: 14px;
-        color: #334155;
-    }
-
     .cat-icon-box {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
+        width: 40px; height: 40px; border-radius: 12px;
         background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-        color: #3b82f6;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.15);
+        color: #3b82f6; display: inline-flex; align-items: center; justify-content: center;
+        font-size: 16px; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.15);
     }
-
-    .action-btn-group {
-        display: flex;
-        gap: 8px;
-        justify-content: flex-end;
-    }
-
+    .action-btn-group { display: flex; gap: 8px; justify-content: flex-end; }
     .btn-icon-circle {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #e2e8f0;
-        background: #fff;
-        color: #64748b;
-        transition: all 0.2s ease;
-        cursor: pointer;
-        outline: none;
-        text-decoration: none;
+        width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        border: 1px solid #e2e8f0; background: #fff; color: #64748b; transition: all 0.2s ease; cursor: pointer; outline: none; text-decoration: none;
     }
-
-    .btn-icon-circle:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .btn-icon-circle.edit:hover {
-        color: #3b82f6;
-        border-color: #bfdbfe;
-        background: #eff6ff;
-    }
-
-    .btn-icon-circle.sliders:hover {
-        color: #10b981;
-        border-color: #a7f3d0;
-        background: #ecfdf5;
-    }
-
-    .btn-icon-circle.delete:hover {
-        color: #ef4444;
-        border-color: #fecaca;
-        background: #fef2f2;
-    }
-
+    .btn-icon-circle:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .btn-icon-circle.edit:hover { color: #3b82f6; border-color: #bfdbfe; background: #eff6ff; }
+    .btn-icon-circle.sliders:hover { color: #10b981; border-color: #a7f3d0; background: #ecfdf5; }
+    .btn-icon-circle.delete:hover { color: #ef4444; border-color: #fecaca; background: #fef2f2; }
     @media (max-width: 767px) {
-        .patients-table-container { border: none; margin: 0; background: transparent; }
-        .table-patients thead { display: none; }
-        .table-patients tbody tr { 
-            display: block; 
-            border: 1px solid #e2e8f0; 
-            margin-bottom: 16px; 
-            border-radius: 16px; 
-            padding: 16px; 
-            background: #fff !important; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-        }
-        .table-patients tbody td { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border: none !important; 
-            padding: 12px 0 !important; 
-            text-align: right; 
-            border-bottom: 1px dashed #e2e8f0 !important; 
-        }
-        .table-patients tbody td:last-child { border-bottom: none !important; }
-        .table-patients tbody td::before { 
-            content: attr(data-label); 
-            font-weight: 600; 
-            color: #94a3b8; 
-            font-size: 12px; 
-            text-transform: uppercase;
-        }
-        .table-patients .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 15px !important; }
+        .table-modern .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 15px !important; }
         .action-btn-group { width: 100%; justify-content: center; gap: 16px; }
     }
 </style>
@@ -162,12 +45,12 @@
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
-        <div class="table-responsive">
-            <div class="patients-table-container">
-                <table class="table-patients" id="tests-table">
+        <div class="table-responsive-modern">
+            
+                <table class="table-modern" id="tests-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>SL No</th>
                             <th>Test Name</th>
                             <th>Price</th>
                             <th>Description</th>
@@ -177,7 +60,7 @@
                     <tbody>
                         @forelse($tests as $test)
                         <tr>
-                            <td data-label="ID"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#{{ $test->id }}</span></td>
+                            <td data-label="SL No"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#{{ $test->id }}</span></td>
                             <td data-label="Test Name" style="font-weight:600; color:#1e293b;">
                                 <div style="display:flex; align-items:center; gap:10px;">
                                     <div class="cat-icon-box" style="width:32px;height:32px;font-size:14px;"><i class="fa fa-flask"></i></div>
@@ -422,3 +305,6 @@
 @endpush
 
 @endsection
+
+
+

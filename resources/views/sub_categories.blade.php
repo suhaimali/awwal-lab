@@ -15,51 +15,7 @@
     </button>
 </div>
 <style>
-    .patients-table-container {
-        border-radius: 0;
-        overflow: hidden;
-        border: none;
-        margin: 0;
-        background: transparent;
-    }
 
-    .table-patients {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 0;
-    }
-
-    .table-patients thead th {
-        background: #f8fafc;
-        color: #64748b;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        padding: 16px 24px;
-        border-bottom: 1px solid #e2e8f0;
-        white-space: nowrap;
-    }
-
-    .table-patients tbody tr {
-        transition: all 0.2s ease;
-        border-bottom: 1px solid #f1f5f9;
-    }
-
-    .table-patients tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    .table-patients tbody tr:hover {
-        background-color: #f8fafc;
-    }
-
-    .table-patients tbody td {
-        padding: 16px 24px;
-        vertical-align: middle;
-        font-size: 14px;
-        color: #334155;
-    }
 
     .cat-icon-box {
         width: 40px;
@@ -119,26 +75,7 @@
     }
 
     @media (max-width: 767px) {
-        .patients-table-container { border: none; margin: 0; background: transparent; }
-        .table-patients thead { display: none; }
-        .table-patients tbody tr { 
-            display: block; 
-            border: 1px solid #e2e8f0; 
-            margin-bottom: 16px; 
-            border-radius: 16px; 
-            padding: 16px; 
-            background: #fff !important; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-        }
-        .table-patients tbody td { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border: none !important; 
-            padding: 12px 0 !important; 
-            text-align: right; 
-            border-bottom: 1px dashed #e2e8f0 !important; 
-        }
+    
         .table-patients tbody td:last-child { border-bottom: none !important; }
         .table-patients tbody td::before { 
             content: attr(data-label); 
@@ -162,12 +99,12 @@
         </div>
     </div>
     <div class="aw-card-body" style="padding:0;">
-        <div class="table-responsive">
-            <div class="patients-table-container">
-                <table class="table-patients" id="subcategories-table">
+        <div class="table-responsive-modern">
+            
+                <table class="table-modern" id="subcategories-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>SL No</th>
                             <th>Sub-Category Name</th>
                             <th>Main Category</th>
                             <th>Description</th>
@@ -177,7 +114,7 @@
                     <tbody>
                         @forelse($subCategories as $sub)
                         <tr>
-                            <td data-label="ID">
+                            <td data-label="SL No">
                                 <span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#{{ str_pad($sub->id, 4, '0', STR_PAD_LEFT) }}</span>
                             </td>
                             <td data-label="Sub-Category Name">
@@ -432,3 +369,6 @@
 @endpush
 
 @endsection
+
+
+

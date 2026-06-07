@@ -9,10 +9,17 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Public Landing Page
+Route::get('/', function() {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
+})->name('home');
+
 // Protected Dashboard Routes
 Route::middleware(['auth'])->group(function () {
-    // Redirect root to dashboard URL
-    Route::get('/', function() { return redirect()->route('dashboard'); });
+    // Redirect /home to dashboard
     Route::get('/home', function() { return redirect()->route('dashboard'); });
 
     // Dashboard served by HomeController@index
@@ -20,13 +27,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function() { return redirect()->route('dashboard'); });
     Route::get('/appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('/reports', [HomeController::class, 'reports'])->name('reports');
-    Route::get('/reports-trash', [HomeController::class, 'reportsTrash'])->name('reports.trash');
     Route::post('/reports', [HomeController::class, 'storeReport'])->name('reports.store');
     Route::get('/reports/{id}', [HomeController::class, 'getReport'])->name('reports.show');
     Route::put('/reports/{id}', [HomeController::class, 'updateReport'])->name('reports.update');
     Route::get('/reports/{id}/pdf', [HomeController::class, 'downloadPDF'])->name('reports.pdf');
     Route::delete('/reports/{id}', [HomeController::class, 'deleteReport'])->name('reports.delete');
-    Route::post('/reports/{id}/restore', [HomeController::class, 'restoreReport'])->name('reports.restore');
 
     // Report Signatures
     Route::get('/report-signatures', [HomeController::class, 'reportSignatures'])->name('report-signatures.index');
@@ -68,6 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/lab-tests/{id}', [HomeController::class, 'deleteLabTest'])->name('lab-tests.delete');
 
     // Test Parameters (Clinical)
+    Route::get('/api/tests', [HomeController::class, 'apiTests'])->name('api.tests');
+    Route::post('/tests/quick-store', [HomeController::class, 'quickStoreTest'])->name('tests.quick-store');
+    Route::put('/tests/quick-update/{id}', [HomeController::class, 'quickUpdateTest'])->name('tests.quick-update');
     Route::get('/test-parameters', [HomeController::class, 'testParameters'])->name('test-parameters.index');
     Route::post('/test-parameters', [HomeController::class, 'storeTestParameter'])->name('test-parameters.store');
 
@@ -85,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Master Data
     Route::get('/master-data', [HomeController::class, 'masterData'])->name('master-data.index');
+    Route::get('/units', [HomeController::class, 'apiUnits'])->name('units.index');
     Route::post('/units', [HomeController::class, 'storeUnit'])->name('units.store');
     Route::put('/units/{id}', [HomeController::class, 'updateUnit'])->name('units.update');
     Route::delete('/units/{id}', [HomeController::class, 'deleteUnit'])->name('units.delete');
@@ -100,3 +109,4 @@ Route::get('/doctors/suggestions', [HomeController::class, 'getDoctorSuggestions
 Route::post('/doctors', [HomeController::class, 'storeDoctor'])->name('doctors.store');
 Route::put('/doctors/{id}', [HomeController::class, 'updateDoctor'])->name('doctors.update');
 Route::delete('/doctors/{id}', [HomeController::class, 'deleteDoctor'])->name('doctors.delete');
+

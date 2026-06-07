@@ -1,27 +1,22 @@
 @extends('layouts.app')
+@section('title', ' | Test Reports')
+@section('page-title', 'Test Reports')
+
 @section('content')
- <div class="content-wrapper">
-	  <div class="container-full">
-		<!-- Content Header (Page header) -->	  
-		<div class="content-header">
-			<div class="d-flex align-items-center">
-				<div class="me-auto">
-					<h4 class="page-title">Test Reports</h4>
-
-				</div>
-					<div class="ms-auto w-100 w-md-auto d-flex align-items-center gap-3">
-						<a href="{{ route('reports.trash') }}" class="btn btn-light btn-sm w-100 w-md-auto mt-2 mt-md-0 d-flex align-items-center justify-content-center">
-							<i class="fa fa-archive me-1"></i> Trash
-						</a>
-						<button type="button" class="btn btn-primary btn-sm w-100 w-md-auto mt-2 mt-md-0 d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#modal-add-report">
-							<i class="fa fa-plus-circle me-1"></i> Add New Report
-						</button>
-					</div>
-			</div>
-		</div>  
-
-		<!-- Main content -->
-		<section class="content">
+<div class="page-header-aw">
+    <div class="page-title-aw">
+        <div class="title-icon"><i class="fa fa-file-medical"></i></div>
+        <div>
+            <div>Test Reports</div>
+            <div style="font-size:13px; font-weight:400; color:var(--text-muted); margin-top:2px;">Generate, preview, print, and manage patient laboratory reports</div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn-aw-primary" data-bs-toggle="modal" data-bs-target="#modal-add-report">
+            <i class="fa fa-plus-circle"></i> Add New Report
+        </button>
+    </div>
+</div>
             <style>
                 @media (max-width: 767px) {
                     .table th, .table td { padding: 10px 8px !important; font-size: 11px; }
@@ -325,14 +320,14 @@
                     .pdf-btn { padding: 8px 10px; }
                     
                     /* Reports Table Mobile Optimization */
-                    .card-table thead { display: none; }
-                    .card-table tbody tr { display: block; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px; border-radius: 16px; padding: 20px; background: #fff !important; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative; }
-                    .card-table tbody td { display: flex; justify-content: space-between; align-items: center; border: none !important; padding: 10px 0 !important; text-align: right; border-bottom: 1px dashed #f1f5f9 !important; }
-                    .card-table tbody td:last-child { border-bottom: none !important; }
-                    .card-table tbody td::before { content: attr(data-label); font-weight: 700; text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-                    .card-table .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 20px !important; gap: 12px; flex-wrap: wrap; }
-                    .card-table .btn { flex: 1; min-width: 80px; height: 42px; border-radius: 10px; }
-                    .card-table .fw-600.text-primary { font-size: 16px; color: #4f46e5 !important; }
+                    .table-awlab thead { display: none; }
+                    .table-awlab tbody tr { display: block; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px; border-radius: 16px; padding: 20px; background: #fff !important; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative; }
+                    .table-awlab tbody td { display: flex; justify-content: space-between; align-items: center; border: none !important; padding: 10px 0 !important; text-align: right; border-bottom: 1px dashed #f1f5f9 !important; }
+                    .table-awlab tbody td:last-child { border-bottom: none !important; }
+                    .table-awlab tbody td::before { content: attr(data-label); font-weight: 700; text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+                    .table-awlab .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 20px !important; gap: 12px; flex-wrap: wrap; }
+                    .table-awlab .btn { flex: 1; min-width: 80px; height: 42px; border-radius: 10px; }
+                    .table-awlab .fw-600.text-primary { font-size: 16px; color: #4f46e5 !important; }
                 }
 
                 @media (max-width: 480px) {
@@ -363,7 +358,7 @@
                 .report-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
                 .report-table th { border-bottom: 2px solid #333; padding: 12px; text-align: left; background: #f9f9f9; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #555; }
                 .report-table td { border-bottom: 1px solid #eee; padding: 12px; text-align: left; font-size: 13px; }
-                .report-section-title { font-weight: 800; color: #0056b3; padding: 15px 0 5px 0 !important; border-bottom: none !important; font-size: 14px; text-transform: uppercase; }
+                .report-section-title { font-weight: 800; color: #000000; padding: 15px 0 5px 0 !important; border-bottom: none !important; font-size: 14px; text-transform: uppercase; }
                 .barcode-container { text-align: center; }
                 .barcode-bars { font-family: 'Libre Barcode 39', cursive; font-size: 40px; line-height: 1; color: #000; }
                 .patient-info-box { background: #fcfcfc; border: 1px solid #eee; border-radius: 8px; padding: 20px; margin-bottom: 30px; }
@@ -375,23 +370,56 @@
                 .signature-section { margin-top: 50px; display: flex; justify-content: space-between; }
                 .signature-box { text-align: center; border-top: 1px solid #333; width: 200px; padding-top: 5px; font-size: 12px; font-weight: 600; }
 
+                /* Custom responsive columns for Report generator popup */
+                @media (min-width: 768px) {
+                    .col-sub { flex: 0 0 14%; max-width: 14%; padding-left: 4px; padding-right: 4px; }
+                    .col-unit-dept { flex: 0 0 14%; max-width: 14%; padding-left: 4px; padding-right: 4px; }
+                    .col-param { flex: 0 0 18%; max-width: 18%; padding-left: 4px; padding-right: 4px; }
+                    .col-observed { flex: 0 0 8%; max-width: 8%; padding-left: 4px; padding-right: 4px; }
+                    .col-unit-meas { flex: 0 0 12%; max-width: 12%; padding-left: 4px; padding-right: 4px; }
+                    .col-ref { flex: 0 0 18%; max-width: 18%; padding-left: 4px; padding-right: 4px; }
+                    .col-flag { flex: 0 0 8%; max-width: 8%; padding-left: 4px; padding-right: 4px; }
+                    .col-action { flex: 0 0 8%; max-width: 8%; padding-left: 4px; padding-right: 4px; }
+                }
+
+                /* Inline buttons styled premium */
+                .btn-add-report-category, .btn-add-report-subcategory, .btn-add-report-test, .btn-add-report-unit {
+                    background: #d1fae5 !important;
+                    color: #059669 !important;
+                    border: 1px solid #a7f3d0 !important;
+                    border-left: none !important;
+                    transition: all 0.2s ease;
+                }
+                .btn-add-report-category:hover, .btn-add-report-subcategory:hover, .btn-add-report-test:hover, .btn-add-report-unit:hover {
+                    background: #059669 !important;
+                    color: #fff !important;
+                }
+
+                .btn-edit-report-category, .btn-edit-report-subcategory, .btn-edit-report-test, .btn-edit-report-unit {
+                    background: #ffedd5 !important;
+                    color: #d97706 !important;
+                    border: 1px solid #fed7aa !important;
+                    border-left: none !important;
+                    transition: all 0.2s ease;
+                }
+                .btn-edit-report-category:hover, .btn-edit-report-subcategory:hover, .btn-edit-report-test:hover, .btn-edit-report-unit:hover {
+                    background: #d97706 !important;
+                    color: #fff !important;
+                }
             </style>
             <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
 
-			<div class="row">				
-				<div class="col-12">
-				  <div class="box">
-					<div class="box-body">
-						<div class="row mb-3">
-							<div class="col-md-4">
-								<div class="input-group">
-									<span class="input-group-text bg-primary-light border-primary-light"><i class="fa fa-search text-primary"></i></span>
-									<input type="text" id="report-search" class="form-control" placeholder="Search reports..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
-								</div>
-							</div>
-						</div>
-						<div class="table-responsive rounded card-table">
-							<table class="table border-no table-striped" id="report-table">
+<div class="aw-card">
+    <div class="aw-card-header">
+        <div class="aw-card-title"><i class="fa fa-list" style="color:var(--primary);"></i> Reports List</div>
+        <div style="position:relative;">
+            <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
+            <input type="text" id="report-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search reports..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+        </div>
+    </div>
+    <div class="aw-card-body p-0">
+        <div class="table-responsive">
+            <table class="table-awlab" id="report-table">
 								<thead>
 									<tr>
 										<th class="d-none d-md-table-cell">ID</th>
@@ -404,23 +432,23 @@
 								<tbody>
                                      @forelse($reports as $report)
 									<tr>
-										<td class="fw-600 text-primary d-none d-md-table-cell">#{{ $report->id }}</td>
-										<td class="fw-600" data-label="Patient">{{ $report->patient->first_name }} {{ $report->patient->last_name }}</td>
-										<td class="d-none d-lg-table-cell text-fade" data-label="Doctor">{{ $report->doctor_name }}</td>
-										<td class="fs-12" data-label="Date">{{ \Carbon\Carbon::parse($report->report_released_on)->format('d-M-Y') }}</td>
+										<td class="d-none d-md-table-cell"><span class="badge-aw badge-blue">#{{ $report->id }}</span></td>
+										<td style="font-weight:600;" data-label="Patient">{{ $report->patient->first_name }} {{ $report->patient->last_name }}</td>
+										<td class="d-none d-lg-table-cell" style="color:var(--text-muted);" data-label="Doctor">{{ $report->doctor_name }}</td>
+										<td data-label="Date">{{ \Carbon\Carbon::parse($report->report_released_on)->format('d M Y') }}</td>
 										<td class="text-end">
-                                            <div class="d-flex justify-content-end gap-2">
-                                                <button class="btn btn-info-light btn-sm btn-view d-flex align-items-center justify-content-center" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-report" title="View / PDF" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-file-pdf-o"></i></button>
-                                                <button class="btn btn-primary-light btn-sm btn-edit d-flex align-items-center justify-content-center" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-report" title="Edit Report" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-edit"></i></button>
-                                                <button class="btn btn-danger-light btn-sm btn-delete d-flex align-items-center justify-content-center" data-id="{{ $report->id }}" title="Delete" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-trash"></i></button>
-                                            </div>
+                                             <div class="d-flex justify-content-end gap-2">
+                                                 <button class="btn-aw-outline btn-aw-sm btn-view" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-report" title="View / PDF" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-file-pdf"></i></button>
+                                                 <button class="btn-aw-primary btn-aw-sm btn-edit" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-report" title="Edit Report" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-edit"></i></button>
+                                                 <button class="btn-aw-danger btn-aw-sm btn-delete" data-id="{{ $report->id }}" title="Delete" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-trash"></i></button>
+                                             </div>
 										</td>
 									</tr>
                                     @empty
                                     <tr>
-                                        <td colspan="5" class="text-center py-50">
-                                            <i class="fa fa-file-text-o fa-3x text-fade d-block mb-10"></i>
-                                            <span class="text-fade fs-18">No test reports generated yet.</span>
+                                        <td colspan="5" class="text-center" style="padding:48px; color:var(--text-muted);">
+                                            <i class="fa fa-folder-open" style="font-size:40px; display:block; margin-bottom:12px; opacity:0.4;"></i>
+                                            <span style="font-size:15px;">No test reports generated yet.</span>
                                         </td>
                                     </tr>
                                     @endforelse
@@ -436,11 +464,11 @@
   </div>
 
   <!-- Add Report Modal -->
-  <div class="modal center-modal fade" id="modal-add-report" tabindex="-1">
+  <div class="modal fade modal-aw" id="modal-add-report" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog modal-xl">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Generate Lab Report</h5>
+			<h5 class="modal-title"><i class="fa fa-file-medical me-2"></i>Generate Lab Report</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
@@ -489,13 +517,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="form-label">Report Notes</label>
-							<textarea class="form-control" name="notes" rows="3" placeholder="Notes to show in the PDF"></textarea>
-						</div>
-					</div>
-					<div class="col-md-4">
+					<div class="col-md-8 col-12">
 						<div class="form-group">
 							<label class="form-label">Authorized Signature</label>
 							<select class="form-select report-signature-select" name="report_signature_id">
@@ -506,7 +528,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4 col-12">
 						<div class="form-group">
 							<label class="form-label">PIN</label>
 							<input type="password" class="form-control signature-pin-input" name="signature_pin" autocomplete="new-password" placeholder="PIN">
@@ -514,104 +536,144 @@
 					</div>
 				</div>
 
-                <div class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
+				<div class="row mt-2">
+					<div class="col-12">
+						<div class="form-group">
+							<label class="form-label">Report Notes</label>
+							<textarea class="form-control" name="notes" rows="2" placeholder="Notes to show in the PDF"></textarea>
+						</div>
+					</div>
+				</div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2 mb-3 border-bottom pb-2">
                     <h4 class="text-primary mb-0">Dynamic Test Results</h4>
                     <button type="button" class="btn btn-sm btn-success" id="btn-add-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
                 </div>
 				
                 <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3">
-                    <div class="col-md-2">Main Heading</div>
-                    <div class="col-md-2">Subheading</div>
-                    <div class="col-md-2">Parameter</div>
-                    <div class="col-md-1">Observed</div>
-                    <div class="col-md-1">Unit</div>
-                    <div class="col-md-3">Reference Value</div>
-                    <div class="col-md-1 text-center">Action</div>
+                    <div class="col-sub">Sub</div>
+                    <div class="col-unit-dept">Unit</div>
+                    <div class="col-param">Parameter</div>
+                    <div class="col-observed">Observed</div>
+                    <div class="col-unit-meas">Unit</div>
+                    <div class="col-ref">Reference Value</div>
+                    <div class="col-flag">Flag</div>
+                    <div class="col-action text-center">Action</div>
                 </div>
 
                 <div id="dynamic-tests-container">
                     <!-- Dynamic rows go here -->
                     <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded shadow-sm">
-                        <div class="col-md-2 col-12 mb-md-0 mb-3">
-                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Main Heading</div>
-                            <select class="form-select border-primary-light" name="test_category[]">
-                                <option value="">Main Heading</option>
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat->name }}">{{ $cat->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-sub col-12 mb-md-0 mb-3">
+                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Sub</div>
+                            <div class="input-group flex-nowrap">
+                                <select class="form-select report-category-select border-primary-light" name="test_category[]">
+                                    <option value="">Sub</option>
+                                    @foreach($categories as $cat)
+                                        <option value="{{ $cat->name }}" data-id="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                            </div>
                         </div>
-                        <div class="col-md-2 col-12 mb-md-0 mb-3 px-md-1">
-                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Subheading</div>
-                            <select class="form-select border-primary-light" name="test_subcategory[]">
-                                <option value="">None</option>
-                                @foreach($subCategories as $sub)
-                                    <option value="{{ $sub->name }}">{{ $sub->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-unit-dept col-12 mb-md-0 mb-3">
+                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Unit</div>
+                            <div class="input-group flex-nowrap">
+                                <select class="form-select report-subcategory-select border-primary-light" name="test_subcategory[]">
+                                    <option value="">None</option>
+                                    @foreach($subCategories as $sub)
+                                        <option value="{{ $sub->name }}" data-id="{{ $sub->id }}">{{ $sub->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                            </div>
                         </div>
-                        <div class="col-md-2 col-12 mb-md-0 mb-3">
+                        <div class="col-param col-12 mb-md-0 mb-3">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-primary mb-1">Parameter</div>
-                            <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required>
-                                <option value="">-- Select Test --</option>
-                                @foreach($tests as $test)
-                                    <option value="{{ $test->name }}" 
-                                        data-unit="{{ $test->parameter->unit ?? '' }}"
-                                        data-male-ref="{{ $test->parameter->male_reference ?? '' }}"
-                                        data-female-ref="{{ $test->parameter->female_reference ?? '' }}"
-                                        data-male-min="{{ $test->parameter->male_min ?? '' }}"
-                                        data-male-max="{{ $test->parameter->male_max ?? '' }}"
-                                        data-female-min="{{ $test->parameter->female_min ?? '' }}"
-	                                        data-female-max="{{ $test->parameter->female_max ?? '' }}"
-	                                        data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
-	                                        data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
-		                                        data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
-	                                        data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
-                                        data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
-                                        data-normal="{{ $test->description }}">{{ $test->name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="input-group flex-nowrap">
+                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required>
+                                    <option value="">-- Select Test --</option>
+                                    @foreach($tests as $test)
+                                        <option value="{{ $test->name }}" 
+                                            data-id="{{ $test->id }}"
+                                            data-price="{{ $test->price }}"
+                                            data-unit="{{ $test->parameter->unit ?? '' }}"
+                                            data-male-ref="{{ $test->parameter->male_reference ?? '' }}"
+                                            data-female-ref="{{ $test->parameter->female_reference ?? '' }}"
+                                            data-male-min="{{ $test->parameter->male_min ?? '' }}"
+                                            data-male-max="{{ $test->parameter->male_max ?? '' }}"
+                                            data-female-min="{{ $test->parameter->female_min ?? '' }}"
+                                            data-female-max="{{ $test->parameter->female_max ?? '' }}"
+                                            data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
+                                            data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
+                                            data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+                                            data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
+                                            data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
+                                            data-normal="{{ $test->description }}">{{ $test->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                            </div>
                         </div>
-                        <div class="col-md-1 col-6 mb-md-0 mb-2 px-1">
+                        <div class="col-observed col-4 mb-md-0 mb-2 px-1">
                             <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
                             <input type="text" class="form-control observed-value-input" name="observed_value[]" list="list-observed" placeholder="Observed" required>
                         </div>
-                        <div class="col-md-1 col-6 mb-md-0 mb-2 px-1">
+                        <div class="col-unit-meas col-8 mb-md-0 mb-2 px-1">
                             <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
-                            <select class="form-select" name="test_unit[]">
-                                <option value="">Unit</option>
-                                @foreach($units as $u)
-                                    <option value="{{ $u->name }}">{{ $u->name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="input-group flex-nowrap">
+                                <select class="form-select report-unit-select" name="test_unit[]">
+                                    <option value="">Unit</option>
+                                    @foreach($units as $u)
+                                        <option value="{{ $u->name }}" data-id="{{ $u->id }}">{{ $u->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                            </div>
                         </div>
-                        <div class="col-md-3 col-12 mb-md-0 mb-2 px-1">
+                        <div class="col-ref col-12 mb-md-0 mb-2 px-1">
                             <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Reference Value</div>
                             <input type="text" class="form-control normal-val-dynamic" name="normal_value[]" placeholder="Reference Interval">
                             <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="">
-                            <input type="hidden" class="flag-selector" name="test_flag[]" value="">
                         </div>
-                        <div class="col-md-1 col-2 text-center pt-md-0 pt-20">
-                            <button type="button" class="btn btn-danger-light btn-sm remove-row mt-md-0 mt-2" title="Remove Test"><i class="fa fa-trash"></i></button>
+                        <div class="col-flag col-6 mb-md-0 mb-2 px-1">
+                            <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
+                            <select class="form-select flag-selector border-warning-light" name="test_flag[]">
+                                <option value="">-</option>
+                                <option value="H">H</option>
+                                <option value="L">L</option>
+                                <option value="N">N</option>
+                                <option value="B">B</option>
+                                <option value="P">P</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                        <div class="col-action col-6 text-end pt-md-0 pt-2">
+                            <div class="d-md-none fw-bold fs-12 mb-1 text-danger">Action</div>
+                            <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Test"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-save-report">Generate Report</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-report">Generate Report</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- Edit Report Modal -->
-  <div class="modal center-modal fade" id="modal-edit-report" tabindex="-1">
+  <div class="modal fade modal-aw" id="modal-edit-report" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog modal-xl">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Edit Lab Report</h5>
+			<h5 class="modal-title"><i class="fa fa-edit me-2"></i>Edit Lab Report</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
@@ -661,13 +723,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="form-label">Report Notes</label>
-							<textarea class="form-control" name="notes" id="edit-report-notes" rows="3" placeholder="Notes to show in the PDF"></textarea>
-						</div>
-					</div>
-					<div class="col-md-4">
+					<div class="col-md-8 col-12">
 						<div class="form-group">
 							<label class="form-label">Authorized Signature</label>
 							<select class="form-select report-signature-select" name="report_signature_id" id="edit-report-signature-id">
@@ -678,7 +734,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4 col-12">
 						<div class="form-group">
 							<label class="form-label">PIN</label>
 							<input type="password" class="form-control signature-pin-input" name="signature_pin" id="edit-signature-pin" autocomplete="new-password" placeholder="Required">
@@ -686,19 +742,29 @@
 					</div>
 				</div>
 
-                <div class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
+				<div class="row mt-2">
+					<div class="col-12">
+						<div class="form-group">
+							<label class="form-label">Report Notes</label>
+							<textarea class="form-control" name="notes" id="edit-report-notes" rows="2" placeholder="Notes to show in the PDF"></textarea>
+						</div>
+					</div>
+				</div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2 mb-3 border-bottom pb-2">
                     <h4 class="text-primary mb-0">Dynamic Test Results</h4>
                     <button type="button" class="btn btn-sm btn-success" id="btn-add-edit-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
                 </div>
 				
                 <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3">
-                    <div class="col-md-2">Main Heading</div>
-                    <div class="col-md-2">Subheading</div>
-                    <div class="col-md-2">Parameter</div>
-                    <div class="col-md-1">Observed</div>
-                    <div class="col-md-1">Unit</div>
-                    <div class="col-md-3">Reference Value</div>
-                    <div class="col-md-1 text-center">Action</div>
+                    <div class="col-sub">Sub</div>
+                    <div class="col-unit-dept">Unit</div>
+                    <div class="col-param">Parameter</div>
+                    <div class="col-observed">Observed</div>
+                    <div class="col-unit-meas">Unit</div>
+                    <div class="col-ref">Reference Value</div>
+                    <div class="col-flag">Flag</div>
+                    <div class="col-action text-center">Action</div>
                 </div>
 
                 <div id="edit-dynamic-tests-container">
@@ -718,16 +784,16 @@
                 </datalist>
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-update-report">Update Report</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-report">Update Report</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- Premium PDF Viewer Modal -->
-  <div class="modal fade" id="modal-view-report" tabindex="-1">
+  <div class="modal fade" id="modal-view-report" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog modal-fullscreen">
 		<div class="modal-content border-0">
 		  <div class="modal-body p-0">
@@ -820,7 +886,7 @@
   <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  @push('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
@@ -832,6 +898,7 @@
       }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  @endpush
 
   <!-- Datalist for Auto-complete -->
   <datalist id="standard-tests-list">
@@ -845,11 +912,29 @@
       <option value="LDL / HDL Ratio">
   </datalist>
 
+  @push('scripts')
   <script>
 	  $(document).ready(function() {
 		  $.ajaxSetup({
 			  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 		  });
+
+          // Fix overlapping modal backdrops z-index
+          $(document).on('show.bs.modal', '.modal', function () {
+              const zIndex = 1040 + (10 * $('.modal:visible').length);
+              $(this).css('z-index', zIndex);
+              setTimeout(function() {
+                  $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+              }, 0);
+          });
+          $(document).on('hidden.bs.modal', '.modal', function () {
+              if ($('.modal:visible').length > 0) {
+                  // Restore modal-open class to body if another modal is still open
+                  setTimeout(function() {
+                      $('body').addClass('modal-open');
+                  }, 0);
+              }
+          });
 
 		  // Live Search for Reports
 		  $("#report-search").on("keyup", function() {
@@ -876,68 +961,98 @@
 
           // Dynamic Rows Logic (Refined Alignment & Auto-fill)
           const trTemplate = `
-            <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded">
-                <div class="col-md-2 col-12 mb-md-0 mb-2">
-                    <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Main Heading</div>
-                    <select class="form-select" name="test_category[]">
-                        <option value="">Main Heading</option>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->name }}">{{ $cat->name }}</option>
-                        @endforeach
-                    </select>
+            <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded shadow-sm">
+                <div class="col-sub col-12 mb-md-0 mb-2">
+                    <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Sub</div>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select report-category-select" name="test_category[]">
+                            <option value="">Sub</option>
+                            @foreach($categories as $cat)
+                                <option value="{{ $cat->name }}" data-id="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                    </div>
                 </div>
-                <div class="col-md-2 col-12 mb-md-0 mb-2 px-1">
-                    <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Subheading</div>
-                    <select class="form-select" name="test_subcategory[]">
-                        <option value="">None</option>
-                        @foreach($subCategories as $sub)
-                            <option value="{{ $sub->name }}">{{ $sub->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="col-unit-dept col-12 mb-md-0 mb-2 px-1">
+                    <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select report-subcategory-select" name="test_subcategory[]">
+                            <option value="">None</option>
+                            @foreach($subCategories as $sub)
+                                <option value="{{ $sub->name }}" data-id="{{ $sub->id }}">{{ $sub->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                    </div>
                 </div>
-                <div class="col-md-2 col-12 mb-md-0 mb-2">
+                <div class="col-param col-12 mb-md-0 mb-2">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-primary">Parameter</div>
-                    <select class="form-select test-selector-dynamic" name="test_name[]" required>
-                        <option value="">-- Select Test --</option>
-                        @foreach($tests as $test)
-                            <option value="{{ $test->name }}" 
-                                data-unit="{{ $test->parameter->unit ?? '' }}"
-                                data-male-ref="{{ $test->parameter->male_reference ?? '' }}"
-                                data-female-ref="{{ $test->parameter->female_reference ?? '' }}"
-                                data-male-min="{{ $test->parameter->male_min ?? '' }}"
-                                data-male-max="{{ $test->parameter->male_max ?? '' }}"
-                                data-female-min="{{ $test->parameter->female_min ?? '' }}"
-                                data-female-max="{{ $test->parameter->female_max ?? '' }}"
-                                data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
-                                data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
-                                data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
-                                data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
-                                data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
-                                data-normal="{{ $test->description }}">{{ $test->name }}</option>
-                        @endforeach
-                    </select>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select test-selector-dynamic" name="test_name[]" required>
+                            <option value="">-- Select Test --</option>
+                            @foreach($tests as $test)
+                                <option value="{{ $test->name }}" 
+                                    data-id="{{ $test->id }}"
+                                    data-price="{{ $test->price }}"
+                                    data-unit="{{ $test->parameter->unit ?? '' }}"
+                                    data-male-ref="{{ $test->parameter->male_reference ?? '' }}"
+                                    data-female-ref="{{ $test->parameter->female_reference ?? '' }}"
+                                    data-male-min="{{ $test->parameter->male_min ?? '' }}"
+                                    data-male-max="{{ $test->parameter->male_max ?? '' }}"
+                                    data-female-min="{{ $test->parameter->female_min ?? '' }}"
+                                    data-female-max="{{ $test->parameter->female_max ?? '' }}"
+                                    data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
+                                    data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
+                                    data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+                                    data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
+                                    data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
+                                    data-normal="{{ $test->description }}">{{ $test->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                    </div>
                 </div>
-                <div class="col-md-1 col-6 mb-md-0 mb-2 px-1">
+                <div class="col-observed col-4 mb-md-0 mb-2 px-1">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
                     <input type="text" class="form-control observed-value-input" name="observed_value[]" list="list-observed" placeholder="Observed" required>
                 </div>
-                <div class="col-md-1 col-6 mb-md-0 mb-2 px-1">
+                <div class="col-unit-meas col-8 mb-md-0 mb-2 px-1">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
-                    <select class="form-select" name="test_unit[]">
-                        <option value="">Unit</option>
-                        @foreach($units as $u)
-                            <option value="{{ $u->name }}">{{ $u->name }}</option>
-                        @endforeach
-                    </select>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select report-unit-select" name="test_unit[]">
+                            <option value="">Unit</option>
+                            @foreach($units as $u)
+                                <option value="{{ $u->name }}" data-id="{{ $u->id }}">{{ $u->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                    </div>
                 </div>
-                <div class="col-md-3 col-12 mb-md-0 mb-3 px-md-1">
+                <div class="col-ref col-12 mb-md-0 mb-3 px-md-1">
                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Reference Value</div>
                     <input type="text" class="form-control normal-val-dynamic border-info-light" name="normal_value[]" placeholder="Reference Interval">
                     <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="">
-	                    <input type="hidden" class="flag-selector" name="test_flag[]" value="">
                 </div>
-                <div class="col-md-1 col-2 text-center pt-md-0 pt-20">
-                    <button type="button" class="btn btn-danger-light btn-sm remove-row mt-md-0 mt-2" title="Remove Test"><i class="fa fa-trash"></i></button>
+                <div class="col-flag col-6 mb-md-0 mb-2 px-1">
+                    <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
+                    <select class="form-select flag-selector border-warning-light" name="test_flag[]">
+                        <option value="">-</option>
+                        <option value="H">H</option>
+                        <option value="L">L</option>
+                        <option value="N">N</option>
+                        <option value="B">B</option>
+                        <option value="P">P</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+                <div class="col-action col-6 text-end pt-md-0 pt-2">
+                    <div class="d-md-none fw-bold fs-12 mb-1 text-danger">Action</div>
+                    <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Test"><i class="fa fa-trash"></i></button>
                 </div>
             </div>`;
 
@@ -1128,6 +1243,318 @@
           fetchReportDoctors();
           // =============================================
 
+          // =============================================
+          // CATEGORY SELECT MANAGEMENT
+          // =============================================
+          function fetchReportCategories(selectedValue = null) {
+              $.get("{{ route('categories.index') }}", function(data) {
+                  let options = '<option value="">Sub</option>';
+                  data.forEach(function(cat) {
+                      options += `<option value="${cat.name}" data-id="${cat.id}">${cat.name}</option>`;
+                  });
+                  $('.report-category-select').each(function() {
+                      let currentVal = $(this).val();
+                      $(this).html(options);
+                      if (selectedValue && $(this).hasClass('active-category-select')) {
+                          $(this).val(selectedValue);
+                          $(this).removeClass('active-category-select');
+                      } else {
+                          $(this).val(currentVal);
+                      }
+                  });
+              });
+          }
+
+          $(document).on('click', '.btn-add-report-category', function() {
+              $('.report-category-select').removeClass('active-category-select');
+              $(this).siblings('.report-category-select').addClass('active-category-select');
+              $('#modal-add-report-category').modal('show');
+          });
+
+          $(document).on('click', '.btn-edit-report-category', function() {
+              let select = $(this).siblings('.report-category-select');
+              let selectedOption = select.find('option:selected');
+              let catId = selectedOption.data('id');
+              if (!catId) { alert('Please select a valid category to edit.'); return; }
+              $('.report-category-select').removeClass('active-category-select');
+              select.addClass('active-category-select');
+              
+              $('#edit-report-cat-id').val(catId);
+              $('#edit-report-cat-name').val(selectedOption.val());
+              $('#modal-edit-report-category').modal('show');
+          });
+
+          $('#btn-save-report-category').click(function() {
+              let formData = $('#form-add-report-category').serialize();
+              $.post("{{ route('categories.store') }}", formData, function(response) {
+                  alert(response.success);
+                  $('#modal-add-report-category').modal('hide');
+                  $('#form-add-report-category')[0].reset();
+                  fetchReportCategories(response.category.name);
+              }).fail(function(xhr) {
+                  alert('Error: ' + (xhr.responseJSON.message || 'Failed to save category.'));
+              });
+          });
+
+          $('#btn-update-report-category').click(function() {
+              let catId = $('#edit-report-cat-id').val();
+              $.ajax({
+                  url: "/categories/" + catId,
+                  type: 'PUT',
+                  data: $('#form-edit-report-category').serialize(),
+                  success: function(response) {
+                      alert(response.success);
+                      $('#modal-edit-report-category').modal('hide');
+                      fetchReportCategories(response.category.name);
+                  },
+                  error: function(xhr) {
+                      alert('Error: ' + (xhr.responseJSON.message || 'Failed to update category.'));
+                  }
+              });
+          });
+          // =============================================
+
+          // =============================================
+          // SUBCATEGORY SELECT MANAGEMENT
+          // =============================================
+          function fetchReportSubCategories(selectedValue = null) {
+              $.get("{{ route('sub-categories.index') }}", function(data) {
+                  let options = '<option value="">None</option>';
+                  data.forEach(function(sub) {
+                      options += `<option value="${sub.name}" data-id="${sub.id}">${sub.name}</option>`;
+                  });
+                  $('.report-subcategory-select').each(function() {
+                      let currentVal = $(this).val();
+                      $(this).html(options);
+                      if (selectedValue && $(this).hasClass('active-subcategory-select')) {
+                          $(this).val(selectedValue);
+                          $(this).removeClass('active-subcategory-select');
+                      } else {
+                          $(this).val(currentVal);
+                      }
+                  });
+              });
+          }
+
+          $(document).on('click', '.btn-add-report-subcategory', function() {
+              $('.report-subcategory-select').removeClass('active-subcategory-select');
+              $(this).siblings('.report-subcategory-select').addClass('active-subcategory-select');
+              $('#modal-add-report-subcategory').modal('show');
+          });
+
+          $(document).on('click', '.btn-edit-report-subcategory', function() {
+              let select = $(this).siblings('.report-subcategory-select');
+              let selectedOption = select.find('option:selected');
+              let subId = selectedOption.data('id');
+              if (!subId) { alert('Please select a valid sub-category to edit.'); return; }
+              $('.report-subcategory-select').removeClass('active-subcategory-select');
+              select.addClass('active-subcategory-select');
+              
+              $('#edit-report-sub-id').val(subId);
+              $('#edit-report-sub-name').val(selectedOption.val());
+              $('#modal-edit-report-subcategory').modal('show');
+          });
+
+          $('#btn-save-report-subcategory').click(function() {
+              let formData = $('#form-add-report-subcategory').serialize();
+              $.post("{{ route('sub-categories.store') }}", formData, function(response) {
+                  alert(response.success);
+                  $('#modal-add-report-subcategory').modal('hide');
+                  $('#form-add-report-subcategory')[0].reset();
+                  fetchReportSubCategories(response.subCategory.name);
+              }).fail(function(xhr) {
+                  alert('Error: ' + (xhr.responseJSON.message || 'Failed to save sub-category.'));
+              });
+          });
+
+          $('#btn-update-report-subcategory').click(function() {
+              let subId = $('#edit-report-sub-id').val();
+              $.ajax({
+                  url: "/sub-categories/" + subId,
+                  type: 'PUT',
+                  data: $('#form-edit-report-subcategory').serialize(),
+                  success: function(response) {
+                      alert(response.success);
+                      $('#modal-edit-report-subcategory').modal('hide');
+                      fetchReportSubCategories(response.subCategory.name);
+                  },
+                  error: function(xhr) {
+                      alert('Error: ' + (xhr.responseJSON.message || 'Failed to update sub-category.'));
+                  }
+              });
+          });
+          // =============================================
+
+          // =============================================
+          // TEST/PARAMETER SELECT MANAGEMENT
+          // =============================================
+          function fetchReportTests(selectedValue = null) {
+              $.get("{{ route('api.tests') }}", function(data) {
+                  let options = '<option value="">-- Select Test --</option>';
+                  data.forEach(function(test) {
+                      let param = test.parameter || {};
+                      let refJson = '[]';
+                      if(test.reference_intervals) {
+                          let refs = test.reference_intervals.map(r => ({
+                              gender: r.gender, age_min: r.age_min, age_max: r.age_max, reference_text: r.reference_text, min_value: r.min_value, max_value: r.max_value
+                          }));
+                          // sanitize quotes
+                          refJson = JSON.stringify(refs).replace(/'/g, "&#39;");
+                      }
+                      options += `<option value="${test.name}" 
+                          data-id="${test.id}"
+                          data-price="${test.price || 0}"
+                          data-unit="${param.unit || ''}"
+                          data-male-ref="${param.male_reference || ''}"
+                          data-female-ref="${param.female_reference || ''}"
+                          data-male-min="${param.male_min || ''}"
+                          data-male-max="${param.male_max || ''}"
+                          data-female-min="${param.female_min || ''}"
+                          data-female-max="${param.female_max || ''}"
+                          data-critical-low="${param.critical_low || ''}"
+                          data-critical-high="${param.critical_high || ''}"
+                          data-reference-intervals='${refJson}'
+                          data-is-immunoassay="${param.is_immunoassay || 0}"
+                          data-bio-ref="${param.biological_reference || ''}"
+                          data-normal="${test.description || ''}">${test.name}</option>`;
+                  });
+                  options += '<option value="Immunoassay Test">Immunoassay Test (Auto-calc)</option>';
+
+                  $('.test-selector-dynamic').each(function() {
+                      let currentVal = $(this).val();
+                      $(this).html(options);
+                      if (selectedValue && $(this).hasClass('active-test-select')) {
+                          $(this).val(selectedValue);
+                          $(this).removeClass('active-test-select');
+                          $(this).trigger('change'); // trigger auto-fill
+                      } else {
+                          $(this).val(currentVal);
+                      }
+                  });
+              });
+          }
+
+          $(document).on('click', '.btn-add-report-test', function() {
+              $('.test-selector-dynamic').removeClass('active-test-select');
+              $(this).siblings('.test-selector-dynamic').addClass('active-test-select');
+              $('#modal-add-report-test').modal('show');
+          });
+
+          $(document).on('click', '.btn-edit-report-test', function() {
+              let select = $(this).siblings('.test-selector-dynamic');
+              let selectedOption = select.find('option:selected');
+              let testId = selectedOption.data('id');
+              if (!testId) { alert('Please select a valid parameter to edit.'); return; }
+              $('.test-selector-dynamic').removeClass('active-test-select');
+              select.addClass('active-test-select');
+              
+              $('#edit-report-test-id').val(testId);
+              $('#edit-report-test-name').val(selectedOption.val());
+              $('#edit-report-test-unit').val(selectedOption.data('unit'));
+              $('#edit-report-test-bio').val(selectedOption.data('bio-ref'));
+              $('#modal-edit-report-test').modal('show');
+          });
+
+          $('#btn-save-report-test').click(function() {
+              let formData = $('#form-add-report-test').serialize();
+              $.post("{{ route('tests.quick-store') }}", formData, function(response) {
+                  alert(response.success);
+                  $('#modal-add-report-test').modal('hide');
+                  $('#form-add-report-test')[0].reset();
+                  fetchReportTests(response.test.name);
+              }).fail(function(xhr) {
+                  alert('Error: ' + (xhr.responseJSON.message || 'Failed to save parameter.'));
+              });
+          });
+
+          $('#btn-update-report-test').click(function() {
+              let testId = $('#edit-report-test-id').val();
+              $.ajax({
+                  url: "/tests/quick-update/" + testId,
+                  type: 'PUT',
+                  data: $('#form-edit-report-test').serialize(),
+                  success: function(response) {
+                      alert(response.success);
+                      $('#modal-edit-report-test').modal('hide');
+                      fetchReportTests(response.test.name);
+                  },
+                  error: function(xhr) {
+                      alert('Error: ' + (xhr.responseJSON.message || 'Failed to update parameter.'));
+                  }
+              });
+          });
+
+          // =============================================
+          // UNIT SELECT MANAGEMENT
+          // =============================================
+          function fetchReportUnits(selectedValue = null) {
+              $.get("{{ route('units.index') }}", function(data) {
+                  let options = '<option value="">Unit</option>';
+                  data.forEach(function(u) {
+                      options += `<option value="${u.name}" data-id="${u.id}">${u.name}</option>`;
+                  });
+                  $('.report-unit-select').each(function() {
+                      let currentVal = $(this).val();
+                      $(this).html(options);
+                      if (selectedValue && $(this).hasClass('active-unit-select')) {
+                          $(this).val(selectedValue);
+                          $(this).removeClass('active-unit-select');
+                      } else {
+                          $(this).val(currentVal);
+                      }
+                  });
+              });
+          }
+
+          $(document).on('click', '.btn-add-report-unit', function() {
+              $('.report-unit-select').removeClass('active-unit-select');
+              $(this).siblings('.report-unit-select').addClass('active-unit-select');
+              $('#modal-add-report-unit').modal('show');
+          });
+
+          $(document).on('click', '.btn-edit-report-unit', function() {
+              let select = $(this).siblings('.report-unit-select');
+              let selectedOption = select.find('option:selected');
+              let unitId = selectedOption.data('id');
+              if (!unitId) { alert('Please select a valid unit to edit.'); return; }
+              $('.report-unit-select').removeClass('active-unit-select');
+              select.addClass('active-unit-select');
+              
+              $('#edit-report-unit-id').val(unitId);
+              $('#edit-report-unit-name').val(selectedOption.val());
+              $('#modal-edit-report-unit').modal('show');
+          });
+
+          $('#btn-save-report-unit').click(function() {
+              let formData = $('#form-add-report-unit').serialize();
+              $.post("{{ route('units.store') }}", formData, function(response) {
+                  alert(response.success);
+                  $('#modal-add-report-unit').modal('hide');
+                  $('#form-add-report-unit')[0].reset();
+                  fetchReportUnits(response.unit.name);
+              }).fail(function(xhr) {
+                  alert('Error: ' + (xhr.responseJSON.message || 'Failed to save unit.'));
+              });
+          });
+
+          $('#btn-update-report-unit').click(function() {
+              let unitId = $('#edit-report-unit-id').val();
+              $.ajax({
+                  url: "/units/" + unitId,
+                  type: 'PUT',
+                  data: $('#form-edit-report-unit').serialize(),
+                  success: function(response) {
+                      alert(response.success);
+                      $('#modal-edit-report-unit').modal('hide');
+                      fetchReportUnits(response.unit.name);
+                  },
+                  error: function(xhr) {
+                      alert('Error: ' + (xhr.responseJSON.message || 'Failed to update unit.'));
+                  }
+              });
+          });
+          // =============================================
+
 		  // Save Report
 		  $('#btn-save-report').click(function() {
               if(!$('#form-add-report')[0].checkValidity()) {
@@ -1168,14 +1595,14 @@
                   
                   if(data.results && data.results.length > 0) {
                       data.results.forEach(item => {
-                          let catOptions = `<option value="">Category</option>`;
+                          let catOptions = `<option value="">Sub</option>`;
                           @foreach($categories as $cat)
-                            catOptions += `<option value="{{ $cat->name }}" ${item.category == '{{ $cat->name }}' ? 'selected' : ''}>{{ $cat->name }}</option>`;
+                            catOptions += `<option value="{{ $cat->name }}" data-id="{{ $cat->id }}" ${item.category == '{{ $cat->name }}' ? 'selected' : ''}>{{ $cat->name }}</option>`;
                           @endforeach
 
-                          let subOptions = `<option value="">Sub-Category</option>`;
+                          let subOptions = `<option value="">Unit</option>`;
                           @foreach($subCategories as $sub)
-                            subOptions += `<option value="{{ $sub->name }}" ${item.subcategory == '{{ $sub->name }}' ? 'selected' : ''}>{{ $sub->name }}</option>`;
+                            subOptions += `<option value="{{ $sub->name }}" data-id="{{ $sub->id }}" ${item.subcategory == '{{ $sub->name }}' ? 'selected' : ''}>{{ $sub->name }}</option>`;
                           @endforeach
 
                            let testOptions = `<option value="">-- Select Test --</option>`;
@@ -1187,11 +1614,11 @@
                                 data-male-min="{{ $test->parameter->male_min ?? '' }}"
                                 data-male-max="{{ $test->parameter->male_max ?? '' }}"
                                 data-female-min="{{ $test->parameter->female_min ?? '' }}"
-	                                data-female-max="{{ $test->parameter->female_max ?? '' }}"
-	                                data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
-	                                data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
-		                                data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
-	                                data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
+                                data-female-max="{{ $test->parameter->female_max ?? '' }}"
+                                data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
+                                data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
+                                data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+                                data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                 data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
                                 data-normal="{{ $test->description }}" ${item.name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
                            @endforeach
@@ -1203,47 +1630,76 @@
                              <option value="N" ${item.flag == 'N' ? 'selected' : ''}>N</option>
                              <option value="B" ${item.flag == 'B' ? 'selected' : ''}>B</option>
                              <option value="P" ${item.flag == 'P' ? 'selected' : ''}>P</option>
+                             <option value="C" ${item.flag == 'C' ? 'selected' : ''}>C</option>
                            `;
 
-                           container.append(`
-                             <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom">
-                                 <div class="col-md-2 col-12 mb-md-0 mb-2">
-                                     <select class="form-select" name="test_category[]">
-                                         ${catOptions}
-                                     </select>
+                            container.append(`
+                             <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded shadow-sm">
+                                 <div class="col-sub col-12 mb-md-0 mb-2">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Sub</div>
+                                     <div class="input-group flex-nowrap">
+                                         <select class="form-select report-category-select" name="test_category[]">
+                                             ${catOptions}
+                                         </select>
+                                         <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                     </div>
                                  </div>
-                                 <div class="col-md-2 col-12 mb-md-0 mb-2 px-1">
-                                     <select class="form-select" name="test_subcategory[]">
-                                         ${subOptions}
-                                     </select>
+                                 <div class="col-unit-dept col-12 mb-md-0 mb-2 px-1">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
+                                     <div class="input-group flex-nowrap">
+                                         <select class="form-select report-subcategory-select" name="test_subcategory[]">
+                                             ${subOptions}
+                                         </select>
+                                         <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                     </div>
                                  </div>
-                                 <div class="col-md-2 col-12 mb-md-0 mb-2 px-1">
-                                     <select class="form-select test-selector-dynamic" name="test_name[]" required>
-                                         ${testOptions}
-                                         <option value="Immunoassay Test" ${item.name == 'Immunoassay Test' ? 'selected' : ''}>Immunoassay Test (Auto-calc)</option>
-                                     </select>
+                                 <div class="col-param col-12 mb-md-0 mb-2 px-1">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-primary">Parameter</div>
+                                     <div class="input-group flex-nowrap">
+                                         <select class="form-select test-selector-dynamic" name="test_name[]" required>
+                                             ${testOptions}
+                                             <option value="Immunoassay Test" ${item.name == 'Immunoassay Test' ? 'selected' : ''}>Immunoassay Test (Auto-calc)</option>
+                                         </select>
+                                         <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                     </div>
                                  </div>
-                                 <div class="col-md-1 col-6 mb-md-0 mb-2 px-1">
+                                 <div class="col-observed col-4 mb-md-0 mb-2 px-1">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
                                      <input type="text" class="form-control observed-value-input" name="observed_value[]" value="${item.observed_value || ''}" required placeholder="Observed" list="list-observed">
                                  </div>
-                                 <div class="col-md-1 col-6 mb-md-0 mb-2 px-1">
-                                     <select class="form-select" name="test_unit[]">
-                                         <option value="">Unit</option>
-                                         @foreach($units as $u)
-                                             <option value="{{ $u->name }}" ${item.unit == '{{ $u->name }}' ? 'selected' : ''}>{{ $u->name }}</option>
-                                         @endforeach
-                                     </select>
+                                 <div class="col-unit-meas col-8 mb-md-0 mb-2 px-1">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
+                                     <div class="input-group flex-nowrap">
+                                         <select class="form-select report-unit-select" name="test_unit[]">
+                                             <option value="">Unit</option>
+                                             @foreach($units as $u)
+                                                 <option value="{{ $u->name }}" data-id="{{ $u->id }}" ${item.unit == '{{ $u->name }}' ? 'selected' : ''}>{{ $u->name }}</option>
+                                             @endforeach
+                                         </select>
+                                         <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                     </div>
                                  </div>
-                                 <div class="col-md-3 col-12 mb-md-0 mb-2 px-1">
+                                 <div class="col-ref col-12 mb-md-0 mb-2 px-1">
+                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Reference Value</div>
                                      <input type="text" class="form-control normal-val-dynamic" name="normal_value[]" value="${item.normal_value || item.biological_reference || ''}" placeholder="Reference Value">
                                      <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="${item.biological_reference || ''}">
-                                     <input type="hidden" class="flag-selector" name="test_flag[]" value="${item.flag || ''}">
                                  </div>
-                                 <div class="col-md-1 col-2 text-center">
-                                     <button type="button" class="btn btn-danger-light btn-sm remove-row" title="Remove Test"><i class="fa fa-trash"></i></button>
+                                 <div class="col-flag col-6 mb-md-0 mb-2 px-1">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
+                                     <select class="form-select flag-selector border-warning-light" name="test_flag[]">
+                                         ${flagOptions}
+                                     </select>
+                                 </div>
+                                 <div class="col-action col-6 text-end pt-md-0 pt-2">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-danger">Action</div>
+                                     <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Test"><i class="fa fa-trash"></i></button>
                                  </div>
                              </div>
-                           `);
+                            `);
                       });
                   } else {
                       container.append(trTemplate);
@@ -1843,50 +2299,51 @@
 
 	  });
   </script>
+  @endpush
 
   <!-- Add Report Doctor Modal -->
-  <div class="modal center-modal fade" id="modal-add-report-doctor" tabindex="-1" style="z-index: 1070;">
-	  <div class="modal-dialog modal-sm">
+  <div class="modal fade modal-aw" id="modal-add-report-doctor" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Add New Doctor</h5>
+			<h5 class="modal-title"><i class="fa fa-user-md me-2"></i>Add New Doctor</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 			<form id="form-add-report-doctor">
 				@csrf
 				<div class="form-group">
-					<label class="form-label">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" name="name" required placeholder="e.g. Dr. John Doe">
+					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Qualification</label>
-					<input type="text" class="form-control" name="qualification" placeholder="e.g. MBBS, MD">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Phone No</label>
-					<input type="text" class="form-control" name="phone" placeholder="Phone Number">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Email</label>
-					<input type="email" class="form-control" name="email" placeholder="Email Address" autocomplete="new-password">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Email</label>
+					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password">
 				</div>
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-save-report-doctor">Save Doctor</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-report-doctor">Save Doctor</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- Edit Report Doctor Modal -->
-  <div class="modal center-modal fade" id="modal-edit-report-doctor" tabindex="-1" style="z-index: 1070;">
-	  <div class="modal-dialog modal-sm">
+  <div class="modal fade modal-aw" id="modal-edit-report-doctor" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Edit Doctor</h5>
+			<h5 class="modal-title"><i class="fa fa-user-md me-2"></i>Edit Doctor</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
@@ -1894,26 +2351,246 @@
 				@csrf
 				<input type="hidden" name="doctor_id" id="edit-report-doc-id">
 				<div class="form-group">
-					<label class="form-label">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" name="name" id="edit-report-doc-name" required>
+					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-doc-name" required>
 				</div>
-				<div class="form-group">
-					<label class="form-label">Qualification</label>
-					<input type="text" class="form-control" name="qualification" id="edit-report-doc-qualification">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" id="edit-report-doc-qualification">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Phone No</label>
-					<input type="text" class="form-control" name="phone" id="edit-report-doc-phone">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" id="edit-report-doc-phone">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Email</label>
-					<input type="email" class="form-control" name="email" id="edit-report-doc-email" autocomplete="new-password">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Email</label>
+					<input type="email" class="form-control-aw" name="email" id="edit-report-doc-email" autocomplete="new-password">
 				</div>
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-update-report-doctor">Update Doctor</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-report-doctor">Update Doctor</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div class="modal fade modal-aw" id="modal-add-report-category" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-folder-plus me-2"></i>Add New Category</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-add-report-category">
+				@csrf
+				<div class="form-group">
+					<label class="form-label-aw">Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. BIOCHEMISTRY">
+				</div>
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-report-category">Save Category</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Edit Category Modal -->
+  <div class="modal fade modal-aw" id="modal-edit-report-category" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-folder-open me-2"></i>Edit Category</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-edit-report-category">
+				@csrf
+				<div class="form-group">
+					<label class="form-label-aw">Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-cat-name" required>
+				</div>
+                <input type="hidden" name="category_id" id="edit-report-cat-id">
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-report-category">Update Category</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Add SubCategory Modal -->
+  <div class="modal fade modal-aw" id="modal-add-report-subcategory" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-folder-plus me-2"></i>Add New Sub-Category</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-add-report-subcategory">
+				@csrf
+				<div class="form-group">
+					<label class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. SEROLOGY">
+				</div>
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-report-subcategory">Save Sub-Category</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Edit SubCategory Modal -->
+  <div class="modal fade modal-aw" id="modal-edit-report-subcategory" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-folder-open me-2"></i>Edit Sub-Category</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-edit-report-subcategory">
+				@csrf
+				<div class="form-group">
+					<label class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-sub-name" required>
+				</div>
+                <input type="hidden" name="subcategory_id" id="edit-report-sub-id">
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-report-subcategory">Update Sub-Category</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Add Parameter Modal -->
+  <div class="modal fade modal-aw" id="modal-add-report-test" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-flask me-2"></i>Add New Parameter</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-add-report-test">
+				@csrf
+				<div class="form-group mb-3">
+					<label class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Glucose Fasting">
+				</div>
+				<div class="form-group mb-3">
+					<label class="form-label-aw">Unit</label>
+					<input type="text" class="form-control-aw" name="unit" placeholder="e.g. mg/dL">
+				</div>
+				<div class="form-group mb-3">
+					<label class="form-label-aw">Biological Reference</label>
+					<input type="text" class="form-control-aw" name="biological_reference" placeholder="e.g. 70 - 110">
+				</div>
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-report-test">Save Parameter</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Edit Parameter Modal -->
+  <div class="modal fade modal-aw" id="modal-edit-report-test" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-flask me-2"></i>Edit Parameter</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-edit-report-test">
+				@csrf
+				<div class="form-group mb-3">
+					<label class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-test-name" required>
+				</div>
+				<div class="form-group mb-3">
+					<label class="form-label-aw">Unit</label>
+					<input type="text" class="form-control-aw" name="unit" id="edit-report-test-unit">
+				</div>
+				<div class="form-group mb-3">
+					<label class="form-label-aw">Biological Reference</label>
+					<input type="text" class="form-control-aw" name="biological_reference" id="edit-report-test-bio">
+				</div>
+                <input type="hidden" name="test_id" id="edit-report-test-id">
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-report-test">Update Parameter</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Add Unit Modal -->
+  <div class="modal fade modal-aw" id="modal-add-report-unit" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-balance-scale me-2"></i>Add New Unit</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-add-report-unit">
+				@csrf
+				<div class="form-group">
+					<label class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. mg/dL">
+				</div>
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-report-unit">Save Unit</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Edit Unit Modal -->
+  <div class="modal fade modal-aw" id="modal-edit-report-unit" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-balance-scale me-2"></i>Edit Unit</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-edit-report-unit">
+				@csrf
+				<div class="form-group">
+					<label class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-report-unit-name" required>
+				</div>
+                <input type="hidden" name="unit_id" id="edit-report-unit-id">
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-report-unit">Update Unit</button>
 		  </div>
 		</div>
 	  </div>

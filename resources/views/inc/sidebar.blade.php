@@ -1,131 +1,161 @@
- <aside class="main-sidebar">
-    <!-- sidebar-->
-    <section class="sidebar position-relative">
-	  	<div class="multinav">
-		  <div class="multinav-scroll" style="height: 100%;">	
-			  <!-- sidebar menu-->
-			  <ul class="sidebar-menu" data-widget="tree">			
-				<li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
-					<a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
-						<i class="fa fa-th-large"></i>
-						<span>Dashboard</span>
-					</a>
-				</li>
-				<li class="{{ request()->routeIs('patients*') ? 'active' : '' }}">
-				  <a href="{{ route('patients') }}" class="{{ request()->routeIs('patients*') ? 'active' : '' }}">
-					<i class="fa fa-user"></i>
-					<span>Patients</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('appointments*') ? 'active' : '' }}">
-				  <a href="{{ route('appointments') }}" class="{{ request()->routeIs('appointments*') ? 'active' : '' }}">
-					<i class="fa fa-calendar-plus-o"></i>
-					<span>Book Appointment</span>
-				  </a>
-				</li>			
+<aside id="awlab-sidebar">
+    <!-- Brand -->
+    <div class="sidebar-brand">
+        <div class="brand-icon">
+            <i class="fa fa-flask"></i>
+        </div>
+        <span class="brand-name">Awwal Lab</span>
+    </div>
 
-				<li class="{{ request()->routeIs('lab-tests*') ? 'active' : '' }}">
-				  <a href="{{ route('lab-tests.index') }}" class="{{ request()->routeIs('lab-tests*') ? 'active' : '' }}">
-					<i class="fa fa-flask"></i>
-					<span>Lab Tests (Billing)</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('test-parameters*') ? 'active' : '' }}">
-				  <a href="{{ route('test-parameters.index') }}" class="{{ request()->routeIs('test-parameters*') ? 'active' : '' }}">
-					<i class="fa fa-cog"></i>
-					<span>Test Parameters</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('categories*') ? 'active' : '' }}">
-				  <a href="{{ route('categories.index') }}" class="{{ request()->routeIs('categories*') ? 'active' : '' }}">
-					<i class="fa fa-tags"></i>
-					<span>Master Categories</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('sub-categories*') ? 'active' : '' }}">
-				  <a href="{{ route('sub-categories.index') }}" class="{{ request()->routeIs('sub-categories*') ? 'active' : '' }}">
-					<i class="fa fa-list-ul"></i>
-					<span>Sub-Categories</span>
-				  </a>
-				</li>
+    <!-- Nav -->
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Menu</div>
 
-				<li class="{{ request()->routeIs('reports*') ? 'active' : '' }}">
-				  <a href="{{ route('reports') }}" class="{{ request()->routeIs('reports*') ? 'active' : '' }}">
-					<i class="fa fa-bar-chart"></i>
-					<span>Test Reports</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('report-signatures*') ? 'active' : '' }}">
-				  <a href="{{ route('report-signatures.index') }}" class="{{ request()->routeIs('report-signatures*') ? 'active' : '' }}">
-					<i class="fa fa-pencil-square-o"></i>
-					<span>Report Signatures</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('payments*') ? 'active' : '' }}">
-				  <a href="{{ route('payments') }}" class="{{ request()->routeIs('payments*') ? 'active' : '' }}">
-					<i class="fa fa-money"></i>
-					<span>Payments & Billing</span>
-				  </a>
-				</li>
-				<li class="{{ request()->routeIs('income-report*') ? 'active' : '' }}">
-				  <a href="#" onclick="openIncomeReport(event)" class="{{ request()->routeIs('income-report*') ? 'active' : '' }}">
-					<i class="fa fa-line-chart"></i>
-					<span>Income Report</span>
-				  </a>
-				</li>
-			  </ul>
+        <a href="{{ route('dashboard') }}"
+           class="nav-item-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+           data-tooltip="Dashboard">
+            <span class="nav-icon"><i class="fa fa-th-large"></i></span>
+            <span class="nav-label">Dashboard</span>
+        </a>
 
-			  <div class="sidebar-widgets">
-			 	<div class="copyright text-center m-25">
-					<p><strong class="d-block">Awwal Lab software</strong> © 2026 All Rights Reserved</p>
-				</div>
-			  </div>
-		  </div>
-		</div>
-    </section>
-  </aside>
+        <a href="{{ route('patients') }}"
+           class="nav-item-link {{ request()->routeIs('patients*') ? 'active' : '' }}"
+           data-tooltip="Patients">
+            <span class="nav-icon"><i class="fa fa-user-group"></i></span>
+            <span class="nav-label">Patients</span>
+        </a>
 
-  <!-- Income Report Password Modal -->
-  <div class="modal center-modal fade" id="modal-income-password" tabindex="-1">
-	  <div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Authentication Required</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-			<div class="form-group">
-				<label>Enter Password</label>
-				<input type="password" id="income-password-input" class="form-control" placeholder="Password">
-			</div>
-			<div id="income-password-error" class="text-danger mt-2" style="display:none;">Incorrect password.</div>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-			<button type="button" class="btn btn-primary" onclick="verifyIncomePassword()">Submit</button>
-		  </div>
-		</div>
-	  </div>
-  </div>
+        <a href="{{ route('appointments') }}"
+           class="nav-item-link {{ request()->routeIs('appointments*') ? 'active' : '' }}"
+           data-tooltip="Book Appointment">
+            <span class="nav-icon"><i class="fa fa-calendar-plus"></i></span>
+            <span class="nav-label">Book Appointment</span>
+        </a>
 
-  <script>
-	function openIncomeReport(e) {
-		e.preventDefault();
-		$('#income-password-input').val('');
-		$('#income-password-error').hide();
-		$('#modal-income-password').modal('show');
-	}
+        <div class="sidebar-section-label" style="margin-top:8px;">Lab Management</div>
 
-	function verifyIncomePassword() {
-		const pass = $('#income-password-input').val();
-		$.post("{{ route('income-report.unlock') }}", {
-			password: pass,
-			_token: $('meta[name="csrf-token"]').attr('content')
-		}).done(function(response) {
-			$('#modal-income-password').modal('hide');
-			window.location.href = response.redirect;
-		}).fail(function() {
-			$('#income-password-error').show();
-		});
-	}
-  </script>
+        <a href="{{ route('lab-tests.index') }}"
+           class="nav-item-link {{ request()->routeIs('lab-tests*') ? 'active' : '' }}"
+           data-tooltip="Lab Tests">
+            <span class="nav-icon"><i class="fa fa-flask"></i></span>
+            <span class="nav-label">Lab Tests (Billing)</span>
+        </a>
+
+        <a href="{{ route('test-parameters.index') }}"
+           class="nav-item-link {{ request()->routeIs('test-parameters*') ? 'active' : '' }}"
+           data-tooltip="Test Parameters">
+            <span class="nav-icon"><i class="fa fa-sliders"></i></span>
+            <span class="nav-label">Test Parameters</span>
+        </a>
+
+        <a href="{{ route('categories.index') }}"
+           class="nav-item-link {{ request()->routeIs('categories*') ? 'active' : '' }}"
+           data-tooltip="Master Categories">
+            <span class="nav-icon"><i class="fa fa-tags"></i></span>
+            <span class="nav-label">Master Categories</span>
+        </a>
+
+        <a href="{{ route('sub-categories.index') }}"
+           class="nav-item-link {{ request()->routeIs('sub-categories*') ? 'active' : '' }}"
+           data-tooltip="Sub-Categories">
+            <span class="nav-icon"><i class="fa fa-list-ul"></i></span>
+            <span class="nav-label">Sub-Categories</span>
+        </a>
+
+        <a href="{{ route('master-data.index') }}"
+           class="nav-item-link {{ request()->routeIs('master-data*') ? 'active' : '' }}"
+           data-tooltip="Master Data">
+            <span class="nav-icon"><i class="fa fa-database"></i></span>
+            <span class="nav-label">Master Data</span>
+        </a>
+
+        <div class="sidebar-section-label" style="margin-top:8px;">Reports</div>
+
+        <a href="{{ route('reports') }}"
+           class="nav-item-link {{ request()->routeIs('reports') ? 'active' : '' }}"
+           data-tooltip="Test Reports">
+            <span class="nav-icon"><i class="fa fa-file-medical"></i></span>
+            <span class="nav-label">Test Reports</span>
+        </a>
+
+        <a href="{{ route('report-signatures.index') }}"
+           class="nav-item-link {{ request()->routeIs('report-signatures*') ? 'active' : '' }}"
+           data-tooltip="Report Signatures">
+            <span class="nav-icon"><i class="fa fa-signature"></i></span>
+            <span class="nav-label">Report Signatures</span>
+        </a>
+
+        <div class="sidebar-section-label" style="margin-top:8px;">Finance</div>
+
+        <a href="{{ route('payments') }}"
+           class="nav-item-link {{ request()->routeIs('payments*') ? 'active' : '' }}"
+           data-tooltip="Payments & Billing">
+            <span class="nav-icon"><i class="fa fa-credit-card"></i></span>
+            <span class="nav-label">Payments &amp; Billing</span>
+        </a>
+
+        <a href="#" onclick="openIncomeReport(event)"
+           class="nav-item-link {{ request()->routeIs('income-report*') ? 'active' : '' }}"
+           data-tooltip="Income Report">
+            <span class="nav-icon"><i class="fa fa-chart-line"></i></span>
+            <span class="nav-label">Income Report</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <strong>Awwal Lab Software</strong><br>© 2026 All Rights Reserved
+    </div>
+</aside>
+
+<!-- Income Report Password Modal -->
+<div class="modal fade modal-aw" id="modal-income-password" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:380px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-lock me-2"></i>Authentication Required</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label class="form-label-aw">Enter Password to Access Income Report</label>
+                <input type="password" id="income-password-input" class="form-control-aw" placeholder="Enter password...">
+                <div id="income-password-error" class="mt-2" style="display:none; color:#dc2626; font-size:13px;">
+                    <i class="fa fa-circle-exclamation me-1"></i>Incorrect password. Please try again.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-aw-primary" onclick="verifyIncomePassword()">
+                    <i class="fa fa-unlock"></i> Unlock
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openIncomeReport(e) {
+        e.preventDefault();
+        document.getElementById('income-password-input').value = '';
+        document.getElementById('income-password-error').style.display = 'none';
+        new bootstrap.Modal(document.getElementById('modal-income-password')).show();
+    }
+    function verifyIncomePassword() {
+        const pass = document.getElementById('income-password-input').value;
+        fetch("{{ route('income-report.unlock') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ password: pass })
+        }).then(r => {
+            if (!r.ok) throw new Error();
+            return r.json();
+        }).then(data => {
+            bootstrap.Modal.getInstance(document.getElementById('modal-income-password')).hide();
+            window.location.href = data.redirect;
+        }).catch(() => {
+            document.getElementById('income-password-error').style.display = 'block';
+        });
+    }
+</script>

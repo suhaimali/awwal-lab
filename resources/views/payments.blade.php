@@ -1,82 +1,96 @@
 @extends('layouts.app')
+@section('title', ' | Payments & Billing')
+@section('page-title', 'Payments & Billing')
 @section('content')
-<div class="content-wrapper">
-  <div class="container-full">
-    <div class="content-header">
-      <div class="d-flex align-items-center">
-        <div class="me-auto">
-          <h4 class="page-title">Payments & Billing</h4>
+<div class="page-header-aw">
+    <div class="page-title-aw">
+        <div class="title-icon"><i class="fa fa-credit-card"></i></div>
+        <div>
+            <div>Payments &amp; Billing</div>
+            <div style="font-size:13px;font-weight:400;color:var(--text-muted);margin-top:2px;">Manage all patient payments</div>
         </div>
-        <div class="ms-auto">
-          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-add-payment">
-            <i class="fa fa-plus-circle me-5"></i> Add New Payment
-          </button>
-        </div>
-      </div>
     </div>
-
-    <section class="content">
-      <div class="row">
-        <div class="col-12">
-          <div class="box">
-            <div class="box-body">
-              <div class="table-responsive">
-                <table class="table table-striped" id="payments-table">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Bill Date</th>
-                      <th>Patient</th>
-                      <th>Total</th>
-                      <th>Discount</th>
-                      <th>Advance</th>
-                      <th>Balance</th>
-                      <th>Status</th>
-                      <th class="text-end">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($payments as $p)
-                      <tr>
-                        <td>#{{ $p->id }}</td>
-                        <td>{{ \Carbon\Carbon::parse($p->bill_date)->format('d M Y') }}</td>
-                        <td>{{ optional($p->patient)->first_name }} {{ optional($p->patient)->last_name }}</td>
-                        <td>₹{{ number_format($p->total_amount ?? 0, 2) }}</td>
-                        <td>₹{{ number_format($p->discount ?? 0, 2) }}</td>
-                        <td>₹{{ number_format($p->advance_paid ?? 0, 2) }}</td>
-                        <td>₹{{ number_format($p->balance_due ?? 0, 2) }}</td>
-                        <td>
-                          <span class="badge badge-{{ $p->payment_status == 'Paid' ? 'success' : ($p->payment_status == 'Partial' ? 'warning' : 'danger') }}">
-                            {{ $p->payment_status }}
-                          </span>
-                        </td>
-                        <td class="text-end">
-                          <button class="btn btn-warning-light btn-sm btn-edit" data-id="{{ $p->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-payment">
-                            <i class="fa fa-edit"></i>
-                          </button>
-                          <button class="btn btn-danger-light btn-sm btn-delete" data-id="{{ $p->id }}" data-bs-toggle="modal" data-bs-target="#modal-delete-payment">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
+    <button type="button" class="btn-aw-primary" data-bs-toggle="modal" data-bs-target="#modal-add-payment">
+        <i class="fa fa-plus"></i> Add New Payment
+    </button>
+</div>
+<div class="aw-card mb-4">
+    <div class="aw-card-header">
+        <div class="aw-card-title"><i class="fa fa-credit-card" style="color:var(--primary);"></i> Payment Records</div>
+        <div class="d-flex align-items-center gap-2">
+            <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($payments) }} records</span>
+            <div style="position:relative;">
+                <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
+                <input type="text" id="payment-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:210px;" placeholder="Search payments..." autocomplete="off">
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-  </div>
+    </div>
+    <div class="aw-card-body" style="padding:0;">
+        <div class="table-responsive">
+<table class="table-awlab" id="payments-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th class="d-none d-sm-table-cell">Bill Date</th>
+            <th>Patient</th>
+            <th class="d-none d-md-table-cell">Total</th>
+            <th class="d-none d-md-table-cell">Discount</th>
+            <th class="d-none d-lg-table-cell">Advance</th>
+            <th>Balance</th>
+            <th class="d-none d-lg-table-cell">Method</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($payments as $p)
+        <tr>
+            <td><span class="badge-aw badge-blue">#{{ $p->id }}</span></td>
+            <td class="d-none d-sm-table-cell" style="color:var(--text-muted);font-size:12px;">{{ \Carbon\Carbon::parse($p->bill_date)->format('d M Y') }}</td>
+            <td style="font-weight:600;">{{ optional($p->patient)->first_name }} {{ optional($p->patient)->last_name }}</td>
+            <td class="d-none d-md-table-cell" style="font-weight:700;color:var(--primary);">₹{{ number_format($p->total_amount ?? 0, 2) }}</td>
+            <td class="d-none d-md-table-cell" style="color:#dc2626;">₹{{ number_format($p->discount ?? 0, 2) }}</td>
+            <td class="d-none d-lg-table-cell">₹{{ number_format($p->advance_paid ?? 0, 2) }}</td>
+            <td style="font-weight:700;color:#059669;">₹{{ number_format($p->balance_due ?? 0, 2) }}</td>
+            <td class="d-none d-lg-table-cell">
+                @php $method = $p->payment_method ?? 'Cash'; @endphp
+                <span class="badge-aw {{ $method == 'Cash' ? 'badge-green' : ($method == 'UPI' ? 'badge-purple' : ($method == 'Card' ? 'badge-blue' : 'badge-orange')) }}">
+                    <i class="fa {{ $method == 'Cash' ? 'fa-money-bill' : ($method == 'UPI' ? 'fa-mobile' : ($method == 'Card' ? 'fa-credit-card' : 'fa-building-columns')) }} me-1"></i>{{ $method }}
+                </span>
+            </td>
+            <td>
+                <span class="badge-aw {{ $p->payment_status == 'Paid' ? 'badge-green' : ($p->payment_status == 'Partial' ? 'badge-orange' : 'badge-red') }}">
+                    {{ $p->payment_status }}
+                </span>
+            </td>
+            <td class="text-end">
+                <div class="d-flex justify-content-end gap-2">
+                    <button class="btn-aw-primary btn-aw-sm btn-edit" data-id="{{ $p->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-payment" title="Edit"><i class="fa fa-pen"></i></button>
+                    <button class="btn-aw-danger btn-aw-sm btn-delete" data-id="{{ $p->id }}" data-bs-toggle="modal" data-bs-target="#modal-delete-payment" title="Delete"><i class="fa fa-trash"></i></button>
+                </div>
+            </td>
+        </tr>
+        @endforeach
+        @if(count($payments) == 0)
+        <tr>
+            <td colspan="10" class="text-center" style="padding:48px;color:var(--text-muted);">
+                <i class="fa fa-credit-card" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
+                <span style="font-size:15px;">No payment records found.</span>
+            </td>
+        </tr>
+        @endif
+    </tbody>
+</table>
+        </div>
+    </div>
 </div>
 
 <!-- Add Payment Modal -->
-<div class="modal center-modal fade" id="modal-add-payment" tabindex="-1">
+<div class="modal fade modal-aw" id="modal-add-payment" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add New Payment</h5>
+        <h5 class="modal-title"><i class="fa fa-credit-card me-2"></i>Add New Payment</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -155,19 +169,19 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btn-save-payment">Save Payment</button>
+        <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn-aw-primary" id="btn-save-payment"><i class="fa fa-check"></i> Save Payment</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Edit Payment Modal -->
-<div class="modal center-modal fade" id="modal-edit-payment" tabindex="-1">
+<div class="modal fade modal-aw" id="modal-edit-payment" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Edit Payment</h5>
+        <h5 class="modal-title"><i class="fa fa-pen me-2"></i>Edit Payment</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -247,42 +261,50 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btn-update-payment">Update Payment</button>
+        <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn-aw-primary" id="btn-update-payment"><i class="fa fa-check"></i> Update Payment</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Delete Modal -->
-<div class="modal center-modal fade" id="modal-delete-payment" tabindex="-1">
-  <div class="modal-dialog">
+<div class="modal fade modal-aw" id="modal-delete-payment" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" style="max-width:400px;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Delete Payment</h5>
+        <h5 class="modal-title"><i class="fa fa-triangle-exclamation me-2"></i>Delete Payment</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <i class="fa fa-warning fa-4x text-danger mb-15"></i>
-        <h4>Confirm Deletion</h4>
-        <p>Are you sure you want to delete this payment record? This action cannot be undone.</p>
+        <i class="fa fa-warning" style="font-size:48px;color:#dc2626;display:block;margin-bottom:16px;"></i>
+        <h5 style="font-weight:700;">Confirm Deletion</h5>
+        <p style="color:var(--text-muted);">Are you sure you want to delete this payment record? This action cannot be undone.</p>
         <input type="hidden" id="delete-id">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" id="btn-confirm-delete">Delete Permanently</button>
+        <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn-aw-danger" id="btn-confirm-delete">Delete Permanently</button>
       </div>
     </div>
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@push('scripts')
 <script>
   $(document).ready(function() {
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
+    });
+
+    // Live search
+    $('#payment-search').on('keyup', function() {
+      let val = $(this).val().toLowerCase();
+      $('#payments-table tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+      });
     });
 
     // Calculation Logic
@@ -358,4 +380,5 @@
     });
   });
 </script>
+@endpush
 @endsection

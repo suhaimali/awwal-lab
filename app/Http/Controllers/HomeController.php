@@ -67,12 +67,6 @@ class HomeController extends Controller
         return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates', 'signatures'));
     }
 
-    public function reportsTrash()
-    {
-        $reports = \App\Models\TestReport::onlyTrashed()->with('patient')->latest('deleted_at')->get();
-        return view('reports_trash', compact('reports'));
-    }
-
     public function reportSignatures()
     {
         $signatures = \App\Models\ReportSignature::latest()->get();
@@ -238,15 +232,6 @@ class HomeController extends Controller
         return response()->json(['success' => 'Report deleted successfully!']);
     }
 
-    public function restoreReport($id)
-    {
-        $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
-        $report->restore();
-        $this->auditReport($report, 'restored', null, $this->reportSnapshot($report->fresh(['patient', 'items', 'signature'])));
-
-        return response()->json(['success' => 'Report restored successfully!']);
-    }
-
     public function downloadPDF($id)
     {
         $report = \App\Models\TestReport::with(['patient', 'items', 'signature'])->findOrFail($id);
@@ -378,11 +363,50 @@ class HomeController extends Controller
             $validated['patient_id'] = date('Y') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
         }
 
-        $validated['total_amount'] = 0;
-        $validated['discount'] = 0;
-        $validated['balance'] = 0;
+        // Calculate totals from input test arrays
+        $testNames = $request->input('test_name', []);
+        $testPrices = $request->input('test_price', []);
+        $testDiscounts = $request->input('test_discount', []);
+
+        $totalAmount = 0;
+        $totalDiscount = 0;
+
+        foreach ($testNames as $index => $name) {
+            if (!empty($name)) {
+                $price = floatval($testPrices[$index] ?? 0);
+                $discount = floatval($testDiscounts[$index] ?? 0);
+                $totalAmount += $price;
+                $totalDiscount += $discount;
+            }
+        }
+
+        $validated['total_amount'] = $totalAmount;
+        $validated['discount'] = $totalDiscount;
+        $validated['balance'] = $totalAmount - $totalDiscount;
 
         $patient = \App\Models\Patient::create($validated);
+
+        // Create appointments
+        foreach ($testNames as $index => $name) {
+            if (!empty($name)) {
+                $price = floatval($testPrices[$index] ?? 0);
+                $discount = floatval($testDiscounts[$index] ?? 0);
+                $balance = $price - $discount;
+
+                \App\Models\Appointment::create([
+                    'patient_id' => $patient->id,
+                    'doctor_name' => $patient->reference_dr ?: 'Self',
+                    'test_name' => $name,
+                    'test_price' => $price,
+                    'discount' => $discount,
+                    'balance' => $balance,
+                    'appointment_date' => date('Y-m-d'),
+                    'appointment_time' => date('H:i'),
+                    'status' => 'Pending',
+                    'total_amount' => $price,
+                ]);
+            }
+        }
 
         return response()->json(['success' => 'Patient added successfully! ID: ' . $validated['patient_id']]);
     }
@@ -410,9 +434,74 @@ class HomeController extends Controller
             'address' => 'nullable',
         ]);
 
+        // Calculate totals from input test arrays
+        $appointmentIds = $request->input('appointment_id', []);
+        $testNames = $request->input('test_name', []);
+        $testPrices = $request->input('test_price', []);
+        $testDiscounts = $request->input('test_discount', []);
+
+        $totalAmount = 0;
+        $totalDiscount = 0;
+
+        foreach ($testNames as $index => $name) {
+            if (!empty($name)) {
+                $price = floatval($testPrices[$index] ?? 0);
+                $discount = floatval($testDiscounts[$index] ?? 0);
+                $totalAmount += $price;
+                $totalDiscount += $discount;
+            }
+        }
+
+        $validated['total_amount'] = $totalAmount;
+        $validated['discount'] = $totalDiscount;
+        $validated['balance'] = $totalAmount - $totalDiscount;
+
         $patient->update($validated);
 
+        // Keep track of active/updated appointment IDs so we can delete removed ones
+        $keepAppointmentIds = [];
 
+        foreach ($testNames as $index => $name) {
+            if (!empty($name)) {
+                $appId = $appointmentIds[$index] ?? null;
+                $price = floatval($testPrices[$index] ?? 0);
+                $discount = floatval($testDiscounts[$index] ?? 0);
+                $balance = $price - $discount;
+
+                if ($appId) {
+                    $appointment = \App\Models\Appointment::find($appId);
+                    if ($appointment) {
+                        $appointment->update([
+                            'test_name' => $name,
+                            'test_price' => $price,
+                            'discount' => $discount,
+                            'balance' => $balance,
+                            'total_amount' => $price,
+                        ]);
+                        $keepAppointmentIds[] = $appointment->id;
+                    }
+                } else {
+                    $newApp = \App\Models\Appointment::create([
+                        'patient_id' => $patient->id,
+                        'doctor_name' => $patient->reference_dr ?: 'Self',
+                        'test_name' => $name,
+                        'test_price' => $price,
+                        'discount' => $discount,
+                        'balance' => $balance,
+                        'appointment_date' => date('Y-m-d'),
+                        'appointment_time' => date('H:i'),
+                        'status' => 'Pending',
+                        'total_amount' => $price,
+                    ]);
+                    $keepAppointmentIds[] = $newApp->id;
+                }
+            }
+        }
+
+        // Delete any appointments that were removed from the edit list
+        \App\Models\Appointment::where('patient_id', $patient->id)
+            ->whereNotIn('id', $keepAppointmentIds)
+            ->delete();
 
         return response()->json(['success' => 'Patient updated successfully!']);
     }
@@ -636,9 +725,35 @@ class HomeController extends Controller
             'description' => 'nullable',
         ]);
 
-        \App\Models\LabTest::create($validated);
+        $test = \App\Models\LabTest::create($validated);
 
-        return response()->json(['success' => 'Laboratory test registered successfully!']);
+        return response()->json(['success' => 'Laboratory test registered successfully!', 'test' => $test]);
+    }
+
+    public function quickStoreTest(\Illuminate\Http\Request $request)
+    {
+        $validatedTest = $request->validate([
+            'name' => 'required',
+            'price' => 'nullable|numeric',
+            'description' => 'nullable'
+        ]);
+
+        if (!isset($validatedTest['price']) || $validatedTest['price'] === null) {
+            $validatedTest['price'] = 0;
+        }
+
+        $test = \App\Models\LabTest::create($validatedTest);
+
+        $paramData = $request->only([
+            'unit', 'male_reference', 'female_reference',
+            'male_min', 'male_max', 'female_min', 'female_max',
+            'critical_low', 'critical_high', 'biological_reference', 'is_immunoassay'
+        ]);
+        $paramData['lab_test_id'] = $test->id;
+
+        \App\Models\TestParameter::create($paramData);
+
+        return response()->json(['success' => 'Parameter created successfully!', 'test' => $test]);
     }
 
     public function updateLabTest(\Illuminate\Http\Request $request, $id)
@@ -653,7 +768,43 @@ class HomeController extends Controller
 
         $test->update($validated);
 
-        return response()->json(['success' => 'Laboratory test updated successfully!']);
+        return response()->json(['success' => 'Laboratory test updated successfully!', 'test' => $test]);
+    }
+
+    public function quickUpdateTest(\Illuminate\Http\Request $request, $id)
+    {
+        $test = \App\Models\LabTest::findOrFail($id);
+        
+        $validatedTest = $request->validate([
+            'name' => 'required',
+            'price' => 'nullable|numeric',
+            'description' => 'nullable'
+        ]);
+
+        if (!isset($validatedTest['price']) || $validatedTest['price'] === null) {
+            $validatedTest['price'] = 0;
+        }
+
+        $test->update($validatedTest);
+
+        $paramData = $request->only([
+            'unit', 'male_reference', 'female_reference',
+            'male_min', 'male_max', 'female_min', 'female_max',
+            'critical_low', 'critical_high', 'biological_reference', 'is_immunoassay'
+        ]);
+
+        $parameter = \App\Models\TestParameter::updateOrCreate(
+            ['lab_test_id' => $test->id],
+            $paramData
+        );
+
+        return response()->json(['success' => 'Parameter updated successfully!', 'test' => $test]);
+    }
+
+    public function apiTests()
+    {
+        $tests = \App\Models\LabTest::with(['parameter', 'referenceIntervals'])->get();
+        return response()->json($tests);
     }
 
     public function deleteLabTest($id)
@@ -762,11 +913,17 @@ class HomeController extends Controller
         return view('master_data', compact('units', 'templates'));
     }
 
+    public function apiUnits()
+    {
+        $units = \App\Models\Unit::orderBy('name')->get();
+        return response()->json($units);
+    }
+
     public function storeUnit(\Illuminate\Http\Request $request)
     {
         $request->validate(['name' => 'required|unique:units']);
-        \App\Models\Unit::create($request->all());
-        return response()->json(['success' => 'Unit added successfully!']);
+        $unit = \App\Models\Unit::create($request->all());
+        return response()->json(['success' => 'Unit added successfully!', 'unit' => $unit]);
     }
 
     public function updateUnit(\Illuminate\Http\Request $request, $id)
@@ -774,7 +931,7 @@ class HomeController extends Controller
         $request->validate(['name' => 'required|unique:units,name,'.$id]);
         $unit = \App\Models\Unit::findOrFail($id);
         $unit->update($request->all());
-        return response()->json(['success' => 'Unit updated!']);
+        return response()->json(['success' => 'Unit updated!', 'unit' => $unit]);
     }
 
     public function deleteUnit($id)
@@ -929,11 +1086,11 @@ class HomeController extends Controller
 
         $value = (float) $observedValue;
 
-        if ($parameter->critical_low !== null && $value <= (float) $parameter->critical_low) {
+        if ($parameter->critical_low !== null && $parameter->critical_low !== '' && $value <= (float) $parameter->critical_low) {
             return 'C';
         }
 
-        if ($parameter->critical_high !== null && $value >= (float) $parameter->critical_high) {
+        if ($parameter->critical_high !== null && $parameter->critical_high !== '' && $value >= (float) $parameter->critical_high) {
             return 'C';
         }
 

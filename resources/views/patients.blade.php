@@ -1,117 +1,568 @@
 @extends('layouts.app')
-@section('content')
- <div class="content-wrapper">
-	  <div class="container-full">
-		<!-- Content Header (Page header) -->	  
-		<div class="content-header">
-			<div class="d-flex align-items-center">
-				<div class="me-auto">
-					<h4 class="page-title">Patients</h4>
+@section('title', ' | Patients')
+@section('page-title', 'Patients')
 
-				</div>
-				<div class="ms-auto">
-					<button type="button" class="btn btn-primary btn-sm btn-md-lg" data-bs-toggle="modal" data-bs-target="#modal-add-patient">
-						<i class="fa fa-plus-circle me-5"></i> <span class="d-none d-md-inline">Add New Patient</span>
-					</button>
-				</div>
-			</div>
-		</div>
-		  
-		<!-- Main content -->
-		<section class="content">
-			<style>
-				@media (max-width: 767px) {
-					.card-table th, .card-table td {
-						padding: 10px 8px !important;
-						font-size: 12px;
-					}
-					.page-title { font-size: 18px; }
-				}
-			</style>
-			<div class="row">
-				<div class="col-12">
-					<div class="box">
-						<div class="box-body">
-							<div class="row mb-3">
-								<div class="col-md-4">
-									<div class="input-group">
-										<span class="input-group-text bg-primary-light border-primary-light"><i class="fa fa-search text-primary"></i></span>
-										<input type="text" id="patient-search" class="form-control" placeholder="Search by name, ID, or phone..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
-									</div>
-								</div>
-							</div>
-							<div class="table-responsive rounded card-table" style="max-height: 500px; overflow-y: auto;">
-								<table class="table border-no" id="patient-table" style="width: 100%;">
-									<thead>
-										<tr>
-											<th class="d-none d-md-table-cell">ID</th>
-											<th>Name</th>
-											<th class="d-none d-lg-table-cell">Gender</th>
-											<th class="d-none d-md-table-cell">Age</th>
-											<th>Phone</th>
-											<th class="d-none d-xl-table-cell">Email</th>
-											<th class="d-none d-lg-table-cell text-primary">Amount</th>
-											<th class="d-none d-xl-table-cell text-danger">Discount</th>
-											<th class="d-none d-sm-table-cell">Balance</th>
-											<th class="d-none d-lg-table-cell">Status</th>
-											<th class="text-end">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										@forelse($patients as $patient)
-                                        @php
-                                            $latestApp = $patient->appointments->last();
-                                            $totalPrice = $latestApp->test_price ?? 0;
-                                            $totalDiscount = $latestApp->discount ?? 0;
-                                            $netBalance = $latestApp->balance ?? ($totalPrice - $totalDiscount);
-                                        @endphp
-										<tr>
-											<td class="fw-600 text-primary d-none d-md-table-cell">{{ str_replace(['#P-', '#'], '', $patient->patient_id) }}</td>
-											<td class="fw-600">{{ $patient->first_name }} {{ $patient->last_name }}</td>
-											<td class="d-none d-lg-table-cell">{{ $patient->gender }}</td>
-											<td class="d-none d-md-table-cell">{{ $patient->age }}</td>
-											<td>{{ $patient->phone }}</td>
-											<td class="d-none d-xl-table-cell text-fade fs-12">{{ $patient->email }}</td>
-											<td class="fw-bold d-none d-lg-table-cell">₹{{ number_format($totalPrice, 2) }}</td>
-											<td class="text-danger d-none d-xl-table-cell">₹{{ number_format($totalDiscount, 2) }}</td>
-											<td class="d-none d-sm-table-cell fw-bold text-success">₹{{ number_format($netBalance, 2) }}</td>
-											<td class="d-none d-lg-table-cell"><span class="badge badge-{{ $patient->status == 'Active' ? 'success' : 'danger' }} p-1 fs-10">{{ $patient->status }}</span></td>
-											<td class="text-end">												
-												<div class="d-flex justify-content-end gap-2">
-													<button class="btn btn-info-light btn-sm btn-view d-flex align-items-center justify-content-center" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-patient" title="View Details" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-eye"></i></button>
-													<button class="btn btn-success-light btn-sm btn-invoice d-none d-lg-flex align-items-center justify-content-center" data-id="{{ $patient->id }}" title="Generate Invoice" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-file-pdf-o"></i></button>
-													<button class="btn btn-warning-light btn-sm btn-edit d-flex align-items-center justify-content-center" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-patient" title="Edit Patient" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-edit"></i></button>
-													<button class="btn btn-danger-light btn-sm btn-delete d-flex align-items-center justify-content-center" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-delete-patient" title="Delete" style="width: 32px; height: 32px; padding: 0;"><i class="fa fa-trash"></i></button>
-												</div>
-											</td>
-										</tr>
-										@empty
-										<tr>
-											<td colspan="11" class="text-center py-50">
-												<i class="fa fa-user-times fa-3x text-fade d-block mb-10"></i>
-												<span class="text-fade fs-18">No patients found in the database.</span>
-											</td>
-										</tr>
-										@endforelse
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>			
-		</section>
-		<!-- /.content -->
-	  </div>
-  </div>
-  <!-- Add Patient Modal -->
-  <div class="modal center-modal fade" id="modal-add-patient" tabindex="-1">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Add New Patient</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
+@push('styles')
+<style>
+    /* Patient Table specific styling */
+    .patients-card {
+        border: none;
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+    }
+
+    .patients-table-container {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #f1f5f9;
+        margin: 10px 0;
+    }
+
+    .table-patients {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0;
+    }
+
+    .table-patients thead th {
+        background: #f8fafc;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 16px 20px;
+        border-bottom: 2px solid #f1f5f9;
+        white-space: nowrap;
+    }
+
+    .table-patients tbody tr {
+        border-bottom: 1px solid #f1f5f9;
+        transition: all 0.2s ease;
+    }
+
+    .table-patients tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .table-patients tbody tr:hover {
+        background-color: #f8fafc;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .table-patients tbody td {
+        padding: 16px 20px;
+        vertical-align: middle;
+        font-size: 14px;
+        color: #334155;
+    }
+
+    /* Avatar style */
+    .patient-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .patient-name {
+        font-weight: 600;
+        color: #1e293b;
+        font-size: 14.5px;
+        line-height: 1.2;
+    }
+
+    .patient-meta {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 4px;
+    }
+
+    .meta-separator {
+        color: #cbd5e1;
+    }
+
+    /* Contact details styling */
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        color: #475569;
+    }
+
+    .contact-item i {
+        font-size: 12px;
+        color: #94a3b8;
+        width: 18px;
+    }
+
+    .contact-item.email {
+        color: #64748b;
+        font-size: 12px;
+    }
+
+    /* Financial block */
+    .financial-block {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .net-balance {
+        font-weight: 700;
+        font-size: 14.5px;
+    }
+
+    .net-balance.paid {
+        color: #059669;
+    }
+
+    .net-balance.due {
+        color: #ea580c;
+    }
+
+    .financial-details {
+        font-size: 11px;
+        color: #64748b;
+        display: flex;
+        gap: 8px;
+        white-space: nowrap;
+    }
+
+    .financial-details span {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Custom badge for ID */
+    .patient-id-badge {
+        font-family: monospace;
+        font-weight: 600;
+        font-size: 12px;
+        background: #f1f5f9;
+        color: #475569;
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Action buttons styling */
+    .action-buttons {
+        display: inline-flex;
+        gap: 6px;
+    }
+
+    .btn-action-circle {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+    .btn-action-circle:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: var(--primary-light);
+        transform: translateY(-1px);
+    }
+
+    .btn-action-circle.btn-invoice:hover {
+        border-color: #059669;
+        color: #059669;
+        background: #d1fae5;
+    }
+
+    .btn-action-circle.btn-delete-action:hover {
+        border-color: #dc2626;
+        color: #dc2626;
+        background: #fee2e2;
+    }
+
+    /* Status badge */
+    .status-dot-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-dot-badge.active {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .status-dot-badge.inactive {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .status-dot.active {
+        background: #059669;
+        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+        animation: pulse-green 2s infinite;
+    }
+
+    .status-dot.inactive {
+        background: #dc2626;
+    }
+
+    @keyframes pulse-green {
+        0% {
+            box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 6px rgba(5, 150, 105, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+        }
+    }
+
+    /* Premium Form Inputs inside Modals */
+    .modal-aw .form-label {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #64748b;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-block;
+    }
+
+    .modal-aw .form-control, 
+    .modal-aw .form-select {
+        border: 1.5px solid #cbd5e1;
+        border-radius: 9px;
+        padding: 9px 12px;
+        font-size: 13.5px;
+        color: #1e293b;
+        background-color: #ffffff;
+        outline: none;
+        box-shadow: none;
+        transition: all 0.2s ease;
+    }
+
+    .modal-aw .form-control:focus, 
+    .modal-aw .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1) !important;
+        background-color: #ffffff;
+    }
+
+    .modal-aw .form-control[readonly] {
+        background-color: #f8fafc;
+        color: #64748b;
+        border-color: #e2e8f0;
+    }
+
+    /* Reference Doctor Input Group Custom style */
+    .modal-aw .input-group .form-select {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .modal-aw .input-group .btn {
+        border-radius: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        font-size: 13px;
+        border: 1.5px solid #cbd5e1;
+        border-left: none;
+        background: #ffffff;
+        color: #64748b;
+        transition: all 0.2s ease;
+    }
+
+    .modal-aw .input-group .btn:hover {
+        background: #f1f5f9;
+        color: #334155;
+    }
+
+    .modal-aw .input-group .btn-success {
+        color: #059669;
+    }
+    .modal-aw .input-group .btn-success:hover {
+        background: #d1fae5;
+        color: #059669;
+        border-color: #a7f3d0;
+    }
+
+    .modal-aw .input-group .btn-warning {
+        color: #d97706;
+    }
+    .modal-aw .input-group .btn-warning:hover {
+        background: #fef3c7;
+        color: #d97706;
+        border-color: #fde68a;
+    }
+
+    .modal-aw .input-group .btn-danger {
+        color: #dc2626;
+        border-top-right-radius: 9px;
+        border-bottom-right-radius: 9px;
+    }
+    .modal-aw .input-group .btn-danger:hover {
+        background: #fee2e2;
+        color: #dc2626;
+        border-color: #fecaca;
+    }
+
+    /* Modal layout styling */
+    .modal-aw .form-group {
+        margin-bottom: 16px;
+    }
+
+    /* Test Row inside modals */
+    .modal-aw .test-row {
+        background: #f8fafc;
+        border: 1px solid #f1f5f9;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px !important;
+        align-items: center;
+        transition: all 0.15s ease;
+    }
+
+    .modal-aw .test-row:hover {
+        border-color: #cbd5e1;
+        background: #f1f5f9;
+    }
+
+    .fs-11 {
+        font-size: 11px !important;
+    }
+
+    /* === View Patient Modal === */
+    #modal-view-patient .modal-content { border: none; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+    #modal-view-patient .vp-header { background: linear-gradient(135deg, #1a56db 0%, #3b82f6 100%); padding: 28px 24px 48px; position: relative; text-align: center; color: #fff; }
+    #modal-view-patient .vp-avatar { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.25); border: 3px solid rgba(255,255,255,0.6); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800; color: #fff; letter-spacing: 1px; backdrop-filter: blur(4px); }
+    #modal-view-patient .vp-name { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    #modal-view-patient .vp-meta { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; opacity: 0.9; flex-wrap: wrap; }
+    #modal-view-patient .vp-meta .vp-id-badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 2px 10px; font-weight: 600; font-size: 11px; letter-spacing: 0.5px; }
+    #modal-view-patient .vp-body { background: #fff; padding: 0 24px 24px; margin-top: -24px; border-radius: 20px 20px 0 0; position: relative; z-index: 1; }
+    #modal-view-patient .vp-status-row { display: flex; justify-content: center; margin: -12px 0 20px; }
+    #modal-view-patient .vp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 480px) { #modal-view-patient .vp-grid { grid-template-columns: 1fr; } }
+    #modal-view-patient .vp-grid .vp-full { grid-column: 1 / -1; }
+    #modal-view-patient .vp-field { background: #f8fafc; border-radius: 10px; padding: 12px 14px; border: 1px solid #f1f5f9; }
+    #modal-view-patient .vp-field-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #94a3b8; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+    #modal-view-patient .vp-field-label i { font-size: 9px; color: #1a56db; }
+    #modal-view-patient .vp-field-value { font-size: 14px; font-weight: 600; color: #1e293b; word-break: break-word; }
+    #modal-view-patient .modal-footer { background: #f8fafc; border-top: 1px solid #f1f5f9; padding: 14px 20px; border-radius: 0 0 16px 16px; }
+
+</style>
+@endpush
+
+@section('content')
+<div class="page-header-aw">
+    <div class="page-title-aw">
+        <div class="title-icon"><i class="fa fa-users"></i></div>
+        <div>
+            <div>Patients</div>
+            <div style="font-size:13px;font-weight:400;color:var(--text-muted);margin-top:2px;">Manage all patient records</div>
+        </div>
+    </div>
+    <button type="button" class="btn-aw-primary" data-bs-toggle="modal" data-bs-target="#modal-add-patient">
+        <i class="fa fa-plus"></i> <span>Add New Patient</span>
+    </button>
+</div>
+<section>
+<div class="aw-card patients-card mb-4">
+    <div class="aw-card-header">
+        <div class="aw-card-title"><i class="fa fa-users" style="color:var(--primary);"></i> Patient Records</div>
+        <div class="d-flex align-items-center gap-2">
+            <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ $patients->count() }} total patients</span>
+            <div style="position:relative;">
+                <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
+                <input type="text" id="patient-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search patients..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            </div>
+        </div>
+    </div>
+    <div class="aw-card-body" style="padding:0;">
+        <div class="table-responsive">
+            <div class="patients-table-container">
+                <table class="table-patients" id="patient-table">
+                    <thead>
+                        <tr>
+                            <th class="d-none d-md-table-cell">ID</th>
+                            <th>Patient Details</th>
+                            <th class="d-none d-sm-table-cell">Contact</th>
+                            <th class="d-none d-md-table-cell">Financial Status</th>
+                            <th class="d-none d-lg-table-cell">Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($patients as $patient)
+                            @php
+                                $latestApp = $patient->appointments->last();
+                                $totalPrice = $latestApp->test_price ?? 0;
+                                $totalDiscount = $latestApp->discount ?? 0;
+                                $netBalance = $latestApp->balance ?? ($totalPrice - $totalDiscount);
+
+                                // Generate initials for avatar
+                                $firstNameInitial = substr(trim($patient->first_name), 0, 1);
+                                $lastNameInitial = substr(trim($patient->last_name), 0, 1);
+                                $initials = strtoupper($firstNameInitial . $lastNameInitial);
+                                if (empty($initials)) {
+                                    $initials = 'P';
+                                }
+
+                                // Set a dynamic background color based on name characters
+                                $bgColors = ['#e0e7ff', '#dbeafe', '#e0f2fe', '#d1fae5', '#fef3c7', '#fee2e2', '#f3e8ff'];
+                                $textColors = ['#4f46e5', '#2563eb', '#0284c7', '#059669', '#d97706', '#dc2626', '#9333ea'];
+                                $colorIdx = (ord($firstNameInitial) + ord($lastNameInitial)) % count($bgColors);
+                                $avatarBg = $bgColors[$colorIdx];
+                                $avatarText = $textColors[$colorIdx];
+                            @endphp
+                            <tr>
+                                <!-- ID Column -->
+                                <td class="d-none d-md-table-cell">
+                                    <span class="patient-id-badge">{{ str_replace(['#P-', '#'], '', $patient->patient_id) }}</span>
+                                </td>
+                                
+                                <!-- Patient Details (Avatar, Name, Gender, Age) -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="patient-avatar" style="background-color: {{ $avatarBg }}; color: {{ $avatarText }};">
+                                            {{ $initials }}
+                                        </div>
+                                        <div>
+                                            <div class="patient-name">{{ $patient->first_name }} {{ $patient->last_name }}</div>
+                                            <div class="patient-meta d-flex align-items-center gap-2">
+                                                <span class="meta-item">{{ $patient->gender }}</span>
+                                                <span class="meta-separator">•</span>
+                                                <span class="meta-item">{{ $patient->age }} Yrs</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <!-- Contact Details (Phone, Email) -->
+                                <td class="d-none d-sm-table-cell">
+                                    <div class="contact-info">
+                                        <div class="contact-item">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <span>{{ $patient->phone }}</span>
+                                        </div>
+                                        @if($patient->email)
+                                            <div class="contact-item email">
+                                                <i class="fa-solid fa-envelope"></i>
+                                                <span>{{ $patient->email }}</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </td>
+                                
+                                <!-- Financial Status (Amount, Discount, Balance) -->
+                                <td class="d-none d-md-table-cell">
+                                    <div class="financial-block">
+                                        @if($netBalance == 0)
+                                            <div class="net-balance paid">
+                                                <i class="fa-solid fa-circle-check me-1"></i>₹0.00
+                                            </div>
+                                        @else
+                                            <div class="net-balance due">
+                                                ₹{{ number_format($netBalance, 2) }}
+                                            </div>
+                                        @endif
+                                        <div class="financial-details">
+                                            <span>Total: ₹{{ number_format($totalPrice, 2) }}</span>
+                                            @if($totalDiscount > 0)
+                                                <span style="color:#dc2626;">• Disc: ₹{{ number_format($totalDiscount, 2) }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <!-- Status (Active / Inactive) -->
+                                <td class="d-none d-lg-table-cell">
+                                    <span class="status-dot-badge {{ strtolower($patient->status) == 'active' ? 'active' : 'inactive' }}">
+                                        <span class="status-dot {{ strtolower($patient->status) == 'active' ? 'active' : 'inactive' }}"></span>
+                                        {{ $patient->status }}
+                                    </span>
+                                </td>
+                                
+                                <!-- Action Buttons -->
+                                <td class="text-end">												
+                                    <div class="action-buttons justify-content-end">
+                                        <button class="btn-action-circle btn-view" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-patient" title="View Details">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action-circle btn-invoice" data-id="{{ $patient->id }}" title="PDF Invoice">
+                                            <i class="fa fa-file-pdf"></i>
+                                        </button>
+                                        <button class="btn-action-circle btn-edit" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-patient" title="Edit Record">
+                                            <i class="fa fa-pen"></i>
+                                        </button>
+                                        <button class="btn-action-circle btn-delete-action btn-delete" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-delete-patient" title="Delete Record">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center" style="padding:48px;color:var(--text-muted);">
+                                    <i class="fa fa-user-slash" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
+                                    <span style="font-size:15px;">No patients found in the database.</span>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- Add Patient Modal -->
+<div class="modal fade modal-aw" id="modal-add-patient" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-user-plus me-2"></i>Add New Patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 		  <div class="modal-body">
 			<form id="form-add-patient">
 				<div class="row">
@@ -192,6 +643,44 @@
 						</div>
 					</div>
 				</div>
+				
+				<h5 class="mt-4 mb-2 text-primary fw-bold"><i class="fa fa-flask me-2"></i>Select Tests & Financial Details</h5>
+				
+                <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    <div class="col-md-5">Test Name</div>
+                    <div class="col-md-3">Amount (₹)</div>
+                    <div class="col-md-3">Discount (₹)</div>
+                    <div class="col-md-1 text-center">Action</div>
+                </div>
+
+				<div id="add-patient-tests-container" class="mb-3">
+					<div class="row test-row mb-2 align-items-center">
+						<div class="col-md-5 col-12">
+                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
+							<select class="form-select add-patient-test-name" name="test_name[]">
+								<option value="">-- Select Test --</option>
+								@foreach($labTests as $test)
+									<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col-md-3 col-6">
+                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
+							<input type="number" step="0.01" class="form-control add-patient-test-price" name="test_price[]" placeholder="0.00">
+						</div>
+						<div class="col-md-3 col-6">
+                            <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
+							<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00">
+						</div>
+						<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+							<button type="button" class="btn btn-success btn-sm btn-add-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="bg-primary-light p-3 rounded mb-3 text-end">
+					<h5 class="mb-0 fw-bold">Net Payable: ₹<span id="add-patient-net-payable">0.00</span></h5>
+				</div>
+
 				<div class="form-group">
 					<label class="form-label">Address</label>
 					<textarea rows="2" class="form-control" name="address" placeholder="Address"></textarea>
@@ -199,73 +688,80 @@
 
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-save-patient">Save Patient</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-patient"><i class="fa fa-check"></i> Save Patient</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
-  <!-- View Modal -->
-  <div class="modal center-modal fade" id="modal-view-patient" tabindex="-1">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Patient Details</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-			<div class="row">
-				<div class="col-md-6">
-					<p><strong>Patient ID:</strong> <span id="view-patient-id"></span></p>
-				</div>
-				<div class="col-md-6">
-					<p><strong>Phone:</strong> <span id="view-phone"></span></p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<p><strong>First Name:</strong> <span id="view-first-name"></span></p>
-				</div>
-				<div class="col-md-6">
-					<p><strong>Last Name:</strong> <span id="view-last-name"></span></p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<p><strong>Gender:</strong> <span id="view-gender"></span></p>
-				</div>
-				<div class="col-md-6">
-					<p><strong>Age:</strong> <span id="view-age"></span></p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<p><strong>Email:</strong> <span id="view-email"></span></p>
-				</div>
-				<div class="col-md-4">
-					<p><strong>Reference Dr:</strong> <span id="view-reference-dr"></span></p>
-				</div>
-				<div class="col-md-4">
-					<p><strong>Status:</strong> <span id="view-status"></span></p>
-				</div>
-			</div>
-			<p><strong>Address:</strong> <span id="view-address"></span></p>
-		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-		  </div>
-		</div>
-	  </div>
+  <!-- View Patient Modal -->
+  <div class="modal fade" id="modal-view-patient" tabindex="-1" aria-labelledby="viewPatientLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+      <div class="modal-content">
+
+        <!-- Gradient Header -->
+        <div class="vp-header">
+          <button type="button" class="btn-close btn-close-white position-absolute" style="top:16px;right:16px;" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="vp-avatar" id="vp-avatar">P</div>
+          <div class="vp-name" id="view-full-name">Patient Name</div>
+          <div class="vp-meta">
+            <span class="vp-id-badge" id="view-patient-id">#0000</span>
+            <span>·</span>
+            <span id="view-gender">—</span>
+            <span>·</span>
+            <span id="view-age">—</span>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="vp-body">
+          <!-- Status badge floated up -->
+          <div class="vp-status-row">
+            <div id="view-status-badge"></div>
+          </div>
+
+          <!-- Info grid -->
+          <div class="vp-grid">
+            <div class="vp-field">
+              <div class="vp-field-label"><i class="fa fa-phone"></i> Phone</div>
+              <div class="vp-field-value" id="view-phone">—</div>
+            </div>
+            <div class="vp-field">
+              <div class="vp-field-label"><i class="fa fa-envelope"></i> Email</div>
+              <div class="vp-field-value" id="view-email">—</div>
+            </div>
+            <div class="vp-field">
+              <div class="vp-field-label"><i class="fa fa-user-doctor"></i> Ref. Doctor</div>
+              <div class="vp-field-value" id="view-reference-dr">—</div>
+            </div>
+            <div class="vp-field">
+              <div class="vp-field-label"><i class="fa fa-calendar"></i> Registered</div>
+              <div class="vp-field-value" id="view-created-at">—</div>
+            </div>
+            <div class="vp-field vp-full">
+              <div class="vp-field-label"><i class="fa fa-location-dot"></i> Address</div>
+              <div class="vp-field-value" id="view-address">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- Edit Modal -->
-  <div class="modal center-modal fade" id="modal-edit-patient" tabindex="-1">
-	  <div class="modal-dialog">
+  <div class="modal fade modal-aw" id="modal-edit-patient" tabindex="-1" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Edit Patient</h5>
+			<h5 class="modal-title"><i class="fa fa-user-pen me-2"></i>Edit Patient</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
@@ -349,6 +845,23 @@
 						</div>
 					</div>
 				</div>
+
+				<h5 class="mt-4 mb-2 text-primary fw-bold"><i class="fa fa-flask me-2"></i>Select Tests & Financial Details</h5>
+				
+                <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    <div class="col-md-5">Test Name</div>
+                    <div class="col-md-3">Amount (₹)</div>
+                    <div class="col-md-3">Discount (₹)</div>
+                    <div class="col-md-1 text-center">Action</div>
+                </div>
+
+				<div id="edit-patient-tests-container" class="mb-3">
+					<!-- Dynamically loaded from JS -->
+				</div>
+				<div class="bg-primary-light p-3 rounded mb-3 text-end">
+					<h5 class="mb-0 fw-bold">Net Payable: ₹<span id="edit-patient-net-payable">0.00</span></h5>
+				</div>
+
 				<div class="form-group">
 					<label class="form-label">Address</label>
 					<textarea rows="2" class="form-control" id="edit-address" name="address" placeholder="Address"></textarea>
@@ -356,16 +869,16 @@
 
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-update-patient">Update Patient</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-patient"><i class="fa fa-check"></i> Update Patient</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- Delete Modal -->
-  <div class="modal center-modal fade" id="modal-delete-patient" tabindex="-1">
+  <div class="modal center-modal fade" id="modal-delete-patient" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
 		  <div class="modal-header">
@@ -387,7 +900,7 @@
   </div>
 
   <!-- Quick Book Test Modal -->
-  <div class="modal center-modal fade" id="modal-patient-book-test" tabindex="-1">
+  <div class="modal center-modal fade" id="modal-patient-book-test" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
 		  <div class="modal-header bg-primary">
@@ -420,8 +933,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="bg-primary-light p-3 rounded mb-15 text-end">
-					<h5 class="mb-0 fw-bold">Net Payable: ₹<span id="quick-book-net-payable">0.00</span></h5>
+				<div class="text-end mb-2 pe-3">
+					<span style="font-size:16px; font-weight:700; color:var(--text-dark);">Net Payable: ₹<span id="quick-book-net-payable">0.00</span></span>
 				</div>
 				<div class="row">
 					<div class="col-6">
@@ -452,80 +965,80 @@
   </div>
 
   <!-- Add Doctor Modal -->
-  <div class="modal center-modal fade" id="modal-add-doctor" tabindex="-1" style="z-index: 1060;">
-	  <div class="modal-dialog modal-sm">
+  <div class="modal fade modal-aw" id="modal-add-doctor" tabindex="-1" style="z-index: 1060;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Add New Doctor</h5>
+			<h5 class="modal-title"><i class="fa fa-user-md me-2"></i>Add New Doctor</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 			<form id="form-add-doctor">
 				<div class="form-group">
-					<label class="form-label">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" name="name" required placeholder="e.g. Dr. John Doe">
+					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Qualification</label>
-					<input type="text" class="form-control" name="qualification" placeholder="e.g. MBBS, MD">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Phone No</label>
-					<input type="text" class="form-control" name="phone" placeholder="Phone Number">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Email</label>
-					<input type="email" class="form-control" name="email" placeholder="Email Address" autocomplete="new-password">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Email</label>
+					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password">
 				</div>
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-save-doctor">Save Doctor</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-doctor"><i class="fa fa-check"></i> Save Doctor</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- Edit Doctor Modal -->
-  <div class="modal center-modal fade" id="modal-edit-doctor" tabindex="-1" style="z-index: 1060;">
-	  <div class="modal-dialog modal-sm">
+  <div class="modal fade modal-aw" id="modal-edit-doctor" tabindex="-1" style="z-index: 1060;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title">Edit Doctor</h5>
+			<h5 class="modal-title"><i class="fa fa-user-md me-2"></i>Edit Doctor</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 			<form id="form-edit-doctor">
 				<input type="hidden" name="doctor_id" id="edit-doc-id">
 				<div class="form-group">
-					<label class="form-label">Doctor Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" name="name" id="edit-doc-name" required>
+					<label class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-doc-name" required>
 				</div>
-				<div class="form-group">
-					<label class="form-label">Qualification</label>
-					<input type="text" class="form-control" name="qualification" id="edit-doc-qualification">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Qualification</label>
+					<input type="text" class="form-control-aw" name="qualification" id="edit-doc-qualification">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Phone No</label>
-					<input type="text" class="form-control" name="phone" id="edit-doc-phone">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Phone No</label>
+					<input type="text" class="form-control-aw" name="phone" id="edit-doc-phone">
 				</div>
-				<div class="form-group">
-					<label class="form-label">Email</label>
-					<input type="email" class="form-control" name="email" id="edit-doc-email" autocomplete="new-password">
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Email</label>
+					<input type="email" class="form-control-aw" name="email" id="edit-doc-email" autocomplete="new-password">
 				</div>
 			</form>
 		  </div>
-		  <div class="modal-footer modal-footer-uniform">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary float-end" id="btn-update-doctor">Update Doctor</button>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-doctor"><i class="fa fa-check"></i> Update Changes</button>
 		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  @push('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
   <script>
@@ -764,20 +1277,32 @@
           });
 
           $('#btn-save-doctor').click(function() {
+              let btn = $(this);
+              if (btn.prop('disabled')) return;
+              
+              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i> Saving...');
               let formData = $('#form-add-doctor').serialize();
+              
               $.post("{{ route('doctors.store') }}", formData, function(response) {
                   alert(response.success);
                   $('#modal-add-doctor').modal('hide');
                   $('#form-add-doctor')[0].reset();
                   fetchDoctorSuggestions(response.doctor.name);
+                  btn.prop('disabled', false).html('<i class="fa fa-check"></i> Save Doctor');
               }).fail(function(xhr) {
-                  alert('Error: ' + (xhr.responseJSON.message || 'Failed to save doctor.'));
+                  alert('Error: ' + (xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Failed to save doctor.'));
+                  btn.prop('disabled', false).html('<i class="fa fa-check"></i> Save Doctor');
               });
           });
 
           $('#btn-update-doctor').click(function() {
+              let btn = $(this);
+              if (btn.prop('disabled')) return;
+              
               let docId = $('#edit-doc-id').val();
+              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i> Updating...');
               let formData = $('#form-edit-doctor').serialize();
+              
               $.ajax({
                   url: "/doctors/" + docId,
                   type: 'PUT',
@@ -786,9 +1311,11 @@
                       alert(response.success);
                       $('#modal-edit-doctor').modal('hide');
                       fetchDoctorSuggestions(response.doctor.name);
+                      btn.prop('disabled', false).html('<i class="fa fa-check"></i> Update Changes');
                   },
                   error: function(xhr) {
-                      alert('Error: ' + (xhr.responseJSON.message || 'Failed to update doctor.'));
+                      alert('Error: ' + (xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Failed to update doctor.'));
+                      btn.prop('disabled', false).html('<i class="fa fa-check"></i> Update Changes');
                   }
               });
           });
@@ -812,23 +1339,6 @@
 				  } else {
 					  alert("Something went wrong. Please try again.");
 				  }
-			  });
-		  });
-
-		  // View Patient
-		  $(document).on('click', '.btn-view', function() {
-			  let id = $(this).data('id');
-			  $.get("/patients/" + id, function(data) {
-				  $('#view-patient-id').text(data.patient_id);
-				  $('#view-first-name').text(data.first_name);
-				  $('#view-last-name').text(data.last_name);
-				  $('#view-gender').text(data.gender);
-				  $('#view-age').text(data.age);
-				  $('#view-phone').text(data.phone);
-				  $('#view-email').text(data.email);
-				  $('#view-reference-dr').text(data.reference_dr);
-				  $('#view-status').text(data.status);
-				  $('#view-address').text(data.address);
 			  });
 		  });
 
@@ -866,6 +1376,38 @@
 			  });
 		  });
 
+		  // View Patient
+		  $(document).on('click', '.btn-view', function() {
+			  let id = $(this).data('id');
+			  $.get("/patients/" + id, function(data) {
+				  // Name & meta
+				  let fullName = ((data.first_name || '') + ' ' + (data.last_name || '')).trim();
+				  $('#view-full-name').text(fullName || 'Unknown');
+				  $('#view-patient-id').text(data.patient_id ? data.patient_id.replace('#P-','').replace('#','') : '—');
+				  $('#view-gender').text(data.gender || '—');
+				  $('#view-age').text(data.age ? data.age + ' Yrs' : '—');
+
+				  // Fields
+				  $('#view-phone').text(data.phone || '—');
+				  $('#view-email').text(data.email || '—');
+				  $('#view-reference-dr').text(data.reference_dr || 'Self');
+				  $('#view-address').text(data.address || '—');
+				  $('#view-created-at').text(data.created_at ? data.created_at.substring(0,10) : '—');
+
+				  // Status badge
+				  let isActive = data.status && data.status.toLowerCase() === 'active';
+				  $('#view-status-badge').html(isActive
+					  ? '<span class="status-dot-badge active"><span class="status-dot active"></span>Active</span>'
+					  : '<span class="status-dot-badge inactive"><span class="status-dot inactive"></span>Inactive</span>');
+
+				  // Avatar initials (uses stylesheet for high-contrast white layout)
+				  let fi = data.first_name ? data.first_name.trim().charAt(0).toUpperCase() : '';
+				  let li = data.last_name ? data.last_name.trim().charAt(0).toUpperCase() : '';
+				  let initials = (fi + li) || 'P';
+				  $('#vp-avatar').text(initials);
+			  });
+		  });
+
 		  // Edit Patient (Fetch Data)
 		  $(document).on('click', '.btn-edit', function() {
 			  let id = $(this).data('id');
@@ -887,51 +1429,53 @@
                   if (data.appointments && data.appointments.length > 0) {
                       data.appointments.forEach(function(app, index) {
                           testRowsHtml += `
-                            <div class="row test-row mb-2">
+                            <div class="row test-row mb-2 align-items-center">
                                 <input type="hidden" name="appointment_id[]" value="${app.id}">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <select class="form-select edit-patient-test-name" name="test_name[]">
-                                            <option value="">-- Select Test --</option>
-                                            @foreach($labTests as $test)
-                                                <option value="{{ $test->name }}" data-price="{{ $test->price }}" ${app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <div class="col-md-5 col-12">
+                                    <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
+                                    <select class="form-select edit-patient-test-name" name="test_name[]">
+                                        <option value="">-- Select Test --</option>
+                                        @foreach($labTests as $test)
+                                            <option value="{{ $test->name }}" data-price="{{ $test->price }}" ${app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-6">
+                                    <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
                                     <input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" value="${parseFloat(app.test_price).toFixed(2)}">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-6">
+                                    <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
                                     <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="${parseFloat(app.discount).toFixed(2)}">
                                 </div>
-                                <div class="col-md-1 d-flex align-items-end mb-3">
-                                    ${index === 0 ? '<button type="button" class="btn btn-success btn-sm btn-edit-add-test-row"><i class="fa fa-plus"></i></button>' : '<button type="button" class="btn btn-danger btn-sm btn-remove-test-row"><i class="fa fa-trash"></i></button>'}
+                                <div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+                                    ${index === 0 ? '<button type="button" class="btn btn-success btn-sm btn-edit-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>' : '<button type="button" class="btn btn-danger btn-sm btn-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>'}
                                 </div>
                             </div>`;
                       });
                   } else {
                       // Default empty row if no appointments found
                       testRowsHtml = `
-                        <div class="row test-row mb-2">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <select class="form-select edit-patient-test-name" name="test_name[]">
-                                        <option value="" selected>-- Select Test (Optional) --</option>
-                                        @foreach($labTests as $test)
-                                            <option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="row test-row mb-2 align-items-center">
+                            <div class="col-md-5 col-12">
+                                <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
+                                <select class="form-select edit-patient-test-name" name="test_name[]">
+                                    <option value="" selected>-- Select Test (Optional) --</option>
+                                    @foreach($labTests as $test)
+                                        <option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-6">
+                                <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
                                 <input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" placeholder="0.00">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-6">
+                                <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
                                 <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" placeholder="0.00" value="0.00">
                             </div>
-                            <div class="col-md-1 d-flex align-items-end mb-3">
-                                <button type="button" class="btn btn-success btn-sm btn-edit-add-test-row"><i class="fa fa-plus"></i></button>
+                            <div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+                                <button type="button" class="btn btn-success btn-sm btn-edit-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>`;
                   }
@@ -939,6 +1483,113 @@
                   calculateNetPayable('edit');
 			  });
 		  });
+
+		  // Dynamic row logic for Add Patient modal
+		  const addTestRowTemplate = `
+			<div class="row test-row mb-2 align-items-center">
+				<div class="col-md-5 col-12">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
+					<select class="form-select add-patient-test-name" name="test_name[]">
+						<option value="">-- Select Test --</option>
+						@foreach($labTests as $test)
+							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-md-3 col-6">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
+					<input type="number" step="0.01" class="form-control add-patient-test-price" name="test_price[]" placeholder="0.00">
+				</div>
+				<div class="col-md-3 col-6">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
+					<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00">
+				</div>
+				<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+					<button type="button" class="btn btn-danger btn-sm btn-add-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>
+				</div>
+			</div>`;
+
+		  $(document).on('click', '.btn-add-add-test-row', function() {
+			  $('#add-patient-tests-container').append(addTestRowTemplate);
+		  });
+
+		  $(document).on('click', '.btn-add-remove-test-row', function() {
+			  $(this).closest('.test-row').remove();
+			  calculateNetPayable('add');
+		  });
+
+		  // Dynamic row logic for Edit Patient modal
+		  const editTestRowTemplate = `
+			<div class="row test-row mb-2 align-items-center">
+				<input type="hidden" name="appointment_id[]" value="">
+				<div class="col-md-5 col-12">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
+					<select class="form-select edit-patient-test-name" name="test_name[]">
+						<option value="">-- Select Test --</option>
+						@foreach($labTests as $test)
+							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-md-3 col-6">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
+					<input type="number" step="0.01" class="form-control edit-patient-test-price" name="test_price[]" placeholder="0.00">
+				</div>
+				<div class="col-md-3 col-6">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
+					<input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="0.00">
+				</div>
+				<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+					<button type="button" class="btn btn-danger btn-sm btn-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>
+				</div>
+			</div>`;
+
+		  $(document).on('click', '.btn-edit-add-test-row', function() {
+			  $('#edit-patient-tests-container').append(editTestRowTemplate);
+		  });
+
+		  $(document).on('click', '.btn-remove-test-row', function() {
+			  $(this).closest('.test-row').remove();
+			  calculateNetPayable('edit');
+		  });
+
+		  // Auto-fill price and calculate net
+		  $(document).on('change', '.add-patient-test-name', function() {
+			  let price = $(this).find(':selected').data('price');
+			  $(this).closest('.test-row').find('.add-patient-test-price').val(price ? parseFloat(price).toFixed(2) : '');
+			  calculateNetPayable('add');
+		  });
+
+		  $(document).on('change', '.edit-patient-test-name', function() {
+			  let price = $(this).find(':selected').data('price');
+			  $(this).closest('.test-row').find('.edit-patient-test-price').val(price ? parseFloat(price).toFixed(2) : '');
+			  calculateNetPayable('edit');
+		  });
+
+		  $(document).on('input', '.add-patient-test-price, .add-patient-test-discount', function() {
+			  calculateNetPayable('add');
+		  });
+
+		  $(document).on('input', '.edit-patient-test-price, .edit-patient-test-discount', function() {
+			  calculateNetPayable('edit');
+		  });
+
+		  function calculateNetPayable(prefix) {
+			  let total = 0;
+			  let discount = 0;
+			  
+			  $(`.${prefix}-patient-test-price`).each(function() {
+				  total += parseFloat($(this).val()) || 0;
+			  });
+			  $(`.${prefix}-patient-test-discount`).each(function() {
+				  discount += parseFloat($(this).val()) || 0;
+			  });
+			  
+			  let net = total - discount;
+			  if (net < 0) net = 0;
+			  
+			  $(`#${prefix}-patient-net-payable`).text(net.toFixed(2));
+		  }
 
 		  // Update Patient
 		  $('#btn-update-patient').click(function() {
@@ -984,5 +1635,6 @@
 		  });
 	  });
   </script>
+  @endpush
 
 @endsection

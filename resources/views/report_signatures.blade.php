@@ -1,166 +1,176 @@
 @extends('layouts.app')
+@section('title', ' | Report Signatures')
+@section('page-title', 'Report Signatures')
+
 @section('content')
- <div class="content-wrapper">
-	  <div class="container-full">
-		<div class="content-header">
-			<div class="d-flex align-items-center">
-				<div class="me-auto">
-					<h4 class="page-title">Report Signatures</h4>
-				</div>
-			</div>
-		</div>
+<div class="page-header-aw">
+    <div class="page-title-aw">
+        <div class="title-icon"><i class="fa fa-signature"></i></div>
+        <div>
+            <div>Report Signatures</div>
+            <div style="font-size:13px; font-weight:400; color:var(--text-muted); margin-top:2px;">Manage doctor signatures for report PDF generation</div>
+        </div>
+    </div>
+</div>
 
-		<section class="content">
-			@if(session('success'))
-				<div class="alert alert-success">{{ session('success') }}</div>
-			@endif
-			@if($errors->any())
-				<div class="alert alert-danger">
-					{{ $errors->first() }}
-				</div>
-			@endif
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm mb-4" style="border-radius:10px; background:#d1fae5; color:#065f46; font-size:13.5px; font-weight:500;">
+        <i class="fa fa-check-circle me-2"></i> {{ session('success') }}
+    </div>
+@endif
+@if($errors->any())
+    <div class="alert alert-danger border-0 shadow-sm mb-4" style="border-radius:10px; background:#fee2e2; color:#991b1b; font-size:13.5px; font-weight:500;">
+        <i class="fa fa-exclamation-triangle me-2"></i> {{ $errors->first() }}
+    </div>
+@endif
 
-			<div class="row">
-				<div class="col-xl-4 col-12">
-					<div class="box">
-						<div class="box-header with-border">
-							<h4 class="box-title text-primary"><i class="fa fa-plus-circle me-2"></i>Add Signature</h4>
-						</div>
-						<div class="box-body">
-							<form action="{{ route('report-signatures.store') }}" method="POST" enctype="multipart/form-data">
-								@csrf
-								<div class="form-group">
-									<label class="form-label">Name <span class="text-danger">*</span></label>
-									<input type="text" name="name" class="form-control" value="{{ old('name') }}" required placeholder="e.g. Medi Technician">
-								</div>
-								<div class="form-group">
-									<label class="form-label">Signature Image <span class="text-danger">*</span></label>
-									<input type="file" name="signature_image" class="form-control" accept="image/png,image/jpeg" required>
-								</div>
-								<div class="form-group">
-									<label class="form-label">PIN <span class="text-danger">*</span></label>
-									<input type="password" name="pin" class="form-control" required minlength="4" maxlength="20" autocomplete="new-password" placeholder="4 digits or more">
-								</div>
-								<button type="submit" class="btn btn-primary w-100">
-									<i class="fa fa-save me-1"></i> Save Signature
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
+<div class="row g-4">
+    <!-- Left Column: Add Signature -->
+    <div class="col-xl-4 col-12">
+        <div class="aw-card">
+            <div class="aw-card-header">
+                <div class="aw-card-title"><i class="fa fa-plus-circle" style="color:var(--primary);"></i> Add Signature</div>
+            </div>
+            <div class="aw-card-body">
+                <form action="{{ route('report-signatures.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label-aw">Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control-aw" value="{{ old('name') }}" required placeholder="e.g. Dr. Jane Doe">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label-aw">Signature Image <span class="text-danger">*</span></label>
+                        <input type="file" name="signature_image" class="form-control-aw" accept="image/png,image/jpeg" required>
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Recommended format: Transparent PNG image</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label-aw">PIN <span class="text-danger">*</span></label>
+                        <input type="password" name="pin" class="form-control-aw" required minlength="4" maxlength="20" autocomplete="new-password" placeholder="4 digits or more">
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Secure PIN to authorize report generation</div>
+                    </div>
+                    <button type="submit" class="btn-aw-primary w-100 mt-2">
+                        <i class="fa fa-save"></i> Save Signature
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-				<div class="col-xl-8 col-12">
-					<div class="box">
-						<div class="box-header with-border">
-							<h4 class="box-title text-success"><i class="fa fa-pencil-square-o me-2"></i>Saved Signatures</h4>
-						</div>
-						<div class="box-body">
-							<div class="table-responsive">
-								<table class="table table-hover mb-0">
-									<thead class="bg-light">
-										<tr>
-											<th>Name</th>
-											<th>Signature</th>
-											<th class="text-end" style="width: 140px;">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										@forelse($signatures as $signature)
-											<tr>
-												<td class="fw-600">{{ $signature->name }}</td>
-												<td>
-													<img src="{{ route('report-signatures.image', $signature->id) }}" alt="{{ $signature->name }}" style="max-width: 150px; max-height: 56px; object-fit: contain;">
-												</td>
-												<td class="text-end">
-													<div class="d-flex justify-content-end gap-2">
-														<button type="button"
-															class="btn btn-info-light btn-sm btn-edit-signature"
-															data-id="{{ $signature->id }}"
-															data-name="{{ $signature->name }}"
-															data-bs-toggle="modal"
-															data-bs-target="#modal-edit-signature"
-															title="Edit">
-															<i class="fa fa-edit"></i>
-														</button>
-														<button type="button" class="btn btn-danger-light btn-sm btn-delete-signature" data-id="{{ $signature->id }}" title="Delete">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</td>
-											</tr>
-										@empty
-											<tr>
-												<td colspan="3" class="text-center py-40 text-fade">
-													No report signatures added yet.
-												</td>
-											</tr>
-										@endforelse
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	  </div>
-  </div>
+    <!-- Right Column: Saved Signatures -->
+    <div class="col-xl-8 col-12">
+        <div class="aw-card">
+            <div class="aw-card-header">
+                <div class="aw-card-title"><i class="fa fa-list" style="color:#059669;"></i> Saved Signatures</div>
+            </div>
+            <div class="aw-card-body p-0">
+                <div class="table-responsive">
+                    <table class="table-awlab">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Signature Preview</th>
+                                <th class="text-end" style="width: 140px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($signatures as $signature)
+                                <tr>
+                                    <td style="font-weight:600;">{{ $signature->name }}</td>
+                                    <td>
+                                        <div style="background:#f8fafc; border:1px dashed var(--border-color); border-radius:8px; display:inline-block; padding:6px; max-width:160px;">
+                                            <img src="{{ route('report-signatures.image', $signature->id) }}" alt="{{ $signature->name }}" style="max-height: 48px; object-fit: contain; display:block;">
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-flex justify-content-end gap-2">
+                                            <button type="button"
+                                                class="btn-aw-primary btn-aw-sm btn-edit-signature"
+                                                data-id="{{ $signature->id }}"
+                                                data-name="{{ $signature->name }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal-edit-signature"
+                                                title="Edit">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-signature" data-id="{{ $signature->id }}" title="Delete">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center" style="padding:48px; color:var(--text-muted);">
+                                        <i class="fa fa-folder-open" style="font-size:40px; display:block; margin-bottom:12px; opacity:0.4;"></i>
+                                        <span style="font-size:15px;">No report signatures added yet.</span>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <div class="modal center-modal fade" id="modal-edit-signature" tabindex="-1">
-	  <div class="modal-dialog modal-sm">
-		<div class="modal-content">
-		  <form id="form-edit-signature" method="POST" enctype="multipart/form-data">
-			@csrf
-			@method('PUT')
-			<div class="modal-header">
-				<h5 class="modal-title">Edit Signature</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="form-group">
-					<label class="form-label">Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" name="name" id="edit-signature-name" required>
-				</div>
-				<div class="form-group">
-					<label class="form-label">Replace Image</label>
-					<input type="file" class="form-control" name="signature_image" accept="image/png,image/jpeg">
-				</div>
-				<div class="form-group">
-					<label class="form-label">New PIN</label>
-					<input type="password" class="form-control" name="pin" minlength="4" maxlength="20" autocomplete="new-password" placeholder="Leave blank to keep current PIN">
-				</div>
-			</div>
-			<div class="modal-footer modal-footer-uniform">
-				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-				<button type="submit" class="btn btn-primary">Update</button>
-			</div>
-		  </form>
-		</div>
-	  </div>
-  </div>
+<!-- Edit Signature Modal -->
+<div class="modal fade modal-aw" id="modal-edit-signature" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form-edit-signature" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa fa-edit me-2"></i>Edit Signature</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label-aw">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control-aw" name="name" id="edit-signature-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label-aw">Replace Image</label>
+                        <input type="file" class="form-control-aw" name="signature_image" accept="image/png,image/jpeg">
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Leave blank to keep current signature image</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label-aw">New PIN</label>
+                        <input type="password" class="form-control-aw" name="pin" minlength="4" maxlength="20" autocomplete="new-password" placeholder="PIN">
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:5px;"><i class="fa fa-info-circle me-1"></i> Leave blank to keep current PIN</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn-aw-primary">Update Signature</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-	  $(document).ready(function() {
-		  $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.btn-edit-signature', function() {
+            $('#edit-signature-name').val($(this).data('name'));
+            $('#form-edit-signature').attr('action', '/report-signatures/' + $(this).data('id'));
+        });
 
-		  $(document).on('click', '.btn-edit-signature', function() {
-			  $('#edit-signature-name').val($(this).data('name'));
-			  $('#form-edit-signature').attr('action', '/report-signatures/' + $(this).data('id'));
-		  });
+        $(document).on('click', '.btn-delete-signature', function() {
+            if (!confirm('Delete this signature? Reports using it will no longer show it.')) return;
 
-		  $(document).on('click', '.btn-delete-signature', function() {
-			  if (!confirm('Delete this signature? Reports using it will no longer show it.')) return;
-
-			  $.ajax({
-				  url: '/report-signatures/' + $(this).data('id'),
-				  type: 'DELETE',
-				  success: function() { location.reload(); },
-				  error: function(xhr) {
-					  alert(xhr.responseJSON?.message || 'Could not delete signature.');
-				  }
-			  });
-		  });
-	  });
-  </script>
+            $.ajax({
+                url: '/report-signatures/' + $(this).data('id'),
+                type: 'DELETE',
+                success: function() { location.reload(); },
+                error: function(xhr) {
+                    alert(xhr.responseJSON?.message || 'Could not delete signature.');
+                }
+            });
+        });
+    });
+</script>
+@endpush
 @endsection

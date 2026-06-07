@@ -1,198 +1,244 @@
 @extends('layouts.app')
+@section('title', ' | Master Data Management')
+@section('page-title', 'Master Data Management')
+
 @section('content')
- <div class="content-wrapper">
-	  <div class="container-full">
-		<div class="content-header">
-			<div class="d-flex align-items-center">
-				<div class="me-auto">
-					<h4 class="page-title">Master Data Management</h4>
+<div class="page-header-aw">
+    <div class="page-title-aw">
+        <div class="title-icon"><i class="fa fa-database"></i></div>
+        <div>
+            <div>Master Data Management</div>
+            <div style="font-size:13px; font-weight:400; color:var(--text-muted); margin-top:2px;">Manage laboratory measurement units and result templates</div>
+        </div>
+    </div>
+</div>
 
-				</div>
-			</div>
-		</div>
+<div class="row g-4">
+    <!-- Units Section -->
+    <div class="col-xl-6 col-12">
+        <div class="aw-card">
+            <div class="aw-card-header">
+                <div class="aw-card-title"><i class="fa fa-flask" style="color:var(--primary);"></i> Laboratory Units</div>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($units) }} units</span>
+                    <div style="position:relative;">
+                        <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
+                        <input type="text" id="unit-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search units...">
+                    </div>
+                </div>
+            </div>
+            <div class="aw-card-body">
+                <form id="form-add-unit" class="mb-4">
+                    @csrf
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new unit (e.g. mg/dl)" required>
+                        <button type="submit" class="btn-aw-primary" style="flex-shrink:0;"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </form>
+                <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
+                    <table class="table-awlab" id="units-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Unit Name</th>
+                                <th class="text-end" style="width: 120px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($units as $i => $unit)
+                            <tr>
+                                <td><span class="badge-aw badge-blue">{{ $i + 1 }}</span></td>
+                                <td style="font-weight:600;">{{ $unit->name }}</td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button class="btn-aw-primary btn-aw-sm btn-edit-unit" data-id="{{ $unit->id }}" data-name="{{ $unit->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn-aw-danger btn-aw-sm btn-delete-unit" data-id="{{ $unit->id }}" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
+                                    <i class="fa fa-flask" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
+                                    No units added yet.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<section class="content">
-			<div class="row">
-				<!-- Units Section -->
-				<div class="col-xl-6 col-12">
-					<div class="box">
-						<div class="box-header with-border">
-							<h4 class="box-title text-primary"><i class="fa fa-flask me-2"></i>Laboratory Units</h4>
-						</div>
-						<div class="box-body">
-							<form id="form-add-unit" class="mb-4">
-								@csrf
-								<div class="input-group">
-									<input type="text" name="name" class="form-control" placeholder="Add new unit (e.g. mg/dl)" required>
-									<button type="submit" class="btn btn-primary"><i class="fa fa-plus me-1"></i> Add</button>
-								</div>
-							</form>
-							<div class="table-responsive" style="max-height: 500px;">
-								<table class="table table-hover mb-0">
-									<thead class="bg-light">
-										<tr>
-											<th>Unit Name</th>
-											<th class="text-end" style="width: 120px;">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach($units as $unit)
-										<tr>
-											<td class="fw-600">{{ $unit->name }}</td>
-											<td class="text-end">
-												<div class="d-flex justify-content-end gap-2">
-													<button class="btn btn-info-light btn-sm btn-edit-unit" data-id="{{ $unit->id }}" data-name="{{ $unit->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master">
-														<i class="fa fa-edit"></i>
-													</button>
-													<button class="btn btn-danger-light btn-sm btn-delete-unit" data-id="{{ $unit->id }}">
-														<i class="fa fa-trash"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+    <!-- Result Templates Section -->
+    <div class="col-xl-6 col-12">
+        <div class="aw-card">
+            <div class="aw-card-header">
+                <div class="aw-card-title"><i class="fa fa-list-check" style="color:#059669;"></i> Result Templates</div>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ count($templates) }} templates</span>
+                    <div style="position:relative;">
+                        <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
+                        <input type="text" id="template-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:7px 12px 7px 30px;font-size:12px;outline:none;width:160px;" placeholder="Search templates...">
+                    </div>
+                </div>
+            </div>
+            <div class="aw-card-body">
+                <form id="form-add-template" class="mb-4">
+                    @csrf
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" name="name" class="form-control-aw" placeholder="Add new result (e.g. Positive)" required>
+                        <button type="submit" class="btn-aw-primary" style="flex-shrink:0; background:#059669;"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </form>
+                <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
+                    <table class="table-awlab" id="templates-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Template Name</th>
+                                <th class="text-end" style="width: 120px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($templates as $i => $template)
+                            <tr>
+                                <td><span class="badge-aw badge-green">{{ $i + 1 }}</span></td>
+                                <td style="font-weight:600; color:#059669;">{{ $template->name }}</td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button class="btn-aw-primary btn-aw-sm btn-edit-template" data-id="{{ $template->id }}" data-name="{{ $template->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn-aw-danger btn-aw-sm btn-delete-template" data-id="{{ $template->id }}" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
+                                    <i class="fa fa-list-check" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
+                                    No result templates added yet.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-				<!-- Result Templates Section -->
-				<div class="col-xl-6 col-12">
-					<div class="box">
-						<div class="box-header with-border">
-							<h4 class="box-title text-success"><i class="fa fa-list-alt me-2"></i>Result Templates</h4>
-						</div>
-						<div class="box-body">
-							<form id="form-add-template" class="mb-4">
-								@csrf
-								<div class="input-group">
-									<input type="text" name="name" class="form-control" placeholder="Add new result (e.g. Positive)" required>
-									<button type="submit" class="btn btn-success"><i class="fa fa-plus me-1"></i> Add</button>
-								</div>
-							</form>
-							<div class="table-responsive" style="max-height: 500px;">
-								<table class="table table-hover mb-0">
-									<thead class="bg-light">
-										<tr>
-											<th>Template Name</th>
-											<th class="text-end" style="width: 120px;">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach($templates as $template)
-										<tr>
-											<td class="fw-600 text-success">{{ $template->name }}</td>
-											<td class="text-end">
-												<div class="d-flex justify-content-end gap-2">
-													<button class="btn btn-info-light btn-sm btn-edit-template" data-id="{{ $template->id }}" data-name="{{ $template->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master">
-														<i class="fa fa-edit"></i>
-													</button>
-													<button class="btn btn-danger-light btn-sm btn-delete-template" data-id="{{ $template->id }}">
-														<i class="fa fa-trash"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	  </div>
-  </div>
+<!-- Universal Edit Modal -->
+<div class="modal fade modal-aw" id="modal-edit-master" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-pen me-2"></i>Edit Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-edit-master">
+                    <input type="hidden" id="edit-id">
+                    <input type="hidden" id="edit-type">
+                    <div class="mb-3">
+                        <label class="form-label-aw">Name / Value</label>
+                        <input type="text" id="edit-name" name="name" class="form-control-aw" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-aw-primary" id="btn-update-master"><i class="fa fa-check"></i> Update</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <!-- Universal Edit Modal -->
-  <div class="modal center-modal fade" id="modal-edit-master" tabindex="-1">
-	  <div class="modal-dialog modal-sm">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Edit Entry</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-			<form id="form-edit-master">
-				<input type="hidden" id="edit-id">
-				<input type="hidden" id="edit-type"> <!-- 'unit' or 'template' -->
-				<div class="form-group">
-					<label class="form-label">Name / Value</label>
-					<input type="text" id="edit-name" name="name" class="form-control" required>
-				</div>
-			</form>
-		  </div>
-		  <div class="modal-footer modal-footer-uniform text-end">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-			<button type="button" class="btn btn-primary" id="btn-update-master">Update Changes</button>
-		  </div>
-		</div>
-	  </div>
-  </div>
+@push('scripts')
+<script>
+    $(document).ready(function() {
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-	  $(document).ready(function() {
-		  $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        // Live search — Units
+        $('#unit-search').on('keyup', function() {
+            let val = $(this).val().toLowerCase();
+            $('#units-table tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+            });
+        });
 
-		  // ADD Unit
-		  $('#form-add-unit').submit(function(e) {
-			  e.preventDefault();
-			  $.post("{{ route('units.store') }}", $(this).serialize(), function() { location.reload(); });
-		  });
+        // Live search — Templates
+        $('#template-search').on('keyup', function() {
+            let val = $(this).val().toLowerCase();
+            $('#templates-table tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+            });
+        });
 
-		  // DELETE Unit
-		  $(document).on('click', '.btn-delete-unit', function() {
-			  if(confirm('Remove this unit?')) {
-				  $.ajax({ url: "/units/" + $(this).data('id'), type: 'DELETE', success: function() { location.reload(); } });
-			  }
-		  });
+        // ADD Unit
+        $('#form-add-unit').submit(function(e) {
+            e.preventDefault();
+            $.post("{{ route('units.store') }}", $(this).serialize(), function() { location.reload(); });
+        });
 
-		  // ADD Template
-		  $('#form-add-template').submit(function(e) {
-			  e.preventDefault();
-			  $.post("{{ route('result-templates.store') }}", $(this).serialize(), function() { location.reload(); });
-		  });
+        // DELETE Unit
+        $(document).on('click', '.btn-delete-unit', function() {
+            if(confirm('Remove this unit?')) {
+                $.ajax({ url: "/units/" + $(this).data('id'), type: 'DELETE', success: function() { location.reload(); } });
+            }
+        });
 
-		  // DELETE Template
-		  $(document).on('click', '.btn-delete-template', function() {
-			  if(confirm('Remove this template?')) {
-				  $.ajax({ url: "/result-templates/" + $(this).data('id'), type: 'DELETE', success: function() { location.reload(); } });
-			  }
-		  });
+        // ADD Template
+        $('#form-add-template').submit(function(e) {
+            e.preventDefault();
+            $.post("{{ route('result-templates.store') }}", $(this).serialize(), function() { location.reload(); });
+        });
 
-		  // POPULATE Edit Modal
-		  $(document).on('click', '.btn-edit-unit', function() {
-			  $('#edit-id').val($(this).data('id'));
-			  $('#edit-name').val($(this).data('name'));
-			  $('#edit-type').val('unit');
-			  $('.modal-title').text('Edit Laboratory Unit');
-		  });
+        // DELETE Template
+        $(document).on('click', '.btn-delete-template', function() {
+            if(confirm('Remove this template?')) {
+                $.ajax({ url: "/result-templates/" + $(this).data('id'), type: 'DELETE', success: function() { location.reload(); } });
+            }
+        });
 
-		  $(document).on('click', '.btn-edit-template', function() {
-			  $('#edit-id').val($(this).data('id'));
-			  $('#edit-name').val($(this).data('name'));
-			  $('#edit-type').val('template');
-			  $('.modal-title').text('Edit Result Template');
-		  });
+        // POPULATE Edit Modal — Unit
+        $(document).on('click', '.btn-edit-unit', function() {
+            $('#edit-id').val($(this).data('id'));
+            $('#edit-name').val($(this).data('name'));
+            $('#edit-type').val('unit');
+            $('.modal-title').html('<i class="fa fa-pen me-2"></i>Edit Laboratory Unit');
+        });
 
-		  // UPDATE Logic
-		  $('#btn-update-master').click(function() {
-			  let id = $('#edit-id').val();
-			  let type = $('#edit-type').val();
-			  let url = type === 'unit' ? "/units/" + id : "/result-templates/" + id;
-			  
-			  $.ajax({
-				  url: url,
-				  type: 'PUT',
-				  data: $('#form-edit-master').serialize(),
-				  success: function() { location.reload(); },
-				  error: function() { alert("Error updating entry. Possibly a duplicate name."); }
-			  });
-		  });
-	  });
-  </script>
+        // POPULATE Edit Modal — Template
+        $(document).on('click', '.btn-edit-template', function() {
+            $('#edit-id').val($(this).data('id'));
+            $('#edit-name').val($(this).data('name'));
+            $('#edit-type').val('template');
+            $('.modal-title').html('<i class="fa fa-pen me-2"></i>Edit Result Template');
+        });
+
+        // UPDATE Logic
+        $('#btn-update-master').click(function() {
+            let id = $('#edit-id').val();
+            let type = $('#edit-type').val();
+            let url = type === 'unit' ? "/units/" + id : "/result-templates/" + id;
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: $('#form-edit-master').serialize(),
+                success: function() { location.reload(); },
+                error: function() { alert("Error updating entry. Possibly a duplicate name."); }
+            });
+        });
+    });
+</script>
+@endpush
 @endsection

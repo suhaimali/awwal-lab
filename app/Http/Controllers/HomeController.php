@@ -62,9 +62,11 @@ class HomeController extends Controller
         $subCategories = \App\Models\SubCategory::orderBy('name')->get();
         $units = \App\Models\Unit::orderBy('name')->get();
         $templates = \App\Models\ResultTemplate::orderBy('name')->get();
+        $referenceTemplates = \App\Models\ReferenceTemplate::orderBy('name')->get();
+        $flagTemplates = \App\Models\FlagTemplate::orderBy('name')->get();
         $signatures = \App\Models\ReportSignature::orderBy('name')->get();
 
-        return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates', 'signatures'));
+        return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates', 'referenceTemplates', 'flagTemplates', 'signatures'));
     }
 
     public function reportSignatures()
@@ -958,6 +960,48 @@ class HomeController extends Controller
     public function deleteResultTemplate($id)
     {
         \App\Models\ResultTemplate::destroy($id);
+        return response()->json(['success' => 'Template removed!']);
+    }
+
+    public function storeReferenceTemplate(\Illuminate\Http\Request $request)
+    {
+        $request->validate(['name' => 'required|unique:reference_templates']);
+        \App\Models\ReferenceTemplate::create($request->all());
+        return response()->json(['success' => 'Reference template added!']);
+    }
+
+    public function updateReferenceTemplate(\Illuminate\Http\Request $request, $id)
+    {
+        $request->validate(['name' => 'required|unique:reference_templates,name,'.$id]);
+        $template = \App\Models\ReferenceTemplate::findOrFail($id);
+        $template->update($request->all());
+        return response()->json(['success' => 'Template updated!']);
+    }
+
+    public function deleteReferenceTemplate($id)
+    {
+        \App\Models\ReferenceTemplate::destroy($id);
+        return response()->json(['success' => 'Template removed!']);
+    }
+
+    public function storeFlagTemplate(\Illuminate\Http\Request $request)
+    {
+        $request->validate(['name' => 'required|unique:flag_templates']);
+        \App\Models\FlagTemplate::create($request->all());
+        return response()->json(['success' => 'Flag template added!']);
+    }
+
+    public function updateFlagTemplate(\Illuminate\Http\Request $request, $id)
+    {
+        $request->validate(['name' => 'required|unique:flag_templates,name,'.$id]);
+        $template = \App\Models\FlagTemplate::findOrFail($id);
+        $template->update($request->all());
+        return response()->json(['success' => 'Template updated!']);
+    }
+
+    public function deleteFlagTemplate($id)
+    {
+        \App\Models\FlagTemplate::destroy($id);
         return response()->json(['success' => 'Template removed!']);
     }
 

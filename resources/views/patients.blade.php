@@ -632,13 +632,22 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label class="form-label">Reference Dr.</label>
-							<div class="input-group flex-nowrap">
-								<select class="form-select reference-dr-select" name="reference_dr">
-									<option value="">-- Select Doctor --</option>
-								</select>
-								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
-								<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
+							<div class="reference-dr-container">
+								<input type="hidden" class="reference-dr-value" name="reference_dr" value="">
+								<div class="input-group flex-nowrap reference-dr-input-group">
+									<select class="form-select reference-dr-select">
+										<option value="">-- Select Doctor --</option>
+									</select>
+									<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
+									<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
+									<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
+								</div>
+								<div class="reference-dr-custom-wrap" style="display:none;">
+									<div class="input-group">
+										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name">
+										<button type="button" class="btn btn-outline-secondary btn-back-to-dr-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -657,12 +666,20 @@
 					<div class="row test-row mb-2 align-items-center">
 						<div class="col-md-5 col-12">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-							<select class="form-select add-patient-test-name" name="test_name[]">
+                            <input type="hidden" class="test-name-value" name="test_name[]" value="">
+							<select class="form-select add-patient-test-name test-name-select">
 								<option value="">-- Select Test --</option>
 								@foreach($labTests as $test)
 									<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
 								@endforeach
+                                <option value="__custom__">✏️ Custom (type below)</option>
 							</select>
+                            <div class="test-name-custom-wrap" style="display:none;">
+                                <div class="input-group">
+                                    <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+                                    <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+                                </div>
+                            </div>
 						</div>
 						<div class="col-md-3 col-6">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
@@ -834,13 +851,22 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label class="form-label">Reference Dr.</label>
-							<div class="input-group flex-nowrap">
-								<select class="form-select reference-dr-select" id="edit-reference-dr" name="reference_dr">
-									<option value="">-- Select Doctor --</option>
-								</select>
-								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
-								<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
+							<div class="reference-dr-container">
+								<input type="hidden" class="reference-dr-value" name="reference_dr" value="">
+								<div class="input-group flex-nowrap reference-dr-input-group">
+									<select class="form-select reference-dr-select" id="edit-reference-dr">
+										<option value="">-- Select Doctor --</option>
+									</select>
+									<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
+									<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
+									<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
+								</div>
+								<div class="reference-dr-custom-wrap" style="display:none;">
+									<div class="input-group">
+										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name">
+										<button type="button" class="btn btn-outline-secondary btn-back-to-dr-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1222,10 +1248,11 @@
 					  let qual = doctor.qualification ? doctor.qualification : '';
 					  options += '<option value="' + doctor.name + '" data-id="'+doctor.id+'" data-phone="'+phone+'" data-email="'+email+'" data-qualification="'+qual+'">' + doctor.name + '</option>';
 				  });
+				  options += '<option value="__custom__">✏️ Custom (type below)</option>';
 				  $('.reference-dr-select').html(options);
-                  if (selectedValue) {
-                      $('.reference-dr-select').val(selectedValue);
-                  }
+                   if (selectedValue) {
+                       $('.reference-dr-select').val(selectedValue);
+                   }
 			  });
 		  }
 
@@ -1420,25 +1447,56 @@
 				  $('#edit-age').val(data.age);
 				  $('#edit-phone').val(data.phone);
 				  $('#edit-email').val(data.email);
-				  $('#edit-reference-dr').val(data.reference_dr);
+				  let refDr = data.reference_dr || '';
+				  let refDrSelect = $('#edit-reference-dr');
+				  let isCustomDr = refDr !== '' && !refDrSelect.find(`option[value="${refDr}"]`).length;
+				  
+				  if (isCustomDr) {
+					  refDrSelect.val('__custom__').closest('.reference-dr-input-group').hide();
+					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-wrap').show();
+					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-input').val(refDr);
+				  } else {
+					  refDrSelect.val(refDr).closest('.reference-dr-input-group').show();
+					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-wrap').hide();
+				  }
+				  refDrSelect.closest('.reference-dr-container').find('.reference-dr-value').val(refDr);
 				  $('#edit-status').val(data.status);
 				  $('#edit-address').val(data.address);
+
+                  // Collect known test names from server (rendered by Blade)
+                  const knownTestNames = [
+                      @foreach($labTests as $test)
+                          '{{ addslashes($test->name) }}',
+                      @endforeach
+                  ];
 
                   // Populate existing appointments
                   let testRowsHtml = '';
                   if (data.appointments && data.appointments.length > 0) {
                       data.appointments.forEach(function(app, index) {
+                          let testName = app.test_name || '';
+                          let isCustom = testName !== '' && !knownTestNames.includes(testName);
+                          let optionsHtml = `<option value="">-- Select Test --</option>`;
+                          @foreach($labTests as $test)
+                              optionsHtml += `<option value="{{ $test->name }}" data-price="{{ $test->price }}" ${!isCustom && app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
+                          @endforeach
+                          optionsHtml += `<option value="__custom__">✏️ Custom (type below)</option>`;
+
                           testRowsHtml += `
                             <div class="row test-row mb-2 align-items-center">
                                 <input type="hidden" name="appointment_id[]" value="${app.id}">
                                 <div class="col-md-5 col-12">
                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-                                    <select class="form-select edit-patient-test-name" name="test_name[]">
-                                        <option value="">-- Select Test --</option>
-                                        @foreach($labTests as $test)
-                                            <option value="{{ $test->name }}" data-price="{{ $test->price }}" ${app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>
-                                        @endforeach
+                                    <input type="hidden" class="test-name-value" name="test_name[]" value="${testName}">
+                                    <select class="form-select edit-patient-test-name test-name-select" ${isCustom ? 'style="display:none;"' : ''}>
+                                        ${optionsHtml}
                                     </select>
+                                    <div class="test-name-custom-wrap" ${isCustom ? '' : 'style="display:none;"'}>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" value="${isCustom ? testName : ''}">
+                                            <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
@@ -1455,16 +1513,26 @@
                       });
                   } else {
                       // Default empty row if no appointments found
+                      let emptyOptions = `<option value="" selected>-- Select Test (Optional) --</option>`;
+                      @foreach($labTests as $test)
+                          emptyOptions += `<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>`;
+                      @endforeach
+                      emptyOptions += `<option value="__custom__">✏️ Custom (type below)</option>`;
+
                       testRowsHtml = `
                         <div class="row test-row mb-2 align-items-center">
                             <div class="col-md-5 col-12">
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-                                <select class="form-select edit-patient-test-name" name="test_name[]">
-                                    <option value="" selected>-- Select Test (Optional) --</option>
-                                    @foreach($labTests as $test)
-                                        <option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
-                                    @endforeach
+                                <input type="hidden" class="test-name-value" name="test_name[]" value="">
+                                <select class="form-select edit-patient-test-name test-name-select">
+                                    ${emptyOptions}
                                 </select>
+                                <div class="test-name-custom-wrap" style="display:none;">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+                                        <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
@@ -1479,6 +1547,7 @@
                             </div>
                         </div>`;
                   }
+
                   $('#edit-patient-tests-container').html(testRowsHtml);
                   calculateNetPayable('edit');
 			  });
@@ -1489,14 +1558,20 @@
 			<div class="row test-row mb-2 align-items-center">
 				<div class="col-md-5 col-12">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-					<select class="form-select add-patient-test-name" name="test_name[]">
+					<input type="hidden" class="test-name-value" name="test_name[]" value="">
+					<select class="form-select add-patient-test-name test-name-select">
 						<option value="">-- Select Test --</option>
-						<option value="Custom">-- Custom Test (Enter) --</option>
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
 						@endforeach
+						<option value="__custom__">✏️ Custom (type below)</option>
 					</select>
-                    <input type="text" class="form-control add-patient-custom-test mt-1 d-none" placeholder="Enter Test Name" name="custom_test_name[]">
+					<div class="test-name-custom-wrap" style="display:none;">
+						<div class="input-group">
+							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+							<button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
@@ -1526,12 +1601,20 @@
 				<input type="hidden" name="appointment_id[]" value="">
 				<div class="col-md-5 col-12">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
-					<select class="form-select edit-patient-test-name" name="test_name[]">
+					<input type="hidden" class="test-name-value" name="test_name[]" value="">
+					<select class="form-select edit-patient-test-name test-name-select">
 						<option value="">-- Select Test --</option>
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
 						@endforeach
+						<option value="__custom__">✏️ Custom (type below)</option>
 					</select>
+					<div class="test-name-custom-wrap" style="display:none;">
+						<div class="input-group">
+							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name">
+							<button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-3 col-6">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Amount</div>
@@ -1555,17 +1638,78 @@
 			  calculateNetPayable('edit');
 		  });
 
-		  // Auto-fill price and calculate net
+		  // ── Custom test name toggle logic ──────────────────────────────────
+		  // When dropdown changes to a test, sync the hidden input; when "__custom__" selected, show text box
+		  $(document).on('change', '.test-name-select', function() {
+			  let val = $(this).val();
+			  let row = $(this).closest('.test-row, div[class*="col-md-5"]').closest('.row, .test-row').length
+						? $(this).closest('.row, .test-row') : $(this).closest('div').parent();
+			  // Simpler: just search within the wrapping col-md-5 parent
+			  let col = $(this).closest('[class*="col-"]');
+			  if (val === '__custom__') {
+				  $(this).hide();
+				  col.find('.test-name-custom-wrap').show();
+				  col.find('.test-name-custom-input').focus();
+				  col.find('.test-name-value').val('');
+			  } else {
+				  col.find('.test-name-value').val(val);
+				  // Auto-fill price
+				  let price = $(this).find(':selected').data('price');
+				  let testRow = $(this).closest('.test-row');
+				  testRow.find('.add-patient-test-price, .edit-patient-test-price').val(price ? parseFloat(price).toFixed(2) : '');
+				  calculateNetPayable(testRow.find('.add-patient-test-price').length ? 'add' : 'edit');
+			  }
+		  });
+
+		  // Live sync custom text → hidden input
+		  $(document).on('input', '.test-name-custom-input', function() {
+			  $(this).closest('[class*="col-"]').find('.test-name-value').val($(this).val().trim());
+		  });
+
+		  // Back to dropdown button
+		  $(document).on('click', '.btn-back-to-select', function() {
+			  let col = $(this).closest('[class*="col-"]');
+			  col.find('.test-name-custom-wrap').hide();
+			  col.find('.test-name-custom-input').val('');
+			  col.find('.test-name-value').val('');
+			  let sel = col.find('.test-name-select').val('').show();
+		  });
+		  // ── End custom test name logic ─────────────────────────────────────
+
+		  // ── Custom reference doctor name toggle logic ─────────────────────────
+		  $(document).on('change', '.reference-dr-select', function() {
+			  let val = $(this).val();
+			  let container = $(this).closest('.reference-dr-container');
+			  if (val === '__custom__') {
+				  $(this).closest('.reference-dr-input-group').hide();
+				  container.find('.reference-dr-custom-wrap').show();
+				  container.find('.reference-dr-custom-input').focus();
+				  container.find('.reference-dr-value').val('');
+			  } else {
+				  container.find('.reference-dr-value').val(val);
+			  }
+		  });
+
+		  $(document).on('input', '.reference-dr-custom-input', function() {
+			  $(this).closest('.reference-dr-container').find('.reference-dr-value').val($(this).val().trim());
+		  });
+
+		  $(document).on('click', '.btn-back-to-dr-select', function() {
+			  let container = $(this).closest('.reference-dr-container');
+			  container.find('.reference-dr-custom-wrap').hide();
+			  container.find('.reference-dr-custom-input').val('');
+			  container.find('.reference-dr-value').val('');
+			  container.find('.reference-dr-select').val('').closest('.reference-dr-input-group').show();
+		  });
+		  // ── End custom reference doctor logic ─────────────────────────────────
+
+		  // Auto-fill price and calculate net (kept for backward compat; now handled in .test-name-select change)
 		  $(document).on('change', '.add-patient-test-name', function() {
-			  let price = $(this).find(':selected').data('price');
-			  $(this).closest('.test-row').find('.add-patient-test-price').val(price ? parseFloat(price).toFixed(2) : '');
-			  calculateNetPayable('add');
+			  // handled above via .test-name-select
 		  });
 
 		  $(document).on('change', '.edit-patient-test-name', function() {
-			  let price = $(this).find(':selected').data('price');
-			  $(this).closest('.test-row').find('.edit-patient-test-price').val(price ? parseFloat(price).toFixed(2) : '');
-			  calculateNetPayable('edit');
+			  // handled above via .test-name-select
 		  });
 
 		  $(document).on('input', '.add-patient-test-price, .add-patient-test-discount', function() {

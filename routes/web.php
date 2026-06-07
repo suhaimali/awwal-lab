@@ -100,6 +100,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/result-templates', [HomeController::class, 'storeResultTemplate'])->name('result-templates.store');
     Route::put('/result-templates/{id}', [HomeController::class, 'updateResultTemplate'])->name('result-templates.update');
     Route::delete('/result-templates/{id}', [HomeController::class, 'deleteResultTemplate'])->name('result-templates.delete');
+
+    Route::post('/reference-templates', [HomeController::class, 'storeReferenceTemplate'])->name('reference-templates.store');
+    Route::put('/reference-templates/{id}', [HomeController::class, 'updateReferenceTemplate'])->name('reference-templates.update');
+    Route::delete('/reference-templates/{id}', [HomeController::class, 'deleteReferenceTemplate'])->name('reference-templates.delete');
+
+    Route::post('/flag-templates', [HomeController::class, 'storeFlagTemplate'])->name('flag-templates.store');
+    Route::put('/flag-templates/{id}', [HomeController::class, 'updateFlagTemplate'])->name('flag-templates.update');
+    Route::delete('/flag-templates/{id}', [HomeController::class, 'deleteFlagTemplate'])->name('flag-templates.delete');
     Route::post('/reports/update-status/{id}', [HomeController::class, 'updateReportStatus'])->name('reports.update-status');
     Route::get('/dashboard-stats', [HomeController::class, 'getDashboardStats'])->name('dashboard.stats');
 });

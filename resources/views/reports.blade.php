@@ -372,14 +372,14 @@
 
                 /* Custom responsive columns for Report generator popup */
                 @media (min-width: 768px) {
-                    .col-sub { flex: 0 0 14%; max-width: 14%; padding-left: 4px; padding-right: 4px; }
-                    .col-unit-dept { flex: 0 0 14%; max-width: 14%; padding-left: 4px; padding-right: 4px; }
-                    .col-param { flex: 0 0 18%; max-width: 18%; padding-left: 4px; padding-right: 4px; }
-                    .col-observed { flex: 0 0 8%; max-width: 8%; padding-left: 4px; padding-right: 4px; }
-                    .col-unit-meas { flex: 0 0 12%; max-width: 12%; padding-left: 4px; padding-right: 4px; }
-                    .col-ref { flex: 0 0 18%; max-width: 18%; padding-left: 4px; padding-right: 4px; }
-                    .col-flag { flex: 0 0 8%; max-width: 8%; padding-left: 4px; padding-right: 4px; }
-                    .col-action { flex: 0 0 8%; max-width: 8%; padding-left: 4px; padding-right: 4px; }
+                    .col-sub { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-unit-dept { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-param { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-observed { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-unit-meas { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-ref { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-flag { flex: 0 0 13%; max-width: 13%; padding-left: 8px; padding-right: 8px; }
+                    .col-action { flex: 0 0 9%; max-width: 9%; padding-left: 8px; padding-right: 8px; }
                 }
 
                 /* Inline buttons styled premium */
@@ -404,6 +404,18 @@
                 }
                 .btn-edit-report-category:hover, .btn-edit-report-subcategory:hover, .btn-edit-report-test:hover, .btn-edit-report-unit:hover {
                     background: #d97706 !important;
+                    color: #fff !important;
+                }
+
+                .btn-view-report-category, .btn-view-report-subcategory, .btn-view-report-test, .btn-view-report-unit, .btn-view-report-doctor, .btn-view-report-patient, .btn-view-report-signature, .btn-view-observed, .btn-view-reference, .btn-view-flag {
+                    background: #e0f2fe !important;
+                    color: #0284c7 !important;
+                    border: 1px solid #bae6fd !important;
+                    border-left: none !important;
+                    transition: all 0.2s ease;
+                }
+                .btn-view-report-category:hover, .btn-view-report-subcategory:hover, .btn-view-report-test:hover, .btn-view-report-unit:hover, .btn-view-report-doctor:hover, .btn-view-report-patient:hover, .btn-view-report-signature:hover, .btn-view-observed:hover, .btn-view-reference:hover, .btn-view-flag:hover {
+                    background: #0284c7 !important;
                     color: #fff !important;
                 }
             </style>
@@ -475,16 +487,19 @@
 			<form id="form-add-report">
                 @csrf
 				<h4 class="text-primary border-bottom pb-2 mb-3">General Information</h4>
-				<div class="row">
+				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="form-label">Select Patient</label>
-							<select class="form-select" name="patient_id" id="add-patient-id" required>
-								<option value="">-- Select Patient --</option>
-								@foreach($patients as $patient)
-										<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
-								@endforeach
-							</select>
+							<div class="input-group flex-nowrap">
+								<select class="form-select" name="patient_id" id="add-patient-id" required>
+									<option value="">-- Select Patient --</option>
+									@foreach($patients as $patient)
+											<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
+									@endforeach
+								</select>
+								<button type="button" class="btn btn-info btn-sm btn-view-report-patient" title="View Patient Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -495,13 +510,13 @@
 									<option value="">-- Select Doctor --</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-report-doctor" title="Add New Doctor"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-edit-report-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-info btn-sm btn-view-report-doctor" title="View Doctor Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="form-label">Sample Received On</label>
@@ -516,19 +531,22 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-8 col-12">
+				<div class="row mb-3">
+					<div class="col-md-6 col-12">
 						<div class="form-group">
 							<label class="form-label">Authorized Signature</label>
-							<select class="form-select report-signature-select" name="report_signature_id">
-								<option value="">No signature</option>
-								@foreach($signatures as $signature)
-									<option value="{{ $signature->id }}">{{ $signature->name }}</option>
-								@endforeach
-							</select>
+							<div class="input-group flex-nowrap">
+								<select class="form-select report-signature-select" name="report_signature_id">
+									<option value="">No signature</option>
+									@foreach($signatures as $signature)
+										<option value="{{ $signature->id }}" data-name="{{ $signature->name }}" data-image="{{ route('report-signatures.image', $signature->id) }}">{{ $signature->name }}</option>
+									@endforeach
+								</select>
+								<button type="button" class="btn btn-info btn-sm btn-view-report-signature" title="View Signature Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-12">
+					<div class="col-md-6 col-12">
 						<div class="form-group">
 							<label class="form-label">PIN</label>
 							<input type="password" class="form-control signature-pin-input" name="signature_pin" autocomplete="new-password" placeholder="PIN">
@@ -563,7 +581,7 @@
 
                 <div id="dynamic-tests-container">
                     <!-- Dynamic rows go here -->
-                    <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded shadow-sm">
+                    <div class="row test-item-row align-items-center mb-3 pb-3 bg-light-xs p-10 rounded shadow-sm">
                         <div class="col-sub col-12 mb-md-0 mb-3">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Sub</div>
                             <div class="input-group flex-nowrap">
@@ -574,7 +592,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                             </div>
                         </div>
                         <div class="col-unit-dept col-12 mb-md-0 mb-3">
@@ -587,7 +605,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                             </div>
                         </div>
                         <div class="col-param col-12 mb-md-0 mb-3">
@@ -615,14 +633,23 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                             </div>
                         </div>
-                        <div class="col-observed col-4 mb-md-0 mb-2 px-1">
-                            <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
-                            <input type="text" class="form-control observed-value-input" name="observed_value[]" list="list-observed" placeholder="Observed" required>
-                        </div>
-                        <div class="col-unit-meas col-8 mb-md-0 mb-2 px-1">
+                         <div class="col-observed col-4 mb-md-0 mb-2 px-2">
+                             <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
+                             <div class="input-group flex-nowrap">
+                                 <select class="form-select report-observed-select" name="observed_value[]" required>
+                                     <option value="">-- Select Observed --</option>
+                                     @foreach($templates as $tmpl)
+                                         <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>
+                                     @endforeach
+                                 </select>
+                                 <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                             </div>
+                         </div>
+                        <div class="col-unit-meas col-8 mb-md-0 mb-2 px-2">
                             <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select report-unit-select" name="test_unit[]">
@@ -632,25 +659,35 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                             </div>
                         </div>
-                        <div class="col-ref col-12 mb-md-0 mb-2 px-1">
-                            <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Reference Value</div>
-                            <input type="text" class="form-control normal-val-dynamic" name="normal_value[]" placeholder="Reference Interval">
-                            <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="">
+                        <div class="col-ref col-12 mb-md-0 mb-2 px-2">
+                             <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Reference Value</div>
+                             <div class="input-group flex-nowrap">
+                                 <select class="form-select normal-val-dynamic" name="normal_value[]">
+                                     <option value="">-- Select --</option>
+                                     @foreach($referenceTemplates as $ref)
+                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
+                                     @endforeach
+                                 </select>
+                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                             </div>
+                             <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="">
                         </div>
-                        <div class="col-flag col-6 mb-md-0 mb-2 px-1">
-                            <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
-                            <select class="form-select flag-selector border-warning-light" name="test_flag[]">
-                                <option value="">-</option>
-                                <option value="H">H</option>
-                                <option value="L">L</option>
-                                <option value="N">N</option>
-                                <option value="B">B</option>
-                                <option value="P">P</option>
-                                <option value="C">C</option>
-                            </select>
+                        <div class="col-flag col-6 mb-md-0 mb-2 px-2">
+                             <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
+                             <div class="input-group flex-nowrap">
+                                 <select class="form-select flag-selector" name="test_flag[]">
+                                     <option value="">-- Select --</option>
+                                     @foreach($flagTemplates as $flg)
+                                         <option value="{{ $flg->name }}" data-id="{{ $flg->id }}">{{ $flg->name }}</option>
+                                     @endforeach
+                                 </select>
+                                 <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                             </div>
                         </div>
                         <div class="col-action col-6 text-end pt-md-0 pt-2">
                             <div class="d-md-none fw-bold fs-12 mb-1 text-danger">Action</div>
@@ -681,16 +718,19 @@
                 @csrf
                 <input type="hidden" name="id" id="edit-report-id">
 				<h4 class="text-primary border-bottom pb-2 mb-3">General Information</h4>
-				<div class="row">
+				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="form-label">Select Patient</label>
-							<select class="form-select" name="patient_id" id="edit-patient-id" required>
-								<option value="">-- Select Patient --</option>
-								@foreach($patients as $patient)
-										<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
-								@endforeach
-							</select>
+							<div class="input-group flex-nowrap">
+								<select class="form-select" name="patient_id" id="edit-patient-id" required>
+									<option value="">-- Select Patient --</option>
+									@foreach($patients as $patient)
+											<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
+									@endforeach
+								</select>
+								<button type="button" class="btn btn-info btn-sm btn-view-report-patient" title="View Patient Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -701,13 +741,13 @@
 									<option value="">-- Select Doctor --</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-report-doctor" title="Add New Doctor"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-edit-report-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-info btn-sm btn-view-report-doctor" title="View Doctor Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="form-label">Sample Received On</label>
@@ -722,19 +762,22 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-8 col-12">
+				<div class="row mb-3">
+					<div class="col-md-6 col-12">
 						<div class="form-group">
 							<label class="form-label">Authorized Signature</label>
-							<select class="form-select report-signature-select" name="report_signature_id" id="edit-report-signature-id">
-								<option value="">No signature</option>
-								@foreach($signatures as $signature)
-									<option value="{{ $signature->id }}">{{ $signature->name }}</option>
-								@endforeach
-							</select>
+							<div class="input-group flex-nowrap">
+								<select class="form-select report-signature-select" name="report_signature_id" id="edit-report-signature-id">
+									<option value="">No signature</option>
+									@foreach($signatures as $signature)
+										<option value="{{ $signature->id }}" data-name="{{ $signature->name }}" data-image="{{ route('report-signatures.image', $signature->id) }}">{{ $signature->name }}</option>
+									@endforeach
+								</select>
+								<button type="button" class="btn btn-info btn-sm btn-view-report-signature" title="View Signature Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-12">
+					<div class="col-md-6 col-12">
 						<div class="form-group">
 							<label class="form-label">PIN</label>
 							<input type="password" class="form-control signature-pin-input" name="signature_pin" id="edit-signature-pin" autocomplete="new-password" placeholder="Required">
@@ -961,7 +1004,7 @@
 
           // Dynamic Rows Logic (Refined Alignment & Auto-fill)
           const trTemplate = `
-            <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded shadow-sm">
+            <div class="row test-item-row align-items-center mb-3 pb-3 bg-light-xs p-10 rounded shadow-sm">
                 <div class="col-sub col-12 mb-md-0 mb-2">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Sub</div>
                     <div class="input-group flex-nowrap">
@@ -972,7 +1015,7 @@
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                     </div>
                 </div>
                 <div class="col-unit-dept col-12 mb-md-0 mb-2 px-1">
@@ -985,7 +1028,7 @@
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                     </div>
                 </div>
                 <div class="col-param col-12 mb-md-0 mb-2">
@@ -1013,14 +1056,23 @@
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                     </div>
                 </div>
-                <div class="col-observed col-4 mb-md-0 mb-2 px-1">
+                <div class="col-observed col-4 mb-md-0 mb-2 px-2">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
-                    <input type="text" class="form-control observed-value-input" name="observed_value[]" list="list-observed" placeholder="Observed" required>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select report-observed-select" name="observed_value[]" required>
+                            <option value="">-- Select Observed --</option>
+                            @foreach($templates as $tmpl)
+                                <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                    </div>
                 </div>
-                <div class="col-unit-meas col-8 mb-md-0 mb-2 px-1">
+                <div class="col-unit-meas col-8 mb-md-0 mb-2 px-2">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
                     <div class="input-group flex-nowrap">
                         <select class="form-select report-unit-select" name="test_unit[]">
@@ -1030,25 +1082,35 @@
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                        <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                     </div>
                 </div>
-                <div class="col-ref col-12 mb-md-0 mb-3 px-md-1">
-                    <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Reference Value</div>
-                    <input type="text" class="form-control normal-val-dynamic border-info-light" name="normal_value[]" placeholder="Reference Interval">
+                <div class="col-ref col-12 mb-md-0 mb-2 px-2">
+                    <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Reference Value</div>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select normal-val-dynamic" name="normal_value[]">
+                            <option value="">-- Select --</option>
+                            @foreach($referenceTemplates as $ref)
+                                <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                    </div>
                     <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="">
                 </div>
-                <div class="col-flag col-6 mb-md-0 mb-2 px-1">
+                <div class="col-flag col-6 mb-md-0 mb-2 px-2">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
-                    <select class="form-select flag-selector border-warning-light" name="test_flag[]">
-                        <option value="">-</option>
-                        <option value="H">H</option>
-                        <option value="L">L</option>
-                        <option value="N">N</option>
-                        <option value="B">B</option>
-                        <option value="P">P</option>
-                        <option value="C">C</option>
-                    </select>
+                    <div class="input-group flex-nowrap">
+                        <select class="form-select flag-selector" name="test_flag[]">
+                            <option value="">-- Select --</option>
+                            @foreach($flagTemplates as $flg)
+                                <option value="{{ $flg->name }}" data-id="{{ $flg->id }}">{{ $flg->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                    </div>
                 </div>
                 <div class="col-action col-6 text-end pt-md-0 pt-2">
                     <div class="d-md-none fw-bold fs-12 mb-1 text-danger">Action</div>
@@ -1078,12 +1140,12 @@
               let masterBio = selected.data('bio-ref');
               row.find('.bio-val-dynamic').val(masterBio || ref);
               
-              // Trigger calculation if value exists
-              row.find('.observed-value-input').trigger('input');
+               // Trigger calculation if value exists
+               row.find('.report-observed-select').trigger('change');
           });
 
           // Keep hidden flag values compatible with older saved reports.
-          $(document).on('input', '.observed-value-input', function() {
+           $(document).on('change', '.report-observed-select', function() {
               let val = parseFloat($(this).val());
 	              let row = $(this).closest('.test-item-row');
 	              let selected = row.find('.test-selector-dynamic :selected');
@@ -1555,7 +1617,158 @@
           });
           // =============================================
 
-		  // Save Report
+           // =============================================
+           // OBSERVED TEMPLATE MANAGEMENT
+           // =============================================
+           $(document).on('click', '.btn-add-observed', function() {
+               $('.report-observed-select').removeClass('active-observed-select');
+               $(this).siblings('.report-observed-select').addClass('active-observed-select');
+               $('#modal-add-report-observed').modal('show');
+           });
+
+           $(document).on('click', '.btn-edit-observed', function() {
+               let select = $(this).siblings('.report-observed-select');
+               let selectedOption = select.find('option:selected');
+               let observedName = selectedOption.val();
+               if (!observedName) { alert('Please select a valid observed value to edit.'); return; }
+               $('.report-observed-select').removeClass('active-observed-select');
+               select.addClass('active-observed-select');
+               
+               let observedId = selectedOption.data('id');
+               $('#edit-report-observed-id').val(observedId);
+               $('#edit-report-observed-name').val(observedName);
+               $('#modal-edit-report-observed').modal('show');
+           });
+
+           $('#btn-save-report-observed').click(function() {
+               let formData = $('#form-add-report-observed').serialize();
+               $.post("{{ route('result-templates.store') }}", formData, function(response) {
+                   alert(response.success);
+                   location.reload();
+               }).fail(function(xhr) {
+                   alert('Error: ' + (xhr.responseJSON.message || 'Failed to save observed template.'));
+               });
+           });
+
+           $('#btn-update-report-observed').click(function() {
+               let observedId = $('#edit-report-observed-id').val();
+               $.ajax({
+                   url: "/result-templates/" + observedId,
+                   type: 'PUT',
+                   data: $('#form-edit-report-observed').serialize(),
+                   success: function(response) {
+                       alert(response.success);
+                       location.reload();
+                   },
+                   error: function(xhr) {
+                       alert('Error: ' + (xhr.responseJSON.message || 'Failed to update observed template.'));
+                   }
+               });
+           });
+           // =============================================
+
+           // =============================================
+           // REFERENCE TEMPLATE MANAGEMENT
+           // =============================================
+           $(document).on('click', '.btn-add-reference', function() {
+               $('.normal-val-dynamic').removeClass('active-reference-select');
+               $(this).siblings('.normal-val-dynamic').addClass('active-reference-select');
+               $('#modal-add-report-reference').modal('show');
+           });
+
+           $(document).on('click', '.btn-edit-reference', function() {
+               let select = $(this).siblings('.normal-val-dynamic');
+               let selectedOption = select.find('option:selected');
+               let referenceName = selectedOption.val();
+               if (!referenceName) { alert('Please select a valid reference value to edit.'); return; }
+               $('.normal-val-dynamic').removeClass('active-reference-select');
+               select.addClass('active-reference-select');
+               
+               let referenceId = selectedOption.data('id');
+               $('#edit-report-reference-id').val(referenceId);
+               $('#edit-report-reference-name').val(referenceName);
+               $('#modal-edit-report-reference').modal('show');
+           });
+
+           $('#btn-save-report-reference').click(function() {
+               let formData = $('#form-add-report-reference').serialize();
+               $.post("{{ route('reference-templates.store') }}", formData, function(response) {
+                   alert(response.success);
+                   location.reload();
+               }).fail(function(xhr) {
+                   alert('Error: ' + (xhr.responseJSON.message || 'Failed to save reference template.'));
+               });
+           });
+
+           $('#btn-update-report-reference').click(function() {
+               let referenceId = $('#edit-report-reference-id').val();
+               $.ajax({
+                   url: "/reference-templates/" + referenceId,
+                   type: 'PUT',
+                   data: $('#form-edit-report-reference').serialize(),
+                   success: function(response) {
+                       alert(response.success);
+                       location.reload();
+                   },
+                   error: function(xhr) {
+                       alert('Error: ' + (xhr.responseJSON.message || 'Failed to update reference template.'));
+                   }
+               });
+           });
+           // =============================================
+
+           // =============================================
+           // FLAG TEMPLATE MANAGEMENT
+           // =============================================
+           $(document).on('click', '.btn-add-flag', function() {
+               $('.flag-selector').removeClass('active-flag-select');
+               $(this).siblings('.flag-selector').addClass('active-flag-select');
+               $('#modal-add-report-flag').modal('show');
+           });
+
+           $(document).on('click', '.btn-edit-flag', function() {
+               let select = $(this).siblings('.flag-selector');
+               let selectedOption = select.find('option:selected');
+               let flagName = selectedOption.val();
+               if (!flagName) { alert('Please select a valid flag to edit.'); return; }
+               $('.flag-selector').removeClass('active-flag-select');
+               select.addClass('active-flag-select');
+               
+               let flagId = selectedOption.data('id');
+               $('#edit-report-flag-id').val(flagId);
+               $('#edit-report-flag-name').val(flagName);
+               $('#modal-edit-report-flag').modal('show');
+           });
+
+           $('#btn-save-report-flag').click(function() {
+               let formData = $('#form-add-report-flag').serialize();
+               $.post("{{ route('flag-templates.store') }}", formData, function(response) {
+                   alert(response.success);
+                   location.reload();
+               }).fail(function(xhr) {
+                   alert('Error: ' + (xhr.responseJSON.message || 'Failed to save flag template.'));
+               });
+           });
+
+           $('#btn-update-report-flag').click(function() {
+               let flagId = $('#edit-report-flag-id').val();
+               $.ajax({
+                   url: "/flag-templates/" + flagId,
+                   type: 'PUT',
+                   data: $('#form-edit-report-flag').serialize(),
+                   success: function(response) {
+                       alert(response.success);
+                       location.reload();
+                   },
+                   error: function(xhr) {
+                       alert('Error: ' + (xhr.responseJSON.message || 'Failed to update flag template.'));
+                   }
+               });
+           });
+           // =============================================
+
+           // Save Report
+
 		  $('#btn-save-report').click(function() {
               if(!$('#form-add-report')[0].checkValidity()) {
                   $('#form-add-report')[0].reportValidity();
@@ -1633,8 +1846,8 @@
                              <option value="C" ${item.flag == 'C' ? 'selected' : ''}>C</option>
                            `;
 
-                            container.append(`
-                             <div class="row test-item-row align-items-center mb-3 pb-3 border-bottom bg-light-xs p-10 rounded shadow-sm">
+                           container.append(`
+                             <div class="row test-item-row align-items-center mb-3 pb-3 bg-light-xs p-10 rounded shadow-sm">
                                  <div class="col-sub col-12 mb-md-0 mb-2">
                                      <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Sub</div>
                                      <div class="input-group flex-nowrap">
@@ -1642,7 +1855,7 @@
                                              ${catOptions}
                                          </select>
                                          <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                         <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                      </div>
                                  </div>
                                  <div class="col-unit-dept col-12 mb-md-0 mb-2 px-1">
@@ -1652,7 +1865,7 @@
                                              ${subOptions}
                                          </select>
                                          <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                         <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                      </div>
                                  </div>
                                  <div class="col-param col-12 mb-md-0 mb-2 px-1">
@@ -1663,14 +1876,23 @@
                                              <option value="Immunoassay Test" ${item.name == 'Immunoassay Test' ? 'selected' : ''}>Immunoassay Test (Auto-calc)</option>
                                          </select>
                                          <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                         <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                      </div>
                                  </div>
-                                 <div class="col-observed col-4 mb-md-0 mb-2 px-1">
-                                     <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
-                                     <input type="text" class="form-control observed-value-input" name="observed_value[]" value="${item.observed_value || ''}" required placeholder="Observed" list="list-observed">
-                                 </div>
-                                 <div class="col-unit-meas col-8 mb-md-0 mb-2 px-1">
+                                  <div class="col-observed col-4 mb-md-0 mb-2 px-2">
+                                      <div class="d-md-none fw-bold fs-12 mb-1 text-success">Observed</div>
+                                      <div class="input-group flex-nowrap">
+                                           <select class="form-select report-observed-select" name="observed_value[]" required>
+                                               <option value="">-- Select Observed --</option>
+                                               @foreach($templates as $tmpl)
+                                                   <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}" ${item.observed_value == '{{ $tmpl->name }}' ? 'selected' : ''}>{{ $tmpl->name }}</option>
+                                               @endforeach
+                                           </select>
+                                           <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                           <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                       </div>
+                                  </div>
+                                 <div class="col-unit-meas col-8 mb-md-0 mb-2 px-2">
                                      <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Unit</div>
                                      <div class="input-group flex-nowrap">
                                          <select class="form-select report-unit-select" name="test_unit[]">
@@ -1680,19 +1902,35 @@
                                              @endforeach
                                          </select>
                                          <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                         <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                         <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                      </div>
                                  </div>
-                                 <div class="col-ref col-12 mb-md-0 mb-2 px-1">
-                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Reference Value</div>
-                                     <input type="text" class="form-control normal-val-dynamic" name="normal_value[]" value="${item.normal_value || item.biological_reference || ''}" placeholder="Reference Value">
+                                 <div class="col-ref col-12 mb-md-0 mb-2 px-2">
+                                     <div class="d-md-none fw-bold fs-12 mb-1 text-muted">Reference Value</div>
+                                     <div class="input-group flex-nowrap">
+                                         <select class="form-select normal-val-dynamic" name="normal_value[]">
+                                             <option value="">-- Select --</option>
+                                             @foreach($referenceTemplates as $ref)
+                                                 <option value="{{ $ref->name }}" data-id="{{ $ref->id }}" ${item.normal_value == '{{ $ref->name }}' ? 'selected' : ''}>{{ $ref->name }}</option>
+                                             @endforeach
+                                         </select>
+                                         <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                         <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                     </div>
                                      <input type="hidden" class="bio-val-dynamic" name="biological_reference[]" value="${item.biological_reference || ''}">
                                  </div>
-                                 <div class="col-flag col-6 mb-md-0 mb-2 px-1">
+                                 <div class="col-flag col-6 mb-md-0 mb-2 px-2">
                                      <div class="d-md-none fw-bold fs-12 mb-1 text-warning">Flag</div>
-                                     <select class="form-select flag-selector border-warning-light" name="test_flag[]">
-                                         ${flagOptions}
-                                     </select>
+                                     <div class="input-group flex-nowrap">
+                                         <select class="form-select flag-selector" name="test_flag[]">
+                                             <option value="">-- Select --</option>
+                                             @foreach($flagTemplates as $flg)
+                                                 <option value="{{ $flg->name }}" data-id="{{ $flg->id }}" ${item.flag == '{{ $flg->name }}' ? 'selected' : ''}>{{ $flg->name }}</option>
+                                             @endforeach
+                                         </select>
+                                         <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+                                         <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                     </div>
                                  </div>
                                  <div class="col-action col-6 text-end pt-md-0 pt-2">
                                      <div class="d-md-none fw-bold fs-12 mb-1 text-danger">Action</div>
@@ -2479,7 +2717,158 @@
   </div>
 
   <!-- Add Parameter Modal -->
-  <div class="modal fade modal-aw" id="modal-add-report-test" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
+   <!-- Add Reference Modal -->
+   <div class="modal fade modal-aw" id="modal-add-report-reference" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title"><i class="fa fa-plus-circle me-2"></i>Add Reference Template</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form id="form-add-report-reference">
+                       @csrf
+                       <div class="form-group">
+                           <label class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" required placeholder="e.g. 70 - 110 mg/dl">
+                       </div>
+                   </form>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn-aw-primary" id="btn-save-report-reference">Save Template</button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- Edit Reference Modal -->
+   <div class="modal fade modal-aw" id="modal-edit-report-reference" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title"><i class="fa fa-edit me-2"></i>Edit Reference Template</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form id="form-edit-report-reference">
+                       @csrf
+                       <input type="hidden" id="edit-report-reference-id">
+                       <div class="form-group">
+                           <label class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" id="edit-report-reference-name" required>
+                       </div>
+                   </form>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn-aw-primary" id="btn-update-report-reference">Update Template</button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- Add Flag Modal -->
+   <div class="modal fade modal-aw" id="modal-add-report-flag" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title"><i class="fa fa-plus-circle me-2"></i>Add Flag Template</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form id="form-add-report-flag">
+                       @csrf
+                       <div class="form-group">
+                           <label class="form-label">Flag Name</label>
+                           <input type="text" class="form-control" name="name" required placeholder="e.g. H, L, N">
+                       </div>
+                   </form>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn-aw-primary" id="btn-save-report-flag">Save Template</button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- Edit Flag Modal -->
+   <div class="modal fade modal-aw" id="modal-edit-report-flag" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title"><i class="fa fa-edit me-2"></i>Edit Flag Template</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form id="form-edit-report-flag">
+                       @csrf
+                       <input type="hidden" id="edit-report-flag-id">
+                       <div class="form-group">
+                           <label class="form-label">Flag Name</label>
+                           <input type="text" class="form-control" name="name" id="edit-report-flag-name" required>
+                       </div>
+                   </form>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn-aw-primary" id="btn-update-report-flag">Update Template</button>
+               </div>
+           </div>
+       </div>
+   </div>
+   <div class="modal fade modal-aw" id="modal-add-report-observed" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title"><i class="fa fa-plus-circle me-2"></i>Add Observed Template</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form id="form-add-report-observed">
+                       @csrf
+                       <div class="form-group">
+                           <label class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" required placeholder="e.g. Negative, Positive, Trace">
+                       </div>
+                   </form>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn-aw-primary" id="btn-save-report-observed">Save Template</button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- Edit Observed Modal -->
+   <div class="modal fade modal-aw" id="modal-edit-report-observed" tabindex="-1" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title"><i class="fa fa-edit me-2"></i>Edit Observed Template</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form id="form-edit-report-observed">
+                       @csrf
+                       <input type="hidden" id="edit-report-observed-id">
+                       <div class="form-group">
+                           <label class="form-label">Template Name</label>
+                           <input type="text" class="form-control" name="name" id="edit-report-observed-name" required>
+                       </div>
+                   </form>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn-aw-primary" id="btn-update-report-observed">Update Template</button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <div class="modal fade modal-aw" id="modal-add-report-test" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 		  <div class="modal-header">
@@ -2570,30 +2959,448 @@
 	  </div>
   </div>
 
-  <!-- Edit Unit Modal -->
-  <div class="modal fade modal-aw" id="modal-edit-report-unit" tabindex="-1" style="z-index: 1070;" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered modal-sm">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title"><i class="fa fa-balance-scale me-2"></i>Edit Unit</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-			<form id="form-edit-report-unit">
-				@csrf
-				<div class="form-group">
-					<label class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" id="edit-report-unit-name" required>
-				</div>
-                <input type="hidden" name="unit_id" id="edit-report-unit-id">
-			</form>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn-aw-primary" id="btn-update-report-unit">Update Unit</button>
-		  </div>
-		</div>
-	  </div>
   </div>
+
+  <!-- Generic Detail View Modal -->
+  <div class="modal fade modal-aw" id="modal-view-detail" tabindex="-1" style="z-index: 1080;" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="view-detail-title"><i class="fa fa-info-circle me-2"></i>Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="view-detail-body">
+                  <!-- Dynamically populated -->
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-sm" id="btn-detail-delete" style="display:none;"><i class="fa fa-trash me-1"></i>Delete</button>
+                  <button type="button" class="btn btn-warning btn-sm" id="btn-detail-edit" style="display:none;"><i class="fa fa-edit me-1"></i>Edit</button>
+                  <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  @push('scripts')
+  <script>
+      $(document).ready(function() {
+          function setupDetailModalButtons(id, type) {
+              $('#btn-detail-edit').data('id', id).data('type', type).show();
+              $('#btn-detail-delete').data('id', id).data('type', type).show();
+          }
+
+          $(document).on('click', '.btn-view-report-patient', function() {
+              let select = $(this).siblings('select');
+              let patientId = select.val();
+              if (!patientId) { alert('Please select a patient first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              $('#view-detail-title').html('<i class="fa fa-user me-2"></i>Patient Details');
+              $('#view-detail-body').html('<div class="text-center py-3"><i class="fa fa-spinner fa-spin fa-2x text-primary"></i></div>');
+              $('#modal-view-detail').modal('show');
+              
+              $.get("/patients/" + patientId, function(data) {
+                  let html = `
+                      <div class="table-responsive">
+                          <table class="table table-bordered table-striped mb-0">
+                              <tr><th width="35%">Patient ID</th><td><strong class="text-primary">${data.patient_id || ''}</strong></td></tr>
+                              <tr><th>First Name</th><td>${data.first_name || ''}</td></tr>
+                              <tr><th>Last Name</th><td>${data.last_name || ''}</td></tr>
+                              <tr><th>Gender</th><td><span class="badge bg-secondary">${data.gender || ''}</span></td></tr>
+                              <tr><th>Age</th><td>${data.age || ''} Years</td></tr>
+                              <tr><th>Phone</th><td>${data.phone || 'N/A'}</td></tr>
+                              <tr><th>Email</th><td>${data.email || 'N/A'}</td></tr>
+                              <tr><th>Reference Doctor</th><td>${data.reference_dr || 'Self'}</td></tr>
+                              <tr><th>Status</th><td><span class="badge bg-success">${data.status || 'Active'}</span></td></tr>
+                              <tr><th>Address</th><td>${data.address || 'N/A'}</td></tr>
+                          </table>
+                      </div>
+                  `;
+                  $('#view-detail-body').html(html);
+                  setupDetailModalButtons(patientId, 'patient');
+              }).fail(function() {
+                  $('#view-detail-body').html('<div class="alert alert-danger">Failed to load patient details.</div>');
+              });
+          });
+
+          $(document).on('click', '.btn-view-report-doctor', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let doctorName = selectedOption.val();
+              if (!doctorName) { alert('Please select a doctor first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              $('#view-detail-title').html('<i class="fa fa-user-md me-2"></i>Doctor Details');
+              
+              let qualification = selectedOption.data('qualification') || 'N/A';
+              let phone = selectedOption.data('phone') || 'N/A';
+              let email = selectedOption.data('email') || 'N/A';
+              let doctorId = selectedOption.data('id');
+              
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Doctor Name</th><td><strong class="text-primary">${doctorName}</strong></td></tr>
+                          <tr><th>Qualification</th><td>${qualification}</td></tr>
+                          <tr><th>Phone</th><td>${phone}</td></tr>
+                          <tr><th>Email</th><td>${email}</td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (doctorId && doctorName !== 'Self') {
+                  setupDetailModalButtons(doctorId, 'doctor');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-report-signature', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let signatureId = selectedOption.val();
+              if (!signatureId) { alert('Please select a signature first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              $('#view-detail-title').html('<i class="fa fa-signature me-2"></i>Signature Details');
+              
+              let name = selectedOption.data('name');
+              let imageUrl = selectedOption.data('image');
+              
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                          <tr>
+                              <th>Signature Image</th>
+                              <td>
+                                  <div class="text-center bg-light p-3 rounded border">
+                                      <img src="${imageUrl}" alt="Signature Image" style="max-height: 100px; max-width: 100%; object-fit: contain;">
+                                  </div>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (signatureId) {
+                  setupDetailModalButtons(signatureId, 'signature');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-report-category', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select a category first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              let id = selectedOption.data('id');
+              $('#view-detail-title').html('<i class="fa fa-folder-open me-2"></i>Category Details');
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Category ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Category Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'category');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-report-subcategory', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select a sub-category first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              let id = selectedOption.data('id');
+              $('#view-detail-title').html('<i class="fa fa-folder me-2"></i>Sub-Category Details');
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Sub-Category ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Sub-Category Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'subcategory');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-report-test', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select a parameter first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              $('#view-detail-title').html('<i class="fa fa-flask me-2"></i>Parameter Details');
+              
+              let unit = selectedOption.data('unit') || 'N/A';
+              let bioRef = selectedOption.data('bio-ref') || 'N/A';
+              let maleRef = selectedOption.data('male-ref') || 'N/A';
+              let femaleRef = selectedOption.data('female-ref') || 'N/A';
+              let price = selectedOption.data('price') || '0';
+              let description = selectedOption.data('normal') || 'N/A';
+              let id = selectedOption.data('id');
+              
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Parameter ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Parameter Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                          <tr><th>Price</th><td>$${price}</td></tr>
+                          <tr><th>Unit</th><td>${unit}</td></tr>
+                          <tr><th>Biological Reference</th><td>${bioRef}</td></tr>
+                          <tr><th>Male Reference</th><td>${maleRef}</td></tr>
+                          <tr><th>Female Reference</th><td>${femaleRef}</td></tr>
+                          <tr><th>Description</th><td>${description}</td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'test');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-observed', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select an observed value first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              let id = selectedOption.data('id');
+              $('#view-detail-title').html('<i class="fa fa-eye me-2"></i>Observed Template Details');
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Template ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Template Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'observed');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-report-unit', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select a unit first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              let id = selectedOption.data('id');
+              $('#view-detail-title').html('<i class="fa fa-balance-scale me-2"></i>Unit Details');
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Unit ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Unit Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'unit');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-reference', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select a reference template first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              let id = selectedOption.data('id');
+              $('#view-detail-title').html('<i class="fa fa-bookmark me-2"></i>Reference Template Details');
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Template ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Template Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'reference');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          $(document).on('click', '.btn-view-flag', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let name = selectedOption.val();
+              if (!name) { alert('Please select a flag template first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              
+              let id = selectedOption.data('id');
+              $('#view-detail-title').html('<i class="fa fa-flag me-2"></i>Flag Template Details');
+              let html = `
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Template ID</th><td>${id || 'N/A'}</td></tr>
+                          <tr><th>Template Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              if (id) {
+                  setupDetailModalButtons(id, 'flag');
+              }
+              $('#modal-view-detail').modal('show');
+          });
+
+          // Handle dynamic edit inside detail view modal
+          $(document).on('click', '#btn-detail-edit', function() {
+              let id = $(this).data('id');
+              let type = $(this).data('type');
+              if (!id || !type) return;
+
+              if (type === 'patient') {
+                  window.location.href = "/patients?edit=" + id;
+              } else if (type === 'signature') {
+                  window.location.href = "/report-signatures";
+              } else if (type === 'doctor') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.report-doctor-select');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-doc-id').val(id);
+                  $('#edit-report-doc-name').val(selectedOption.val() || selectedOption.text());
+                  $('#edit-report-doc-qualification').val(selectedOption.data('qualification'));
+                  $('#edit-report-doc-phone').val(selectedOption.data('phone'));
+                  $('#edit-report-doc-email').val(selectedOption.data('email'));
+                  $('#modal-edit-report-doctor').modal('show');
+              } else if (type === 'category') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.report-category-select');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-cat-id').val(id);
+                  $('#edit-report-cat-name').val(selectedOption.val() || selectedOption.text());
+                  $('#modal-edit-report-category').modal('show');
+              } else if (type === 'subcategory') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.report-subcategory-select');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-sub-id').val(id);
+                  $('#edit-report-sub-name').val(selectedOption.val() || selectedOption.text());
+                  $('#modal-edit-report-subcategory').modal('show');
+              } else if (type === 'test') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.test-selector-dynamic');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-test-id').val(id);
+                  $('#edit-report-test-name').val(selectedOption.val() || selectedOption.text());
+                  $('#edit-report-test-unit').val(selectedOption.data('unit'));
+                  $('#edit-report-test-bio').val(selectedOption.data('bio-ref'));
+                  $('#modal-edit-report-test').modal('show');
+              } else if (type === 'observed') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.report-observed-select');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-observed-id').val(id);
+                  $('#edit-report-observed-name').val(selectedOption.val() || selectedOption.text());
+                  $('#modal-edit-report-observed').modal('show');
+              } else if (type === 'unit') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.report-unit-select');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-unit-id').val(id);
+                  $('#edit-report-unit-name').val(selectedOption.val() || selectedOption.text());
+                  $('#modal-edit-report-unit').modal('show');
+              } else if (type === 'reference') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.normal-val-dynamic');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-reference-id').val(id);
+                  $('#edit-report-reference-name').val(selectedOption.val() || selectedOption.text());
+                  $('#modal-edit-report-reference').modal('show');
+              } else if (type === 'flag') {
+                  $('#modal-view-detail').modal('hide');
+                  let select = $('.flag-selector');
+                  let selectedOption = select.find(`option[data-id="${id}"]`);
+                  $('#edit-report-flag-id').val(id);
+                  $('#edit-report-flag-name').val(selectedOption.val() || selectedOption.text());
+                  $('#modal-edit-report-flag').modal('show');
+              }
+          });
+
+          // Handle dynamic delete inside detail view modal
+          $(document).on('click', '#btn-detail-delete', function() {
+              let id = $(this).data('id');
+              let type = $(this).data('type');
+              if (!id || !type) return;
+
+              if (confirm('Are you sure you want to delete this ' + type + '? This action cannot be undone.')) {
+                  let deleteUrl = '';
+                  if (type === 'patient') deleteUrl = "/patients/" + id;
+                  else if (type === 'doctor') deleteUrl = "/doctors/" + id;
+                  else if (type === 'signature') deleteUrl = "/report-signatures/" + id;
+                  else if (type === 'category') deleteUrl = "/categories/" + id;
+                  else if (type === 'subcategory') deleteUrl = "/sub-categories/" + id;
+                  else if (type === 'test') deleteUrl = "/lab-tests/" + id;
+                  else if (type === 'observed') deleteUrl = "/result-templates/" + id;
+                  else if (type === 'unit') deleteUrl = "/units/" + id;
+                  else if (type === 'reference') deleteUrl = "/reference-templates/" + id;
+                  else if (type === 'flag') deleteUrl = "/flag-templates/" + id;
+
+                  if (deleteUrl) {
+                      $.ajax({
+                          url: deleteUrl,
+                          type: 'DELETE',
+                          success: function(response) {
+                              alert(response.success || 'Item deleted successfully!');
+                              $('#modal-view-detail').modal('hide');
+                              location.reload();
+                          },
+                          error: function(xhr) {
+                              alert('Error: ' + (xhr.responseJSON?.message || 'Failed to delete item.'));
+                          }
+                      });
+                  }
+              }
+          });
+      });
+  </script>
+  @endpush
 
 @endsection

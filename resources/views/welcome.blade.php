@@ -232,16 +232,10 @@
             border-radius: 20px;
             padding: 40px 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
             position: relative;
             height: 100%;
             border: 1px solid rgba(255,255,255,0.5);
             text-align: left;
-        }
-
-        .process-card-modern:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(13, 110, 253, 0.1);
         }
 
         .step-number-circle {

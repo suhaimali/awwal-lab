@@ -600,7 +600,12 @@
 </head>
 <body>
     <!-- Loader -->
-    <div id="aw-loader"><div class="aw-spinner"></div></div>
+    <div id="aw-loader">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px;">
+            <div class="aw-spinner"></div>
+            <div style="color: var(--primary); font-weight: 600; font-size: 16px; letter-spacing: 1px;">Please wait ...........</div>
+        </div>
+    </div>
     <!-- Mobile overlay -->
     <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 

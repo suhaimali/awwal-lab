@@ -5,6 +5,7 @@
     margin: 60px auto 0;
 }
 
+/* ── Back Button ─────────────────────────────────────────────────────── */
 .back-btn {
     position: absolute;
     top: 20px;
@@ -31,15 +32,10 @@
 }
 
 @media (max-width: 480px) {
-    .back-btn {
-        top: 15px;
-        left: 15px;
-        width: 28px;
-        height: 28px;
-        font-size: 0.8rem;
-    }
+    .back-btn { top: 15px; left: 15px; width: 28px; height: 28px; font-size: 0.8rem; }
 }
 
+/* ── Card ────────────────────────────────────────────────────────────── */
 .login-card {
     background: var(--card-bg);
     border-radius: 20px;
@@ -47,22 +43,22 @@
     padding: 40px;
     position: relative;
     overflow: hidden;
+    transition: transform 0.1s ease;
 }
 
-/* Top Accent */
+/* Top Accent Stripe */
 .login-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 6px;
     background: linear-gradient(90deg, var(--primary), #818cf8);
 }
 
+/* ── Brand Header ────────────────────────────────────────────────────── */
 .brand-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .brand-icon {
@@ -84,7 +80,7 @@
     font-size: 28px;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .brand-header p {
@@ -92,23 +88,91 @@
     color: var(--text-muted);
 }
 
+/* ── Lockout Alert ───────────────────────────────────────────────────── */
+.lockout-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fff7ed;
+    border-left: 4px solid #f97316;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    color: #9a3412;
+    animation: slideDown 0.3s ease;
+}
+
+.lockout-alert > i {
+    font-size: 18px;
+    color: #f97316;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.lockout-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lockout-text strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7c2d12;
+}
+
+.lockout-text span {
+    font-size: 13px;
+    color: #9a3412;
+}
+
+#lockout-timer {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Error Alert ─────────────────────────────────────────────────────── */
 .error-alert {
     display: none;
     background: #fef2f2;
     border-left: 4px solid var(--error);
     padding: 12px 16px;
     border-radius: 6px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     font-size: 14px;
     color: #991b1b;
     align-items: flex-start;
     gap: 10px;
+    animation: slideDown 0.25s ease;
 }
 
 .error-alert.show {
     display: flex;
 }
 
+/* ── Attempts Warning Alert ──────────────────────────────────────────── */
+.attempts-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #92400e;
+    font-weight: 500;
+    animation: slideDown 0.25s ease;
+}
+
+.attempts-alert > i {
+    color: #f59e0b;
+    flex-shrink: 0;
+}
+
+/* ── Form ────────────────────────────────────────────────────────────── */
 .form-group {
     margin-bottom: 20px;
 }
@@ -133,6 +197,7 @@
     color: #9ca3af;
     font-size: 16px;
     transition: color 0.3s;
+    pointer-events: none;
 }
 
 .form-input {
@@ -158,11 +223,18 @@
     box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
+.form-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f3f4f6;
+}
+
 .form-input:focus + .input-icon,
 .input-group:focus-within .input-icon {
     color: var(--primary);
 }
 
+/* ── Password Toggle ─────────────────────────────────────────────────── */
 .btn-toggle-password {
     position: absolute;
     right: 16px;
@@ -177,10 +249,10 @@
     transition: color 0.2s;
 }
 
-.btn-toggle-password:hover {
-    color: var(--text-dark);
-}
+.btn-toggle-password:hover { color: var(--text-dark); }
+.btn-toggle-password:disabled { opacity: 0.4; cursor: not-allowed; }
 
+/* ── Form Options Row ────────────────────────────────────────────────── */
 .form-options {
     display: flex;
     align-items: center;
@@ -209,6 +281,24 @@
     font-weight: 500;
 }
 
+/* ── Security Badge ──────────────────────────────────────────────────── */
+.security-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #059669;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 20px;
+    padding: 4px 10px;
+    letter-spacing: 0.02em;
+}
+
+.security-badge i { font-size: 11px; }
+
+/* ── Submit Button ───────────────────────────────────────────────────── */
 .btn-submit {
     width: 100%;
     padding: 14px;
@@ -227,27 +317,28 @@
     transition: all 0.2s;
 }
 
-.btn-submit:hover {
+.btn-submit:hover:not(:disabled) {
     background: var(--primary-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
 }
 
-.btn-submit:active {
-    transform: translateY(0);
-}
+.btn-submit:active:not(:disabled) { transform: translateY(0); }
 
 .btn-submit:disabled {
-    opacity: 0.7;
+    opacity: 0.65;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    background: #6b7280;
 }
 
 .btn-submit.success {
     background: var(--success);
+    cursor: default;
 }
 
+/* ── Footer ──────────────────────────────────────────────────────────── */
 .footer-text {
     text-align: center;
     margin-top: 24px;
@@ -255,8 +346,25 @@
     color: var(--text-muted);
 }
 
+.security-note {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.security-note i { color: #059669; }
+
+/* ── Animations ──────────────────────────────────────────────────────── */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-    .login-card {
-        padding: 30px 20px;
-    }
+    .login-card { padding: 30px 20px; }
 }

@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    'driver' => env('SESSION_DRIVER', 'database'), // SQL-backed sessions
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +169,12 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    /*
+     * Auto-secure: true on production (any non-local env),
+     * false on local/dev so HTTP localhost still works.
+     * Override via SESSION_SECURE_COOKIE in .env if needed.
+     */
+    'secure' => env('SESSION_SECURE_COOKIE', env('APP_ENV', 'production') !== 'local'),
 
     /*
     |--------------------------------------------------------------------------

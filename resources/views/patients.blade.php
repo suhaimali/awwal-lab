@@ -1092,55 +1092,57 @@
 					  doc.setFontSize(10);
 					  doc.setFont("helvetica", "normal");
 					  doc.setTextColor(0); // Black
-					  doc.text("Professional Laboratory Management System", 20, 27);
-					  doc.text("Website: suhaimsoft.netlify.app", 20, 32);
+					  doc.text("Professional Laboratory Management System", 20, 26);
+					  doc.text("123 Health Avenue, Medical City, 10001", 20, 31);
+					  doc.text("Phone: +1 234 567 8900 | Email: contact@suhaimsoft.com", 20, 36);
+					  doc.text("Website: suhaimsoft.netlify.app", 20, 41);
 					  
 					  doc.setDrawColor(0);
 					  doc.setLineWidth(0.5);
-					  doc.line(20, 40, 190, 40);
+					  doc.line(20, 46, 190, 46);
 
-					  // --- Invoice Info (Moved further right to avoid overlap) ---
+					  // --- Invoice Info ---
 					  doc.setFontSize(10);
                       doc.setTextColor(0);
 					  doc.setFont("helvetica", "bold");
-					  doc.text("INVOICE DETAILS", 150, 50);
+					  doc.text("INVOICE DETAILS", 140, 56);
 					  doc.setFont("helvetica", "normal");
 					  const now = new Date();
 					  const dateStr = now.toLocaleDateString();
 					  const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-					  doc.text(`Date: ${dateStr} ${timeStr}`, 150, 56);
-					  doc.text(`Invoice No: INV-${patient.id}${Math.floor(Math.random() * 1000)}`, 150, 62);
+					  doc.text(`Date: ${dateStr} ${timeStr}`, 140, 62);
+					  doc.text(`Invoice No: INV-${patient.id}${Math.floor(Math.random() * 1000)}`, 140, 67);
 
 					  // --- Patient Info ---
 					  doc.setFont("helvetica", "bold");
-					  doc.text("PATIENT INFORMATION:", 20, 50);
+					  doc.text("PATIENT INFORMATION:", 20, 56);
 					  
 					  doc.setFontSize(9);
 					  // Column 1
-					  doc.setFont("helvetica", "bold"); doc.text("Name:", 20, 58);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.first_name} ${patient.last_name}`, 45, 58);
+					  doc.setFont("helvetica", "bold"); doc.text("Name:", 20, 64);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.first_name} ${patient.last_name}`, 45, 64);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Patient ID:", 20, 63);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.patient_id.replace('#P-', '').replace('#', '')}`, 45, 63);
+					  doc.setFont("helvetica", "bold"); doc.text("Patient ID:", 20, 69);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.patient_id.replace('#P-', '').replace('#', '')}`, 45, 69);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Gender:", 20, 68);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.gender}`, 45, 68);
+					  doc.setFont("helvetica", "bold"); doc.text("Gender:", 20, 74);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.gender}`, 45, 74);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Age:", 20, 73);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.age}`, 45, 73);
+					  doc.setFont("helvetica", "bold"); doc.text("Age:", 20, 79);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.age} ${patient.age_type || 'Years'}`, 45, 79);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Phone:", 20, 78);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.phone || 'N/A'}`, 45, 78);
+					  doc.setFont("helvetica", "bold"); doc.text("Phone:", 20, 84);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.phone || 'N/A'}`, 45, 84);
 
 					  // Column 2
-					  doc.setFont("helvetica", "bold"); doc.text("Ref. Dr:", 95, 58);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.reference_dr || 'Self'}`, 115, 58);
+					  doc.setFont("helvetica", "bold"); doc.text("Ref. Dr:", 95, 64);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.reference_dr || 'Self'}`, 115, 64);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Address:", 95, 63);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.address || 'N/A'}`, 115, 63);
+					  doc.setFont("helvetica", "bold"); doc.text("Address:", 95, 69);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.address || 'N/A'}`, 115, 69);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Time:", 95, 68);
-					  doc.setFont("helvetica", "normal"); doc.text(`${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`, 115, 68);
+					  doc.setFont("helvetica", "bold"); doc.text("Time:", 95, 74);
+					  doc.setFont("helvetica", "normal"); doc.text(`${timeStr}`, 115, 74);
 
 					  // --- Table ---
 					  const tableData = patientAppointments.map((app, index) => [
@@ -1155,7 +1157,7 @@
 					  }
 
 					  doc.autoTable({
-						  startY: 90,
+						  startY: 92,
 						  head: [['S.No', 'Description of Services/Tests', 'Date', 'Amount (INR)']],
 						  body: tableData,
 						  theme: 'grid',

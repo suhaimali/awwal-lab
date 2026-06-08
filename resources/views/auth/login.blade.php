@@ -8,10 +8,10 @@
 
 @section('content')
 <div class="login-container">
-    <a href="/" class="back-btn">
-        <i class="fa-solid fa-arrow-left"></i>
-    </a>
     <div class="login-card">
+        <a href="/" class="back-btn" title="Back to Home">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <div class="brand-header">
             <div class="brand-icon">
                 <i class="fa-solid fa-flask"></i>

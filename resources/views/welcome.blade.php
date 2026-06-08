@@ -13,16 +13,14 @@
     
     <style>
         :root {
-            --primary-blue: #2563eb;
-            --light-blue: #dbeafe;
-            --dark-blue: #1e3a8a;
-            --accent-blue: #0ea5e9;
-            --vibrant-purple: #8b5cf6;
-            --vibrant-pink: #ec4899;
+            --primary-blue: #0d6efd;
+            --light-blue: #e0f2fe;
+            --dark-blue: #082f49;
+            --accent-blue: #38bdf8;
             --white: #ffffff;
             --bg-gray: #f8fafc;
-            --text-dark: #0f172a;
-            --text-light: #475569;
+            --text-dark: #334155;
+            --text-light: #64748b;
         }
 
         body {
@@ -32,51 +30,44 @@
             overflow-x: hidden;
         }
 
-        /* 3D Elements & Glassmorphism */
+        /* 3D Elements & Shadows */
         .card-3d {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.1), inset 0 2px 0 rgba(255, 255, 255, 0.9);
+            background: var(--white);
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
 
         .card-3d:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.9);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(13, 110, 253, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
         /* Navbar */
         .navbar {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
-            padding: 1.2rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 1rem 0;
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .navbar-brand {
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-blue), var(--vibrant-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.6rem;
+            color: var(--primary-blue) !important;
+            font-size: 1.5rem;
             letter-spacing: 1px;
         }
 
         .nav-link {
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-dark) !important;
-            margin: 0 12px;
+            margin: 0 10px;
             position: relative;
             transition: color 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
         }
 
         .nav-link:hover {
@@ -84,28 +75,30 @@
         }
 
         .btn-3d {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
+            background: linear-gradient(135deg, #38bdf8 0%, #0d6efd 100%);
             color: white !important;
-            font-weight: 800;
+            font-weight: 700;
             border: none;
             border-radius: 50px;
-            padding: 12px 35px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3), inset 0 -3px 0 rgba(0,0,0,0.15);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 10px 30px;
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3), inset 0 -3px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
         }
 
         .btn-3d:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4), inset 0 -3px 0 rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, var(--vibrant-purple) 0%, var(--primary-blue) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(13, 110, 253, 0.4), inset 0 -3px 0 rgba(0,0,0,0.1);
+        }
+
+        .btn-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 10px rgba(13, 110, 253, 0.2), inset 0 -1px 0 rgba(0,0,0,0.1);
         }
 
         /* Hero Section */
         .hero {
-            padding: 240px 0 180px 0;
-            background: linear-gradient(-45deg, #eff6ff, #ffffff, #f0fdfa, #fdf4ff);
+            padding: 220px 0 160px 0;
+            background: linear-gradient(-45deg, var(--light-blue), #ffffff, #e0f2fe, var(--accent-blue));
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             position: relative;
@@ -123,12 +116,12 @@
             position: absolute;
             top: -150px;
             right: -100px;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
             border-radius: 50%;
             z-index: 0;
-            animation: floatCircle 10s ease-in-out infinite;
+            animation: floatCircle 8s ease-in-out infinite;
         }
 
         .hero::after {
@@ -136,17 +129,17 @@
             position: absolute;
             bottom: -150px;
             left: -100px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(13, 110, 253, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             z-index: 0;
-            animation: floatCircle 12s ease-in-out infinite reverse;
+            animation: floatCircle 10s ease-in-out infinite reverse;
         }
 
         @keyframes floatCircle {
             0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-40px) scale(1.1); }
+            50% { transform: translateY(-30px) scale(1.05); }
             100% { transform: translateY(0px) scale(1); }
         }
 
@@ -157,216 +150,178 @@
         }
 
         .hero h1 {
-            font-weight: 900;
-            font-size: 5.5rem;
-            line-height: 1.1;
-            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue), var(--vibrant-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            letter-spacing: -1px;
+            font-weight: 800;
+            font-size: 4rem;
+            line-height: 1.2;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         }
 
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: var(--text-light);
             margin-bottom: 40px;
             line-height: 1.8;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 500;
         }
 
         /* Welcome Section Animation */
         .welcome-section {
-            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            background: linear-gradient(-45deg, #020617, #1e40af, #0f172a, #0369a1);
+            background-size: 400% 400%;
+            animation: welcomeDarkGradient 15s ease infinite;
             position: relative;
             overflow: hidden;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: white;
         }
-        
-        .welcome-section::after {
+
+        .welcome-section::before {
             content: '';
             position: absolute;
-            right: -20%;
-            top: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
         }
+
+        @keyframes welcomeDarkGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
 
         /* Section Titles */
         .section-title {
             text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 60px;
         }
 
         .section-title h2 {
-            font-weight: 900;
+            font-weight: 800;
             color: var(--dark-blue);
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
         }
 
         .section-title p {
             color: var(--text-light);
-            font-size: 1.25rem;
-            max-width: 650px;
+            font-size: 1.1rem;
+            max-width: 600px;
             margin: 0 auto;
-            font-weight: 500;
         }
 
         /* Process Section */
         .process-section {
-            padding: 120px 0;
-            background: var(--bg-gray);
-            position: relative;
+            padding: 100px 0;
+            background: white;
         }
 
         .process-step {
             text-align: center;
-            padding: 50px 30px;
-            background: white;
+            padding: 40px 20px;
         }
 
         .step-number {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--vibrant-purple));
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0d6efd, #38bdf8);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin: 0 auto 25px auto;
-            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
-            border: 6px solid var(--white);
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+            border: 5px solid var(--light-blue);
         }
 
         /* Features Section */
         .features-section {
-            padding: 120px 0;
-            background: linear-gradient(135deg, #ffffff, #eff6ff);
+            padding: 100px 0;
+            background: var(--bg-gray);
         }
 
         .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--light-blue), #ffffff);
+            width: 60px;
+            height: 60px;
+            background: var(--light-blue);
             color: var(--primary-blue);
-            border-radius: 20px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
         .card-3d:hover .feature-icon {
-            background: linear-gradient(135deg, var(--primary-blue), var(--vibrant-purple));
+            background: var(--primary-blue);
             color: white;
-            transform: rotateY(180deg) scale(1.1);
-            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+            transform: rotateY(180deg);
         }
 
         /* Benefits Section */
         .benefits-section {
-            padding: 120px 0;
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 50%, var(--vibrant-purple) 100%);
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
             color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .benefits-section::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
-            background-size: 100px 100px;
-            opacity: 0.5;
         }
 
         .benefits-section .section-title h2,
         .benefits-section .section-title p {
             color: white;
-            -webkit-text-fill-color: white;
         }
 
         .benefit-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            padding: 50px 30px;
+            border-radius: 20px;
+            padding: 40px;
             text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .benefit-card:hover {
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .benefit-value {
-            font-size: 4.5rem;
-            font-weight: 900;
+            font-size: 4rem;
+            font-weight: 800;
             color: var(--accent-blue);
-            margin-bottom: 15px;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, #bae6fd, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         /* Footer */
         .footer {
-            background: #0f172a;
+            background: var(--dark-blue);
             color: white;
-            padding: 80px 0 30px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: -50px; left: 0; width: 100%; height: 50px;
-            background: var(--vibrant-purple);
-            filter: blur(50px);
-            opacity: 0.5;
+            padding: 60px 0 20px 0;
         }
 
         .footer-brand {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
             display: inline-block;
         }
 
         .footer p {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.9;
-            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
         }
 
         .footer-links h5 {
@@ -478,13 +433,13 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-10 hero-content">
-                    <h1 style="font-size: 5.5rem; margin-bottom: 30px;">Smart, Secure & Efficient<br>Lab Management</h1>
+                    <h1 style="font-size: 5rem; margin-bottom: 30px;">Smart, Secure & Efficient<br><span class="text-primary" style="text-shadow: none;">Lab Management</span></h1>
                     <p style="font-size: 1.5rem; max-width: 900px;" class="mx-auto mb-5">
                         Empower your diagnostic center with our cutting-edge Laboratory Information System designed for modern healthcare.
                     </p>
-                    <div class="d-flex gap-4 mt-5 justify-content-center">
-                        <a href="#welcome" class="btn btn-3d" style="font-size: 1.1rem; padding: 15px 40px;">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 15px 40px; font-weight: 800; font-size: 1.1rem; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); border: 2px solid var(--primary-blue);">Enroll Now</a>
+                    <div class="d-flex gap-3 mt-4 justify-content-center">
+                        <a href="#welcome" class="btn btn-3d">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
                     </div>
                 </div>
             </div>
@@ -495,15 +450,15 @@
     <section id="welcome" class="py-5 welcome-section">
         <div class="container py-5 text-center" style="position: relative; z-index: 2;">
             <div class="section-title mb-5">
-                <h2 style="font-size: 2.5rem; text-transform: uppercase;">Welcome to Suhaim Lab</h2>
-                <p class="text-primary fw-bold" style="font-size: 1.25rem;">Your Partner in Digital Healthcare Transformation.</p>
+                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: white;">Welcome to Suhaim Lab</h2>
+                <p class="fw-bold" style="font-size: 1.25rem; color: var(--accent-blue);">Your Partner in Digital Healthcare Transformation.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <p class="text-dark" style="line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; font-weight: 500;">
-                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong>SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                    <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; font-weight: 300;">
+                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-white fw-bold">SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
                     </p>
-                    <p class="text-dark" style="line-height: 1.8; font-size: 1.15rem; font-weight: 500;">
+                    <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; font-weight: 300;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
                     </p>
                 </div>

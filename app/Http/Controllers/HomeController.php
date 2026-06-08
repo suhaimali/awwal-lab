@@ -1314,7 +1314,12 @@ class HomeController extends Controller
             'max_value' => 'nullable|numeric',
         ]);
 
-        \App\Models\ReferenceInterval::create(array_merge($request->all(), ['lab_test_id' => $id]));
+        if ($request->has('interval_id') && $request->interval_id) {
+            $interval = \App\Models\ReferenceInterval::findOrFail($request->interval_id);
+            $interval->update($request->all());
+        } else {
+            \App\Models\ReferenceInterval::create(array_merge($request->all(), ['lab_test_id' => $id]));
+        }
 
         return response()->json(['success' => 'Interval added successfully']);
     }

@@ -254,6 +254,7 @@
                 <div class="card-body p-3">
                     <form id="form-add-interval">
                         <input type="hidden" name="lab_test_id" id="interval-test-id">
+                        <input type="hidden" name="interval_id" id="interval-id">
                         <div class="row g-2">
                             <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Gender</label>
@@ -370,6 +371,7 @@
                                   <td style="font-size:12px;">${inv.reference_text || '-'}</td>
                                   <td style="font-size:12px;">${inv.min_value || '-'} / ${inv.max_value || '-'}</td>
                                   <td class="text-end">
+                                      <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-interval me-1" data-inv='${JSON.stringify(inv)}'><i class="fa fa-edit"></i></button>
                                       <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-interval" data-id="${inv.id}"><i class="fa fa-trash"></i></button>
                                   </td>
                               </tr>
@@ -387,14 +389,29 @@
           $('#form-add-interval').submit(function(e) {
               e.preventDefault();
               let btn = $('#btn-submit-interval');
-              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Adding...');
+              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
               let testId = $('#interval-test-id').val();
               $.post("/test-parameters/" + testId + "/intervals", $(this).serialize(), function(res) {
                   location.reload();
               }).fail(function() {
-                  alert('Error adding interval.');
-                  btn.prop('disabled', false).html('<i class="fa fa-plus"></i> Add Interval');
+                  alert('Error saving interval.');
+                  btn.prop('disabled', false).html('<i class="fa fa-save"></i> Save Interval');
               });
+          });
+
+          // Edit Interval
+          $(document).on('click', '.btn-edit-interval', function() {
+              let inv = $(this).data('inv');
+              $('#interval-id').val(inv.id);
+              $('select[name="gender"]').val(inv.gender || 'Any');
+              $('input[name="age_min"]').val(inv.age_min);
+              $('input[name="age_max"]').val(inv.age_max);
+              $('select[name="age_type"]').val(inv.age_type || 'Years');
+              $('input[name="reference_text"]').val(inv.reference_text);
+              $('input[name="min_value"]').val(inv.min_value);
+              $('input[name="max_value"]').val(inv.max_value);
+              
+              $('#btn-submit-interval').html('<i class="fa fa-save"></i> Update Interval');
           });
 
           // Delete Interval

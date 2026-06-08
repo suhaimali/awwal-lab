@@ -1373,52 +1373,6 @@ class HomeController extends Controller
 
         return response()->json(['success' => 'Report permanently deleted!']);
     }
-
-    public function bulkUpdateReport(\Illuminate\Http\Request $request, $id)
-    {
-        $report = \App\Models\TestReport::findOrFail($id);
-        $tests = \App\Models\LabTest::with(['parameter', 'referenceIntervals'])->get()->keyBy('name');
-        
-        $bulkTests = $request->input('bulk_tests', []);
-        $bulkObserved = $request->input('bulk_observed', []);
-        
-        $existingItems = $report->items()->get()->keyBy('name');
-        
-        foreach ($bulkTests as $index => $name) {
-            $observed = $bulkObserved[$index] ?? null;
-            if ($observed !== null && $observed !== '') {
-                $labTest = $tests->get($name);
-                $parameter = $labTest?->parameter;
-                $patient = $report->patient;
-                $reference = $this->resolveReferenceInterval($labTest, $patient);
-                $flag = $this->calculateResultFlag($observed, $parameter, $reference, $patient->gender);
-
-                if ($existingItems->has($name)) {
-                    $item = $existingItems->get($name);
-                    $item->update([
-                        'observed_value' => $observed,
-                        'flag' => $flag
-                    ]);
-                } else {
-                    $normalValue = $reference['text'] ?? ($parameter?->biological_reference ?? '');
-                    $report->items()->create([
-                        'lab_test_id' => $labTest?->id,
-                        'category' => 'General',
-                        'subcategory' => '',
-                        'name' => $name,
-                        'observed_value' => $observed,
-                        'unit' => $parameter?->unit ?? '',
-                        'normal_value' => $normalValue,
-                        'biological_reference' => $parameter?->biological_reference ?? $normalValue,
-                        'flag' => $flag,
-                        'sort_order' => $report->items()->count() + 1,
-                    ]);
-                }
-            }
-        }
-        
-        return response()->json(['success' => 'Bulk entry saved successfully!']);
-    }
 }
 
 

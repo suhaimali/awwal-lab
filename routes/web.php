@@ -27,7 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reports', [HomeController::class, 'storeReport'])->name('reports.store');
     Route::get('/reports/{id}', [HomeController::class, 'getReport'])->name('reports.show');
     Route::put('/reports/{id}', [HomeController::class, 'updateReport'])->name('reports.update');
-    Route::post('/reports/{id}/bulk', [HomeController::class, 'bulkUpdateReport'])->name('reports.bulk');
     Route::get('/reports/{id}/pdf', [HomeController::class, 'downloadPDF'])->name('reports.pdf');
     Route::delete('/reports/{id}', [HomeController::class, 'deleteReport'])->name('reports.delete');
 

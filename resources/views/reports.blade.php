@@ -885,7 +885,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -898,7 +898,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -926,7 +926,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -939,7 +939,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -952,7 +952,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -965,7 +965,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -978,7 +978,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12">
@@ -991,7 +991,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                             </div>
                         </div>
                     </div>
@@ -1934,7 +1934,7 @@
                                      \${catOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1944,7 +1944,7 @@
                                      \${subOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1954,7 +1954,7 @@
                                      ${testOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1967,7 +1967,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1980,7 +1980,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1993,7 +1993,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -2003,7 +2003,7 @@
                                      \${flagOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                          <div class="col-md-8 col-sm-12">
@@ -2016,7 +2016,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                              </div>
                          </div>
                      </div>
@@ -3249,201 +3249,19 @@
               $('#modal-view-detail').modal('show');
           });
 
-          $(document).on('click', '.btn-view-report-category', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select a category first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              let id = selectedOption.data('id');
-              $('#view-detail-title').html('<i class="fa fa-folder-open me-2"></i>Category Details');
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Category ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Category Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'category');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-report-category', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a category first.'); return; } $('#edit-report-cat-id').val(id); $('#edit-report-cat-name').val(name || selectedOption.text()); $('#modal-edit-report-category').modal('show'); });
 
-          $(document).on('click', '.btn-view-report-subcategory', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select a sub-category first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              let id = selectedOption.data('id');
-              $('#view-detail-title').html('<i class="fa fa-folder me-2"></i>Sub-Category Details');
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Sub-Category ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Sub-Category Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'subcategory');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-report-subcategory', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a sub-category first.'); return; } $('#edit-report-sub-id').val(id); $('#edit-report-sub-name').val(name || selectedOption.text()); $('#modal-edit-report-subcategory').modal('show'); });
 
-          $(document).on('click', '.btn-view-report-test', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select a parameter first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              $('#view-detail-title').html('<i class="fa fa-flask me-2"></i>Parameter Details');
-              
-              let unit = selectedOption.data('unit') || 'N/A';
-              let bioRef = selectedOption.data('bio-ref') || 'N/A';
-              let maleRef = selectedOption.data('male-ref') || 'N/A';
-              let femaleRef = selectedOption.data('female-ref') || 'N/A';
-              let price = selectedOption.data('price') || '0';
-              let description = selectedOption.data('normal') || 'N/A';
-              let id = selectedOption.data('id');
-              
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Parameter ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Parameter Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                          <tr><th>Price</th><td>$${price}</td></tr>
-                          <tr><th>Unit</th><td>${unit}</td></tr>
-                          <tr><th>Biological Reference</th><td>${bioRef}</td></tr>
-                          <tr><th>Male Reference</th><td>${maleRef}</td></tr>
-                          <tr><th>Female Reference</th><td>${femaleRef}</td></tr>
-                          <tr><th>Description</th><td>${description}</td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'test');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-report-test', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a parameter first.'); return; } $('#edit-report-test-id').val(id); $('#edit-report-test-name').val(name || selectedOption.text()); $('#edit-report-test-unit').val(selectedOption.data('unit')); $('#edit-report-test-bio').val(selectedOption.data('bio-ref')); $('#modal-edit-report-test').modal('show'); });
 
-          $(document).on('click', '.btn-view-observed', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select an observed value first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              let id = selectedOption.data('id');
-              $('#view-detail-title').html('<i class="fa fa-eye me-2"></i>Observed Template Details');
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Template ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Template Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'observed');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-observed', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select an observed value first.'); return; } $('#edit-report-observed-id').val(id); $('#edit-report-observed-name').val(name || selectedOption.text()); $('#modal-edit-report-observed').modal('show'); });
 
-          $(document).on('click', '.btn-view-report-unit', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select a unit first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              let id = selectedOption.data('id');
-              $('#view-detail-title').html('<i class="fa fa-balance-scale me-2"></i>Unit Details');
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Unit ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Unit Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'unit');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-report-unit', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a unit first.'); return; } $('#edit-report-unit-id').val(id); $('#edit-report-unit-name').val(name || selectedOption.text()); $('#modal-edit-report-unit').modal('show'); });
 
-          $(document).on('click', '.btn-view-reference', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select a reference template first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              let id = selectedOption.data('id');
-              $('#view-detail-title').html('<i class="fa fa-bookmark me-2"></i>Reference Template Details');
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Template ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Template Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'reference');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-reference', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a reference template first.'); return; } $('#edit-report-reference-id').val(id); $('#edit-report-reference-name').val(name || selectedOption.text()); $('#modal-edit-report-reference').modal('show'); });
 
-          $(document).on('click', '.btn-view-flag', function() {
-              let select = $(this).siblings('select');
-              let selectedOption = select.find('option:selected');
-              let name = selectedOption.val();
-              if (!name) { alert('Please select a flag template first.'); return; }
-              
-              $('#btn-detail-edit').hide();
-              $('#btn-detail-delete').hide();
-              
-              let id = selectedOption.data('id');
-              $('#view-detail-title').html('<i class="fa fa-flag me-2"></i>Flag Template Details');
-              let html = `
-                  <div class="table-responsive-modern">
-                      <table class="table table-bordered table-striped mb-0">
-                          <tr><th width="35%">Template ID</th><td>${id || 'N/A'}</td></tr>
-                          <tr><th>Template Name</th><td><strong class="text-primary">${name}</strong></td></tr>
-                      </table>
-                  </div>
-              `;
-              $('#view-detail-body').html(html);
-              if (id) {
-                  setupDetailModalButtons(id, 'flag');
-              }
-              $('#modal-view-detail').modal('show');
-          });
+          $(document).on('click', '.btn-edit-flag', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a flag template first.'); return; } $('#edit-report-flag-id').val(id); $('#edit-report-flag-name').val(name || selectedOption.text()); $('#modal-edit-report-flag').modal('show'); });
 
           // Handle dynamic edit inside detail view modal
           $(document).on('click', '#btn-detail-edit', function() {

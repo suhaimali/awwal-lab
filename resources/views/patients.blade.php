@@ -627,13 +627,17 @@
 						<div class="col-md-5 col-12">
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
                             <input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1048">
-							<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1049" name="name_1050">
-								<option value="">-- Select Test --</option>
-								@foreach($labTests as $test)
-									<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
-								@endforeach
-                                <option value="__custom__">✏️ Custom (type below)</option>
-							</select>
+							<div class="input-group flex-nowrap">
+								<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1049" name="name_1050">
+									<option value="">-- Select Test --</option>
+									@foreach($labTests as $test)
+										<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+									@endforeach
+									<option value="__custom__">✏️ Custom (type below)</option>
+								</select>
+								<button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+							</div>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
                                     <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1051" name="name_1052">
@@ -1474,9 +1478,13 @@
                                 <div class="col-md-5 col-12">
                                     <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
                                     <input type="hidden" class="test-name-value" name="test_name[]" value="${testName}" id="field_1068">
-                                    <select class="form-select edit-patient-test-name test-name-select" ${isCustom ? 'style="display:none;"' : ''} autocomplete="off" id="field_1069" name="name_1070">
-                                        ${optionsHtml}
-                                    </select>
+                                    <div class="input-group flex-nowrap" ${isCustom ? 'style="display:none;"' : ''}>
+                                        <select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1069" name="name_1070">
+                                            ${optionsHtml}
+                                        </select>
+                                        <button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                    </div>
                                     <div class="test-name-custom-wrap" ${isCustom ? '' : 'style="display:none;"'}>
                                         <div class="input-group">
                                             <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" value="${isCustom ? testName : ''}" autocomplete="off" id="field_1071" name="name_1072">
@@ -1510,9 +1518,13 @@
                             <div class="col-md-5 col-12">
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
                                 <input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1075">
-                                <select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1076" name="name_1077">
-                                    ${emptyOptions}
-                                </select>
+                                <div class="input-group flex-nowrap">
+                                    <select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1076" name="name_1077">
+                                        ${emptyOptions}
+                                    </select>
+                                    <button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                </div>
                                 <div class="test-name-custom-wrap" style="display:none;">
                                     <div class="input-group">
                                         <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1078" name="name_1079">
@@ -1546,13 +1558,17 @@
 				<div class="col-md-5 col-12">
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Test Name</div>
 					<input type="hidden" class="test-name-value" name="test_name[]" value="" id="field_1082">
-					<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1083" name="name_1084">
-						<option value="">-- Select Test --</option>
-						@foreach($labTests as $test)
-							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
-						@endforeach
-						<option value="__custom__">✏️ Custom (type below)</option>
-					</select>
+					<div class="input-group flex-nowrap">
+						<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1083" name="name_1084">
+							<option value="">-- Select Test --</option>
+							@foreach($labTests as $test)
+								<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+							@endforeach
+							<option value="__custom__">✏️ Custom (type below)</option>
+						</select>
+						<button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+						<button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+					</div>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
 							<input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1085" name="name_1086">

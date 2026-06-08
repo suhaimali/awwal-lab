@@ -1052,25 +1052,25 @@
 	              let max = ageInterval ? ageInterval.max_value : (gender === 'Male' ? selected.data('male-max') : selected.data('female-max'));
 
 	              if (!isNaN(criticalLow) && val <= criticalLow) {
-	                  flagSelector.val('C');
+	                  setSelectValueWithDefault(flagSelector, 'C');
 	                  return;
 	              }
 
 	              if (!isNaN(criticalHigh) && val >= criticalHigh) {
-	                  flagSelector.val('C');
+	                  setSelectValueWithDefault(flagSelector, 'C');
 	                  return;
 	              }
 
               if (isImmuno) {
                   // Immunoassay logic: <0.9 Neg, 0.9-1.1 Bord, >1.1 Pos
-                  if (val < 0.9) flagSelector.val('N');
-                  else if (val >= 0.9 && val <= 1.1) flagSelector.val('B');
-                  else if (val > 1.1) flagSelector.val('P');
+                  if (val < 0.9) setSelectValueWithDefault(flagSelector, 'N');
+                  else if (val >= 0.9 && val <= 1.1) setSelectValueWithDefault(flagSelector, 'B');
+                  else if (val > 1.1) setSelectValueWithDefault(flagSelector, 'P');
               } else if (min !== undefined && max !== undefined) {
                   // Standard Min-Max logic
-	                  if (val < min) flagSelector.val('L');
-	                  else if (val > max) flagSelector.val('H');
-	                  else flagSelector.val('N');
+	                  if (val < min) setSelectValueWithDefault(flagSelector, 'L');
+	                  else if (val > max) setSelectValueWithDefault(flagSelector, 'H');
+	                  else setSelectValueWithDefault(flagSelector, 'N');
 	              }
 	          });
 

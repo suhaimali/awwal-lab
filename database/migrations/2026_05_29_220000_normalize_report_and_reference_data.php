@@ -34,8 +34,8 @@ return new class extends Migration
             $table->foreignId('test_report_id')->nullable()->constrained('test_reports')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('action');
-            $table->json('old_data')->nullable();
-            $table->json('new_data')->nullable();
+            $table->longText('old_data')->nullable();
+            $table->longText('new_data')->nullable();
             $table->timestamps();
 
             $table->index(['test_report_id', 'action']);

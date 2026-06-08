@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dateTime('sample_received_on')->nullable();
             $table->dateTime('report_released_on')->nullable();
             $table->string('barcode')->nullable();
-            $table->json('results')->nullable(); // Stores biochemistry, lipid profile, etc.
+            $table->longText('results')->nullable(); // Stores biochemistry, lipid profile, etc.
             $table->timestamps();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');

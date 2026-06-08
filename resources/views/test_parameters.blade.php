@@ -256,7 +256,7 @@
                         <input type="hidden" name="lab_test_id" id="interval-test-id">
                         <input type="hidden" name="interval_id" id="interval-id">
                         <div class="row g-2">
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label class="form-label-aw" style="font-size: 10px;">Gender</label>
                                 <select class="form-select" name="gender" autocomplete="off" required>
                                     <option value="Any">Any</option>
@@ -264,11 +264,11 @@
                                     <option value="Female">Female</option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Age Min</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_min" autocomplete="off">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Age Max</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_max" autocomplete="off">
                             </div>
@@ -280,7 +280,7 @@
                                     <option value="Days">Days</option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <label class="form-label-aw" style="font-size: 10px;">Reference Text</label>
                                 <input type="text" class="form-control-aw" name="reference_text" autocomplete="off">
                             </div>

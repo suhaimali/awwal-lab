@@ -157,7 +157,7 @@
 					</div>
 					</div>
 
-					<h5 class="text-danger border-bottom pb-2 mt-4"><i class="fa fa-triangle-exclamation me-2"></i>Critical / Panic Values</h5>
+					<h5 class="text-secondary border-bottom pb-2 mt-4"><i class="fa fa-heart-pulse me-2"></i>Critical / Panic Values</h5>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">

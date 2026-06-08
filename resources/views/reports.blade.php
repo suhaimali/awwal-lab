@@ -2444,7 +2444,7 @@
                   const lineCount = Math.max(nameLines.length, observedLines.length, refLines.length, 1);
                   const rowH = Math.max(6, lineCount * 5.2);
 
-                  if (y + rowH > footerTop - 35) {
+                  if (y + rowH > footerTop - 12) {
                       y = addNewPage();
                       y = drawTableHeader(y);
                   }
@@ -2506,19 +2506,18 @@
                   y += 8;
               });
 
+              if (y > footerTop - 55) y = addNewPage();
+              doc.setFont('times', 'normal');
+              doc.setFontSize(11);
+              doc.text('Note :', left, y + 5);
+
               if (reportNotes) {
                   const noteLines = doc.splitTextToSize(reportNotes, 116);
-                  if (y + 8 + noteLines.length * 5 > footerTop - 25) {
+                  if (y + 8 + noteLines.length * 5 > footerTop - 18) {
                       y = addNewPage();
+                      doc.text('Note :', left, y + 5);
                   }
-                  doc.setFont('times', 'normal');
-                  doc.setFontSize(11);
-                  doc.text('Note :', left, y + 5);
                   doc.text(noteLines, left + 13, y + 5);
-              } else {
-                  if (y > footerTop - 25) {
-                      y = addNewPage();
-                  }
               }
 
               if (signature && signature.image_data) {

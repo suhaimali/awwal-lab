@@ -1713,7 +1713,12 @@
 			  // Simpler: just search within the wrapping col-md-5 parent
 			  let col = $(this).closest('[class*="col-"]');
 			  if (val === '__custom__') {
-				  $(this).closest('.input-group').hide();
+                  let ig = $(this).closest('.input-group');
+                  if (ig.length && ig.find('.btn-add-test').length) {
+                      ig.hide();
+                  } else {
+                      $(this).hide();
+                  }
 				  col.find('.test-name-custom-wrap').show();
 				  col.find('.test-name-custom-input').focus();
 				  col.find('.test-name-value').val('');
@@ -1738,7 +1743,13 @@
 			  col.find('.test-name-custom-wrap').hide();
 			  col.find('.test-name-custom-input').val('');
 			  col.find('.test-name-value').val('');
-			  col.find('.test-name-select').val('').closest('.input-group').show();
+			  let sel = col.find('.test-name-select').val('');
+              let ig = sel.closest('.input-group');
+              if (ig.length && ig.find('.btn-add-test').length) {
+                  ig.show();
+              } else {
+                  sel.show();
+              }
 		  });
 		  // ── End custom test name logic ─────────────────────────────────────
 

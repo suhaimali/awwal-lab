@@ -68,5 +68,3 @@
             console.log('Completely cleared all local storage keys.');
         }
     </script>
-</body>
-</html>

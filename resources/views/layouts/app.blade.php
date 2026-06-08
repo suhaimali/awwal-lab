@@ -70,3 +70,5 @@
     @include('inc.scripts')
 
 
+</body>
+</html>

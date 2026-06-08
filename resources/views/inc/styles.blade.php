@@ -550,3 +550,5 @@
         .input-group > .select2-container--bootstrap-5 .select2-selection {
             border-top-right-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
+        }
+    </style>

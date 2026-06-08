@@ -427,6 +427,29 @@
                 margin-top: 40px;
                 transform: none;
             }
+            .process-arrow {
+                display: none !important;
+            }
+            .process-step {
+                margin-bottom: 2rem;
+            }
+            .section-title h2 {
+                font-size: 2rem !important;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 28px;
+            }
+            .footer {
+                padding: 50px 0 20px 0;
+                text-align: center;
+            }
+            .footer-links {
+                margin-top: 30px;
+            }
         }
     </style>
 </head>
@@ -508,31 +531,41 @@
     <!-- Process Section -->
     <section id="process" class="process-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Simple Onboarding Process</h2>
-                <p>Get started with SUHAIM LAB in three easy steps. Streamline your practice with our intuitive platform.</p>
+            <div class="section-title mb-5">
+                <h2 style="font-size: 2.5rem; text-transform: uppercase;">How It Works</h2>
+                <p class="text-muted">A streamlined workflow designed for maximum efficiency.</p>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="process-step card-3d h-100">
-                        <div class="step-number">1</div>
-                        <h4>Consult & Demo</h4>
-                        <p class="text-muted mt-3">Request a demo, and our specialists will showcase the platform's power, tailored to your clinic's needs.</p>
+            <div class="row text-center mt-5">
+                <div class="col-md-3 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-user-plus text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">1. Registration</h5>
+                    <p class="text-muted">Quick and easy patient entry.</p>
+                    <i class="fa-solid fa-arrow-right process-arrow"></i>
                 </div>
-                <div class="col-md-4">
-                    <div class="process-step card-3d h-100">
-                        <div class="step-number">2</div>
-                        <h4>Seamless Integration</h4>
-                        <p class="text-muted mt-3">Our team handles the heavy lifting, migrating your existing data and integrating our EMR into your workflow.</p>
+                <div class="col-md-3 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-vial text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">2. Sample Collection</h5>
+                    <p class="text-muted">Barcode tracking for accuracy.</p>
+                    <i class="fa-solid fa-arrow-right process-arrow"></i>
                 </div>
-                <div class="col-md-4">
-                    <div class="process-step card-3d h-100">
-                        <div class="step-number">3</div>
-                        <h4>Training & Support</h4>
-                        <p class="text-muted mt-3">We provide comprehensive training and dedicated support to ensure your team is confident and successful.</p>
+                <div class="col-md-3 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-microscope text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">3. Processing</h5>
+                    <p class="text-muted">Automated machine interfacing.</p>
+                    <i class="fa-solid fa-arrow-right process-arrow"></i>
+                </div>
+                <div class="col-md-3 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-file-medical text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mt-4">4. Reporting</h5>
+                    <p class="text-muted">Instant delivery via SMS/WhatsApp.</p>
                 </div>
             </div>
         </div>

@@ -635,7 +635,9 @@
     <script>
         // ── Hide loader on page load
         window.addEventListener('load', () => {
-            document.getElementById('aw-loader').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('aw-loader').classList.add('hidden');
+            }, 30000); // Added 30 seconds loading delay as requested
         });
 
         // ── Sidebar toggle (desktop collapse)

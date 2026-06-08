@@ -23,11 +23,17 @@
             --text-light: #64748b;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-dark);
             background-color: var(--bg-gray);
-            overflow-x: hidden;
         }
 
         /* 3D Elements & Shadows */

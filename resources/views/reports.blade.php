@@ -509,7 +509,10 @@
 											<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
 									@endforeach
 								</select>
+								<button type="button" class="btn btn-success btn-sm btn-add-report-patient" title="Add Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-warning btn-sm btn-edit-report-patient" title="Edit Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-info btn-sm btn-view-report-patient" title="View Patient Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+								<button type="button" class="btn btn-danger btn-sm btn-delete-report-patient" title="Delete Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
 							</div>
 						</div>
 					</div>
@@ -616,7 +619,10 @@
 											<option value="{{ $patient->id }}" data-gender="{{ $patient->gender }}" data-age="{{ $patient->age }}">{{ $patient->first_name }} {{ $patient->last_name }} ({{ $patient->patient_id }})</option>
 									@endforeach
 								</select>
+								<button type="button" class="btn btn-success btn-sm btn-add-report-patient" title="Add Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-warning btn-sm btn-edit-report-patient" title="Edit Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-info btn-sm btn-view-report-patient" title="View Patient Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+								<button type="button" class="btn btn-danger btn-sm btn-delete-report-patient" title="Delete Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
 							</div>
 						</div>
 					</div>
@@ -3175,6 +3181,26 @@
               $('#btn-detail-edit').data('id', id).data('type', type).show();
               $('#btn-detail-delete').data('id', id).data('type', type).show();
           }
+
+          $(document).on('click', '.btn-add-report-patient', function() {
+              if (confirm("Adding a new patient requires you to navigate to the Patients page. Make sure to save your work. Do you want to open the Patients page in a new tab?")) {
+                  window.open("/patients", "_blank");
+              }
+          });
+
+          $(document).on('click', '.btn-edit-report-patient', function() {
+              let select = $(this).siblings('select');
+              let patientId = select.val();
+              if (!patientId) { alert('Please select a patient first.'); return; }
+              window.open("/patients?edit=" + patientId, "_blank");
+          });
+
+          $(document).on('click', '.btn-delete-report-patient', function() {
+              let select = $(this).siblings('select');
+              let id = select.val();
+              if (!id) { alert('Please select a patient first.'); return; }
+              $('#btn-detail-delete').data('id', id).data('type', 'patient').click();
+          });
 
           $(document).on('click', '.btn-view-report-patient', function() {
               let select = $(this).siblings('select');

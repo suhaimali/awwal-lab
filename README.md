@@ -9,6 +9,7 @@ Awwal Lab is a comprehensive, highly secure, and modern Laboratory Information M
 - **Advanced Clinical Setup:** Highly specialized biological reference intervals based on age, gender, and clinical logic (e.g., standard min-max boundaries vs. immunoassay textual results).
 - **Automated PDF Invoicing:** Client-side, instant PDF invoice generation powered by `jsPDF` and `AutoTable`, featuring beautifully aligned, professional layouts and dynamic calculations.
 - **Diagnostic Test Reports:** Generate, manage, and securely print clinical reports with custom dynamic templates, flag templates, and authorized doctor signatures.
+- **Optimized Workflow UI:** Fast, inline "Edit" buttons directly linked to drop-down fields across reports, instantly pulling up detail modals without tedious intermediate "view" steps.
 - **Master Data Configuration:** Manage clinical units of measurement, reference text templates, and flag templates from a centralized UI.
 - **Progressive Web App (PWA):** Fully PWA-ready with service workers, manifest configuration, and installability on mobile/desktop devices.
 
@@ -16,6 +17,7 @@ Awwal Lab is a comprehensive, highly secure, and modern Laboratory Information M
 
 - **100% SQL Driven:** Completely migrated away from browser-based `localStorage`. All state (even UI preferences like sidebar toggles) is securely preserved in a normalized **MySQL** database via Eloquent ORM.
 - **Modular Blade Layouts:** Clean, highly organized Laravel Blade architecture utilizing strictly partitioned partials for header, sidebar, footer, styles, and scripts.
+- **Zero-Tracking Policies:** Full removal of unnecessary WebSockets and tracking scripts from vendor plugins (like PACE), guaranteeing internal data stays strictly local.
 - **Security Protocols:** Fully authenticated routes, protected APIs, strict CSRF protection, secure sessions, and forced Local Storage eviction to prevent sensitive data leaks in browser DevTools.
 
 ## 💻 Tech Stack

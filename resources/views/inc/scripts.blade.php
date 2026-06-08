@@ -61,10 +61,3 @@
     </script>
 
     @stack('scripts')
-    <script>
-        // Security: Force clear ALL local storage to ensure 100% MySQL security and clean out any old data.
-        if (localStorage.length > 0) {
-            localStorage.clear();
-            console.log('Completely cleared all local storage keys.');
-        }
-    </script>

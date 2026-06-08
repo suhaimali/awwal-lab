@@ -26,319 +26,201 @@
                 }
 
                 /* ═══════════════════════════════════════════════
-                   PDF VIEWER — PREMIUM 3D GLASSMORPHISM DESIGN
-                   ═══════════════════════════════════════════════ */
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+   PDF VIEWER — NEAT RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-                .pdf-viewer-wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    height: 100vh;
-                    height: 100dvh;
-                    background: linear-gradient(135deg, #0a0a1a 0%, #0f1729 40%, #0a1628 100%);
-                    overflow: hidden;
-                    font-family: 'Inter', sans-serif;
-                    position: relative;
-                }
+.pdf-viewer-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #f8fafc;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
 
-                /* Animated background orbs */
-                .pdf-viewer-wrapper::before {
-                    content: '';
-                    position: absolute;
-                    width: 500px; height: 500px;
-                    background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
-                    top: -100px; left: -100px;
-                    border-radius: 50%;
-                    pointer-events: none;
-                    animation: orbFloat 8s ease-in-out infinite;
-                }
-                .pdf-viewer-wrapper::after {
-                    content: '';
-                    position: absolute;
-                    width: 400px; height: 400px;
-                    background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
-                    bottom: 50px; right: -80px;
-                    border-radius: 50%;
-                    pointer-events: none;
-                    animation: orbFloat 10s ease-in-out infinite reverse;
-                }
-                @keyframes orbFloat {
-                    0%,100% { transform: translate(0,0) scale(1); }
-                    50% { transform: translate(30px,20px) scale(1.05); }
-                }
+.pdf-toolbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    color: #334155;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
 
-                /* ── TOOLBAR ───────────────────────────────────── */
-                .pdf-toolbar {
-                    background: linear-gradient(180deg, rgba(15,23,42,0.98) 0%, rgba(10,15,30,0.95) 100%);
-                    backdrop-filter: blur(25px);
-                    -webkit-backdrop-filter: blur(25px);
-                    border-bottom: 1px solid rgba(255,255,255,0.08);
-                    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-                    color: #e2e8f0;
-                    padding: 0 24px;
-                    height: 64px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    z-index: 1000;
-                    user-select: none;
-                    position: relative;
-                }
+.toolbar-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-                .toolbar-section {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                }
+.pdf-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #64748b;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
 
-                /* Filename area */
-                #viewer-filename-link {
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: #94a3b8 !important;
-                    letter-spacing: 0.3px;
-                    transition: color 0.2s;
-                    max-width: 220px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-                #viewer-filename-link:hover { color: #6366f1 !important; }
+.pdf-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
 
-                /* Clear Vertical Divider (Gaps instead of lines) */
-                .toolbar-divider {
-                    width: 0px;
-                    height: 24px;
-                    background: transparent;
-                    margin: 0 16px;
-                }
+.pdf-btn.pdf-btn-action {
+    color: #3b82f6;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+}
 
-                /* ── CENTER ZOOM GROUP ─────────────────────────── */
-                .pdf-toolbar-center {
-                    position: absolute;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    display: flex;
-                    align-items: center;
-                    background: rgba(15,23,42,0.6);
-                    border: 1px solid rgba(255,255,255,0.1);
-                    border-radius: 14px;
-                    padding: 4px 8px;
-                    gap: 8px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-                }
+.pdf-btn.pdf-btn-action:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
 
-                /* ── TOOLBAR BUTTONS ───────────────────────────── */
-                .pdf-btn {
-                    background: transparent;
-                    border: 1px solid transparent;
-                    color: #94a3b8;
-                    padding: 8px 12px;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-                    font-size: 13px;
-                    font-weight: 600;
-                    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-                    position: relative;
-                    outline: none !important;
-                }
-                .pdf-btn i { font-size: 16px; }
-                .pdf-btn:hover {
-                    color: #fff;
-                    background: rgba(255,255,255,0.08);
-                    transform: translateY(-1px);
-                }
-                .pdf-btn:active { transform: translateY(0); }
+.pdf-btn.pdf-btn-share {
+    color: #10b981;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+}
 
-                /* Action buttons (download/share/print) */
-                .pdf-btn.pdf-btn-action {
-                    background: rgba(99,102,241,0.12);
-                    color: #a5b4fc;
-                    border: 1px solid rgba(99,102,241,0.2);
-                }
-                .pdf-btn.pdf-btn-action:hover {
-                    background: rgba(99,102,241,0.25);
-                    color: #fff;
-                    border-color: rgba(99,102,241,0.4);
-                    box-shadow: 0 0 15px rgba(99,102,241,0.3);
-                }
+.pdf-btn.pdf-btn-share:hover {
+    background: #d1fae5;
+    color: #047857;
+}
 
-                .pdf-btn.pdf-btn-share {
-                    background: rgba(16,185,129,0.12);
-                    color: #6ee7b7;
-                    border: 1px solid rgba(16,185,129,0.2);
-                }
-                .pdf-btn.pdf-btn-share:hover {
-                    background: rgba(16,185,129,0.25);
-                    color: #fff;
-                    border-color: rgba(16,185,129,0.4);
-                    box-shadow: 0 0 15px rgba(16,185,129,0.3);
-                }
+#viewer-filename-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155 !important;
+    text-decoration: none;
+}
 
-                /* Zoom level badge */
-                .zoom-level {
-                    font-size: 13px;
-                    min-width: 50px;
-                    text-align: center;
-                    font-weight: 700;
-                    color: #fff;
-                    background: rgba(255,255,255,0.05);
-                    border-radius: 8px;
-                    padding: 4px 10px;
-                }
+.toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: #e2e8f0;
+    margin: 0 8px;
+}
 
-                /* ── HEADER TOGGLE (Segmented Control) ────────── */
-                .header-toggle-container {
-                    display: flex;
-                    align-items: center;
-                    background: rgba(0,0,0,0.4);
-                    border: 1px solid rgba(255,255,255,0.1);
-                    border-radius: 12px;
-                    padding: 4px;
-                    gap: 4px;
-                }
-                .pdf-header-toggle {
-                    font-size: 12px !important;
-                    padding: 8px 16px !important;
-                    border-radius: 10px !important;
-                    border: none !important;
-                    color: #64748b !important;
-                    font-weight: 600;
-                    transition: all 0.3s ease !important;
-                    background: transparent !important;
-                }
-                .pdf-header-toggle.is-active {
-                    background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
-                    color: #fff !important;
-                    box-shadow: 0 4px 12px rgba(79,70,229,0.4);
-                }
-                .dropdown-item.pdf-header-toggle.is-active {
-                    background: rgba(99,102,241,0.2) !important;
-                    color: #a5b4fc !important;
-                    border-left: 3px solid #6366f1 !important;
-                    box-shadow: none !important;
-                }
-                .dropdown-item.pdf-header-toggle:hover:not(.is-active) {
-                    background: rgba(255,255,255,0.08) !important;
-                    color: #fff !important;
-                }
+.pdf-toolbar-center {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #f8fafc;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
 
-                .test-item-row {
-                    transition: all 0.2s ease;
-                }
-                .test-item-row:hover {
-                    background: rgba(99,102,241,0.03) !important;
-                }
-                @media (max-width: 767px) {
-                    .test-item-row {
-                        background: #f8fafc !important;
-                        border: 1px solid #e2e8f0 !important;
-                        padding: 15px !important;
-                        border-radius: 12px !important;
-                        margin-bottom: 15px !important;
-                    }
-                    .test-item-row .col-12 {
-                        padding: 5px 0;
-                    }
-                    .test-item-row label {
-                        font-size: 11px;
-                        text-transform: uppercase;
-                        color: #64748b;
-                        font-weight: 700;
-                        margin-bottom: 4px;
-                        display: block;
-                    }
-                }
+.zoom-level {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    min-width: 45px;
+    text-align: center;
+}
 
-                /* ── VIEWPORT ──────────────────────────────────── */
-                .pdf-viewport {
-                    flex: 1;
-                    overflow: auto;
-                    padding: 36px 24px;
-                    display: block;
-                    scroll-behavior: smooth;
-                    scrollbar-width: thin;
-                    scrollbar-color: rgba(99,102,241,0.4) transparent;
-                }
-                .pdf-viewport::-webkit-scrollbar { width: 8px; }
-                .pdf-viewport::-webkit-scrollbar-track { background: transparent; }
-                .pdf-viewport::-webkit-scrollbar-thumb {
-                    background: rgba(99,102,241,0.35);
-                    border-radius: 8px;
-                    border: 2px solid transparent;
-                    background-clip: content-box;
-                }
-                .pdf-viewport::-webkit-scrollbar-thumb:hover {
-                    background: rgba(99,102,241,0.6);
-                    background-clip: content-box;
-                }
+.header-toggle-container {
+    display: flex;
+    align-items: center;
+}
 
-                /* ── PDF PAGE (3D shadow lift) ─────────────────── */
-                .pdf-page-container {
-                    width: max-content;
-                    max-width: none;
-                    margin: 0 auto;
-                    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-                }
-                #pdf-canvas-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 24px;
-                    width: max-content;
-                    max-width: none;
-                }
-                .pdf-canvas-wrapper {
-                    line-height: 0;
-                    border-radius: 4px;
-                    overflow: hidden;
-                    box-shadow:
-                        0 0 0 1px rgba(255,255,255,0.08),
-                        0 20px 60px rgba(0,0,0,0.8),
-                        0 8px 24px rgba(0,0,0,0.6),
-                        0 2px 8px rgba(0,0,0,0.4);
-                    transition: box-shadow 0.3s ease;
-                }
-                .pdf-canvas-wrapper canvas {
-                    display: block;
-                    height: auto;
-                }
-                  @media (max-width: 991px) {
-                    .pdf-toolbar { height: auto; padding: 16px; flex-direction: column; gap: 16px; background: rgba(15,23,42,1); }
-                    .pdf-toolbar-center { position: static; transform: none; width: 100%; justify-content: center; margin: 5px 0; background: rgba(255,255,255,0.05); }
-                    .toolbar-section { width: 100%; justify-content: space-between; gap: 10px; }
-                    .toolbar-section .d-flex { gap: 8px !important; }
-                    #viewer-filename-link { max-width: 130px; font-size: 12px; }
-                    .pdf-viewport { padding: 10px 5px; background: #0f172a; }
-                    .pdf-page-container { margin: 0 auto; }
-                    .pdf-canvas-wrapper { margin-bottom: 10px; }
-                    canvas { height: auto !important; }
-                    .pdf-btn span { font-size: 11px; }
-                    .pdf-btn { padding: 8px 10px; }
-                    
-                    /* Reports Table Mobile Optimization */
-                    .table-awlab thead { display: none; }
-                    .table-awlab tbody tr { display: block; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px; border-radius: 16px; padding: 20px; background: #fff !important; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative; }
-                    .table-awlab tbody td { display: flex; justify-content: space-between; align-items: center; border: none !important; padding: 10px 0 !important; text-align: right; border-bottom: 1px dashed #f1f5f9 !important; }
-                    .table-awlab tbody td:last-child { border-bottom: none !important; }
-                    .table-awlab tbody td::before { content: attr(data-label); font-weight: 700; text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-                    .table-awlab .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 20px !important; gap: 12px; flex-wrap: wrap; }
-                    .table-awlab .btn { flex: 1; min-width: 80px; height: 42px; border-radius: 10px; }
-                    .table-awlab .fw-600.text-primary { font-size: 16px; color: #4f46e5 !important; }
-                }
+.pdf-viewport {
+    flex: 1;
+    overflow: auto;
+    padding: 30px;
+    background-color: #cbd5e1;
+}
 
-                @media (max-width: 480px) {
-                    .toolbar-section { flex-wrap: wrap; justify-content: center; gap: 12px; }
-                    .pdf-btn span { display: none; }
-                    #viewer-filename-link { display: none; }
-                    .toolbar-divider { margin: 0 4px; }
-                }
+.pdf-page-container {
+    margin: 0 auto;
+    width: max-content;
+    max-width: 100%;
+}
 
-                @media print {
+#pdf-canvas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.pdf-canvas-wrapper {
+    background: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 2px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.pdf-canvas-wrapper canvas {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .pdf-toolbar {
+        height: auto;
+        padding: 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    .toolbar-section {
+        gap: 6px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .pdf-toolbar-center {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+    }
+    .pdf-viewport {
+        padding: 10px;
+    }
+    .pdf-btn {
+        padding: 6px 10px;
+    }
+    .pdf-btn span {
+        display: inline-block;
+        font-size: 11px;
+    }
+    #viewer-filename-link {
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-all;
+        font-size: 12px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+@media (max-width: 480px) {
+    .pdf-btn {
+        padding: 8px 10px;
+    }
+    .toolbar-divider {
+        margin: 0 4px;
+    }
+}
+
+@media print {
                     @page { 
                         size: A4 portrait;
                         margin: 0; 
@@ -829,28 +711,24 @@
 	  </div>
   </div>
 
-  <!-- Premium PDF Viewer Modal -->
+  <!-- Neat PDF Viewer Modal -->
   <div class="modal fade" id="modal-view-report" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog modal-fullscreen">
 		<div class="modal-content border-0">
 		  <div class="modal-body p-0">
               <div class="pdf-viewer-wrapper">
 
-                  <!-- Premium Toolbar -->
+                  <!-- Neat Toolbar -->
                   <div class="pdf-toolbar d-print-none">
 
                       <!-- LEFT: Back + Filename -->
                       <div class="toolbar-section">
-                          <button type="button" class="pdf-btn pdf-btn-close" data-bs-dismiss="modal" title="Close Viewer">
+                          <button type="button" class="pdf-btn" data-bs-dismiss="modal" title="Close Viewer">
                               <i class="fa fa-arrow-left"></i>
                           </button>
                           <div class="toolbar-divider"></div>
-                          <div class="d-flex align-items-center gap-2">
-                              <div style="width:32px;height:32px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(99,102,241,0.3);">
-                                  <i class="fa fa-file-pdf-o" style="font-size:14px;color:#fff;"></i>
-                              </div>
-                              <a href="javascript:void(0)" id="viewer-filename-link" title="Open in New Tab">report_preview.pdf</a>
-                          </div>
+                          <i class="fa fa-file-pdf-o text-danger"></i>
+                          <a href="javascript:void(0)" id="viewer-filename-link">report_preview.pdf</a>
                       </div>
 
                       <!-- CENTER: Zoom Controls -->
@@ -858,48 +736,43 @@
                           <button type="button" class="pdf-btn" id="zoom-out" title="Zoom Out"><i class="fa fa-minus"></i></button>
                           <span class="zoom-level" id="zoom-text">100%</span>
                           <button type="button" class="pdf-btn" id="zoom-in" title="Zoom In"><i class="fa fa-plus"></i></button>
-                          <div class="toolbar-divider" style="height: 18px; margin: 0 4px;"></div>
+                          <div class="toolbar-divider" style="height: 16px; margin: 0 4px;"></div>
                           <button type="button" class="pdf-btn" id="fit-width" title="Fit Width"><i class="fa fa-arrows-h"></i></button>
                       </div>
 
-                      <!-- RIGHT: Mode Selector + Actions -->
+                      <!-- RIGHT: Actions -->
                       <div class="toolbar-section">
                           <!-- Mode Selector Dropdown -->
                           <div class="dropdown">
-                              <button type="button" class="pdf-btn pdf-btn-action dropdown-toggle" id="btn-mode-selector" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button type="button" class="pdf-btn dropdown-toggle" id="btn-mode-selector" data-bs-toggle="dropdown" aria-expanded="false" style="background:#f1f5f9; color:#334155; border:1px solid #e2e8f0;">
                                   <i class="fa fa-id-card-o" id="current-mode-icon"></i>
-                                  <span class="d-none d-lg-inline ml-2" id="current-mode-text">With Header</span>
+                                  <span class="ms-1" id="current-mode-text">With Header</span>
                               </button>
-                              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-0 shadow-lg" style="background: rgba(15,23,42,0.98); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 12px; margin-top: 10px;">
+                              <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" style="border-radius:8px;">
                                   <li>
-                                      <a class="dropdown-item py-10 px-20 pdf-header-toggle is-active" href="javascript:void(0)" id="btn-with-header">
-                                          <i class="fa fa-id-card-o me-2"></i> With Lab Header
+                                      <a class="dropdown-item py-2 px-3 pdf-header-toggle is-active" href="javascript:void(0)" id="btn-with-header">
+                                          <i class="fa fa-id-card-o me-2 text-primary"></i> With Lab Header
                                       </a>
                                   </li>
                                   <li>
-                                      <a class="dropdown-item py-10 px-20 pdf-header-toggle" href="javascript:void(0)" id="btn-without-header">
-                                          <i class="fa fa-file-o me-2"></i> No Header (Plain)
+                                      <a class="dropdown-item py-2 px-3 pdf-header-toggle" href="javascript:void(0)" id="btn-without-header">
+                                          <i class="fa fa-file-o me-2 text-secondary"></i> No Header (Plain)
                                       </a>
                                   </li>
                               </ul>
                           </div>
+                          
+                          <div class="toolbar-divider d-none d-md-block"></div>
 
-                          <div class="toolbar-divider" style="height: 32px; background: rgba(255,255,255,0.15);"></div>
-
-                          <div class="d-flex align-items-center gap-2">
-                              <button type="button" class="pdf-btn pdf-btn-action" id="btn-viewer-fullscreen" title="Toggle Fullscreen">
-                                  <i class="fa fa-expand"></i><span class="d-none d-xl-inline">Full Screen</span>
-                              </button>
-                              <button type="button" class="pdf-btn pdf-btn-action" id="btn-viewer-print" title="Print Report">
-                                  <i class="fa fa-print"></i><span class="d-none d-xl-inline">Print</span>
-                              </button>
-                              <button type="button" class="pdf-btn pdf-btn-action" id="btn-viewer-download" title="Download PDF">
-                                  <i class="fa fa-download"></i><span class="d-none d-xl-inline">Download</span>
-                              </button>
-                              <button type="button" class="pdf-btn pdf-btn-share" id="btn-viewer-share" title="Share via WhatsApp/Web">
-                                  <i class="fa fa-share-alt"></i><span class="d-none d-xl-inline">Share</span>
-                              </button>
-                          </div>
+                          <button type="button" class="pdf-btn pdf-btn-action" id="btn-viewer-print" title="Print">
+                              <i class="fa fa-print"></i><span>Print</span>
+                          </button>
+                          <button type="button" class="pdf-btn pdf-btn-action" id="btn-viewer-download" title="Download">
+                              <i class="fa fa-download"></i><span>Download</span>
+                          </button>
+                          <button type="button" class="pdf-btn pdf-btn-share" id="btn-viewer-share" title="Share">
+                              <i class="fa fa-share-alt"></i><span>Share</span>
+                          </button>
                       </div>
                   </div>
 
@@ -908,8 +781,8 @@
                       <div class="pdf-page-container" id="pdf-page-container">
                           <div id="pdf-canvas-container">
                               <div class="text-center py-50" style="color:#64748b;">
-                                  <div style="width:56px;height:56px;border:3px solid rgba(99,102,241,0.3);border-top-color:#6366f1;border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 20px;"></div>
-                                  <p style="font-size:14px;letter-spacing:0.5px;">Initializing PDF Engine...</p>
+                                  <i class="fa fa-circle-o-notch fa-spin fa-2x mb-3 text-primary"></i>
+                                  <p>Loading document...</p>
                               </div>
                           </div>
                       </div>
@@ -920,7 +793,6 @@
 		</div>
 	  </div>
   </div>
-  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
   <!-- Scripts -->
   @push('scripts')

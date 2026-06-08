@@ -808,7 +808,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 15px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                 <div class="modal-header" style="background: linear-gradient(135deg, var(--light-blue), #ffffff); border-radius: 15px 15px 0 0; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                    <h5 class="modal-title fw-bold text-dark" id="enrollModalLabel">Enroll in SUHAIM LAB</h5>
+                    <h5 class="modal-title fw-bold text-dark" id="enrollModalLabel">Enroll in Suhaim Soft Lab</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">

@@ -609,7 +609,6 @@
                     </p>
                     <div class="d-flex gap-3 mt-4 justify-content-center flex-wrap">
                         <a href="#welcome" class="btn btn-3d">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
                     </div>
                 </div>
             </div>

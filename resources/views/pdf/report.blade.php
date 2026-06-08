@@ -1,10 +1,9 @@
 <style>
         @@page { margin: 0; }
 
-        html, body {
+        body {
             margin: 0;
             padding: 0;
-            height: 100%;
         }
 
         .report-container {
@@ -12,9 +11,6 @@
             font-family: "Times New Roman", Times, serif;
             font-size: 14px;
             color: #000;
-            position: relative;
-            min-height: 100%;
-            overflow: hidden;
         }
 
         .page-header {
@@ -99,14 +95,10 @@
 
         .page-footer {
             height: 82px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
         }
 
         .report-body {
-            margin: 32px 60px 100px 60px; /* added bottom margin to clear absolute footer */
+            margin: 32px 60px 20px 60px;
         }
 
         .patient-info {

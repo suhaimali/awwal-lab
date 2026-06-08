@@ -631,12 +631,12 @@
 								<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1049" name="name_1050">
 									<option value="">-- Select Test --</option>
 									@foreach($labTests as $test)
-										<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+										<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
 									@endforeach
 									<option value="__custom__">✏️ Custom (type below)</option>
 								</select>
-								<button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
 							</div>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
@@ -992,6 +992,65 @@
 		  <div class="modal-footer">
 			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
 			<button type="button" class="btn-aw-primary" id="btn-save-doctor"><i class="fa fa-check"></i> Save Doctor</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Add Test Modal -->
+  <div class="modal fade modal-aw" id="modal-add-test" tabindex="-1" style="z-index: 1060;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-flask me-2"></i>Add New Test</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-add-test">
+                @csrf
+				<div class="form-group">
+					<label class="form-label-aw">Test Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. CBC" autocomplete="off">
+				</div>
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Price</label>
+					<input type="number" step="0.01" class="form-control-aw" name="price" placeholder="e.g. 500" autocomplete="off">
+				</div>
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-save-test"><i class="fa fa-check"></i> Save Test</button>
+		  </div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Edit Test Modal -->
+  <div class="modal fade modal-aw" id="modal-edit-test" tabindex="-1" style="z-index: 1060;" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"><i class="fa fa-flask me-2"></i>Edit Test</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form id="form-edit-test">
+                @csrf
+				<input type="hidden" name="test_id" id="edit-test-id">
+				<div class="form-group">
+					<label class="form-label-aw">Test Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" id="edit-test-name" required autocomplete="off">
+				</div>
+				<div class="form-group mt-3">
+					<label class="form-label-aw">Price</label>
+					<input type="number" step="0.01" class="form-control-aw" name="price" id="edit-test-price" autocomplete="off">
+				</div>
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn-aw-primary" id="btn-update-test"><i class="fa fa-check"></i> Update Changes</button>
 		  </div>
 		</div>
 	  </div>
@@ -1468,7 +1527,7 @@
                           let isCustom = testName !== '' && !knownTestNames.includes(testName);
                           let optionsHtml = `<option value="">-- Select Test --</option>`;
                           @foreach($labTests as $test)
-                              optionsHtml += `<option value="{{ $test->name }}" data-price="{{ $test->price }}" ${!isCustom && app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
+                              optionsHtml += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" ${!isCustom && app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
                           @endforeach
                           optionsHtml += `<option value="__custom__">✏️ Custom (type below)</option>`;
 
@@ -1482,8 +1541,8 @@
                                         <select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1069" name="name_1070">
                                             ${optionsHtml}
                                         </select>
-                                        <button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-                                        <button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
                                     </div>
                                     <div class="test-name-custom-wrap" ${isCustom ? '' : 'style="display:none;"'}>
                                         <div class="input-group">
@@ -1509,7 +1568,7 @@
                       // Default empty row if no appointments found
                       let emptyOptions = `<option value="" selected>-- Select Test (Optional) --</option>`;
                       @foreach($labTests as $test)
-                          emptyOptions += `<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>`;
+                          emptyOptions += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}">{{ $test->name }}</option>`;
                       @endforeach
                       emptyOptions += `<option value="__custom__">✏️ Custom (type below)</option>`;
 
@@ -1522,8 +1581,8 @@
                                     <select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1076" name="name_1077">
                                         ${emptyOptions}
                                     </select>
-                                    <button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-                                    <button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
                                 </div>
                                 <div class="test-name-custom-wrap" style="display:none;">
                                     <div class="input-group">
@@ -1562,12 +1621,12 @@
 						<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1083" name="name_1084">
 							<option value="">-- Select Test --</option>
 							@foreach($labTests as $test)
-								<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+								<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
 							@endforeach
 							<option value="__custom__">✏️ Custom (type below)</option>
 						</select>
-						<button type="button" class="btn btn-success" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-						<button type="button" class="btn btn-warning" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+						<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
+						<button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
 					</div>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
@@ -1784,6 +1843,121 @@
 				  }
 			  });
 		  });
+
+          // --- Add / Edit Test JS ---
+          let currentTestSelect = null;
+
+          $(document).on('click', '.btn-add-test', function() {
+              currentTestSelect = $(this).siblings('.test-name-select');
+              $('#form-add-test')[0].reset();
+              $('#modal-add-test').modal('show');
+          });
+
+          $(document).on('click', '.btn-edit-test', function() {
+              currentTestSelect = $(this).siblings('.test-name-select');
+              let selectedOption = currentTestSelect.find('option:selected');
+              let testId = selectedOption.data('id');
+              
+              if (!testId || currentTestSelect.val() === '__custom__' || currentTestSelect.val() === '') {
+                  alert('Please select a valid test from the dropdown to edit.');
+                  return;
+              }
+
+              $('#edit-test-id').val(testId);
+              $('#edit-test-name').val(selectedOption.val());
+              $('#edit-test-price').val(selectedOption.data('price'));
+              $('#modal-edit-test').modal('show');
+          });
+
+          $('#btn-save-test').click(function() {
+              let btn = $(this);
+              let form = $('#form-add-test');
+              
+              if(!form[0].checkValidity()) {
+                  form[0].reportValidity();
+                  return;
+              }
+
+              btn.html('<i class="fa fa-spinner fa-spin"></i> Saving...').prop('disabled', true);
+
+              $.ajax({
+                  url: "{{ route('lab-tests.store') }}",
+                  type: "POST",
+                  data: form.serialize(),
+                  success: function(response) {
+                      if(response.success) {
+                          let t = response.test;
+                          let newOption = `<option value="${t.name}" data-id="${t.id}" data-price="${t.price}">${t.name}</option>`;
+                          
+                          // Update all test selects
+                          $('.test-name-select').each(function() {
+                              // Insert before the Custom option
+                              $(this).find('option[value="__custom__"]').before(newOption);
+                          });
+
+                          if (currentTestSelect) {
+                              currentTestSelect.val(t.name).trigger('change');
+                          }
+                          
+                          $('#modal-add-test').modal('hide');
+                      }
+                  },
+                  error: function(xhr) {
+                      alert('Error saving test.');
+                  },
+                  complete: function() {
+                      btn.html('<i class="fa fa-check"></i> Save Test').prop('disabled', false);
+                  }
+              });
+          });
+
+          $('#btn-update-test').click(function() {
+              let btn = $(this);
+              let form = $('#form-edit-test');
+              let id = $('#edit-test-id').val();
+              
+              if(!form[0].checkValidity()) {
+                  form[0].reportValidity();
+                  return;
+              }
+
+              btn.html('<i class="fa fa-spinner fa-spin"></i> Updating...').prop('disabled', true);
+
+              $.ajax({
+                  url: "/lab-tests/update/" + id,
+                  type: "POST",
+                  data: form.serialize(),
+                  success: function(response) {
+                      if(response.success) {
+                          let t = response.test;
+                          
+                          // Update all test selects where this test was an option
+                          $('.test-name-select').each(function() {
+                              let opt = $(this).find(`option[data-id="${t.id}"]`);
+                              if (opt.length) {
+                                  opt.val(t.name);
+                                  opt.text(t.name);
+                                  opt.data('price', t.price);
+                                  opt.attr('data-price', t.price);
+                              }
+                          });
+
+                          if (currentTestSelect) {
+                              currentTestSelect.val(t.name).trigger('change');
+                          }
+                          
+                          $('#modal-edit-test').modal('hide');
+                      }
+                  },
+                  error: function(xhr) {
+                      alert('Error updating test.');
+                  },
+                  complete: function() {
+                      btn.html('<i class="fa fa-check"></i> Update Changes').prop('disabled', false);
+                  }
+              });
+          });
+
 	  });
   </script>
   @endpush

@@ -927,6 +927,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-report-test" title="Delete Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -1955,6 +1957,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-test" title="Delete Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">

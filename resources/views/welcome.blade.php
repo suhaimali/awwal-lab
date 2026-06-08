@@ -599,7 +599,7 @@
                     </p>
                     <div class="mt-5 pt-3" style="border-top: 1px solid rgba(255,255,255,0.1);">
                         <h1 class="fw-bold text-white" style="font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3);"><span class="auto-counter" data-target="100">0</span>+</h1>
-                        <p style="color: var(--accent-blue); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Satisfied Labs & Clinics</p>
+                        <p style="color: var(--accent-blue); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Diagnostic Centers Powered</p>
                     </div>
                 </div>
             </div>
@@ -715,28 +715,28 @@
             <div class="row g-4">
                 <div class="col-md-3 col-6">
                     <div class="benefit-card h-100">
-                        <div class="benefit-value">100%</div>
+                        <div class="benefit-value"><span class="auto-counter" data-target="100">0</span>%</div>
                         <h5 class="fw-bold">Time Savings</h5>
                         <p class="mb-0 text-white-50 small">Reduce administrative overhead, allowing more time for what matters most: patient diagnoses.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="benefit-card h-100">
-                        <div class="benefit-value">100%</div>
+                        <div class="benefit-value"><span class="auto-counter" data-target="100">0</span>%</div>
                         <h5 class="fw-bold">Data Accuracy</h5>
                         <p class="mb-0 text-white-50 small">Our system minimizes data entry errors, ensuring highly accurate and reliable patient records.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="benefit-card h-100">
-                        <div class="benefit-value">100%</div>
+                        <div class="benefit-value"><span class="auto-counter" data-target="100">0</span>%</div>
                         <h5 class="fw-bold">Revenue Boost</h5>
                         <p class="mb-0 text-white-50 small">Streamline billing and coding to increase revenue collection by an average of 100%.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="benefit-card h-100">
-                        <div class="benefit-value">100%</div>
+                        <div class="benefit-value"><span class="auto-counter" data-target="100">0</span>%</div>
                         <h5 class="fw-bold">Patient Satisfaction</h5>
                         <p class="mb-0 text-white-50 small">Faster check-ins and better data access lead to a significant increase in patient satisfaction.</p>
                     </div>
@@ -771,7 +771,7 @@
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled text-white-50">
                         <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> Pathappiriyam, Edavanna, Malappuram, Kerala</li>
-                        <li class="mb-3"><i class="fa-brands fa-whatsapp me-2" style="color: #25d366;"></i> <a href="https://wa.me/918891479505" target="_blank" class="text-white-50 text-decoration-none">+91 8891 479 505</a></li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> <a href="tel:+918891479505" class="text-white-50 text-decoration-none">+91 8891 479 505</a></li>
                         <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> info@suhaimsoft.com</li>
                     </ul>
                 </div>

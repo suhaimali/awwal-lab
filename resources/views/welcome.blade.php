@@ -659,7 +659,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; {{ date('Y') }} Awwal Lab. Designed by Suhaim Soft.</p>
+                <p class="mb-0">&copy; {{ date('Y') }} Awwal Lab. Designed by <a href="https://suhaimsoft.com" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-weight: bold;">Suhaim Soft</a>.</p>
             </div>
         </div>
     </footer>

@@ -421,6 +421,32 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-5px);
+        }
+
         /* Footer */
         .footer {
             background: var(--dark-blue);
@@ -538,6 +564,12 @@
             .footer {
                 padding: 50px 0 20px 0;
                 text-align: center;
+            }
+            .back-to-top {
+                left: 20px;
+                bottom: 20px;
+                width: 45px;
+                height: 45px;
             }
             .footer-links {
                 margin-top: 30px;
@@ -821,6 +853,11 @@
         <i class="fa-brands fa-whatsapp"></i>
     </button>
 
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTopBtn" class="back-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <!-- WhatsApp Popup Widget -->
     <div class="wa-popup" id="waPopup">
         <div class="wa-popup-header">
@@ -864,6 +901,22 @@
                 });
             });
         });
+
+        // Back to Top functionality
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "flex";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
         // Auto Counter Animation
         document.addEventListener('DOMContentLoaded', function() {

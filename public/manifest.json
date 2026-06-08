@@ -1,15 +1,15 @@
 {
-  "name": "Awwal Lab Software",
-  "short_name": "Awwal Lab",
+  "name": "Suhaim Lab Software",
+  "short_name": "Suhaim Lab",
   "description": "Professional Laboratory Management System",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#787cf5",
+  "theme_color": "#0284c7",
   "icons": [
     {
       "src": "/favicon.svg",
-      "sizes": "any",
+      "sizes": "144x144 192x192 512x512 any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }

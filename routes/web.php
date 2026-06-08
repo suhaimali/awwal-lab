@@ -11,10 +11,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Public Landing Page
 Route::get('/', function() {
-    if (auth()->check()) {
-        return redirect()->route('dashboard');
-    }
-    return redirect()->route('login');
+    return view('welcome');
 })->name('home');
 
 // Protected Dashboard Routes

@@ -430,8 +430,8 @@
                         <a class="nav-link" href="#benefits">Benefits</a>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <a href="{{ route('login') }}" class="btn btn-3d">Login</a>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                 </div>
             </div>
         </div>

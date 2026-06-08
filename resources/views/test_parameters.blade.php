@@ -256,7 +256,7 @@
                         <input type="hidden" name="lab_test_id" id="interval-test-id">
                         <input type="hidden" name="interval_id" id="interval-id">
                         <div class="row g-2">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Gender</label>
                                 <select class="form-select" name="gender" autocomplete="off" required>
                                     <option value="Any">Any</option>
@@ -264,11 +264,11 @@
                                     <option value="Female">Female</option>
                                 </select>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label class="form-label-aw" style="font-size: 10px;">Age Min</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_min" autocomplete="off">
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label class="form-label-aw" style="font-size: 10px;">Age Max</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_max" autocomplete="off">
                             </div>
@@ -280,7 +280,7 @@
                                     <option value="Days">Days</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label class="form-label-aw" style="font-size: 10px;">Reference Text</label>
                                 <input type="text" class="form-control-aw" name="reference_text" autocomplete="off">
                             </div>
@@ -296,8 +296,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 text-end mt-2">
-                                <button type="submit" class="btn-aw-primary btn-aw-sm" id="btn-submit-interval"><i class="fa fa-plus"></i> Add Interval</button>
+                            <div class="col-12 mt-3">
+                                <button type="submit" class="btn-aw-primary w-100 py-2 fw-bold" id="btn-submit-interval" style="border-radius: 6px; font-size: 14px;"><i class="fa fa-plus me-1"></i> Add Interval</button>
                             </div>
                         </div>
                     </form>
@@ -389,13 +389,13 @@
           $('#form-add-interval').submit(function(e) {
               e.preventDefault();
               let btn = $('#btn-submit-interval');
-              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
+              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-1"></i> Saving...');
               let testId = $('#interval-test-id').val();
               $.post("/test-parameters/" + testId + "/intervals", $(this).serialize(), function(res) {
                   location.reload();
               }).fail(function() {
                   alert('Error saving interval.');
-                  btn.prop('disabled', false).html('<i class="fa fa-save"></i> Save Interval');
+                  btn.prop('disabled', false).html('<i class="fa fa-plus me-1"></i> Add Interval');
               });
           });
 
@@ -411,7 +411,7 @@
               $('input[name="min_value"]').val(inv.min_value);
               $('input[name="max_value"]').val(inv.max_value);
               
-              $('#btn-submit-interval').html('<i class="fa fa-save"></i> Update Interval');
+              $('#btn-submit-interval').html('<i class="fa fa-save me-1"></i> Update Interval');
           });
 
           // Delete Interval

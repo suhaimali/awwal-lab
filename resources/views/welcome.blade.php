@@ -597,12 +597,9 @@
                     <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; font-weight: 300;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
                     </p>
-
-                    <div class="mt-5">
-                        <div class="d-inline-block px-5 py-4" style="background: rgba(255,255,255,0.1); border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
-                            <h1 class="display-3 fw-bold text-white mb-0"><span id="welcomeCounter">1</span>+</h1>
-                            <p class="mb-0 fw-bold text-uppercase mt-2" style="color: var(--accent-blue); letter-spacing: 2px; font-size: 0.9rem;">Diagnostic Centers Powered</p>
-                        </div>
+                    <div class="mt-5 pt-3" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                        <h1 class="fw-bold text-white" style="font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3);"><span class="auto-counter" data-target="100">0</span>+</h1>
+                        <p style="color: var(--accent-blue); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Satisfied Labs & Clinics</p>
                     </div>
                 </div>
             </div>
@@ -856,32 +853,6 @@
             }
         }
 
-        // Animated Counter for Welcome Section
-        document.addEventListener("DOMContentLoaded", () => {
-            const counter = document.getElementById("welcomeCounter");
-            if(counter) {
-                let count = 1;
-                const target = 100;
-                const duration = 2000; // 2 seconds
-                const increment = target / (duration / 16); 
-
-                const updateCounter = () => {
-                    count += increment;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                
-                // Start animation with a slight delay
-                setTimeout(() => {
-                    requestAnimationFrame(updateCounter);
-                }, 800);
-            }
-        });
-
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -889,6 +860,37 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+
+        // Auto Counter Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.auto-counter');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        let count = 0;
+                        const updateCount = () => {
+                            const inc = target / 50; // Speed of animation
+                            if (count < target) {
+                                count += inc;
+                                counter.innerText = Math.ceil(count);
+                                setTimeout(updateCount, 30);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(counter); // Only run once
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => {
+                observer.observe(counter);
             });
         });
     </script>

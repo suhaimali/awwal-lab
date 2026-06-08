@@ -598,7 +598,7 @@
         }
     </style>
 </head>
-<body>
+<body class="{{ auth()->check() && auth()->user()->sidebar_collapsed ? 'sidebar-collapsed' : '' }}">
     <!-- Loader -->
     <div id="aw-loader"><div class="aw-spinner"></div></div>
     <!-- Mobile overlay -->
@@ -646,15 +646,15 @@
                 document.body.classList.toggle('sidebar-open');
             } else {
                 document.body.classList.toggle('sidebar-collapsed');
-                localStorage.setItem('sidebar-collapsed', document.body.classList.contains('sidebar-collapsed'));
+                $.ajax({
+                    url: '/sidebar-toggle',
+                    type: 'POST',
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                });
             }
         }
         function closeSidebar() {
             document.body.classList.remove('sidebar-open');
-        }
-        // Restore state
-        if (localStorage.getItem('sidebar-collapsed') === 'true' && window.innerWidth > 991) {
-            document.body.classList.add('sidebar-collapsed');
         }
 
         // ── Live clock

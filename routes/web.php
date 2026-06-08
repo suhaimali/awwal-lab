@@ -116,6 +116,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/flag-templates/{id}', [HomeController::class, 'deleteFlagTemplate'])->name('flag-templates.delete');
     Route::post('/reports/update-status/{id}', [HomeController::class, 'updateReportStatus'])->name('reports.update-status');
     Route::get('/dashboard-stats', [HomeController::class, 'getDashboardStats'])->name('dashboard.stats');
+    
+    // Sidebar Toggle
+    Route::post('/sidebar-toggle', [HomeController::class, 'toggleSidebar'])->name('sidebar.toggle');
 });
 
 // Doctor Routes

@@ -54,6 +54,17 @@ class HomeController extends Controller
         return view('appointments', compact('appointments', 'patients', 'tests', 'units'));
     }
 
+    //
+
+    public function toggleSidebar(\Illuminate\Http\Request $request)
+    {
+        $user = auth()->user();
+        $user->sidebar_collapsed = !$user->sidebar_collapsed;
+        $user->save();
+
+        return response()->json(['success' => true, 'collapsed' => $user->sidebar_collapsed]);
+    }
+
     public function reports()
     {
         $reports = \App\Models\TestReport::with('patient')->latest()->get();

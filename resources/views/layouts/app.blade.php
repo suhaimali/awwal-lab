@@ -7,13 +7,13 @@
     <meta name="description" content="Awwal Lab - Advanced Laboratory Management System">
     <meta name="author" content="Suhaim Soft">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('images/logo-pwa.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <title>{{ config('app.name', 'Awwal Lab') }} @yield('title')</title>
 
     <!-- PWA -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <meta name="theme-color" content="#1a56db">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo-pwa.png') }}">
+    <meta name="theme-color" content="#787cf5">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

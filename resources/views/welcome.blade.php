@@ -659,7 +659,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; {{ date('Y') }} SUHAIM LAB. All rights reserved.</p>
+                <p class="mb-0">&copy; {{ date('Y') }} Awwal Lab. Designed by Suhaim Soft.</p>
             </div>
         </div>
     </footer>

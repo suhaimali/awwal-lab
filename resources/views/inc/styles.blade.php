@@ -507,6 +507,58 @@
         @media (max-width: 575px) {
             .header-clock { display: none; }
             #awlab-main { padding: 14px 12px 0; }
+            
+            /* Mobile Modal Responsiveness */
+            .modal-dialog {
+                margin: 10px;
+                max-width: calc(100% - 20px) !important;
+            }
+            .modal-aw .modal-body {
+                padding: 16px;
+            }
+
+            /* Fix input groups with many buttons wrapping nicely */
+            .modal-aw .input-group.flex-nowrap {
+                flex-wrap: wrap !important;
+            }
+            .modal-aw .input-group.flex-nowrap > .form-select,
+            .modal-aw .input-group.flex-nowrap > .form-control {
+                flex: 1 1 100% !important;
+                width: 100% !important;
+                border-radius: 9px !important;
+                margin-bottom: 8px;
+            }
+            .modal-aw .input-group.flex-nowrap > .btn {
+                flex: 1 1 auto;
+                border-radius: 6px !important;
+                margin-right: 4px;
+                margin-bottom: 4px;
+            }
+
+            /* Stack two-column detail tables (th/td pairs) */
+            .modal-aw .table-responsive-modern table tr {
+                display: flex;
+                flex-direction: column;
+                border-bottom: 1px solid #eee;
+            }
+            .modal-aw .table-responsive-modern table th,
+            .modal-aw .table-responsive-modern table td {
+                width: 100% !important;
+                display: block;
+                border: none !important;
+            }
+            .modal-aw .table-responsive-modern table th {
+                padding-bottom: 2px !important;
+                background: transparent !important;
+                color: #64748b;
+                font-size: 11px;
+            }
+            .modal-aw .table-responsive-modern table td {
+                padding-top: 0 !important;
+                padding-bottom: 12px !important;
+                font-size: 14px;
+                font-weight: 500;
+            }
         }
 
         /* DataTables override */

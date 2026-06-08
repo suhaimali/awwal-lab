@@ -1,11 +1,11 @@
-const CACHE_NAME = 'awwal-lab-v2';
+const CACHE_NAME = 'awwal-lab-v3';
 const urlsToCache = [
   '/css/style.css?v=2',
   '/css/vendors_css.css?v=2',
   '/css/skin_color.css?v=2',
   '/js/template.js',
   '/js/vendors.min.js',
-  '/images/logo-pwa.png',
+  '/favicon.svg',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 ];
 

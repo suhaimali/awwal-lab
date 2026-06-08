@@ -771,7 +771,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="col-12 col-lg-4 mb-4 mb-lg-0">
                     <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM LAB</a>
                     <p>By automating repetitive tasks, providing actionable insights, and ensuring rock-solid security, we empower you to practice medicine more efficiently and effectively. Join us in building a smarter, more connected future for healthcare.</p>
                     <div class="social-icons mt-4">
@@ -780,7 +780,7 @@
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-2 offset-lg-2 col-md-4 mb-4 mb-md-0 footer-links">
+                <div class="col-12 col-md-4 col-lg-2 offset-lg-2 mb-4 mb-md-0 footer-links">
                     <h5>Quick Links</h5>
                     <ul>
                         <li><a href="#home">Home</a></li>
@@ -789,7 +789,7 @@
                         <li><a href="#benefits">Benefits</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4 col-md-8 footer-links">
+                <div class="col-12 col-md-8 col-lg-4 footer-links">
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled text-white-50">
                         <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> Pathappiriyam, Edavanna, Malappuram, Kerala</li>

@@ -8,6 +8,9 @@
 
 @section('content')
 <div class="login-container">
+    <a href="/" style="position: absolute; top: 30px; left: 30px; width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0d6efd; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-decoration: none; font-size: 1.2rem; transition: all 0.3s ease; z-index: 50;" onmouseover="this.style.transform='translateX(-5px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
     <div class="login-card">
         <div class="brand-header">
             <div class="brand-icon">

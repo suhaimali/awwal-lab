@@ -636,7 +636,7 @@
 									<option value="__custom__">✏️ Custom (type below)</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
 							</div>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
@@ -724,22 +724,6 @@
             <div class="vp-field vp-full">
               <div class="vp-field-label"><i class="fa fa-location-dot"></i> Address</div>
               <div class="vp-field-value" id="view-address">—</div>
-            </div>
-            <div class="vp-field vp-full mt-3 border-top pt-3">
-              <div class="vp-field-label text-primary fw-bold mb-2"><i class="fa fa-flask"></i> Booked Tests</div>
-              <div class="vp-field-value w-100">
-                  <table class="table table-bordered table-sm fs-12 mb-0" id="view-tests-table">
-                      <thead class="bg-light">
-                          <tr>
-                              <th>Test Name</th>
-                              <th class="text-end">Amount (₹)</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <!-- Dynamically populated -->
-                      </tbody>
-                  </table>
-              </div>
             </div>
           </div>
         </div>
@@ -1497,29 +1481,6 @@
 				  let initials = (fi + li) || 'P';
 				  $('#vp-avatar').text(initials);
 
-				  // Tests List
-				  let testsHtml = '';
-				  if (data.appointments && data.appointments.length > 0) {
-					  let totalAmount = 0;
-					  data.appointments.forEach(function(app) {
-						  let price = parseFloat(app.test_price || 0);
-						  let discount = parseFloat(app.discount || 0);
-						  let net = price - discount;
-						  totalAmount += net;
-						  testsHtml += `<tr>
-							  <td>${app.test_name || 'General'}</td>
-							  <td class="text-end">${net.toFixed(2)}</td>
-						  </tr>`;
-					  });
-					  testsHtml += `<tr class="fw-bold bg-light">
-						  <td class="text-end">Total Payable:</td>
-						  <td class="text-end text-primary">${totalAmount.toFixed(2)}</td>
-					  </tr>`;
-				  } else {
-					  testsHtml = `<tr><td colspan="2" class="text-center text-muted">No tests booked</td></tr>`;
-				  }
-				  $('#view-tests-table tbody').html(testsHtml);
-
 				  $('#modal-view-patient').modal('show');
 			  });
 		  });
@@ -1583,7 +1544,7 @@
                                             ${optionsHtml}
                                         </select>
                                         <button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-                                        <button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
                                     </div>
                                     <div class="test-name-custom-wrap" ${isCustom ? '' : 'style="display:none;"'}>
                                         <div class="input-group">
@@ -1623,7 +1584,7 @@
                                         ${emptyOptions}
                                     </select>
                                     <button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-                                    <button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
                                 </div>
                                 <div class="test-name-custom-wrap" style="display:none;">
                                     <div class="input-group">
@@ -1667,7 +1628,7 @@
 							<option value="__custom__">✏️ Custom (type below)</option>
 						</select>
 						<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
-						<button type="button" class="btn btn-warning btn-edit-test" style="background-color: #fbbf24; color: #000; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+						<button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
 					</div>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
@@ -1752,7 +1713,7 @@
 			  // Simpler: just search within the wrapping col-md-5 parent
 			  let col = $(this).closest('[class*="col-"]');
 			  if (val === '__custom__') {
-				  $(this).hide();
+				  $(this).closest('.input-group').hide();
 				  col.find('.test-name-custom-wrap').show();
 				  col.find('.test-name-custom-input').focus();
 				  col.find('.test-name-value').val('');
@@ -1777,7 +1738,7 @@
 			  col.find('.test-name-custom-wrap').hide();
 			  col.find('.test-name-custom-input').val('');
 			  col.find('.test-name-value').val('');
-			  let sel = col.find('.test-name-select').val('').show();
+			  col.find('.test-name-select').val('').closest('.input-group').show();
 		  });
 		  // ── End custom test name logic ─────────────────────────────────────
 

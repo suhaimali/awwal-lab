@@ -652,9 +652,9 @@
                 <div class="col-lg-4 col-md-8 footer-links">
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled text-white-50">
-                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> 123 Healthcare Avenue, Tech District</li>
-                        <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> +1 (800) 123-4567</li>
-                        <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> contact@suhaimsoft.com</li>
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> Pathappiriyam, Edavanna, Malappuram, Kerala</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> +91 8891 479 505</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> info@suhaimsoft.com</li>
                     </ul>
                 </div>
             </div>

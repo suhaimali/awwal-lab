@@ -1314,11 +1314,17 @@ class HomeController extends Controller
             'max_value' => 'nullable|numeric',
         ]);
 
+        $data = $request->all();
+        // Database requires age_min to be non-null. Default to 0.
+        if (empty($data['age_min'])) {
+            $data['age_min'] = 0;
+        }
+
         if ($request->has('interval_id') && $request->interval_id) {
             $interval = \App\Models\ReferenceInterval::findOrFail($request->interval_id);
-            $interval->update($request->all());
+            $interval->update($data);
         } else {
-            \App\Models\ReferenceInterval::create(array_merge($request->all(), ['lab_test_id' => $id]));
+            \App\Models\ReferenceInterval::create(array_merge($data, ['lab_test_id' => $id]));
         }
 
         return response()->json(['success' => 'Interval added successfully']);

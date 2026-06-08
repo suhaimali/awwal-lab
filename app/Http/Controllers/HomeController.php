@@ -738,6 +738,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
+            'payment_method' => 'required',
             'description' => 'nullable',
         ]);
 
@@ -779,6 +780,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
+            'payment_method' => 'required',
             'description' => 'nullable',
         ]);
 

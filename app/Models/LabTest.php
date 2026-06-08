@@ -12,6 +12,7 @@ class LabTest extends Model
         'description',
         'category_id',
         'sub_category_id',
+        'payment_method',
     ];
 
     public function category()

@@ -673,81 +673,28 @@
 			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
 			<button type="button" class="btn-aw-primary" id="btn-save-patient"><i class="fa fa-check"></i> Save Patient</button>
 		  </div>
+		  </div>
 		</div>
 	  </div>
   </div>
 
   <!-- View Patient Modal -->
-  <div class="modal fade" id="modal-view-patient" tabindex="-1" aria-labelledby="viewPatientLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
-      <div class="modal-content">
-
-        <!-- Gradient Header -->
-        <div class="vp-header">
-          <button type="button" class="btn-close btn-close-white position-absolute" style="top:16px;right:16px;" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="vp-avatar" id="vp-avatar">P</div>
-          <div class="vp-name" id="view-full-name">Patient Name</div>
-          <div class="vp-meta">
-            <span class="vp-id-badge" id="view-patient-id">#0000</span>
-            <span>·</span>
-            <span id="view-gender">—</span>
-            <span>·</span>
-            <span id="view-age">—</span>
-          </div>
-        </div>
-
-        <!-- Body -->
-        <div class="vp-body">
-          <!-- Status badge floated up -->
-          <div class="vp-status-row">
-            <div id="view-status-badge"></div>
-          </div>
-
-          <!-- Info grid -->
-          <div class="vp-grid">
-            <div class="vp-field">
-              <div class="vp-field-label"><i class="fa fa-phone"></i> Phone</div>
-              <div class="vp-field-value" id="view-phone">—</div>
-            </div>
-            <div class="vp-field">
-              <div class="vp-field-label"><i class="fa fa-envelope"></i> Email</div>
-              <div class="vp-field-value" id="view-email">—</div>
-            </div>
-            <div class="vp-field">
-              <div class="vp-field-label"><i class="fa fa-user-doctor"></i> Ref. Doctor</div>
-              <div class="vp-field-value" id="view-reference-dr">—</div>
-            </div>
-            <div class="vp-field">
-              <div class="vp-field-label"><i class="fa fa-calendar"></i> Registered</div>
-              <div class="vp-field-value" id="view-created-at">—</div>
-            </div>
-            <div class="vp-field vp-full">
-              <div class="vp-field-label"><i class="fa fa-location-dot"></i> Address</div>
-              <div class="vp-field-value" id="view-address">—</div>
-            </div>
-            <div class="vp-field vp-full mt-3 border-top pt-3">
-              <div class="vp-field-label text-primary fw-bold mb-2"><i class="fa fa-flask"></i> Booked Tests</div>
-              <div class="vp-field-value w-100">
-                  <table class="table table-bordered table-sm fs-12 mb-0" id="view-tests-table">
-                      <thead class="bg-light">
-                          <tr>
-                              <th>Test Name</th>
-                              <th class="text-end">Amount (₹)</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <!-- Dynamically populated -->
-                      </tbody>
-                  </table>
+  <div class="modal fade modal-aw" id="modal-view-patient" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"><i class="fa fa-user me-2"></i>Patient Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-            </div>
+              <div class="modal-body" id="view-patient-body">
+                  <!-- Dynamically populated striped table -->
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
+              </div>
           </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
-        </div>
+      </div>
+  </div></div>
 
       </div>
     </div>
@@ -1470,58 +1417,31 @@
 		  // View Patient
 		  $(document).on('click', '.btn-view', function() {
 			  let id = $(this).data('id');
+              $('#view-patient-body').html('<div class="text-center py-3"><i class="fa fa-spinner fa-spin fa-2x text-primary"></i></div>');
+              $('#modal-view-patient').modal('show');
 			  $.get("/patients/" + id, function(data) {
-				  // Name & meta
-				  let fullName = ((data.first_name || '') + ' ' + (data.last_name || '')).trim();
-				  $('#view-full-name').text(fullName || 'Unknown');
-				  $('#view-patient-id').text(data.patient_id ? data.patient_id.replace('#P-','').replace('#','') : '—');
-				  $('#view-gender').text(data.gender || '—');
-				  $('#view-age').text(data.age ? data.age + ' Yrs' : '—');
-
-				  // Fields
-				  $('#view-phone').text(data.phone || '—');
-				  $('#view-email').text(data.email || '—');
-				  $('#view-reference-dr').text(data.reference_dr || 'Self');
-				  $('#view-address').text(data.address || '—');
-				  $('#view-created-at').text(data.created_at ? data.created_at.substring(0,10) : '—');
-
-				  // Status badge
-				  let isActive = data.status && data.status.toLowerCase() === 'active';
-				  $('#view-status-badge').html(isActive
-					  ? '<span class="status-dot-badge active"><span class="status-dot active"></span>Active</span>'
-					  : '<span class="status-dot-badge inactive"><span class="status-dot inactive"></span>Inactive</span>');
-
-				  // Avatar initials (uses stylesheet for high-contrast white layout)
-				  let fi = data.first_name ? data.first_name.trim().charAt(0).toUpperCase() : '';
-				  let li = data.last_name ? data.last_name.trim().charAt(0).toUpperCase() : '';
-				  let initials = (fi + li) || 'P';
-				  $('#vp-avatar').text(initials);
-
-				  // Tests List
-				  let testsHtml = '';
-				  if (data.appointments && data.appointments.length > 0) {
-					  let totalAmount = 0;
-					  data.appointments.forEach(function(app) {
-						  let price = parseFloat(app.test_price || 0);
-						  let discount = parseFloat(app.discount || 0);
-						  let net = price - discount;
-						  totalAmount += net;
-						  testsHtml += `<tr>
-							  <td>${app.test_name || 'General'}</td>
-							  <td class="text-end">${net.toFixed(2)}</td>
-						  </tr>`;
-					  });
-					  testsHtml += `<tr class="fw-bold bg-light">
-						  <td class="text-end">Total Payable:</td>
-						  <td class="text-end text-primary">${totalAmount.toFixed(2)}</td>
-					  </tr>`;
-				  } else {
-					  testsHtml = `<tr><td colspan="2" class="text-center text-muted">No tests booked</td></tr>`;
-				  }
-				  $('#view-tests-table tbody').html(testsHtml);
-
-				  $('#modal-view-patient').modal('show');
-			  });
+                  let html = `
+                      <div class="table-responsive-modern">
+                          <table class="table table-bordered table-striped mb-0">
+                              <tbody>
+                                  <tr><th width="35%">Patient ID</th><td>${data.patient_id || '-'}</td></tr>
+                                  <tr><th>Name</th><td>${data.first_name} ${data.last_name || ''}</td></tr>
+                                  <tr><th>Gender</th><td>${data.gender}</td></tr>
+                                  <tr><th>Age</th><td>${data.age} ${data.age_type || 'Years'}</td></tr>
+                                  <tr><th>Phone</th><td>${data.phone || '-'}</td></tr>
+                                  <tr><th>Email</th><td>${data.email || '-'}</td></tr>
+                                  <tr><th>Reference Dr</th><td>${data.reference_dr || '-'}</td></tr>
+                                  <tr><th>Address</th><td>${data.address || '-'}</td></tr>
+                                  <tr><th>Status</th><td><span class="badge bg-${(data.status||'').toLowerCase() === 'active' ? 'success' : 'danger'}">${data.status || 'Active'}</span></td></tr>
+                                  <tr><th>Registered On</th><td>${data.created_at ? data.created_at.substring(0,10) : '-'}</td></tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  `;
+                  $('#view-patient-body').html(html);
+			  }).fail(function() {
+                  $('#view-patient-body').html('<div class="alert alert-danger">Failed to load details.</div>');
+              });
 		  });
 
 		  // Edit Patient (Fetch Data)

@@ -611,42 +611,37 @@
                 <h2 style="font-size: 2.5rem; text-transform: uppercase;">How It Works</h2>
                 <p class="text-muted">A streamlined workflow designed for maximum efficiency.</p>
             </div>
-            <div class="row text-center mt-5 g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-3d p-4 h-100 process-step" style="border-top: 5px solid var(--primary-blue);">
-                        <div class="process-icon mx-auto">
-                            <i class="fa-solid fa-user-plus text-white"></i>
-                        </div>
-                        <h5 class="fw-bold mt-4">1. Registration</h5>
-                        <p class="text-muted mb-0">Quick and easy patient entry.</p>
+            <div class="row text-center mt-5">
+                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-user-plus text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">1. Registration</h5>
+                    <p class="text-muted">Quick and easy patient entry.</p>
+                    <i class="fa-solid fa-arrow-right process-arrow d-none d-lg-block"></i>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-3d p-4 h-100 process-step" style="border-top: 5px solid var(--accent-blue);">
-                        <div class="process-icon mx-auto">
-                            <i class="fa-solid fa-vial text-white"></i>
-                        </div>
-                        <h5 class="fw-bold mt-4">2. Sample Collection</h5>
-                        <p class="text-muted mb-0">Barcode tracking for accuracy.</p>
+                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-vial text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">2. Sample Collection</h5>
+                    <p class="text-muted">Barcode tracking for accuracy.</p>
+                    <i class="fa-solid fa-arrow-right process-arrow d-none d-lg-block"></i>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-3d p-4 h-100 process-step" style="border-top: 5px solid var(--dark-blue);">
-                        <div class="process-icon mx-auto">
-                            <i class="fa-solid fa-microscope text-white"></i>
-                        </div>
-                        <h5 class="fw-bold mt-4">3. Processing</h5>
-                        <p class="text-muted mb-0">Automated machine interfacing.</p>
+                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-microscope text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">3. Processing</h5>
+                    <p class="text-muted">Automated machine interfacing.</p>
+                    <i class="fa-solid fa-arrow-right process-arrow d-none d-lg-block"></i>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-3d p-4 h-100 process-step" style="border-top: 5px solid #25d366;">
-                        <div class="process-icon mx-auto">
-                            <i class="fa-solid fa-file-medical text-white"></i>
-                        </div>
-                        <h5 class="fw-bold mt-4">4. Reporting</h5>
-                        <p class="text-muted mb-0">Instant delivery via SMS/WhatsApp.</p>
+                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                    <div class="process-icon mx-auto">
+                        <i class="fa-solid fa-file-medical text-white"></i>
                     </div>
+                    <h5 class="fw-bold mt-4">4. Reporting</h5>
+                    <p class="text-muted">Instant delivery via SMS/WhatsApp.</p>
                 </div>
             </div>
         </div>

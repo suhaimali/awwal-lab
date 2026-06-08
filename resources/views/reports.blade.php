@@ -510,7 +510,7 @@
 									@endforeach
 								</select>
 								<button type="button" class="btn btn-success btn-sm btn-add-report-patient" title="Add Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-sm btn-edit-report-patient" title="Edit Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-primary btn-sm btn-edit-report-patient" title="Edit Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-info btn-sm btn-view-report-patient" title="View Patient Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
 								<button type="button" class="btn btn-danger btn-sm btn-delete-report-patient" title="Delete Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
 							</div>
@@ -620,7 +620,7 @@
 									@endforeach
 								</select>
 								<button type="button" class="btn btn-success btn-sm btn-add-report-patient" title="Add Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-								<button type="button" class="btn btn-warning btn-sm btn-edit-report-patient" title="Edit Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-primary btn-sm btn-edit-report-patient" title="Edit Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-info btn-sm btn-view-report-patient" title="View Patient Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
 								<button type="button" class="btn btn-danger btn-sm btn-delete-report-patient" title="Delete Patient" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
 							</div>
@@ -891,7 +891,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-category" title="Delete Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -906,7 +906,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-subcategory" title="Delete Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -936,7 +936,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-test" title="Delete Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -951,7 +951,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-observed" title="Delete Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -966,7 +966,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-unit" title="Delete Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -981,7 +981,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -996,7 +996,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-flag" title="Delete Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -1011,7 +1011,7 @@
                                     @endforeach
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
@@ -1956,7 +1956,7 @@
                                      \${catOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-report-category" title="Delete Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -1968,7 +1968,7 @@
                                      \${subOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-report-subcategory" title="Delete Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -1980,7 +1980,7 @@
                                      ${testOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-report-test" title="Edit Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-report-test" title="Delete Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -1995,7 +1995,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-observed" title="Delete Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -2010,7 +2010,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-report-unit" title="Delete Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -2025,7 +2025,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -2037,7 +2037,7 @@
                                      \${flagOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-flag" title="Delete Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -2052,7 +2052,7 @@
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
-                                 <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-primary btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                                  <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
@@ -3167,7 +3167,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-danger btn-sm" id="btn-detail-delete" style="display:none;"><i class="fa fa-trash me-1"></i>Delete</button>
-                  <button type="button" class="btn btn-warning btn-sm" id="btn-detail-edit" style="display:none;"><i class="fa fa-edit me-1"></i>Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="btn-detail-edit" style="display:none;"><i class="fa fa-edit me-1"></i>Edit</button>
                   <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Close</button>
               </div>
           </div>

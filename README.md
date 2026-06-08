@@ -65,3 +65,37 @@ Awwal Lab is a comprehensive, highly secure, and modern Laboratory Information M
 ## 📜 License
 
 This project is proprietary. Unauthorized copying of this project, via any medium, is strictly prohibited.
+
+
+Run these commands one by one and send the output:
+
+dir bootstrap
+
+If there is no cache folder:
+
+mkdir bootstrap\cache
+
+Then verify:
+
+dir bootstrap
+
+You should see:
+
+bootstrap
+│
+├── app.php
+├── providers.php
+└── cache
+
+Then run:
+
+composer dump-autoload
+php artisan optimize:clear
+php artisan serve
+
+If mkdir bootstrap\cache gives an error or the folder already exists, send the output of:
+
+dir bootstrap
+dir bootstrap\cache
+
+This usually happens after a Git merge/rebase where the bootstrap/cache directory was deleted because Git doesn't track empty folders.

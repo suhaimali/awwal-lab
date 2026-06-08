@@ -255,7 +255,7 @@
                     <form id="form-add-interval">
                         <input type="hidden" name="lab_test_id" id="interval-test-id">
                         <div class="row g-2">
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label class="form-label-aw" style="font-size: 10px;">Gender</label>
                                 <select class="form-select" name="gender" autocomplete="off" required>
                                     <option value="Any">Any</option>
@@ -283,7 +283,7 @@
                                 <label class="form-label-aw" style="font-size: 10px;">Reference Text</label>
                                 <input type="text" class="form-control-aw" name="reference_text" autocomplete="off">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="d-flex gap-2">
                                     <div class="flex-grow-1">
                                         <label class="form-label-aw" style="font-size: 10px;">Min Val</label>

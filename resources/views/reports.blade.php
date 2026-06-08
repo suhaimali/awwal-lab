@@ -2378,7 +2378,7 @@
                   doc.setFont('times', 'normal');
                   doc.text('Age', 132, infoY);
                   doc.text(':', 158, infoY);
-                  doc.text(`${p.age || ''}`, 160, infoY);
+                  doc.text(`${p.age || ''} ${p.age_type || 'Years'}`, 160, infoY);
                   doc.text(`Sex : ${sex}`, 171, infoY);
 
                   doc.text('Specimen', 132, infoY + 5);
@@ -3163,7 +3163,7 @@
                               <tr><th>First Name</th><td>${data.first_name || ''}</td></tr>
                               <tr><th>Last Name</th><td>${data.last_name || ''}</td></tr>
                               <tr><th>Gender</th><td><span class="badge bg-secondary">${data.gender || ''}</span></td></tr>
-                              <tr><th>Age</th><td>${data.age || ''} Years</td></tr>
+                              <tr><th>Age</th><td>${data.age || ''} ${data.age_type || 'Years'}</td></tr>
                               <tr><th>Phone</th><td>${data.phone || 'N/A'}</td></tr>
                               <tr><th>Email</th><td>${data.email || 'N/A'}</td></tr>
                               <tr><th>Reference Doctor</th><td>${data.reference_dr || 'Self'}</td></tr>

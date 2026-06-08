@@ -424,7 +424,7 @@
                                             <div class="patient-meta d-flex align-items-center gap-2">
                                                 <span class="meta-item">{{ $patient->gender }}</span>
                                                 <span class="meta-separator">•</span>
-                                                <span class="meta-item">{{ $patient->age }} Yrs</span>
+                                                <span class="meta-item">{{ $patient->age }} {{ $patient->age_type ?: 'Yrs' }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -560,7 +560,14 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="field_1040" class="form-label">Age</label>
-							<input type="number" class="form-control" name="age" placeholder="Age" autocomplete="off" id="field_1040">
+							<div class="input-group flex-nowrap">
+								<input type="number" class="form-control" name="age" placeholder="Age" autocomplete="off" id="field_1040">
+								<select class="form-select" name="age_type" autocomplete="off" style="max-width: 110px;">
+									<option value="Years">Years</option>
+									<option value="Months">Months</option>
+									<option value="Days">Days</option>
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -779,7 +786,14 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="edit-age" class="form-label">Age</label>
-							<input type="number" class="form-control" id="edit-age" name="age" placeholder="Age" autocomplete="off">
+							<div class="input-group flex-nowrap">
+								<input type="number" class="form-control" id="edit-age" name="age" placeholder="Age" autocomplete="off">
+								<select class="form-select" id="edit-age-type" name="age_type" autocomplete="off" style="max-width: 110px;">
+									<option value="Years">Years</option>
+									<option value="Months">Months</option>
+									<option value="Days">Days</option>
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1416,6 +1430,7 @@
 				  $('#edit-last-name').val(data.last_name);
 				  $('#edit-gender').val(data.gender);
 				  $('#edit-age').val(data.age);
+				  $('#edit-age-type').val(data.age_type || 'Years');
 				  $('#edit-phone').val(data.phone);
 				  $('#edit-email').val(data.email);
 				  let refDr = data.reference_dr || '';

@@ -295,8 +295,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 mt-3">
-                                <button type="submit" class="btn-aw-primary w-100 py-2 fw-bold" id="btn-submit-interval" style="border-radius: 6px; font-size: 14px;"><i class="fa fa-plus me-1"></i> Add Interval</button>
+                            <div class="col-12 text-end mt-2">
+                                <button type="submit" class="btn-aw-primary btn-aw-sm" id="btn-submit-interval"><i class="fa fa-plus me-1"></i> Add Interval</button>
                             </div>
                         </div>
                     </form>

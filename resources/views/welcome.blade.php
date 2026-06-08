@@ -149,21 +149,21 @@
             text-align: center;
         }
 
-        .hero h1 {
+        .hero h1, .hero-title {
             font-weight: 800;
-            font-size: 4rem;
+            font-size: 5rem;
             line-height: 1.2;
             color: var(--dark-blue);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         }
 
-        .hero p {
-            font-size: 1.25rem;
+        .hero p, .hero-subtitle {
+            font-size: 1.5rem;
             color: var(--text-light);
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
             line-height: 1.8;
-            max-width: 800px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -387,8 +387,11 @@
                 padding: 120px 0 60px 0;
                 text-align: center;
             }
-            .hero h1 {
+            .hero h1, .hero-title {
                 font-size: 2.5rem;
+            }
+            .hero p, .hero-subtitle {
+                font-size: 1.15rem;
             }
             .hero-img {
                 margin-top: 40px;
@@ -439,11 +442,11 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-10 hero-content">
-                    <h1 style="font-size: 5rem; margin-bottom: 30px;">Smart, Secure & Efficient<br><span class="text-primary" style="text-shadow: none;">Lab Management</span></h1>
-                    <p style="font-size: 1.5rem; max-width: 900px;" class="mx-auto mb-5">
+                    <h1 class="hero-title">Smart, Secure & Efficient<br><span class="text-primary" style="text-shadow: none;">Lab Management</span></h1>
+                    <p class="hero-subtitle">
                         Empower your diagnostic center with our cutting-edge Laboratory Information System designed for modern healthcare.
                     </p>
-                    <div class="d-flex gap-3 mt-4 justify-content-center">
+                    <div class="d-flex gap-3 mt-4 justify-content-center flex-wrap">
                         <a href="#welcome" class="btn btn-3d">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
                         <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
                     </div>

@@ -2117,10 +2117,10 @@
               
 			  $('#pdf-canvas-container').html(`
 				<div class="text-center py-100">
-					<div class="spinner-border text-light" role="status" style="width: 3rem; height: 3rem;">
+					<div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
 						<span class="visually-hidden">Loading...</span>
 					</div>
-					<p class="mt-20 text-white-50 fs-16">Generating real PDF preview...</p>
+					<p class="mt-20 text-muted fs-16">Generating real PDF preview...</p>
 				</div>
 			  `);
               
@@ -2349,10 +2349,15 @@
 
               function addShell(isFirstPage = true) {
                   if (showHeader) {
-                      doc.addImage(REPORT_HEADER_IMAGE, 'PNG', 0, 0, pageW, 26.5);
+                      const hProps = doc.getImageProperties(REPORT_HEADER_IMAGE);
+                      const hHeight = (hProps.height * pageW) / hProps.width;
+                      doc.addImage(REPORT_HEADER_IMAGE, 'PNG', 0, 0, pageW, hHeight);
                   }
 
-                  doc.addImage(REPORT_FOOTER_IMAGE, 'PNG', 0, footerTop, pageW, pageH - footerTop);
+                  const fProps = doc.getImageProperties(REPORT_FOOTER_IMAGE);
+                  const fHeight = (fProps.height * pageW) / fProps.width;
+                  const actualFooterTop = pageH - fHeight;
+                  doc.addImage(REPORT_FOOTER_IMAGE, 'PNG', 0, actualFooterTop, pageW, fHeight);
                   doc.setTextColor(0);
                   doc.setDrawColor(0);
                   doc.setLineWidth(0.25);

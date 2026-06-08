@@ -168,6 +168,21 @@
             margin-right: auto;
         }
 
+        /* Welcome Section Animation */
+        .welcome-section {
+            background: linear-gradient(270deg, #e0f2fe, #f0f9ff, #dbeafe, #bae6fd);
+            background-size: 800% 800%;
+            animation: welcomeGradient 20s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes welcomeGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Section Titles */
         .section-title {
             text-align: center;
@@ -419,18 +434,18 @@
     </section>
 
     <!-- Welcome Section -->
-    <section id="welcome" class="py-5 bg-light">
-        <div class="container py-5 text-center">
+    <section id="welcome" class="py-5 welcome-section">
+        <div class="container py-5 text-center" style="position: relative; z-index: 2;">
             <div class="section-title mb-5">
                 <h2 style="font-size: 2.5rem; text-transform: uppercase;">Welcome to Suhaim Lab</h2>
                 <p class="text-primary fw-bold" style="font-size: 1.25rem;">Your Partner in Digital Healthcare Transformation.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px;">
+                    <p class="text-dark" style="line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; font-weight: 500;">
                         In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong>SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
                     </p>
-                    <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem;">
+                    <p class="text-dark" style="line-height: 1.8; font-size: 1.15rem; font-weight: 500;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
                     </p>
                 </div>

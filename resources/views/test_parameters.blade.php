@@ -263,11 +263,11 @@
                                     <option value="Female">Female</option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Age Min</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_min" autocomplete="off">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Age Max</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_max" autocomplete="off">
                             </div>
@@ -279,11 +279,11 @@
                                     <option value="Days">Days</option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <label class="form-label-aw" style="font-size: 10px;">Reference Text</label>
                                 <input type="text" class="form-control-aw" name="reference_text" autocomplete="off">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="d-flex gap-2">
                                     <div class="flex-grow-1">
                                         <label class="form-label-aw" style="font-size: 10px;">Min Val</label>

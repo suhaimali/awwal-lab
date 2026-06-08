@@ -418,9 +418,6 @@
                         <a class="nav-link" href="#welcome">Welcome</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#process">Process</a>
                     </li>
                     <li class="nav-item">
@@ -430,7 +427,8 @@
                         <a class="nav-link" href="#benefits">Benefits</a>
                     </li>
                 </ul>
-                <div class="d-flex mt-3 mt-lg-0">
+                <div class="d-flex gap-2 mt-3 mt-lg-0 align-items-center">
+                    <a href="{{ route('login') }}" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
                     <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                 </div>
             </div>
@@ -475,29 +473,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-5 bg-white">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h2 class="fw-bold text-dark mb-4" style="font-size: 2.5rem;">About SUHAIM LAB</h2>
-                    <p class="text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-                        We are a leading provider of innovative laboratory management solutions. Our core mission is to empower diagnostic centers and laboratories with cutting-edge technology that simplifies daily operations, ensures uncompromising data accuracy, and significantly reduces turnaround times.
-                    </p>
-                    <p class="text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-                        With a deep understanding of the healthcare industry, SUHAIM LAB was built by professionals, for professionals. We handle the complexity of lab management so you can focus entirely on delivering the highest quality patient diagnostics.
-                    </p>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card-3d p-4 text-center bg-light">
-                        <i class="fa-solid fa-microscope text-primary" style="font-size: 5rem; margin-bottom: 20px;"></i>
-                        <h4 class="fw-bold">Precision & Care</h4>
-                        <p class="text-muted mb-0">Delivering state-of-the-art diagnostic reporting and seamless lab integrations.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Process Section -->
     <section id="process" class="process-section">

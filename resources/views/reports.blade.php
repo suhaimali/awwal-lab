@@ -2444,7 +2444,7 @@
                   const lineCount = Math.max(nameLines.length, observedLines.length, refLines.length, 1);
                   const rowH = Math.max(6, lineCount * 5.2);
 
-                  if (y + rowH > footerTop - 12) {
+                  if (y + rowH > footerTop - 35) {
                       y = addNewPage();
                       y = drawTableHeader(y);
                   }

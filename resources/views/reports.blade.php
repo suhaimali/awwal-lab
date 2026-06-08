@@ -1890,12 +1890,12 @@
                       data.results.forEach(item => {
                           let catOptions = `<option value="">Sub</option>`;
                           @foreach($categories as $cat)
-                            catOptions += `<option value="{{ $cat->name }}" data-id="{{ $cat->id }}" \${item.category == '{{ $cat->name }}' ? 'selected' : ''}>{{ $cat->name }}</option>`;
+                            catOptions += `<option value="{{ $cat->name }}" data-id="{{ $cat->id }}">{{ $cat->name }}</option>`;
                           @endforeach
 
                           let subOptions = `<option value="">None</option>`;
                           @foreach($subCategories as $sub)
-                            subOptions += `<option value="{{ $sub->name }}" data-id="{{ $sub->id }}" \${item.subcategory == '{{ $sub->name }}' ? 'selected' : ''}>{{ $sub->name }}</option>`;
+                            subOptions += `<option value="{{ $sub->name }}" data-id="{{ $sub->id }}">{{ $sub->name }}</option>`;
                           @endforeach
 
                            let testOptions = `<option value="">-- Select Test --</option>`;
@@ -1913,12 +1913,12 @@
                                 data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
                                 data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                 data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
-                                data-normal="{{ $test->description }}" \${item.name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
+                                data-normal="{{ $test->description }}">{{ $test->name }}</option>`;
                            @endforeach
 
                            let flagOptions = `<option value="">-- Select --</option>`;
                            @foreach($flagTemplates as $flg)
-                             flagOptions += `<option value="{{ $flg->name }}" data-id="{{ $flg->id }}" \${item.flag == '{{ $flg->name }}' ? 'selected' : ''}>{{ $flg->name }}</option>`;
+                             flagOptions += `<option value="{{ $flg->name }}" data-id="{{ $flg->id }}">{{ $flg->name }}</option>`;
                            @endforeach
 
                            let newRow = $(`
@@ -1950,9 +1950,7 @@
                          <div class="col-md-4 col-sm-12">
                              <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1120">
-                                     \${testOptions}
-                                     <option value="Immunoassay Test" \${item.name == 'Immunoassay Test' ? 'selected' : ''}>Immunoassay Test (Auto-calc)</option>
+                                 <selec                                     <option value="Immunoassay Test">Immunoassay Test (Auto-calc)</option>
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
@@ -1964,7 +1962,7 @@
                                  <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1121">
                                      <option value="">-- Select Observed --</option>
                                      @foreach($templates as $tmpl)
-                                         <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}" \${item.observed_value == '{{ $tmpl->name }}' ? 'selected' : ''}>{{ $tmpl->name }}</option>
+                                         <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -1977,20 +1975,20 @@
                                  <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off" id="field_1122">
                                      <option value="">Unit</option>
                                      @foreach($units as $u)
-                                         <option value="{{ $u->name }}" data-id="{{ $u->id }}" \${item.unit == '{{ $u->name }}' ? 'selected' : ''}>{{ $u->name }}</option>
+                                         <option value="{{ $u->name }}" data-id="{{ $u->id }}">{{ $u->name }}</option>
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                              </div>
                          </div>
-                         <div class="col-md-4 col-sm-12">
-                             <label  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
+                         <div class="col-md-4 col-sm-6">
+                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1123">
                                      <option value="">-- Select --</option>
                                      @foreach($referenceTemplates as $ref)
-                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}" \${item.normal_value == '{{ $ref->name }}' ? 'selected' : ''}>{{ $ref->name }}</option>
+                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2013,7 +2011,7 @@
                                  <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off" id="field_1125">
                                      <option value="">-- Select --</option>
                                      @foreach($referenceTemplates as $ref)
-                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}" \${item.biological_reference == '{{ $ref->name }}' ? 'selected' : ''}>{{ $ref->name }}</option>
+                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
                                      @endforeach
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2025,6 +2023,12 @@
              </div>
                             `);
                            container.append(newRow);
+                           setSelectValueWithDefault(newRow.find('.report-category-select'), item.category);
+                           setSelectValueWithDefault(newRow.find('.report-subcategory-select'), item.subcategory);
+                           setSelectValueWithDefault(newRow.find('.test-selector-dynamic'), item.name);
+                           setSelectValueWithDefault(newRow.find('.report-observed-select'), item.observed_value);
+                           setSelectValueWithDefault(newRow.find('.report-unit-select'), item.unit);
+                           setSelectValueWithDefault(newRow.find('.flag-selector'), item.flag);
                            setSelectValueWithDefault(newRow.find('.normal-val-dynamic'), item.normal_value);
                            setSelectValueWithDefault(newRow.find('.bio-val-dynamic'), item.biological_reference);
                       });

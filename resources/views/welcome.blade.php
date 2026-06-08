@@ -231,56 +231,33 @@
             background: white;
             border-radius: 20px;
             padding: 40px 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
             height: 100%;
-            z-index: 1;
             border: 1px solid rgba(255,255,255,0.5);
             text-align: left;
         }
 
         .process-card-modern:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(14, 165, 233, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(13, 110, 253, 0.1);
         }
 
-        .process-card-modern::before {
-            content: attr(data-step);
-            position: absolute;
-            top: -20px;
-            right: -10px;
-            font-size: 120px;
-            font-weight: 900;
-            color: rgba(14, 165, 233, 0.05);
-            z-index: -1;
-            line-height: 1;
-            transition: all 0.4s ease;
-        }
-
-        .process-card-modern:hover::before {
-            color: rgba(14, 165, 233, 0.1);
-            transform: scale(1.1);
-        }
-
-        .process-icon-modern {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
+        .step-number-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            color: white;
+            font-size: 24px;
+            font-weight: bold;
             margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
         }
-
-        .icon-bg-1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-        .icon-bg-2 { background: linear-gradient(135deg, #10b981, #059669); }
-        .icon-bg-3 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-        .icon-bg-4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
 
         /* Features Section */
         .features-section {
@@ -647,44 +624,29 @@
     <section id="process" class="process-section">
         <div class="container">
             <div class="section-title mb-5 text-center">
-                <h2 style="font-size: 2.8rem; text-transform: uppercase; font-weight: 800; background: linear-gradient(to right, var(--dark-blue), var(--primary-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">How It Works</h2>
-                <p class="text-muted fs-5">A streamlined workflow designed for maximum efficiency.</p>
+                <h2 style="font-size: 2.8rem; text-transform: uppercase; font-weight: 800; color: var(--dark-blue);">Our Simple Onboarding Process</h2>
+                <p class="text-muted fs-5">Get started with SUHAIM SOFT in three easy steps. Streamline your practice with our intuitive platform.</p>
             </div>
-            <div class="row g-4 mt-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="process-card-modern" data-step="01">
-                        <div class="process-icon-modern icon-bg-1">
-                            <i class="fa-solid fa-user-plus"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3 text-dark">Registration</h4>
-                        <p class="text-muted">Quick and easy patient entry.</p>
+            <div class="row g-4 mt-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="process-card-modern">
+                        <div class="step-number-circle">1</div>
+                        <h4 class="fw-bold mb-3 text-dark">Consult & Demo</h4>
+                        <p class="text-muted">Request a demo, and our specialists will showcase the platform's power, tailored to your clinic's needs.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="process-card-modern" data-step="02">
-                        <div class="process-icon-modern icon-bg-2">
-                            <i class="fa-solid fa-vial"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3 text-dark">Sample Collection</h4>
-                        <p class="text-muted">Barcode tracking for accuracy.</p>
+                <div class="col-md-4">
+                    <div class="process-card-modern">
+                        <div class="step-number-circle">2</div>
+                        <h4 class="fw-bold mb-3 text-dark">Seamless Integration</h4>
+                        <p class="text-muted">Our team handles the heavy lifting, migrating your existing data and integrating our EMR into your workflow.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="process-card-modern" data-step="03">
-                        <div class="process-icon-modern icon-bg-3">
-                            <i class="fa-solid fa-microscope"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3 text-dark">Processing</h4>
-                        <p class="text-muted">Automated machine interfacing.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="process-card-modern" data-step="04">
-                        <div class="process-icon-modern icon-bg-4">
-                            <i class="fa-solid fa-file-medical"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3 text-dark">Reporting</h4>
-                        <p class="text-muted">Instant delivery via SMS/WhatsApp.</p>
+                <div class="col-md-4">
+                    <div class="process-card-modern">
+                        <div class="step-number-circle">3</div>
+                        <h4 class="fw-bold mb-3 text-dark">Training & Support</h4>
+                        <p class="text-muted">We provide comprehensive training and dedicated support to ensure your team is confident and successful.</p>
                     </div>
                 </div>
             </div>

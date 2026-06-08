@@ -2506,18 +2506,19 @@
                   y += 8;
               });
 
-              if (y > footerTop - 55) y = addNewPage();
-              doc.setFont('times', 'normal');
-              doc.setFontSize(11);
-              doc.text('Note :', left, y + 5);
-
               if (reportNotes) {
                   const noteLines = doc.splitTextToSize(reportNotes, 116);
-                  if (y + 8 + noteLines.length * 5 > footerTop - 18) {
+                  if (y + 8 + noteLines.length * 5 > footerTop - 25) {
                       y = addNewPage();
-                      doc.text('Note :', left, y + 5);
                   }
+                  doc.setFont('times', 'normal');
+                  doc.setFontSize(11);
+                  doc.text('Note :', left, y + 5);
                   doc.text(noteLines, left + 13, y + 5);
+              } else {
+                  if (y > footerTop - 25) {
+                      y = addNewPage();
+                  }
               }
 
               if (signature && signature.image_data) {

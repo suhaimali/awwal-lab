@@ -919,7 +919,7 @@
                                             data-female-max="{{ $test->parameter->female_max ?? '' }}"
                                             data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
                                             data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
-                                            data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+                                            data-reference-intervals='{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}'
                                             data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                             data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
                                             data-normal="{{ $test->description }}">{{ $test->name }}</option>
@@ -1910,7 +1910,7 @@
                                 data-female-max="{{ $test->parameter->female_max ?? '' }}"
                                 data-critical-low="{{ $test->parameter->critical_low ?? '' }}"
                                 data-critical-high="{{ $test->parameter->critical_high ?? '' }}"
-                                data-reference-intervals="{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}"
+                                data-reference-intervals='{{ $test->referenceIntervals->map->only(['gender', 'age_min', 'age_max', 'reference_text', 'min_value', 'max_value'])->values()->toJson() }}'
                                 data-is-immunoassay="{{ $test->parameter->is_immunoassay ?? 0 }}"
                                 data-bio-ref="{{ $test->parameter->biological_reference ?? '' }}"
                                 data-normal="{{ $test->description }}">{{ $test->name }}</option>`;

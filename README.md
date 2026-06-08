@@ -1,28 +1,33 @@
-# Awwal Lab Management System
+# Awwal Lab - Advanced Laboratory Management System
 
-Awwal Lab is a comprehensive, secure, and modern Laboratory Information Management System (LIMS) built with Laravel. It streamlines the management of patients, laboratory tests, clinical reference intervals, billing, and comprehensive diagnostic reports.
+Awwal Lab is a comprehensive, highly secure, and modern Laboratory Information Management System (LIMS) built on the powerful **Laravel 11** framework. It is meticulously designed to streamline the management of clinical patients, laboratory tests, dynamic reference intervals, billing, and highly specialized diagnostic reporting.
 
-## Features
+## 🚀 Key Features
 
-- **Patient Management:** Complete patient registry with secure data storage.
-- **Laboratory Tests & Billing:** Dynamic pricing, test configuration, and payment tracking.
-- **Clinical Setup:** Advanced biological reference intervals based on age, gender, and specialized clinical logic (e.g., standard min-max vs immunoassay).
-- **Test Reports:** Generate, manage, and print clinical reports with custom dynamic templates and doctor signatures.
-- **Master Data Configuration:** Manage units of measurement, reference text templates, and flag templates.
-- **High Security:** 
-  - Fully authenticated routes and protected APIs.
-  - Strict HTTPS enforcement.
-  - Secure Sessions & localized database interactions.
-- **Modern UI:** Responsive, highly styled interface featuring live search, modals, and dynamic AJAX-powered form submissions.
+- **Robust Patient Management:** A complete, secure patient registry with live search and rapid AJAX-based CRUD operations.
+- **Laboratory Tests & Billing:** Dynamic pricing, detailed test configuration, discount application, and comprehensive payment tracking.
+- **Advanced Clinical Setup:** Highly specialized biological reference intervals based on age, gender, and clinical logic (e.g., standard min-max boundaries vs. immunoassay textual results).
+- **Automated PDF Invoicing:** Client-side, instant PDF invoice generation powered by `jsPDF` and `AutoTable`, featuring beautifully aligned, professional layouts and dynamic calculations.
+- **Diagnostic Test Reports:** Generate, manage, and securely print clinical reports with custom dynamic templates, flag templates, and authorized doctor signatures.
+- **Master Data Configuration:** Manage clinical units of measurement, reference text templates, and flag templates from a centralized UI.
+- **Progressive Web App (PWA):** Fully PWA-ready with service workers, manifest configuration, and installability on mobile/desktop devices.
 
-## Tech Stack
+## 🛡️ Enterprise-Grade Security & Architecture
 
-- **Backend:** Laravel (PHP)
+- **100% SQL Driven:** Completely migrated away from browser-based `localStorage`. All state (even UI preferences like sidebar toggles) is securely preserved in a normalized **MySQL** database via Eloquent ORM.
+- **Modular Blade Layouts:** Clean, highly organized Laravel Blade architecture utilizing strictly partitioned partials for header, sidebar, footer, styles, and scripts.
+- **Security Protocols:** Fully authenticated routes, protected APIs, strict CSRF protection, secure sessions, and forced Local Storage eviction to prevent sensitive data leaks in browser DevTools.
+
+## 💻 Tech Stack
+
+- **Backend:** Laravel 11 (PHP 8.2+)
 - **Database:** MySQL
-- **Frontend:** HTML5, CSS3, JavaScript (jQuery + AJAX), Bootstrap
-- **Icons & UI:** FontAwesome, custom modern glassmorphism styling
+- **Frontend Engine:** Laravel Blade
+- **Frontend Technologies:** HTML5, CSS3, JavaScript (jQuery + AJAX), Bootstrap 5
+- **Plugins:** DataTables, Select2, SweetAlert2, jsPDF, Moment.js
+- **Design:** Custom modern UI, glassmorphism aesthetics, responsive layouts, and FontAwesome 6 icons.
 
-## Installation
+## ⚙️ Installation
 
 1. **Clone the repository:**
    ```bash
@@ -42,7 +47,6 @@ Awwal Lab is a comprehensive, secure, and modern Laboratory Information Manageme
    cp .env.example .env
    php artisan key:generate
    ```
-   *Make sure `SESSION_SECURE_COOKIE=true` is set if running in production.*
 
 4. **Database Migration:**
    ```bash
@@ -53,13 +57,8 @@ Awwal Lab is a comprehensive, secure, and modern Laboratory Information Manageme
    ```bash
    php artisan serve
    ```
-   Access the application securely at `http://127.0.0.1:8000` (HTTPS will be enforced if configured).
+   Access the application securely at `http://127.0.0.1:8000`.
 
-## Security Notes
-
-- Local Storage is cleared actively to ensure that sensitive medical data (such as legacy patient lists or tests) is not exposed in the browser's developer tools.
-- All application transactions interact securely with the backend MySQL database using Eloquent ORM.
-
-## License
+## 📜 License
 
 This project is proprietary. Unauthorized copying of this project, via any medium, is strictly prohibited.

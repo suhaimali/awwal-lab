@@ -1150,15 +1150,14 @@
 					  doc.setFont("helvetica", "bold");
 					  doc.setFontSize(22);
 					  doc.setTextColor(0);
-					  doc.text("SUHAIM SOFT LAB MS", 20, 20);
+					  doc.text("Awwal Lab", 20, 20);
 					  
 					  doc.setFontSize(10);
 					  doc.setFont("helvetica", "normal");
 					  doc.setTextColor(0); // Black
-					  doc.text("Professional Laboratory Management System", 20, 26);
-					  doc.text("123 Health Avenue, Medical City, 10001", 20, 31);
-					  doc.text("Phone: +1 234 567 8900 | Email: contact@suhaimsoft.com", 20, 36);
-					  doc.text("Website: suhaimsoft.netlify.app", 20, 41);
+					  doc.text("A Muhammed's Complex Chenayikunnu Road Jn. PATHAPPIRIYAM, Vayanasala", 20, 26);
+					  doc.text("Ph: 7034 250 209, 7559 049 948 | Email: awwallabppm@gmail.com", 20, 31);
+					  doc.text("Website: https://awwallabs.in/", 20, 36);
 					  
 					  doc.setDrawColor(0);
 					  doc.setLineWidth(0.5);

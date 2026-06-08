@@ -608,7 +608,8 @@
                         Empower your diagnostic center with our cutting-edge Laboratory Information System designed for modern healthcare.
                     </p>
                     <div class="d-flex gap-3 mt-4 justify-content-center flex-wrap">
-                        <a href="#welcome" class="btn btn-3d">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
+                        <a href="#welcome" class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm" style="background: var(--primary-blue); border: none; font-size: 1.1rem;">Learn More <i class="fa-solid fa-arrow-down ms-2"></i></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="btn btn-light rounded-pill px-4 py-2 fw-bold shadow-sm" style="color: var(--primary-blue); border: none; font-size: 1.1rem;">Enroll Now</a>
                     </div>
                 </div>
             </div>

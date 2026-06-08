@@ -168,7 +168,31 @@
             margin-right: auto;
         }
 
+        /* Welcome Section Animation */
+        .welcome-section {
+            background: linear-gradient(-45deg, #020617, #1e40af, #0f172a, #0369a1);
+            background-size: 400% 400%;
+            animation: welcomeDarkGradient 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
 
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes welcomeDarkGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
 
 
@@ -559,20 +583,27 @@
     </section>
 
     <!-- Welcome Section -->
-    <section id="welcome" class="py-5 bg-white">
-        <div class="container py-5 text-center">
+    <section id="welcome" class="py-5 welcome-section">
+        <div class="container py-5 text-center" style="position: relative; z-index: 2;">
             <div class="section-title mb-5">
-                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: var(--dark-blue);">Welcome to Suhaim Lab</h2>
-                <p class="text-primary fw-bold" style="font-size: 1.25rem;">Your Partner in Digital Healthcare Transformation.</p>
+                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: white;">Welcome to Suhaim Lab</h2>
+                <p class="fw-bold" style="font-size: 1.25rem; color: var(--accent-blue);">Your Partner in Digital Healthcare Transformation.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px;">
-                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-dark">SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                    <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; font-weight: 300;">
+                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-white fw-bold">SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
                     </p>
-                    <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem;">
+                    <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; font-weight: 300;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
                     </p>
+
+                    <div class="mt-5">
+                        <div class="d-inline-block px-5 py-4" style="background: rgba(255,255,255,0.1); border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+                            <h1 class="display-3 fw-bold text-white mb-0"><span id="welcomeCounter">1</span>+</h1>
+                            <p class="mb-0 fw-bold text-uppercase mt-2" style="color: var(--accent-blue); letter-spacing: 2px; font-size: 0.9rem;">Diagnostic Centers Powered</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -824,6 +855,32 @@
                 popup.style.display = "flex";
             }
         }
+
+        // Animated Counter for Welcome Section
+        document.addEventListener("DOMContentLoaded", () => {
+            const counter = document.getElementById("welcomeCounter");
+            if(counter) {
+                let count = 1;
+                const target = 100;
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); 
+
+                const updateCounter = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                // Start animation with a slight delay
+                setTimeout(() => {
+                    requestAnimationFrame(updateCounter);
+                }, 800);
+            }
+        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

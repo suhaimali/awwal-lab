@@ -428,7 +428,7 @@
                     </li>
                 </ul>
                 <div class="d-flex gap-2 mt-3 mt-lg-0 align-items-center">
-                    <a href="{{ route('login') }}" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
                     <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                 </div>
             </div>
@@ -446,7 +446,7 @@
                     </p>
                     <div class="d-flex gap-3 mt-4 justify-content-center flex-wrap">
                         <a href="#welcome" class="btn btn-3d">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
                     </div>
                 </div>
             </div>
@@ -638,6 +638,38 @@
             </div>
         </div>
     </footer>
+
+    <!-- Enroll Now Modal -->
+    <div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 15px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div class="modal-header" style="background: linear-gradient(135deg, var(--light-blue), #ffffff); border-radius: 15px 15px 0 0; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <h5 class="modal-title fw-bold text-dark" id="enrollModalLabel">Enroll in SUHAIM LAB</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted mb-4">Please fill out the form below to request enrollment, and our team will get back to you shortly.</p>
+                    <form>
+                        <div class="mb-3">
+                            <label for="enrollName" class="form-label fw-bold">Full Name</label>
+                            <input type="text" class="form-control" id="enrollName" placeholder="Enter your full name" required style="border-radius: 10px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="enrollPhone" class="form-label fw-bold">Phone Number</label>
+                            <input type="tel" class="form-control" id="enrollPhone" placeholder="Enter your phone number" required style="border-radius: 10px;">
+                        </div>
+                        <div class="mb-4">
+                            <label for="enrollMsg" class="form-label fw-bold">Message</label>
+                            <textarea class="form-control" id="enrollMsg" rows="3" placeholder="How can we help your lab?" required style="border-radius: 10px;"></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary py-2 fw-bold" style="border-radius: 50px;">Submit Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

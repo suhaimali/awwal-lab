@@ -24,7 +24,6 @@
         }
 
         html, body {
-            width: 100%;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
@@ -224,10 +223,6 @@
 
         /* Process Section */
         .process-section {
-            padding: 100px 0;
-            background: white;
-        }
-
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             padding: 100px 0;
             position: relative;

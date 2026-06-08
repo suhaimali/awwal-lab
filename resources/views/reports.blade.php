@@ -23,6 +23,42 @@
                     .table th, .table td { padding: 10px 8px !important; font-size: 11px; }
                     .page-title { font-size: 18px; }
                     .page-header-aw .d-flex.gap-2 { flex-direction: column; gap: 5px !important; align-items: flex-end; }
+                    
+                    /* Responsive Add/Edit Modals */
+                    .modal-body .input-group.flex-nowrap {
+                        flex-wrap: wrap !important;
+                        border: none !important;
+                        box-shadow: none !important;
+                    }
+                    .modal-body .input-group.flex-nowrap > .form-select,
+                    .modal-body .input-group.flex-nowrap > .form-control {
+                        width: 100% !important;
+                        flex: 1 1 100% !important;
+                        border-radius: 8px !important;
+                        margin-bottom: 8px;
+                        border: 1px solid #ced4da !important;
+                    }
+                    .modal-body .input-group.flex-nowrap:focus-within > .form-select,
+                    .modal-body .input-group.flex-nowrap:focus-within > .form-control {
+                        border-color: #86b7fe !important;
+                        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+                    }
+                    .modal-body .input-group.flex-nowrap > .btn {
+                        flex: 1;
+                        border-radius: 8px !important;
+                        margin: 0 4px !important;
+                        padding: 8px 0 !important;
+                        height: auto !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                    .modal-body .input-group.flex-nowrap > .btn:first-of-type {
+                        margin-left: 0 !important;
+                    }
+                    .modal-body .input-group.flex-nowrap > .btn:last-of-type {
+                        margin-right: 0 !important;
+                    }
                 }
 
                 /* ═══════════════════════════════════════════════
@@ -556,7 +592,6 @@
 										<option value="{{ $signature->id }}" data-name="{{ $signature->name }}" data-image="{{ route('report-signatures.image', $signature->id) }}">{{ $signature->name }}</option>
 									@endforeach
 								</select>
-								<button type="button" class="btn btn-info btn-sm btn-view-report-signature" title="View Signature Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
 							</div>
 						</div>
 					</div>
@@ -666,7 +701,6 @@
 										<option value="{{ $signature->id }}" data-name="{{ $signature->name }}" data-image="{{ route('report-signatures.image', $signature->id) }}">{{ $signature->name }}</option>
 									@endforeach
 								</select>
-								<button type="button" class="btn btn-info btn-sm btn-view-report-signature" title="View Signature Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
 							</div>
 						</div>
 					</div>

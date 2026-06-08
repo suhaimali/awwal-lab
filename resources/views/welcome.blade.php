@@ -222,26 +222,65 @@
             background: white;
         }
 
-        .process-step {
-            text-align: center;
-            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 100px 0;
+            position: relative;
         }
 
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #0d6efd, #38bdf8);
-            color: white;
-            border-radius: 50%;
+        .process-card-modern {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.5);
+            text-align: left;
+        }
+
+        .process-card-modern:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(14, 165, 233, 0.15);
+        }
+
+        .process-card-modern::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 120px;
+            font-weight: 900;
+            color: rgba(14, 165, 233, 0.05);
+            z-index: -1;
+            line-height: 1;
+            transition: all 0.4s ease;
+        }
+
+        .process-card-modern:hover::before {
+            color: rgba(14, 165, 233, 0.1);
+            transform: scale(1.1);
+        }
+
+        .process-icon-modern {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 0 auto 20px auto;
-            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
-            border: 5px solid var(--light-blue);
+            font-size: 30px;
+            color: white;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+
+        .icon-bg-1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .icon-bg-2 { background: linear-gradient(135deg, #10b981, #059669); }
+        .icon-bg-3 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .icon-bg-4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
 
         /* Features Section */
         .features-section {
@@ -597,10 +636,6 @@
                     <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; font-weight: 300;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
                     </p>
-                    <div class="mt-5 pt-3" style="border-top: 1px solid rgba(255,255,255,0.1);">
-                        <h1 class="fw-bold text-white" style="font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3);"><span class="auto-counter" data-target="100">0</span>+</h1>
-                        <p style="color: var(--accent-blue); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Diagnostic Centers Powered</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -611,41 +646,46 @@
     <!-- Process Section -->
     <section id="process" class="process-section">
         <div class="container">
-            <div class="section-title mb-5">
-                <h2 style="font-size: 2.5rem; text-transform: uppercase;">How It Works</h2>
-                <p class="text-muted">A streamlined workflow designed for maximum efficiency.</p>
+            <div class="section-title mb-5 text-center">
+                <h2 style="font-size: 2.8rem; text-transform: uppercase; font-weight: 800; background: linear-gradient(to right, var(--dark-blue), var(--primary-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">How It Works</h2>
+                <p class="text-muted fs-5">A streamlined workflow designed for maximum efficiency.</p>
             </div>
-            <div class="row text-center mt-5">
-                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
-                    <div class="process-icon mx-auto">
-                        <i class="fa-solid fa-user-plus text-white"></i>
+            <div class="row g-4 mt-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-card-modern" data-step="01">
+                        <div class="process-icon-modern icon-bg-1">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3 text-dark">Registration</h4>
+                        <p class="text-muted">Quick and easy patient entry.</p>
                     </div>
-                    <h5 class="fw-bold mt-4">1. Registration</h5>
-                    <p class="text-muted">Quick and easy patient entry.</p>
-                    <i class="fa-solid fa-arrow-right process-arrow d-none d-md-block"></i>
                 </div>
-                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
-                    <div class="process-icon mx-auto">
-                        <i class="fa-solid fa-vial text-white"></i>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-card-modern" data-step="02">
+                        <div class="process-icon-modern icon-bg-2">
+                            <i class="fa-solid fa-vial"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3 text-dark">Sample Collection</h4>
+                        <p class="text-muted">Barcode tracking for accuracy.</p>
                     </div>
-                    <h5 class="fw-bold mt-4">2. Sample Collection</h5>
-                    <p class="text-muted">Barcode tracking for accuracy.</p>
-                    <i class="fa-solid fa-arrow-right process-arrow d-none d-md-block"></i>
                 </div>
-                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
-                    <div class="process-icon mx-auto">
-                        <i class="fa-solid fa-microscope text-white"></i>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-card-modern" data-step="03">
+                        <div class="process-icon-modern icon-bg-3">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3 text-dark">Processing</h4>
+                        <p class="text-muted">Automated machine interfacing.</p>
                     </div>
-                    <h5 class="fw-bold mt-4">3. Processing</h5>
-                    <p class="text-muted">Automated machine interfacing.</p>
-                    <i class="fa-solid fa-arrow-right process-arrow d-none d-md-block"></i>
                 </div>
-                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
-                    <div class="process-icon mx-auto">
-                        <i class="fa-solid fa-file-medical text-white"></i>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-card-modern" data-step="04">
+                        <div class="process-icon-modern icon-bg-4">
+                            <i class="fa-solid fa-file-medical"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3 text-dark">Reporting</h4>
+                        <p class="text-muted">Instant delivery via SMS/WhatsApp.</p>
                     </div>
-                    <h5 class="fw-bold mt-4">4. Reporting</h5>
-                    <p class="text-muted">Instant delivery via SMS/WhatsApp.</p>
                 </div>
             </div>
         </div>

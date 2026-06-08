@@ -598,7 +598,7 @@
                 </ul>
                 <div class="d-flex gap-2 mt-3 mt-lg-0 align-items-center">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
-                    <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
+                    <a href="/login" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                 </div>
             </div>
         </div>
@@ -615,7 +615,7 @@
                     </p>
                     <div class="d-flex gap-3 mt-4 justify-content-center flex-wrap">
                         <a href="#welcome" class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm" style="background: var(--primary-blue); border: none; font-size: 1.1rem;">Learn More <i class="fa-solid fa-arrow-down ms-2"></i></a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="btn btn-light rounded-pill px-4 py-2 fw-bold shadow-sm" style="color: var(--primary-blue); border: none; font-size: 1.1rem;">Enroll Now</a>
+                        <a href="/login" class="btn btn-light rounded-pill px-4 py-2 fw-bold shadow-sm" style="color: var(--primary-blue); border: none; font-size: 1.1rem;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                     </div>
                 </div>
             </div>

@@ -2380,7 +2380,7 @@
                   doc.text('Age', 132, infoY);
                   doc.text(':', 158, infoY);
                   doc.text(`${p.age || ''} ${p.age_type || 'Years'}`, 160, infoY);
-                  doc.text(`Sex : ${sex}`, 171, infoY);
+                  doc.text(`Sex : ${sex}`, 178, infoY);
 
                   doc.text('Specimen', 132, infoY + 5);
                   doc.text(':', 158, infoY + 5);

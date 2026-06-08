@@ -269,8 +269,7 @@
                 <td><strong>{{ $patientName }}</strong></td>
                 <td class="right-label">Age</td>
                 <td class="sep">:</td>
-                <td>{{ $patient->age }}</td>
-                <td>Sex : {{ $sex }}</td>
+                <td colspan="2">{{ $patient->age }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sex : {{ $sex }}</td>
             </tr>
             <tr>
                 <td></td>

@@ -227,30 +227,22 @@
             position: relative;
         }
 
-        .process-card-modern {
+        .process-card-simple {
             background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            position: relative;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             height: 100%;
-            border: 1px solid rgba(255,255,255,0.5);
             text-align: left;
         }
 
-        .step-number-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
+        .step-number-simple {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            line-height: 1;
+            opacity: 0.8;
         }
 
         /* Features Section */
@@ -655,22 +647,22 @@
             </div>
             <div class="row g-4 mt-4 justify-content-center">
                 <div class="col-md-4">
-                    <div class="process-card-modern">
-                        <div class="step-number-circle">1</div>
+                    <div class="process-card-simple">
+                        <div class="step-number-simple">1.</div>
                         <h4 class="fw-bold mb-3 text-dark">Consult & Demo</h4>
                         <p class="text-muted">Request a demo, and our specialists will showcase the platform's power, tailored to your clinic's needs.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="process-card-modern">
-                        <div class="step-number-circle">2</div>
+                    <div class="process-card-simple">
+                        <div class="step-number-simple">2.</div>
                         <h4 class="fw-bold mb-3 text-dark">Seamless Integration</h4>
                         <p class="text-muted">Our team handles the heavy lifting, migrating your existing data and integrating our EMR into your workflow.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="process-card-modern">
-                        <div class="step-number-circle">3</div>
+                    <div class="process-card-simple">
+                        <div class="step-number-simple">3.</div>
                         <h4 class="fw-bold mb-3 text-dark">Training & Support</h4>
                         <p class="text-muted">We provide comprehensive training and dedicated support to ensure your team is confident and successful.</p>
                     </div>

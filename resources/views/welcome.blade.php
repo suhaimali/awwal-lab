@@ -612,31 +612,31 @@
                 <p class="text-muted">A streamlined workflow designed for maximum efficiency.</p>
             </div>
             <div class="row text-center mt-5">
-                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
                     <div class="process-icon mx-auto">
                         <i class="fa-solid fa-user-plus text-white"></i>
                     </div>
                     <h5 class="fw-bold mt-4">1. Registration</h5>
                     <p class="text-muted">Quick and easy patient entry.</p>
-                    <i class="fa-solid fa-arrow-right process-arrow d-none d-lg-block"></i>
+                    <i class="fa-solid fa-arrow-right process-arrow d-none d-md-block"></i>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
                     <div class="process-icon mx-auto">
                         <i class="fa-solid fa-vial text-white"></i>
                     </div>
                     <h5 class="fw-bold mt-4">2. Sample Collection</h5>
                     <p class="text-muted">Barcode tracking for accuracy.</p>
-                    <i class="fa-solid fa-arrow-right process-arrow d-none d-lg-block"></i>
+                    <i class="fa-solid fa-arrow-right process-arrow d-none d-md-block"></i>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
                     <div class="process-icon mx-auto">
                         <i class="fa-solid fa-microscope text-white"></i>
                     </div>
                     <h5 class="fw-bold mt-4">3. Processing</h5>
                     <p class="text-muted">Automated machine interfacing.</p>
-                    <i class="fa-solid fa-arrow-right process-arrow d-none d-lg-block"></i>
+                    <i class="fa-solid fa-arrow-right process-arrow d-none d-md-block"></i>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4 position-relative process-step">
+                <div class="col-md-3 mb-4 mb-md-0 position-relative process-step">
                     <div class="process-icon mx-auto">
                         <i class="fa-solid fa-file-medical text-white"></i>
                     </div>

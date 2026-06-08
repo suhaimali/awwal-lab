@@ -725,6 +725,22 @@
               <div class="vp-field-label"><i class="fa fa-location-dot"></i> Address</div>
               <div class="vp-field-value" id="view-address">—</div>
             </div>
+            <div class="vp-field vp-full mt-3 border-top pt-3">
+              <div class="vp-field-label text-primary fw-bold mb-2"><i class="fa fa-flask"></i> Booked Tests</div>
+              <div class="vp-field-value w-100">
+                  <table class="table table-bordered table-sm fs-12 mb-0" id="view-tests-table">
+                      <thead class="bg-light">
+                          <tr>
+                              <th>Test Name</th>
+                              <th class="text-end">Amount (₹)</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Dynamically populated -->
+                      </tbody>
+                  </table>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1480,6 +1496,31 @@
 				  let li = data.last_name ? data.last_name.trim().charAt(0).toUpperCase() : '';
 				  let initials = (fi + li) || 'P';
 				  $('#vp-avatar').text(initials);
+
+				  // Tests List
+				  let testsHtml = '';
+				  if (data.appointments && data.appointments.length > 0) {
+					  let totalAmount = 0;
+					  data.appointments.forEach(function(app) {
+						  let price = parseFloat(app.test_price || 0);
+						  let discount = parseFloat(app.discount || 0);
+						  let net = price - discount;
+						  totalAmount += net;
+						  testsHtml += `<tr>
+							  <td>${app.test_name || 'General'}</td>
+							  <td class="text-end">${net.toFixed(2)}</td>
+						  </tr>`;
+					  });
+					  testsHtml += `<tr class="fw-bold bg-light">
+						  <td class="text-end">Total Payable:</td>
+						  <td class="text-end text-primary">${totalAmount.toFixed(2)}</td>
+					  </tr>`;
+				  } else {
+					  testsHtml = `<tr><td colspan="2" class="text-center text-muted">No tests booked</td></tr>`;
+				  }
+				  $('#view-tests-table tbody').html(testsHtml);
+
+				  $('#modal-view-patient').modal('show');
 			  });
 		  });
 

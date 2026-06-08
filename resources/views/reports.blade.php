@@ -901,7 +901,7 @@
                                 <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-4 col-sm-6">
                             <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1112">
@@ -955,7 +955,7 @@
                                 <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-4 col-sm-6">
                             <label  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Ref. Template</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1115">
@@ -1947,10 +1947,11 @@
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
                              </div>
                          </div>
-                         <div class="col-md-4 col-sm-12">
+                         <div class="col-md-4 col-sm-6">
                              <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                              <div class="input-group flex-nowrap">
-                                 <selec                                     <option value="Immunoassay Test">Immunoassay Test (Auto-calc)</option>
+                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off">
+                                     ${testOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-info btn-sm btn-view-report-test" title="View Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>

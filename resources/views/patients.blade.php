@@ -1073,7 +1073,7 @@
 			  let id = $(this).data('id');
 			  let btn = $(this);
 			  let originalHtml = btn.html();
-			  btn.html('<i class="fa fa-spinner fa-spin me-2"></i> Loading...').addClass('disabled');
+			  btn.html('<i class="fa fa-spinner fa-spin"></i>').addClass('disabled');
 
 			  $.get("/patients/" + id, function(patient) {
 				  // Fetch appointments for this patient to get test details

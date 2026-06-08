@@ -304,6 +304,36 @@
             text-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        .footer-brand i {
+            color: var(--accent-blue);
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            font-size: 35px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            color: white;
+            transform: scale(1.1);
+        }
+
         /* Footer */
         .footer {
             background: var(--dark-blue);
@@ -628,7 +658,7 @@
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled text-white-50">
                         <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> Pathappiriyam, Edavanna, Malappuram, Kerala</li>
-                        <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> +91 8891 479 505</li>
+                        <li class="mb-3"><i class="fa-brands fa-whatsapp me-2" style="color: #25d366;"></i> <a href="https://wa.me/918891479505" target="_blank" class="text-white-50 text-decoration-none">+91 8891 479 505</a></li>
                         <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> info@suhaimsoft.com</li>
                     </ul>
                 </div>
@@ -670,6 +700,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918891479505" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

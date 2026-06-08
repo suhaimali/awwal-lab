@@ -378,6 +378,9 @@
                         <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#welcome">Welcome</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
@@ -397,23 +400,39 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Home) -->
     <section id="home" class="hero">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-10 hero-content">
-                    <h1>WELCOME TO SUHAIM LAB</h1>
-                    <h3 class="text-primary mb-4" style="font-weight: 700;">Your Partner in Digital Healthcare Transformation.</h3>
-                    <p>
-                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong>SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                    <h1 style="font-size: 5rem; margin-bottom: 30px;">Smart, Secure & Efficient<br><span class="text-primary" style="text-shadow: none;">Lab Management</span></h1>
+                    <p style="font-size: 1.5rem; max-width: 900px;" class="mx-auto mb-5">
+                        Empower your diagnostic center with our cutting-edge Laboratory Information System designed for modern healthcare.
                     </p>
-                    <p>
-                        Our intelligent Laboratory Information System (LIS) system is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
-                    </p>
-                    <div class="d-flex gap-3 mt-5 justify-content-center">
-                        <a href="#process" class="btn btn-3d">Learn More <i class="fa fa-arrow-right ms-2"></i></a>
+                    <div class="d-flex gap-3 mt-4 justify-content-center">
+                        <a href="#welcome" class="btn btn-3d">Learn More <i class="fa fa-arrow-down ms-2"></i></a>
                         <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section id="welcome" class="py-5 bg-light">
+        <div class="container py-5 text-center">
+            <div class="section-title mb-5">
+                <h2 style="font-size: 2.5rem; text-transform: uppercase;">Welcome to Suhaim Lab</h2>
+                <p class="text-primary fw-bold" style="font-size: 1.25rem;">Your Partner in Digital Healthcare Transformation.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px;">
+                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong>SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                    </p>
+                    <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem;">
+                        Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
+                    </p>
                 </div>
             </div>
         </div>

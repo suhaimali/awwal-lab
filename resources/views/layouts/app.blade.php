@@ -600,12 +600,7 @@
 </head>
 <body>
     <!-- Loader -->
-    <div id="aw-loader">
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px;">
-            <div class="aw-spinner"></div>
-            <div style="color: var(--primary); font-weight: 600; font-size: 16px; letter-spacing: 1px;">Please wait ...........</div>
-        </div>
-    </div>
+    <div id="aw-loader"><div class="aw-spinner"></div></div>
     <!-- Mobile overlay -->
     <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 
@@ -613,20 +608,59 @@
     @include('inc.sidebar')
 
     <!-- ── HEADER ── -->
-    @include('inc.header')
+    <header id="awlab-header">
+        <div class="header-left">
+            <button class="btn-sidebar-toggle" onclick="toggleSidebar()">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="search-bar d-none d-md-flex">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Search patients, tests, reports...">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="action-btn" title="Notifications">
+                <i class="fa fa-bell"></i>
+                <span class="badge">3</span>
+            </div>
+            <div class="action-btn" title="Settings">
+                <i class="fa fa-cog"></i>
+            </div>
+            <div class="user-profile dropdown">
+                <div class="dropdown-toggle d-flex align-items-center gap-2" data-bs-toggle="dropdown" style="cursor:pointer;">
+                    <div class="avatar">
+                        {{ substr(Auth::user()->name, 0, 1) }}
+                    </div>
+                    <div class="user-info d-none d-sm-block text-start">
+                        <div class="user-name">{{ Auth::user()->name }}</div>
+                        <div class="user-role text-muted" style="font-size:11px;">Administrator</div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2" style="border-radius:12px; min-width:200px;">
+                    <li><a class="dropdown-item py-2" href="#"><i class="fa fa-user me-2 text-muted"></i> My Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="dropdown-item py-2 text-danger" type="submit"><i class="fa fa-sign-out-alt me-2"></i> Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
     <!-- ── MAIN CONTENT ── -->
     <main id="awlab-main">
-        @yield('content')
+        <div class="container-fluid p-3 p-md-4">
+            @yield('content')
+        </div>
     </main>
 
-    <!-- ── FOOTER ── -->
-    @include('inc.footer')
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
@@ -642,7 +676,7 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('aw-loader').classList.add('hidden');
-            }, 5000); // 5 seconds loading delay
+            }, 3000); // 3 seconds loading delay
         });
 
         // ── Sidebar toggle (desktop collapse)

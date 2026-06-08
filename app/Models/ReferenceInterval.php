@@ -11,6 +11,7 @@ class ReferenceInterval extends Model
         'gender',
         'age_min',
         'age_max',
+        'age_type',
         'reference_text',
         'min_value',
         'max_value',

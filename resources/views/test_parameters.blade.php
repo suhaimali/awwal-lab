@@ -255,7 +255,7 @@
                     <form id="form-add-interval">
                         <input type="hidden" name="lab_test_id" id="interval-test-id">
                         <div class="row g-2">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label-aw" style="font-size: 10px;">Gender</label>
                                 <select class="form-select" name="gender" autocomplete="off" required>
                                     <option value="Any">Any</option>
@@ -271,7 +271,15 @@
                                 <label class="form-label-aw" style="font-size: 10px;">Age Max</label>
                                 <input type="number" step="0.1" class="form-control-aw" name="age_max" autocomplete="off">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
+                                <label class="form-label-aw" style="font-size: 10px;">Age Type</label>
+                                <select class="form-select" name="age_type" autocomplete="off">
+                                    <option value="Years">Years</option>
+                                    <option value="Months">Months</option>
+                                    <option value="Days">Days</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
                                 <label class="form-label-aw" style="font-size: 10px;">Reference Text</label>
                                 <input type="text" class="form-control-aw" name="reference_text" autocomplete="off">
                             </div>
@@ -358,7 +366,7 @@
                           tbody.append(`
                               <tr>
                                   <td style="font-size:12px;font-weight:600;"><span class="badge-aw bg-light text-dark border">${inv.gender}</span></td>
-                                  <td style="font-size:12px;">${inv.age_min || '-'} to ${inv.age_max || '-'} yrs</td>
+                                  <td style="font-size:12px;">${inv.age_min || '-'} to ${inv.age_max || '-'} ${inv.age_type || 'Years'}</td>
                                   <td style="font-size:12px;">${inv.reference_text || '-'}</td>
                                   <td style="font-size:12px;">${inv.min_value || '-'} / ${inv.max_value || '-'}</td>
                                   <td class="text-end">

@@ -12,6 +12,7 @@
         </div>
     </div>
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
+
         <a href="{{ route('patients') }}" class="btn-aw-primary">
             <i class="fa fa-user-plus"></i> Add Patient
         </a>

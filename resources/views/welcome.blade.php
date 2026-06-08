@@ -326,12 +326,83 @@
             justify-content: center;
             text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
 
         .whatsapp-float:hover {
             background-color: #128c7e;
             color: white;
             transform: scale(1.1);
+        }
+
+        /* WhatsApp Popup Widget */
+        .wa-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease forwards;
+        }
+
+        .wa-popup-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wa-popup-header h5 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .wa-popup-body {
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        .wa-chat-bubble {
+            background: white;
+            padding: 15px;
+            border-radius: 0 15px 15px 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+            color: var(--dark-blue);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .wa-chat-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10px;
+            border-width: 0 10px 10px 0;
+            border-style: solid;
+            border-color: transparent white transparent transparent;
+        }
+
+        .wa-popup-footer {
+            padding: 15px 20px;
+            background: white;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Footer */
@@ -442,6 +513,11 @@
                 bottom: 20px;
                 right: 20px;
                 font-size: 28px;
+            }
+            .wa-popup {
+                right: 20px;
+                bottom: 80px;
+                width: calc(100% - 40px);
             }
             .footer {
                 padding: 50px 0 20px 0;
@@ -735,13 +811,44 @@
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/918891479505" target="_blank" class="whatsapp-float">
+    <button onclick="toggleWaPopup()" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    </button>
+
+    <!-- WhatsApp Popup Widget -->
+    <div class="wa-popup" id="waPopup">
+        <div class="wa-popup-header">
+            <div class="d-flex align-items-center">
+                <i class="fa-brands fa-whatsapp fs-4 me-2"></i>
+                <h5>Suhaim Soft</h5>
+            </div>
+            <button onclick="toggleWaPopup()" style="background: none; border: none; color: white; font-size: 1.2rem;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="wa-popup-body">
+            <div class="wa-chat-bubble">
+                WELCOME TO SUHAIM SOFT<br>HOW CAN I HELP YOU?
+            </div>
+        </div>
+        <div class="wa-popup-footer">
+            <a href="https://wa.me/918891479505" target="_blank" class="btn w-100 fw-bold" style="background: #25d366; color: white; border-radius: 50px;">
+                <i class="fa-brands fa-whatsapp me-2"></i> Start Chat
+            </a>
+        </div>
+    </div>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // WhatsApp Popup Toggle
+        function toggleWaPopup() {
+            var popup = document.getElementById("waPopup");
+            if (popup.style.display === "flex") {
+                popup.style.display = "none";
+            } else {
+                popup.style.display = "flex";
+            }
+        }
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

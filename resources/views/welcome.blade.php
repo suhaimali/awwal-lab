@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUHAIM SOFT | Digital Healthcare Transformation</title>
+    <title>SUHAIM LAB | Digital Healthcare Transformation</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -97,32 +97,61 @@
 
         /* Hero Section */
         .hero {
-            padding: 180px 0 120px 0;
-            background: linear-gradient(135deg, var(--light-blue) 0%, #ffffff 100%);
+            padding: 220px 0 160px 0;
+            background: linear-gradient(-45deg, var(--light-blue), #ffffff, #e0f2fe, var(--accent-blue));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             position: relative;
             overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -100px;
+            top: -150px;
             right: -100px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
             border-radius: 50%;
             z-index: 0;
+            animation: floatCircle 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(13, 110, 253, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: floatCircle 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatCircle {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+            100% { transform: translateY(0px) scale(1); }
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
+            text-align: center;
         }
 
         .hero h1 {
             font-weight: 800;
-            font-size: 3.5rem;
+            font-size: 4rem;
             line-height: 1.2;
             color: var(--dark-blue);
             margin-bottom: 20px;
@@ -130,29 +159,13 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-light);
             margin-bottom: 40px;
             line-height: 1.8;
-        }
-
-        .hero-img-container {
-            position: relative;
-            z-index: 1;
-            perspective: 1000px;
-        }
-
-        .hero-img {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 20px;
-            box-shadow: 20px 20px 60px rgba(13, 110, 253, 0.15), -20px -20px 60px rgba(255,255,255,0.8);
-            transform: rotateY(-10deg) rotateX(5deg);
-            transition: all 0.5s ease;
-        }
-
-        .hero-img-container:hover .hero-img {
-            transform: rotateY(0deg) rotateX(0deg);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Section Titles */
@@ -355,7 +368,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM SOFT</a>
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM LAB</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -363,6 +376,9 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#process">Process</a>
@@ -384,25 +400,43 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 hero-content">
-                    <h1>WELCOME TO SUHAIM SOFT</h1>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-10 hero-content">
+                    <h1>WELCOME TO SUHAIM LAB</h1>
                     <h3 class="text-primary mb-4" style="font-weight: 700;">Your Partner in Digital Healthcare Transformation.</h3>
                     <p>
-                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong>SUHAIM SOFT</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong>SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
                     </p>
                     <p>
-                        Our intelligent Electronic Medical Record (EMR) system is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient check-in to billing.
+                        Our intelligent Laboratory Information System (LIS) system is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
                     </p>
-                    <div class="d-flex gap-3 mt-4">
+                    <div class="d-flex gap-3 mt-5 justify-content-center">
                         <a href="#process" class="btn btn-3d">Learn More <i class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700;">Enroll Now</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 30px; font-weight: 700; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);">Enroll Now</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold text-dark mb-4" style="font-size: 2.5rem;">About SUHAIM LAB</h2>
+                    <p class="text-muted" style="line-height: 1.8; font-size: 1.1rem;">
+                        We are a leading provider of innovative laboratory management solutions. Our core mission is to empower diagnostic centers and laboratories with cutting-edge technology that simplifies daily operations, ensures uncompromising data accuracy, and significantly reduces turnaround times.
+                    </p>
+                    <p class="text-muted" style="line-height: 1.8; font-size: 1.1rem;">
+                        With a deep understanding of the healthcare industry, SUHAIM LAB was built by professionals, for professionals. We handle the complexity of lab management so you can focus entirely on delivering the highest quality patient diagnostics.
+                    </p>
+                </div>
                 <div class="col-lg-6">
-                    <div class="hero-img-container text-center">
-                        <!-- Placeholder for a nice 3D UI image -->
-                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="SUHAIM SOFT Dashboard" class="hero-img img-fluid">
+                    <div class="card-3d p-4 text-center bg-light">
+                        <i class="fa-solid fa-microscope text-primary" style="font-size: 5rem; margin-bottom: 20px;"></i>
+                        <h4 class="fw-bold">Precision & Care</h4>
+                        <p class="text-muted mb-0">Delivering state-of-the-art diagnostic reporting and seamless lab integrations.</p>
                     </div>
                 </div>
             </div>
@@ -414,7 +448,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Our Simple Onboarding Process</h2>
-                <p>Get started with SUHAIM SOFT in three easy steps. Streamline your practice with our intuitive platform.</p>
+                <p>Get started with SUHAIM LAB in three easy steps. Streamline your practice with our intuitive platform.</p>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -453,15 +487,15 @@
                 <div class="col-md-4">
                     <div class="card-3d p-4 h-100">
                         <div class="feature-icon"><i class="fa-solid fa-stopwatch"></i></div>
-                        <h4>30-Second Prescriptions</h4>
-                        <p class="text-muted">Generate and finalize complete prescriptions in under 30 seconds with intelligent templates and drug databases.</p>
+                        <h4>30-Second Test Reports</h4>
+                        <p class="text-muted">Generate and finalize complete test reports in under 30 seconds with intelligent templates and normal ranges.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card-3d p-4 h-100">
                         <div class="feature-icon"><i class="fa-solid fa-paper-plane"></i></div>
-                        <h4>Automated Delivery</h4>
-                        <p class="text-muted">Instantly and securely send finalized prescriptions directly to the patient's email or preferred pharmacy, eliminating paper and wait times.</p>
+                        <h4>Automated Report Delivery</h4>
+                        <p class="text-muted">Instantly and securely send finalized reports directly to the patient's email or WhatsApp, eliminating paper and wait times.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -474,8 +508,8 @@
                 <div class="col-md-4">
                     <div class="card-3d p-4 h-100">
                         <div class="feature-icon"><i class="fa-solid fa-video"></i></div>
-                        <h4>Digital Consultation</h4>
-                        <p class="text-muted">Conduct secure and efficient patient consultations from anywhere. Our easy-to-use digital EMR provides all the tools you need.</p>
+                        <h4>Digital Test Tracking</h4>
+                        <p class="text-muted">Conduct secure and efficient patient test tracking from anywhere. Our easy-to-use digital LIS provides all the tools you need.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -508,7 +542,7 @@
                     <div class="benefit-card h-100">
                         <div class="benefit-value">100%</div>
                         <h5 class="fw-bold">Time Savings</h5>
-                        <p class="mb-0 text-white-50 small">Reduce administrative overhead, allowing more time for what matters most: patient consultations.</p>
+                        <p class="mb-0 text-white-50 small">Reduce administrative overhead, allowing more time for what matters most: patient diagnoses.</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
@@ -541,7 +575,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4 mb-lg-0">
-                    <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM SOFT</a>
+                    <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM LAB</a>
                     <p>By automating repetitive tasks, providing actionable insights, and ensuring rock-solid security, we empower you to practice medicine more efficiently and effectively. Join us in building a smarter, more connected future for healthcare.</p>
                     <div class="social-icons mt-4">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -569,7 +603,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; {{ date('Y') }} SUHAIM SOFT. All rights reserved.</p>
+                <p class="mb-0">&copy; {{ date('Y') }} SUHAIM LAB. All rights reserved.</p>
             </div>
         </div>
     </footer>

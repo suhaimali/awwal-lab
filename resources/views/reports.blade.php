@@ -498,7 +498,6 @@
 										<td class="text-end">
                                              <div class="d-flex justify-content-end gap-2">
                                                  <button class="btn-aw-outline btn-aw-sm btn-view" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-report" title="View / PDF" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-file-pdf"></i></button>
-                                                 <button class="btn-aw-info btn-aw-sm btn-bulk" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-bulk-entry" title="Bulk Entry" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-list-ol"></i></button>
                                                  <button class="btn-aw-primary btn-aw-sm btn-edit" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-report" title="Edit Report" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-edit"></i></button>
                                                  <button class="btn-aw-danger btn-aw-sm btn-delete" data-id="{{ $report->id }}" title="Delete" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-trash"></i></button>
                                              </div>
@@ -751,40 +750,6 @@
 		</div>
 	  </div>
   </div>
-  <!-- Bulk Entry Modal -->
-  <div class="modal fade" id="modal-bulk-entry" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-	  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-		<div class="modal-content border-0 shadow-lg">
-		  <div class="modal-header bg-info text-white border-0 py-3">
-			<h5 class="modal-title fw-semibold"><i class="fa fa-list-ol me-2"></i> Bulk Entry (A to Z)</h5>
-			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body p-4 bg-light">
-			<form id="form-bulk-entry">
-                @csrf
-                <input type="hidden" name="report_id" id="bulk-report-id">
-                <div class="table-responsive bg-white rounded shadow-sm">
-                    <table class="table table-hover table-bordered mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th style="width: 40%">Test Name (A - Z)</th>
-                                <th style="width: 60%">Observed Result</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bulk-entry-tbody">
-                            <!-- Populated via JS -->
-                        </tbody>
-                    </table>
-                </div>
-			</form>
-		  </div>
-		  <div class="modal-footer border-0 bg-light">
-			<button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
-			<button type="button" class="btn-aw-info text-white fw-bold" id="btn-save-bulk-entry">Save Bulk Entry</button>
-		  </div>
-		</div>
-	  </div>
-  </div>
 
   <!-- Neat PDF Viewer Modal -->
   <div class="modal fade" id="modal-view-report" tabindex="-1" aria-hidden="true">
@@ -948,7 +913,6 @@
             <div class="test-item-row card border-0 shadow-sm mb-3" style="background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 12px; position: relative; overflow: hidden;">
                 <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #6366f1;"></div>
                 <div class="card-body p-3">
-                    <button type="button" class="btn btn-sm btn-secondary position-absolute drag-handle" style="top: 10px; right: 45px; z-index: 10; border-radius: 8px; cursor: move;" title="Drag to Sort"><i class="fa fa-arrows-alt"></i></button>
                     <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
                     <div class="row g-3 align-items-end">
                         <div class="col-md-4 col-sm-6">
@@ -1266,66 +1230,6 @@
 
           $(document).on('click', '.remove-row', function() {
               $(this).closest('.test-item-row').remove();
-          });
-
-          // Initialize Sortable
-          if($.fn.sortable) {
-              $('#dynamic-tests-container').sortable({ handle: '.drag-handle', cursor: 'move', axis: 'y' });
-              $('#edit-dynamic-tests-container').sortable({ handle: '.drag-handle', cursor: 'move', axis: 'y' });
-          }
-
-          // Bulk Entry Logic
-          $(document).on('click', '.btn-bulk', function(e) {
-              e.preventDefault();
-              let id = $(this).data('id');
-              $('#bulk-report-id').val(id);
-              $('#bulk-entry-tbody').html('<tr><td colspan="2" class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x text-primary"></i><br>Loading tests...</td></tr>');
-              
-              $.get("/reports/" + id, function(reportData) {
-                  let existingResults = {};
-                  if(reportData.results && reportData.results.length > 0) {
-                      reportData.results.forEach(item => {
-                          existingResults[item.name] = item.observed_value;
-                      });
-                  }
-                  
-                  $.get("{{ route('api.tests') }}", function(testsData) {
-                      testsData.sort((a, b) => a.name.localeCompare(b.name));
-                      
-                      let tbodyHtml = '';
-                      testsData.forEach(test => {
-                          let currentValue = existingResults[test.name] || '';
-                          tbodyHtml += `
-                              <tr>
-                                  <td class="align-middle fw-medium text-secondary">
-                                      ${test.name}
-                                      <input type="hidden" name="bulk_tests[]" value="${test.name}">
-                                  </td>
-                                  <td>
-                                      <input type="text" name="bulk_observed[]" class="form-control" value="${currentValue}" placeholder="Enter result..." autocomplete="off">
-                                  </td>
-                              </tr>
-                          `;
-                      });
-                      
-                      $('#bulk-entry-tbody').html(tbodyHtml);
-                  });
-              });
-          });
-
-          $('#btn-save-bulk-entry').click(function() {
-              let btn = $(this);
-              let originalText = btn.html();
-              btn.html('<i class="fa fa-spinner fa-spin"></i> Saving...').prop('disabled', true);
-              let reportId = $('#bulk-report-id').val();
-              
-              $.post("/reports/" + reportId + "/bulk", $('#form-bulk-entry').serialize(), function(response) {
-                  alert(response.success);
-                  location.reload();
-              }).fail(function(xhr) {
-                  alert('Error: ' + (xhr.responseJSON?.message || 'Failed to save bulk entry.'));
-                  btn.html(originalText).prop('disabled', false);
-              });
           });
 
           // =============================================
@@ -2077,7 +1981,6 @@
              <div class="test-item-row card border-0 shadow-sm mb-3" style="background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 12px; position: relative; overflow: hidden;">
                  <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #6366f1;"></div>
                  <div class="card-body p-3">
-                     <button type="button" class="btn btn-sm btn-secondary position-absolute drag-handle" style="top: 10px; right: 45px; z-index: 10; border-radius: 8px; cursor: move;" title="Drag to Sort"><i class="fa fa-arrows-alt"></i></button>
                      <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
                      <div class="row g-3 align-items-end">
                          <div class="col-md-4 col-sm-6">

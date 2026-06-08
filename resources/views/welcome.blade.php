@@ -306,26 +306,10 @@
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            background: var(--dark-blue);
             color: white;
-            padding: 80px 0 20px 0;
+            padding: 60px 0 20px 0;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 60%);
-            animation: rotateBG 20s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes rotateBG {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .footer .container {

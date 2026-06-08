@@ -608,54 +608,15 @@
     @include('inc.sidebar')
 
     <!-- ── HEADER ── -->
-    <header id="awlab-header">
-        <div class="header-left">
-            <button class="btn-sidebar-toggle" onclick="toggleSidebar()">
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="search-bar d-none d-md-flex">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search patients, tests, reports...">
-            </div>
-        </div>
-        <div class="header-right">
-            <div class="action-btn" title="Notifications">
-                <i class="fa fa-bell"></i>
-                <span class="badge">3</span>
-            </div>
-            <div class="action-btn" title="Settings">
-                <i class="fa fa-cog"></i>
-            </div>
-            <div class="user-profile dropdown">
-                <div class="dropdown-toggle d-flex align-items-center gap-2" data-bs-toggle="dropdown" style="cursor:pointer;">
-                    <div class="avatar">
-                        {{ substr(Auth::user()->name, 0, 1) }}
-                    </div>
-                    <div class="user-info d-none d-sm-block text-start">
-                        <div class="user-name">{{ Auth::user()->name }}</div>
-                        <div class="user-role text-muted" style="font-size:11px;">Administrator</div>
-                    </div>
-                </div>
-                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2" style="border-radius:12px; min-width:200px;">
-                    <li><a class="dropdown-item py-2" href="#"><i class="fa fa-user me-2 text-muted"></i> My Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="dropdown-item py-2 text-danger" type="submit"><i class="fa fa-sign-out-alt me-2"></i> Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
+    @include('inc.header')
 
     <!-- ── MAIN CONTENT ── -->
     <main id="awlab-main">
-        <div class="container-fluid p-3 p-md-4">
-            @yield('content')
-        </div>
+        @yield('content')
     </main>
+
+    <!-- ── FOOTER ── -->
+    @include('inc.footer')
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

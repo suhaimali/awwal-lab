@@ -306,9 +306,31 @@
 
         /* Footer */
         .footer {
-            background: var(--dark-blue);
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             color: white;
-            padding: 60px 0 20px 0;
+            padding: 80px 0 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 60%);
+            animation: rotateBG 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateBG {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer .container {
+            position: relative;
+            z-index: 1;
         }
 
         .footer-brand {
@@ -643,9 +665,9 @@
                 <div class="col-lg-4 col-md-8 footer-links">
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled text-white-50">
-                        <li class="mb-3"><i class="fa fa-map-marker-alt me-2 text-primary"></i> 123 Healthcare Avenue, Tech District</li>
-                        <li class="mb-3"><i class="fa fa-phone-alt me-2 text-primary"></i> +1 (800) 123-4567</li>
-                        <li class="mb-3"><i class="fa fa-envelope me-2 text-primary"></i> contact@suhaimsoft.com</li>
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> 123 Healthcare Avenue, Tech District</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> +1 (800) 123-4567</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> contact@suhaimsoft.com</li>
                     </ul>
                 </div>
             </div>

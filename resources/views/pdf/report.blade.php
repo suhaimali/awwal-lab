@@ -235,7 +235,7 @@
                     <div class="fallback-tagline">"Accurate Diagnosis for Effective Treatment"</div>
                     <div class="fallback-name">awwal</div>
                     <div class="fallback-sub">QUALITY DIAGNOSTIC LABS</div>
-                    <div class="fallback-site">www.awwallabs.com</div>
+                    <div class="fallback-site">www.awwallabs.in</div>
                 </div>
                 <div class="fallback-address">
                     A Muhammed's Complex<br>
@@ -261,34 +261,34 @@
             <tr>
                 <td class="label">Patient Name</td>
                 <td class="sep">:</td>
-                <td><strong>{{ $patientName }}</strong></td>
+                <td style="width: 35%;"><strong>{{ $patientName }}</strong></td>
                 <td class="right-label">Age</td>
                 <td class="sep">:</td>
-                <td colspan="2">{{ $patient->age }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sex : {{ $sex }}</td>
+                <td>{{ $patient->age }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sex : {{ $sex }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>Specimen</td>
+                <td class="right-label">Specimen</td>
                 <td class="sep">:</td>
-                <td colspan="2"></td>
+                <td></td>
             </tr>
             <tr>
                 <td>Reference No</td>
                 <td class="sep">:</td>
                 <td>{{ $referenceNo }}</td>
-                <td>Date</td>
+                <td class="right-label">Date</td>
                 <td class="sep">:</td>
-                <td colspan="2">{{ $reportDate }}</td>
+                <td>{{ $reportDate }}</td>
             </tr>
             <tr>
                 <td>Referred By</td>
                 <td class="sep">:</td>
                 <td><strong>{{ $report->doctor_name }}</strong></td>
-                <td>Printed Date</td>
+                <td class="right-label">Printed Date</td>
                 <td class="sep">:</td>
-                <td colspan="2">{{ $printedDate }}</td>
+                <td>{{ $printedDate }}</td>
             </tr>
         </table>
 

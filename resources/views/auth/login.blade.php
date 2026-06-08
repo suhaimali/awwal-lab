@@ -25,7 +25,7 @@
             <span id="error-message">Invalid credentials provided.</span>
         </div>
 
-        <form id="login-form" action="{{ route('login.post') }}" autocomplete="off" novalidate>
+        <form id="login-form" method="POST" action="{{ route('login.post') }}" autocomplete="off" novalidate>
             @csrf
             <div class="form-group">
                 <label class="form-label">Email Address</label>

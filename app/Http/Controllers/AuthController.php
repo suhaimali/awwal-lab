@@ -24,10 +24,19 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return response()->json(['success' => true, 'redirect' => route('dashboard')]);
+            if ($request->expectsJson()) {
+                return response()->json(['success' => true, 'redirect' => route('dashboard')]);
+            }
+            return redirect()->intended(route('dashboard'));
         }
 
-        return response()->json(['success' => false, 'message' => 'The provided credentials do not match our records.'], 401);
+        if ($request->expectsJson()) {
+            return response()->json(['success' => false, 'message' => 'The provided credentials do not match our records.'], 401);
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('email', 'remember'));
     }
 
     public function logout(Request $request)

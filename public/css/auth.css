@@ -148,6 +148,10 @@
     outline: none;
 }
 
+#password {
+    padding-right: 48px;
+}
+
 .form-input:focus {
     background: #fff;
     border-color: var(--primary);

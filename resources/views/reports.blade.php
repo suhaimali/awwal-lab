@@ -886,6 +886,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-report-category" title="Delete Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -899,6 +901,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-report-subcategory" title="Delete Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -942,6 +946,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-observed" title="Delete Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -955,6 +961,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-report-unit" title="Delete Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -968,6 +976,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
@@ -981,6 +991,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-flag" title="Delete Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12">
@@ -994,6 +1006,8 @@
                                 </select>
                                 <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                     </div>
@@ -1937,6 +1951,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-category" title="Add Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-report-category" title="Edit Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-report-category" title="View Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-category" title="Delete Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1947,6 +1963,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-subcategory" title="Add Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-report-subcategory" title="Edit Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-report-subcategory" title="View Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-subcategory" title="Delete Sub-Category" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1972,6 +1990,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-observed" title="Add Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-observed" title="Edit Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-observed" title="View Observed Details" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-observed" title="Delete Observed" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1985,6 +2005,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-unit" title="Add Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-report-unit" title="Edit Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-report-unit" title="View Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-report-unit" title="Delete Unit" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -1998,6 +2020,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
@@ -2008,6 +2032,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-flag" title="Add Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-flag" title="Edit Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-flag" title="View Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-flag" title="Delete Flag" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                          <div class="col-md-8 col-sm-12">
@@ -2021,6 +2047,8 @@
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-reference" title="Add Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
                                  <button type="button" class="btn btn-warning btn-sm btn-edit-reference" title="Edit Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-edit"></i></button>
+                                 <button type="button" class="btn btn-info btn-sm btn-view-reference" title="View Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-eye"></i></button>
+                                 <button type="button" class="btn btn-danger btn-sm btn-delete-reference" title="Delete Reference" style="padding: 0.25rem 0.5rem;"><i class="fa fa-trash"></i></button>
                              </div>
                          </div>
                      </div>
@@ -3266,6 +3294,80 @@
           $(document).on('click', '.btn-edit-reference', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a reference template first.'); return; } $('#edit-report-reference-id').val(id); $('#edit-report-reference-name').val(name || selectedOption.text()); $('#modal-edit-report-reference').modal('show'); });
 
           $(document).on('click', '.btn-edit-flag', function() { let select = $(this).siblings('select'); let selectedOption = select.find('option:selected'); let id = selectedOption.data('id'); let name = selectedOption.val(); if (!id) { alert('Please select a flag template first.'); return; } $('#edit-report-flag-id').val(id); $('#edit-report-flag-name').val(name || selectedOption.text()); $('#modal-edit-report-flag').modal('show'); });
+
+          // Handle Dynamic Row View/Delete Buttons
+          $(document).on('click', '.btn-delete-report-category', function() { handleDeleteClick($(this), 'category', 'category'); });
+          $(document).on('click', '.btn-delete-report-subcategory', function() { handleDeleteClick($(this), 'sub-category', 'subcategory'); });
+          $(document).on('click', '.btn-delete-report-test', function() { handleDeleteClick($(this), 'parameter', 'test'); });
+          $(document).on('click', '.btn-delete-observed', function() { handleDeleteClick($(this), 'observed value', 'observed'); });
+          $(document).on('click', '.btn-delete-report-unit', function() { handleDeleteClick($(this), 'unit', 'unit'); });
+          $(document).on('click', '.btn-delete-reference', function() { handleDeleteClick($(this), 'reference template', 'reference'); });
+          $(document).on('click', '.btn-delete-flag', function() { handleDeleteClick($(this), 'flag', 'flag'); });
+
+          function handleDeleteClick(btn, label, type) {
+              let select = btn.siblings('select');
+              let id = select.find('option:selected').data('id');
+              if (!id) { alert('Please select a ' + label + ' first.'); return; }
+              $('#btn-detail-delete').data('id', id).data('type', type).click();
+          }
+
+          $(document).on('click', '.btn-view-report-category', function() { handleViewClick($(this), 'category', 'Category', 'fa-folder'); });
+          $(document).on('click', '.btn-view-report-subcategory', function() { handleViewClick($(this), 'subcategory', 'Sub-Category', 'fa-folder-open'); });
+          $(document).on('click', '.btn-view-report-test', function() {
+              let select = $(this).siblings('select');
+              let selectedOption = select.find('option:selected');
+              let id = selectedOption.data('id');
+              let name = selectedOption.val() || selectedOption.text();
+              if (!id) { alert('Please select a parameter first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              $('#view-detail-title').html('<i class="fa fa-flask me-2"></i>Parameter Details');
+              
+              let html = `
+                  <div class="table-responsive-modern">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">Test Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                          <tr><th>Price</th><td>${selectedOption.data('price') || 'N/A'}</td></tr>
+                          <tr><th>Unit</th><td>${selectedOption.data('unit') || 'N/A'}</td></tr>
+                          <tr><th>Male Ref.</th><td>${selectedOption.data('male-ref') || 'N/A'}</td></tr>
+                          <tr><th>Female Ref.</th><td>${selectedOption.data('female-ref') || 'N/A'}</td></tr>
+                          <tr><th>Critical Low</th><td>${selectedOption.data('critical-low') || 'N/A'}</td></tr>
+                          <tr><th>Critical High</th><td>${selectedOption.data('critical-high') || 'N/A'}</td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              setupDetailModalButtons(id, 'test');
+              $('#modal-view-detail').modal('show');
+          });
+          $(document).on('click', '.btn-view-observed', function() { handleViewClick($(this), 'observed', 'Observed Value', 'fa-eye'); });
+          $(document).on('click', '.btn-view-report-unit', function() { handleViewClick($(this), 'unit', 'Unit', 'fa-balance-scale'); });
+          $(document).on('click', '.btn-view-reference', function() { handleViewClick($(this), 'reference', 'Reference Template', 'fa-book'); });
+          $(document).on('click', '.btn-view-flag', function() { handleViewClick($(this), 'flag', 'Flag', 'fa-flag'); });
+
+          function handleViewClick(btn, type, label, icon) {
+              let select = btn.siblings('select');
+              let id = select.find('option:selected').data('id');
+              let name = select.val() || select.find('option:selected').text();
+              if (!id) { alert('Please select a ' + label + ' first.'); return; }
+              
+              $('#btn-detail-edit').hide();
+              $('#btn-detail-delete').hide();
+              $('#view-detail-title').html('<i class="fa ' + icon + ' me-2"></i>' + label + ' Details');
+              
+              let html = `
+                  <div class="table-responsive-modern">
+                      <table class="table table-bordered table-striped mb-0">
+                          <tr><th width="35%">${label} Name</th><td><strong class="text-primary">${name}</strong></td></tr>
+                      </table>
+                  </div>
+              `;
+              $('#view-detail-body').html(html);
+              setupDetailModalButtons(id, type);
+              $('#modal-view-detail').modal('show');
+          }
+
 
           // Handle dynamic edit inside detail view modal
           $(document).on('click', '#btn-detail-edit', function() {

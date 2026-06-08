@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Lab Report - {{ $patient->first_name }} {{ $patient->last_name }}</title>
-    <style>
+<style>
         @@page { margin: 0; }
 
-        body {
+        .report-container {
             margin: 0;
             font-family: "Times New Roman", Times, serif;
             font-size: 14px;
@@ -229,8 +224,8 @@
             font-weight: 700;
         }
     </style>
-</head>
-<body>
+
+<div class="report-container">
     <div class="page-header">
         @if (extension_loaded('gd'))
             <img src="{{ public_path('images/report-header-awwal.png') }}" alt="Awwal Lab">
@@ -375,5 +370,4 @@
             </div>
         @endif
     </div>
-</body>
-</html>
+</div>

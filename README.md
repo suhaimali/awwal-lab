@@ -8,6 +8,7 @@ Awwal Lab is a comprehensive, highly secure, and modern Laboratory Information M
 - **Laboratory Tests & Billing:** Dynamic pricing, detailed test configuration, discount application, and comprehensive payment tracking.
 - **Advanced Clinical Setup:** Highly specialized biological reference intervals based on age, gender, and clinical logic (e.g., standard min-max boundaries vs. immunoassay textual results).
 - **Automated PDF Invoicing:** Client-side, instant PDF invoice generation powered by `jsPDF` and `AutoTable`, featuring beautifully aligned, professional layouts and dynamic calculations.
+- **Server-Side PDF Partials:** Clean, scoped Blade templates (`report.blade.php`, `invoice.blade.php`) designed without HTML boilerplate for flexible integration into modals, layouts, and direct PDF generation (e.g., via DomPDF), supporting thermal receipt layouts.
 - **Diagnostic Test Reports:** Generate, manage, and securely print clinical reports with custom dynamic templates, flag templates, and authorized doctor signatures.
 - **Optimized Workflow UI:** Fast, inline "Edit" buttons directly linked to drop-down fields across reports, instantly pulling up detail modals without tedious intermediate "view" steps.
 - **Master Data Configuration:** Manage clinical units of measurement, reference text templates, and flag templates from a centralized UI.

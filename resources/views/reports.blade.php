@@ -913,6 +913,7 @@
             <div class="test-item-row card border-0 shadow-sm mb-3" style="background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 12px; position: relative; overflow: hidden;">
                 <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #6366f1;"></div>
                 <div class="card-body p-3">
+                    <button type="button" class="btn btn-sm btn-secondary position-absolute drag-handle" style="top: 10px; right: 45px; z-index: 10; border-radius: 8px; cursor: move;" title="Drag to Sort"><i class="fa fa-arrows-alt"></i></button>
                     <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
                     <div class="row g-3 align-items-end">
                         <div class="col-md-4 col-sm-6">
@@ -1231,6 +1232,12 @@
           $(document).on('click', '.remove-row', function() {
               $(this).closest('.test-item-row').remove();
           });
+
+          // Initialize Sortable
+          if($.fn.sortable) {
+              $('#dynamic-tests-container').sortable({ handle: '.drag-handle', cursor: 'move', axis: 'y' });
+              $('#edit-dynamic-tests-container').sortable({ handle: '.drag-handle', cursor: 'move', axis: 'y' });
+          }
 
           // =============================================
           // DOCTOR SELECT MANAGEMENT (for Reports)
@@ -1981,6 +1988,7 @@
              <div class="test-item-row card border-0 shadow-sm mb-3" style="background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 12px; position: relative; overflow: hidden;">
                  <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #6366f1;"></div>
                  <div class="card-body p-3">
+                     <button type="button" class="btn btn-sm btn-secondary position-absolute drag-handle" style="top: 10px; right: 45px; z-index: 10; border-radius: 8px; cursor: move;" title="Drag to Sort"><i class="fa fa-arrows-alt"></i></button>
                      <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
                      <div class="row g-3 align-items-end">
                          <div class="col-md-4 col-sm-6">

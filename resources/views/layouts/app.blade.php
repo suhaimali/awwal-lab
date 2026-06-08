@@ -637,7 +637,7 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('aw-loader').classList.add('hidden');
-            }, 30000); // Added 30 seconds loading delay as requested
+            }, 5000); // 5 seconds loading delay
         });
 
         // ── Sidebar toggle (desktop collapse)

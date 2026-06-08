@@ -1295,6 +1295,35 @@ class HomeController extends Controller
         );
     }
 
+    public function getReferenceIntervals($id)
+    {
+        return response()->json(\App\Models\ReferenceInterval::where('lab_test_id', $id)->get());
+    }
+
+    public function storeReferenceInterval(\Illuminate\Http\Request $request, $id)
+    {
+        $request->validate([
+            'gender' => 'required|string',
+            'age_min' => 'nullable|numeric',
+            'age_max' => 'nullable|numeric',
+            'reference_text' => 'nullable|string',
+            'min_value' => 'nullable|numeric',
+            'max_value' => 'nullable|numeric',
+        ]);
+
+        \App\Models\ReferenceInterval::create(array_merge($request->all(), ['lab_test_id' => $id]));
+
+        return response()->json(['success' => 'Interval added successfully']);
+    }
+
+    public function deleteReferenceInterval($id)
+    {
+        $interval = \App\Models\ReferenceInterval::findOrFail($id);
+        $interval->delete();
+
+        return response()->json(['success' => 'Interval deleted successfully']);
+    }
+
     public function reportsTrash()
     {
         $reports = \App\Models\TestReport::onlyTrashed()->with('patient')->latest()->get();

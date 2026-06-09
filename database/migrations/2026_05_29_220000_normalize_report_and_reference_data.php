@@ -71,7 +71,9 @@ return new class extends Migration
             if (Schema::hasColumn('test_parameters', 'critical_low')) {
                 $table->dropColumn(['critical_low', 'critical_high']);
             }
+            $table->dropForeign(['lab_test_id']);
             $table->dropUnique('test_parameters_lab_test_id_unique');
+            $table->foreign('lab_test_id')->references('id')->on('lab_tests')->onDelete('cascade');
         });
 
         Schema::table('reference_intervals', function (Blueprint $table) {

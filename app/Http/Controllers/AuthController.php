@@ -173,7 +173,8 @@ class AuthController extends Controller
      */
     protected function throttleKey(Request $request): string
     {
-        return 'login|' . Str::lower($request->input('email', '')) . '|' . $request->ip();
+        // Cast email to string to prevent TypeError if an array is provided
+        return 'login|' . Str::lower((string) $request->input('email', '')) . '|' . $request->ip();
     }
 
     /**

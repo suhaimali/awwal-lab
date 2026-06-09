@@ -12,16 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
-            $table->decimal('total_amount', 10, 2)->default(0);
-            $table->decimal('discount', 10, 2)->default(0);
-            $table->decimal('advance_paid', 10, 2)->default(0);
-            $table->decimal('net_amount', 10, 2)->default(0);
-            $table->decimal('balance_due', 10, 2)->default(0);
-            $table->string('payment_status')->default('Unpaid');
-            $table->string('payment_method')->nullable();
-            $table->date('bill_date')->nullable();
-            $table->text('remarks')->nullable();
+            if (!Schema::hasColumn('payments', 'patient_id')) {
+                $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            }
+            if (!Schema::hasColumn('payments', 'total_amount')) {
+                $table->decimal('total_amount', 10, 2)->default(0);
+                $table->decimal('discount', 10, 2)->default(0);
+                $table->decimal('advance_paid', 10, 2)->default(0);
+                $table->decimal('net_amount', 10, 2)->default(0);
+                $table->decimal('balance_due', 10, 2)->default(0);
+                $table->string('payment_status')->default('Unpaid');
+            }
+            if (!Schema::hasColumn('payments', 'payment_method')) {
+                $table->string('payment_method')->nullable();
+            }
+            if (!Schema::hasColumn('payments', 'bill_date')) {
+                $table->date('bill_date')->nullable();
+                $table->text('remarks')->nullable();
+            }
         });
     }
 

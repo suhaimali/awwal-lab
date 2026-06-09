@@ -68,6 +68,7 @@ $(document).ready(function () {
             url:  form.attr('action'),
             type: 'POST',
             data: form.serialize(),
+            dataType: 'json',
 
             success: function (res) {
                 if (res.success) {
@@ -87,7 +88,12 @@ $(document).ready(function () {
 
                 // ── Locked out (429 or locked_out flag) ──────────────────
                 if (xhr.status === 429 || res.locked_out) {
-                    const secs = res.retry_after || 900;
+                    let secs = res.retry_after;
+                    if (!secs && xhr.getResponseHeader('Retry-After')) {
+                        secs = parseInt(xhr.getResponseHeader('Retry-After'), 10);
+                    }
+                    secs = secs || 900;
+                    
                     btn.prop('disabled', true);
                     btnIcon.removeClass('fa-arrow-right-to-bracket').addClass('fa-lock');
                     btnText.text('Account Locked');

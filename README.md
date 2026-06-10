@@ -1,6 +1,6 @@
-# Awwal Lab - Advanced Laboratory Management System
+# SUHAIM SOFT - Advanced Laboratory Management System
 
-Awwal Lab is a comprehensive, highly secure, and modern Laboratory Information Management System (LIMS) built on the powerful **Laravel 11** framework. It is meticulously designed to streamline the management of clinical patients, laboratory tests, dynamic reference intervals, billing, and highly specialized diagnostic reporting.
+SUHAIM SOFT is a comprehensive, highly secure, and modern Laboratory Information Management System (LIMS) built on the powerful **Laravel 11** framework. It is meticulously designed to streamline the management of clinical patients, laboratory tests, dynamic reference intervals, billing, and highly specialized diagnostic reporting.
 
 ## 🚀 Key Features
 

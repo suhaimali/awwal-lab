@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUHAIM LAB | Digital Healthcare Transformation</title>
+    <title>SUHAIM SOFT | Digital Healthcare Transformation</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -550,7 +550,22 @@
                 width: calc(100% - 40px);
             }
             .footer {
-                padding: 50px 0 20px 0;
+                padding: 40px 0 20px 0;
+            }
+            .footer-brand {
+                margin-bottom: 10px;
+                display: block;
+            }
+            .footer-links {
+                margin-top: 20px;
+                text-align: center;
+            }
+            .footer-links ul {
+                display: inline-block;
+                text-align: left;
+                padding-left: 0;
+            }
+            .footer-links h5 {
                 text-align: center;
             }
             .back-to-top {
@@ -558,9 +573,6 @@
                 bottom: 20px;
                 width: 45px;
                 height: 45px;
-            }
-            .footer-links {
-                margin-top: 30px;
             }
         }
     </style>
@@ -570,7 +582,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM LAB</a>
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM SOFT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -622,13 +634,13 @@
     <section id="welcome" class="py-5 welcome-section">
         <div class="container py-5 text-center" style="position: relative; z-index: 2;">
             <div class="section-title mb-5">
-                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: white;">Welcome to Suhaim Lab</h2>
+                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: white;">Welcome to SUHAIM SOFT</h2>
                 <p class="fw-bold" style="font-size: 1.25rem; color: var(--accent-blue);">Your Partner in Digital Healthcare Transformation.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; font-weight: 300;">
-                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-white fw-bold">SUHAIM LAB</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-white fw-bold">SUHAIM SOFT</strong> was founded on a simple principle: to give that time back to healthcare professionals.
                     </p>
                     <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; font-weight: 300;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
@@ -772,7 +784,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4 mb-4 mb-lg-0">
-                    <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM LAB</a>
+                    <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM SOFT</a>
                     <p>By automating repetitive tasks, providing actionable insights, and ensuring rock-solid security, we empower you to practice medicine more efficiently and effectively. Join us in building a smarter, more connected future for healthcare.</p>
                     <div class="social-icons mt-4">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -780,26 +792,30 @@
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 col-lg-2 offset-lg-2 mb-4 mb-md-0 footer-links">
-                    <h5>Quick Links</h5>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#process">Process</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#benefits">Benefits</a></li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-8 col-lg-4 footer-links">
-                    <h5>Contact Us</h5>
-                    <ul class="list-unstyled text-white-50">
-                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> Pathappiriyam, Edavanna, Malappuram, Kerala</li>
-                        <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> <a href="tel:+918891479505" class="text-white-50 text-decoration-none">+91 8891 479 505</a></li>
-                        <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> info@suhaimsoft.com</li>
-                    </ul>
+                <div class="col-12 col-md-8 footer-links">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Quick Links</h5>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#process">Process</a></li>
+                                <li><a href="#features">Features</a></li>
+                                <li><a href="#benefits">Benefits</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <h5>Contact Us</h5>
+                            <ul class="list-unstyled text-white-50">
+                                <li class="mb-3"><i class="fa-solid fa-location-dot me-2" style="color: var(--accent-blue);"></i> Pathappiriyam</li>
+                                <li class="mb-3"><i class="fa-solid fa-phone me-2" style="color: var(--accent-blue);"></i> <a href="tel:+918891479505" class="text-white-50 text-decoration-none">+91 8891 479 505</a></li>
+                                <li class="mb-3"><i class="fa-solid fa-envelope me-2" style="color: var(--accent-blue);"></i> info@suhaimsoft.com</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; {{ date('Y') }} Awwal Lab. Designed by <a href="https://suhaimsoft.com" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-weight: bold;">Suhaim Soft</a>.</p>
+                <p class="mb-0">&copy; {{ date('Y') }} SUHAIM SOFT. Designed by <a href="https://suhaimsoft.com" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-weight: bold;">Suhaim Soft</a>.</p>
             </div>
         </div>
     </footer>

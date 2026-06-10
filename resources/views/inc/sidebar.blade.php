@@ -4,7 +4,7 @@
         <div class="brand-icon">
             <i class="fa fa-flask"></i>
         </div>
-        <span class="brand-name">Awwal Lab</span>
+        <span class="brand-name">SUHAIM SOFT</span>
     </div>
 
     <!-- Nav -->

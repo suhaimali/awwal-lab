@@ -6,7 +6,7 @@
 
     <!-- Page title (dynamic) -->
     <div class="header-page-title" id="header-page-title">
-        @yield('page-title', config('app.name', 'Awwal Lab'))
+        @yield('page-title', config('app.name', 'SUHAIM SOFT'))
     </div>
 
     <!-- Clock -->
@@ -20,7 +20,7 @@
         <button class="header-avatar-btn" data-bs-toggle="dropdown" id="userDropdown" aria-expanded="false">
             <div class="header-avatar">A</div>
             <div class="header-user-info">
-                <div class="u-name">Awwal Lab</div>
+                <div class="u-name">SUHAIM SOFT</div>
                 <div class="u-role">Administrator</div>
             </div>
             <i class="fa fa-chevron-down" style="font-size:11px; color:var(--text-muted); margin-left:4px;"></i>
@@ -28,7 +28,7 @@
         <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2" style="min-width:180px;">
             <li>
                 <div class="px-3 py-2 border-bottom">
-                    <div style="font-size:13px; font-weight:600; color:var(--text-dark);">Awwal Lab</div>
+                    <div style="font-size:13px; font-weight:600; color:var(--text-dark);">SUHAIM SOFT</div>
                     <div style="font-size:11px; color:var(--text-muted);">Administrator</div>
                 </div>
             </li>

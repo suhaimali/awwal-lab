@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Awwal Lab - Advanced Laboratory Management System">
+    <meta name="description" content="SUHAIM SOFT - Advanced Laboratory Management System">
     <meta name="author" content="Suhaim Soft">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <title>{{ config('app.name', 'Awwal Lab') }} @yield('title')</title>
+    <title>{{ config('app.name', 'SUHAIM SOFT') }} @yield('title')</title>
 
     <!-- PWA -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">

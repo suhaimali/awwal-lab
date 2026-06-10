@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login - Awwal Lab')
+@section('title', 'Login - SUHAIM SOFT')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
@@ -16,7 +16,7 @@
             <div class="brand-icon">
                 <i class="fa-solid fa-flask"></i>
             </div>
-            <h1>Awwal Lab</h1>
+            <h1>SUHAIM SOFT</h1>
             <p>Advanced Laboratory Management System</p>
         </div>
 
@@ -101,7 +101,7 @@
         </form>
 
         <div class="footer-text">
-            &copy; {{ date('Y') }} Awwal Lab. All rights reserved.
+            &copy; {{ date('Y') }} SUHAIM SOFT. All rights reserved.
             <div class="security-note">
                 <i class="fa-solid fa-shield-halved"></i> Protected &bull; Max {{ env('LOGIN_MAX_ATTEMPTS', 5) }} attempts
             </div>

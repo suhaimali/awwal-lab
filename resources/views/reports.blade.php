@@ -2379,12 +2379,11 @@
           });
 
           $('#btn-viewer-print').click(function() {
-              // Temporarily change title to remove "Awwal Lab - Dashboard" from print headers
-              const oldTitle = document.title;
-              document.title = $('#viewer-filename-link').text().replace('.pdf', '');
-              window.print();
-              // Restore title after print dialog closes
-              setTimeout(() => { document.title = oldTitle; }, 500);
+              let id = $(this).data('current-id');
+              $.get("/reports/" + id, function(data) {
+                  const doc = createPDFDocument(data, showReportHeader);
+                  window.open(doc.output('bloburl'), '_blank');
+              });
           });
 
           $(document).on('click', '#viewer-filename-link', function() {
@@ -2650,7 +2649,7 @@
                       // Share API available but no file support — share link/text
                       navigator.share({
                           title: `Lab Report - ${p.first_name} ${p.last_name}`,
-                          text: `Lab Report for ${p.first_name} ${p.last_name} (ID: ${p.patient_id}). Generated from Awwal Lab Management System.`,
+                          text: `Lab Report for ${p.first_name} ${p.last_name} (ID: ${p.patient_id}). Generated from SUHAIM SOFT Management System.`,
                       }).catch(err => console.warn('Share failed:', err));
                   } else {
                       // Desktop fallback: WhatsApp + auto-download

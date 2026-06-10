@@ -737,10 +737,14 @@ class HomeController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
-            'price' => 'required|numeric',
-            'payment_method' => 'required',
+            'price' => 'nullable|numeric',
+            'payment_method' => 'nullable',
             'description' => 'nullable',
         ]);
+
+        if (empty($validated['price']) && $validated['price'] !== 0) {
+            $validated['price'] = 0;
+        }
 
         $test = \App\Models\LabTest::create($validated);
 

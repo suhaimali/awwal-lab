@@ -1238,7 +1238,7 @@
           function fetchReportDoctors(selectedValue = null) {
               $.get("{{ route('doctors.suggestions') }}", function(data) {
                   let options = '<option value="">-- Select Doctor --</option><option value="Self">Self</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(doctor) {
+                  data.forEach(function(doctor) {
                       let qual = doctor.qualification ? doctor.qualification : '';
                       options += `<option value="${doctor.name}" data-id="${doctor.id}" data-phone="${doctor.phone || ''}" data-email="${doctor.email || ''}" data-qualification="${qual}">${doctor.name}${qual ? ' (' + qual + ')' : ''}</option>`;
                   });
@@ -1321,7 +1321,7 @@
               $.get("{{ route('categories.index') }}", function(data) {
                   let options = '<option value="">Sub</option>';
                   let modalOptions = '<option value="">-- Select Category --</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(cat) {
+                  data.forEach(function(cat) {
                       options += `<option value="${cat.name}" data-id="${cat.id}">${cat.name}</option>`;
                       modalOptions += `<option value="${cat.id}">${cat.name}</option>`;
                   });
@@ -1401,7 +1401,7 @@
           function fetchReportSubCategories(selectedValue = null) {
               $.get("{{ route('sub-categories.index') }}", function(data) {
                   let options = '<option value="">None</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(sub) {
+                  data.forEach(function(sub) {
                       options += `<option value="${sub.name}" data-id="${sub.id}">${sub.name}</option>`;
                   });
                   $('.report-subcategory-select').each(function() {
@@ -1478,7 +1478,7 @@
           function fetchReportTests(selectedValue = null) {
               $.get("{{ route('api.tests') }}", function(data) {
                   let options = '<option value="">-- Select Test --</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(test) {
+                  data.forEach(function(test) {
                       let param = test.parameter || {};
                       let refJson = '[]';
                       if(test.reference_intervals) {
@@ -1575,7 +1575,7 @@
           function fetchReportUnits(selectedValue = null) {
               $.get("{{ route('units.index') }}", function(data) {
                   let options = '<option value="">Unit</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(u) {
+                  data.forEach(function(u) {
                       options += `<option value="${u.name}" data-id="${u.id}">${u.name}</option>`;
                   });
                   $('.report-unit-select').each(function() {
@@ -1641,7 +1641,7 @@
           function fetchReportReferences(selectedValue = null) {
               $.get("{{ route('reference-templates.index') }}", function(data) {
                   let options = '<option value="">-- Select --</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(ref) {
+                  data.forEach(function(ref) {
                       options += `<option value="${ref.name}" data-id="${ref.id}">${ref.name}</option>`;
                   });
                   $('.normal-val-dynamic, .bio-val-dynamic').each(function() {
@@ -1665,7 +1665,7 @@
           function fetchReportObserved(selectedValue = null) {
               $.get("{{ route('result-templates.index') }}", function(data) {
                   let options = '<option value="">-- Select Observed --</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(tmpl) {
+                  data.forEach(function(tmpl) {
                       options += `<option value="${tmpl.name}" data-id="${tmpl.id}">${tmpl.name}</option>`;
                   });
                   $('.report-observed-select').each(function() {
@@ -1689,7 +1689,7 @@
           function fetchReportFlags(selectedValue = null) {
               $.get("{{ route('flag-templates.index') }}", function(data) {
                   let options = '<option value="">-- Select --</option>';
-                  (Array.isArray(data) ? data : (data.data || [])).forEach(function(flg) {
+                  data.forEach(function(flg) {
                       options += `<option value="${flg.name}" data-id="${flg.id}">${flg.name}</option>`;
                   });
                   $('.flag-selector').each(function() {
@@ -3550,7 +3550,6 @@
   @endpush
 
 @endsection
-
 
 
 

@@ -323,8 +323,11 @@
             background: var(--white);
         }
         .table-modern tbody tr:hover { 
-            background: #f1f5f9; 
-            transform: scale(1.001);
+            background: #eef2ff;
+        }
+        .table-modern tbody tr:hover:not(:has(td[colspan])):not(.no-results-row) { 
+            background: #eef2ff;
+            box-shadow: inset 0 0 0 9999px rgba(26,86,219,0.06), inset 3px 0 0 var(--primary);
         }
         .table-modern tbody td {
             padding: 16px 20px;

@@ -98,7 +98,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" class="text-center py-5">
+                            <td colspan="8" class="text-center py-5">
                                 <div style="color:var(--text-muted);">
                                     <i class="fa fa-sliders fa-3x mb-3" style="opacity: 0.5;"></i>
                                     <br>
@@ -108,7 +108,7 @@
                         </tr>
                         @endforelse
                         <tr class="no-results-row" style="display: none;">
-                            <td colspan="7" class="text-center py-5">
+                            <td colspan="8" class="text-center py-5">
                                 <div style="color:var(--text-muted);">
                                     <i class="fa fa-search fa-3x mb-3" style="opacity: 0.5;"></i>
                                     <br>

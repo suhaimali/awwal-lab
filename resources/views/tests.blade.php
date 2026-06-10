@@ -96,9 +96,11 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="5" class="text-center" style="padding:48px;color:var(--text-muted);">
-                                <i class="fa fa-flask" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
-                                <span style="font-size:15px;">No laboratory tests found.</span>
+                            <td colspan="6" class="text-center" style="padding:48px;color:var(--text-muted);">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <i class="fa fa-flask" style="font-size:40px;margin-bottom:12px;opacity:0.4;"></i>
+                                    <span style="font-size:15px;">No laboratory tests found.</span>
+                                </div>
                             </td>
                         </tr>
                         @endforelse
@@ -107,7 +109,7 @@
                                 <div style="color:var(--text-muted);">
                                     <i class="fa fa-search fa-3x mb-3" style="opacity: 0.5;"></i>
                                     <br>
-                                    <span style="font-size:15px;">No matching tests found.</span>
+                                    <span style="font-size:15px; display: block; text-align: center;">No matching tests found.</span>
                                 </div>
                             </td>
                         </tr>

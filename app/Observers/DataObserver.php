@@ -8,11 +8,12 @@ class DataObserver
 {
     public function saved($model)
     {
-        event(new DataChanged(get_class($model), 'saved'));
+        // event(new DataChanged(get_class($model), 'saved'));
     }
 
     public function deleted($model)
     {
-        event(new DataChanged(get_class($model), 'deleted'));
+        // event(new DataChanged(get_class($model), 'deleted'));
     }
 }
+

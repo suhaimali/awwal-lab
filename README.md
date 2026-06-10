@@ -34,7 +34,7 @@ SUHAIM SOFT is a comprehensive, highly secure, and modern Laboratory Information
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/suhaimali/awwal-lab.in.git
+   git clone https://github.com/suhaimali/awwal-lab.git
    cd awwal-lab.in
    ```
 

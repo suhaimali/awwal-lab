@@ -39,7 +39,7 @@
                     <table class="table table-modern" id="units-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>SL. NO</th>
                                 <th>Unit Name</th>
                                 <th class="text-end" style="width: 120px;">Action</th>
                             </tr>
@@ -100,7 +100,7 @@
                     <table class="table table-modern" id="templates-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>SL. NO</th>
                                 <th>Template Name</th>
                                 <th class="text-end" style="width: 120px;">Action</th>
                             </tr>
@@ -163,7 +163,7 @@
                     <table class="table table-modern" id="references-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>SL. NO</th>
                                 <th>Template Value</th>
                                 <th class="text-end" style="width: 120px;">Action</th>
                             </tr>
@@ -224,7 +224,7 @@
                     <table class="table table-modern" id="flags-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>SL. NO</th>
                                 <th>Flag Value</th>
                                 <th class="text-end" style="width: 120px;">Action</th>
                             </tr>

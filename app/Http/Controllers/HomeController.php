@@ -370,6 +370,7 @@ class HomeController extends Controller
             'reference_dr' => 'nullable',
             'status' => 'nullable',
             'address' => 'nullable',
+            'payment_method' => 'nullable|string',
         ]);
 
         if (empty($validated['patient_id'])) {
@@ -448,6 +449,7 @@ class HomeController extends Controller
             'reference_dr' => 'nullable',
             'status' => 'nullable',
             'address' => 'nullable',
+            'payment_method' => 'nullable|string',
         ]);
 
         // Calculate totals from input test arrays
@@ -784,7 +786,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
-            'payment_method' => 'required',
+            'payment_method' => 'nullable',
             'description' => 'nullable',
         ]);
 

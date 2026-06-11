@@ -233,12 +233,12 @@
 <div class="report-container">
     <div class="page-header">
         @if (extension_loaded('gd'))
-            <img src="{{ public_path('images/report-header-awwal.png') }}" alt="SUHAIM SOFT">
+            <img src="{{ public_path('images/report-header-awwal.png') }}" alt="SUHAIM SOFT LAB">
         @else
             <div class="letterhead-fallback">
                 <div class="fallback-brand">
                     <div class="fallback-tagline">"Accurate Diagnosis for Effective Treatment"</div>
-                    <div class="fallback-name">awwal</div>
+                    <div class="fallback-name">awwal LABS</div>
                     <div class="fallback-sub">QUALITY DIAGNOSTIC LABS</div>
                     <div class="fallback-site">www.awwallabs.in</div>
                 </div>

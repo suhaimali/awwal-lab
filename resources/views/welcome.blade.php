@@ -3,7 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUHAIM SOFT | Digital Healthcare Transformation</title>
+    <title>{{ config('app.name', 'SUHAIM SOFT LAB') }} | Digital Healthcare Transformation</title>
+    <meta name="description" content="{{ config('app.name', 'SUHAIM SOFT LAB') }} is a cutting-edge Laboratory Information Management System (LIMS) and EMR software built for diagnostic centers to automate medical testing, manage patients, and deliver reports instantly.">
+    <meta name="keywords" content="laboratory management system, lims, emr, lab software, diagnostics LIS, medical reports automation, whatsapp lab reports, suhaim soft lab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ config('app.name', 'SUHAIM SOFT LAB') }} | Advanced Laboratory Information System">
+    <meta property="og:description" content="Empower your diagnostic center with our cutting-edge LIMS. Automate patient check-ins, track tests, and deliver medical reports instantly.">
+    <meta property="og:image" content="{{ asset('favicon.svg') }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="{{ config('app.name', 'SUHAIM SOFT LAB') }} | Advanced Laboratory Information System">
+    <meta property="twitter:description" content="Empower your diagnostic center with our cutting-edge LIMS. Automate patient check-ins, track tests, and deliver medical reports instantly.">
+    <meta property="twitter:image" content="{{ asset('favicon.svg') }}">
+
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -582,7 +601,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM SOFT</a>
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-laptop-medical me-2"></i>{{ config('app.name', 'SUHAIM SOFT LAB') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -606,7 +625,7 @@
                 </ul>
                 <div class="d-flex gap-2 mt-3 mt-lg-0 align-items-center">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
-                    <a href="/login" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
+                    <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                 </div>
             </div>
         </div>
@@ -623,7 +642,7 @@
                     </p>
                     <div class="d-flex gap-3 mt-4 justify-content-center flex-wrap">
                         <a href="#welcome" class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm" style="background: var(--primary-blue); border: none; font-size: 1.1rem;">Learn More <i class="fa-solid fa-arrow-down ms-2"></i></a>
-                        <a href="/login" class="btn btn-light rounded-pill px-4 py-2 fw-bold shadow-sm" style="color: var(--primary-blue); border: none; font-size: 1.1rem;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
+                        <a href="{{ route('login') }}" class="btn btn-light rounded-pill px-4 py-2 fw-bold shadow-sm" style="color: var(--primary-blue); border: none; font-size: 1.1rem;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -634,13 +653,13 @@
     <section id="welcome" class="py-5 welcome-section">
         <div class="container py-5 text-center" style="position: relative; z-index: 2;">
             <div class="section-title mb-5">
-                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: white;">Welcome to SUHAIM SOFT</h2>
+                <h2 style="font-size: 2.5rem; text-transform: uppercase; color: white;">Welcome to {{ config('app.name', 'SUHAIM SOFT LAB') }}</h2>
                 <p class="fw-bold" style="font-size: 1.25rem; color: var(--accent-blue);">Your Partner in Digital Healthcare Transformation.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; font-weight: 300;">
-                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-white fw-bold">SUHAIM SOFT</strong> was founded on a simple principle: to give that time back to healthcare professionals.
+                        In today's fast-paced medical environment, the most valuable resource is time. Administrative tasks and cumbersome paperwork can divert focus from what truly matters: patient care. <strong class="text-white fw-bold">{{ config('app.name', 'SUHAIM SOFT LAB') }}</strong> was founded on a simple principle: to give that time back to healthcare professionals.
                     </p>
                     <p style="color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.15rem; font-weight: 300;">
                         Our intelligent Laboratory Information System (LIS) is more than just a digital filing cabinet. It is a powerful, integrated platform designed to streamline your entire workflow, from patient registration to test reports.
@@ -657,7 +676,7 @@
         <div class="container">
             <div class="section-title mb-5 text-center">
                 <h2 style="font-size: 2.8rem; text-transform: uppercase; font-weight: 800; color: var(--dark-blue);">Our Simple Onboarding Process</h2>
-                <p class="text-muted fs-5">Get started with SUHAIM SOFT in three easy steps. Streamline your practice with our intuitive platform.</p>
+                <p class="text-muted fs-5">Get started with {{ config('app.name', 'SUHAIM SOFT LAB') }} in three easy steps. Streamline your practice with our intuitive platform.</p>
             </div>
             <div class="row g-4 mt-4 justify-content-center">
                 <div class="col-md-4">
@@ -784,7 +803,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4 mb-4 mb-lg-0">
-                    <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>SUHAIM SOFT</a>
+                    <a href="#" class="footer-brand text-decoration-none"><i class="fa-solid fa-laptop-medical me-2"></i>{{ config('app.name', 'SUHAIM SOFT LAB') }}</a>
                     <p>By automating repetitive tasks, providing actionable insights, and ensuring rock-solid security, we empower you to practice medicine more efficiently and effectively. Join us in building a smarter, more connected future for healthcare.</p>
                     <div class="social-icons mt-4">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -825,7 +844,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 15px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                 <div class="modal-header" style="background: linear-gradient(135deg, var(--light-blue), #ffffff); border-radius: 15px 15px 0 0; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                    <h5 class="modal-title fw-bold text-dark" id="enrollModalLabel">Enroll in Suhaim Soft Lab</h5>
+                    <h5 class="modal-title fw-bold text-dark" id="enrollModalLabel">Enroll in {{ config('app.name', 'SUHAIM SOFT LAB') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -833,15 +852,15 @@
                     <form>
                         <div class="mb-3">
                             <label for="enrollName" class="form-label fw-bold">Full Name</label>
-                            <input type="text" class="form-control" id="enrollName" placeholder="Enter your full name" required style="border-radius: 10px;">
+                            <input type="text" class="form-control" id="enrollName" placeholder="Enter your full name" required style="border-radius: 10px;" autocomplete="off" name="name_1011">
                         </div>
                         <div class="mb-3">
                             <label for="enrollPhone" class="form-label fw-bold">Phone Number</label>
-                            <input type="tel" class="form-control" id="enrollPhone" placeholder="Enter your phone number" required style="border-radius: 10px;">
+                            <input type="tel" class="form-control" id="enrollPhone" placeholder="Enter your phone number" required style="border-radius: 10px;" autocomplete="off" name="name_1012">
                         </div>
                         <div class="mb-4">
                             <label for="enrollMsg" class="form-label fw-bold">Message</label>
-                            <textarea class="form-control" id="enrollMsg" rows="3" placeholder="How can we help your lab?" required style="border-radius: 10px;"></textarea>
+                            <textarea class="form-control" id="enrollMsg" rows="3" placeholder="How can we help your lab?" required style="border-radius: 10px;" autocomplete="off" name="name_1013"></textarea>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary py-2 fw-bold" style="border-radius: 50px;">Submit Request</button>
@@ -867,13 +886,13 @@
         <div class="wa-popup-header">
             <div class="d-flex align-items-center">
                 <i class="fa-brands fa-whatsapp fs-4 me-2"></i>
-                <h5>Suhaim Soft</h5>
+                <h5>{{ config('app.name', 'SUHAIM SOFT LAB') }}</h5>
             </div>
             <button onclick="toggleWaPopup()" style="background: none; border: none; color: white; font-size: 1.2rem;"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="wa-popup-body">
             <div class="wa-chat-bubble">
-                WELCOME TO SUHAIM SOFT<br>HOW CAN I HELP YOU?
+                WELCOME TO {{ strtoupper(config('app.name', 'SUHAIM SOFT LAB')) }}<br>HOW CAN I HELP YOU?
             </div>
         </div>
         <div class="wa-popup-footer">

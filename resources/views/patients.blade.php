@@ -115,6 +115,20 @@
         border: 1px solid #e2e8f0;
     }
 
+    /* Payment mode badge */
+    .payment-mode-badge {
+        font-weight: 600;
+        font-size: 11.5px;
+        background: #eff6ff;
+        color: #1a56db;
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid #bfdbfe;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
     /* Action buttons styling */
     .action-buttons {
         display: inline-flex;
@@ -380,6 +394,7 @@
                             <th>Patient Details</th>
                             <th class="d-none d-sm-table-cell">Contact</th>
                             <th class="d-none d-md-table-cell">Financial Status</th>
+                            <th class="d-none d-lg-table-cell">Payment Mode</th>
                             <th class="d-none d-lg-table-cell">Status</th>
                             <th class="text-end">Actions</th>
                         </tr>
@@ -467,6 +482,17 @@
                                     </div>
                                 </td>
                                 
+                                <!-- Payment Mode -->
+                                <td class="d-none d-lg-table-cell">
+                                    @if($patient->payment_method)
+                                        <span class="payment-mode-badge">
+                                            <i class="fa-solid fa-wallet"></i>{{ $patient->payment_method }}
+                                        </span>
+                                    @else
+                                        <span style="color:var(--text-muted); font-size:12px; font-style:italic;">—</span>
+                                    @endif
+                                </td>
+
                                 <!-- Status (Active / Inactive) -->
                                 <td class="d-none d-lg-table-cell">
                                     <span class="status-dot-badge {{ strtolower($patient->status) == 'active' ? 'active' : 'inactive' }}">
@@ -495,7 +521,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center" style="padding:48px;color:var(--text-muted);">
+                                <td colspan="7" class="text-center" style="padding:48px;color:var(--text-muted);">
                                     <i class="fa fa-user-slash" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
                                     <span style="font-size:15px;">No patients found in the database.</span>
                                 </td>
@@ -562,7 +588,7 @@
 							<label for="field_1040" class="form-label">Age</label>
 							<div class="input-group flex-nowrap">
 								<input type="number" class="form-control" name="age" placeholder="Age" autocomplete="off" id="field_1040">
-								<select class="form-select" name="age_type" autocomplete="off" style="max-width: 110px;">
+								<select class="form-select" name="age_type" autocomplete="off" style="max-width: 110px;" id="field_1000">
 									<option value="Years">Years</option>
 									<option value="Months">Months</option>
 									<option value="Days">Days</option>
@@ -589,7 +615,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="field_1043" class="form-label">Reference Dr.</label>
 							<div class="reference-dr-container">
@@ -609,6 +635,18 @@
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="field_payment_method" class="form-label">Payment Mode</label>
+							<select class="form-select" name="payment_method" autocomplete="off" id="field_payment_method">
+								<option value="">-- Select Payment Mode --</option>
+								<option value="Cash">Cash</option>
+								<option value="Card">Card</option>
+								<option value="UPI">UPI</option>
+								<option value="Net Banking">Net Banking</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -631,7 +669,7 @@
 								<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1049" name="name_1050">
 									<option value="">-- Select Test --</option>
 									@foreach($labTests as $test)
-										<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+										<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>
 									@endforeach
 									<option value="__custom__">✏️ Custom (type below)</option>
 								</select>
@@ -819,7 +857,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="field_1056" class="form-label">Reference Dr.</label>
 							<div class="reference-dr-container">
@@ -839,6 +877,18 @@
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="edit-payment-method" class="form-label">Payment Mode</label>
+							<select class="form-select" name="payment_method" id="edit-payment-method" autocomplete="off">
+								<option value="">-- Select Payment Mode --</option>
+								<option value="Cash">Cash</option>
+								<option value="Card">Card</option>
+								<option value="UPI">UPI</option>
+								<option value="Net Banking">Net Banking</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -1009,12 +1059,22 @@
 			<form id="form-add-test">
                 @csrf
 				<div class="form-group">
-					<label class="form-label-aw">Test Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. CBC" autocomplete="off">
+					<label for="field_1001" class="form-label-aw">Test Name <span class="text-danger">*</span></label>
+					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. CBC" autocomplete="off" id="field_1001">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Price</label>
-					<input type="number" step="0.01" class="form-control-aw" name="price" placeholder="e.g. 500" autocomplete="off">
+					<label for="field_1002" class="form-label-aw">Price</label>
+					<input type="number" step="0.01" class="form-control-aw" name="price" placeholder="e.g. 500" autocomplete="off" id="field_1002">
+				</div>
+				<div class="form-group mt-3">
+					<label for="field_add_test_payment_method" class="form-label-aw">Payment Mode</label>
+					<select class="form-select" name="payment_method" autocomplete="off" id="field_add_test_payment_method">
+						<option value="">-- Select Payment Mode --</option>
+						<option value="Cash">Cash</option>
+						<option value="Card">Card</option>
+						<option value="UPI">UPI</option>
+						<option value="Net Banking">Net Banking</option>
+					</select>
 				</div>
 			</form>
 		  </div>
@@ -1039,12 +1099,22 @@
                 @csrf
 				<input type="hidden" name="test_id" id="edit-test-id">
 				<div class="form-group">
-					<label class="form-label-aw">Test Name <span class="text-danger">*</span></label>
+					<label for="edit-test-name" class="form-label-aw">Test Name <span class="text-danger">*</span></label>
 					<input type="text" class="form-control-aw" name="name" id="edit-test-name" required autocomplete="off">
 				</div>
 				<div class="form-group mt-3">
-					<label class="form-label-aw">Price</label>
+					<label for="edit-test-price" class="form-label-aw">Price</label>
 					<input type="number" step="0.01" class="form-control-aw" name="price" id="edit-test-price" autocomplete="off">
+				</div>
+				<div class="form-group mt-3">
+					<label for="edit-test-payment-method" class="form-label-aw">Payment Mode</label>
+					<select class="form-select" name="payment_method" id="edit-test-payment-method" autocomplete="off">
+						<option value="">-- Select Payment Mode --</option>
+						<option value="Cash">Cash</option>
+						<option value="Card">Card</option>
+						<option value="UPI">UPI</option>
+						<option value="Net Banking">Net Banking</option>
+					</select>
 				</div>
 			</form>
 		  </div>
@@ -1150,7 +1220,7 @@
 					  doc.setFont("helvetica", "bold");
 					  doc.setFontSize(22);
 					  doc.setTextColor(0);
-					  doc.text("SUHAIM SOFT", 20, 20);
+					  doc.text("SUHAIM SOFT LAB", 20, 20);
 					  
 					  doc.setFontSize(10);
 					  doc.setFont("helvetica", "normal");
@@ -1196,14 +1266,17 @@
 
 					  // Column 2
 					  doc.setFont("helvetica", "bold"); doc.text("Ref. Dr:", 105, 60);
-					  doc.setFont("helvetica", "normal"); doc.text(`${patient.reference_dr || 'Self'}`, 125, 60);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.reference_dr || 'Self'}`, 135, 60);
 					  
-					  doc.setFont("helvetica", "bold"); doc.text("Address:", 105, 65);
+					  doc.setFont("helvetica", "bold"); doc.text("Payment Mode:", 105, 65);
+					  doc.setFont("helvetica", "normal"); doc.text(`${patient.payment_method || 'N/A'}`, 135, 65);
+					  
+					  doc.setFont("helvetica", "bold"); doc.text("Address:", 105, 70);
 					  doc.setFont("helvetica", "normal"); 
                       let addressText = patient.address || 'N/A';
                       // Split address if it's too long
-                      let splitAddress = doc.splitTextToSize(addressText, 70);
-                      doc.text(splitAddress, 125, 65);
+                      let splitAddress = doc.splitTextToSize(addressText, 55);
+                      doc.text(splitAddress, 135, 70);
 
 					  // --- Table ---
 					  const tableData = patientAppointments.map((app, index) => [
@@ -1512,6 +1585,7 @@
 				  }
 				  refDrSelect.closest('.reference-dr-container').find('.reference-dr-value').val(refDr);
 				  $('#edit-status').val(data.status).trigger('change');
+				  $('#edit-payment-method').val(data.payment_method || '').trigger('change');
 				  $('#edit-address').val(data.address);
 
                   // Collect known test names from server (rendered by Blade)
@@ -1529,7 +1603,7 @@
                           let isCustom = testName !== '' && !knownTestNames.includes(testName);
                           let optionsHtml = `<option value="">-- Select Test --</option>`;
                           @foreach($labTests as $test)
-                              optionsHtml += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" ${!isCustom && app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
+                              optionsHtml += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}" ${!isCustom && app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
                           @endforeach
                           optionsHtml += `<option value="__custom__">✏️ Custom (type below)</option>`;
 
@@ -1570,7 +1644,7 @@
                       // Default empty row if no appointments found
                       let emptyOptions = `<option value="" selected>-- Select Test (Optional) --</option>`;
                       @foreach($labTests as $test)
-                          emptyOptions += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}">{{ $test->name }}</option>`;
+                          emptyOptions += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>`;
                       @endforeach
                       emptyOptions += `<option value="__custom__">✏️ Custom (type below)</option>`;
 
@@ -1623,7 +1697,7 @@
 						<select class="form-select add-patient-test-name test-name-select" autocomplete="off" id="field_1083" name="name_1084">
 							<option value="">-- Select Test --</option>
 							@foreach($labTests as $test)
-								<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+								<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>
 							@endforeach
 							<option value="__custom__">✏️ Custom (type below)</option>
 						</select>
@@ -1670,7 +1744,7 @@
 					<select class="form-select edit-patient-test-name test-name-select" autocomplete="off" id="field_1091" name="name_1092">
 						<option value="">-- Select Test --</option>
 						@foreach($labTests as $test)
-							<option value="{{ $test->name }}" data-price="{{ $test->price }}">{{ $test->name }}</option>
+							<option value="{{ $test->name }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>
 						@endforeach
 						<option value="__custom__">✏️ Custom (type below)</option>
 					</select>
@@ -1879,6 +1953,7 @@
               $('#edit-test-id').val(testId);
               $('#edit-test-name').val(selectedOption.val());
               $('#edit-test-price').val(selectedOption.data('price'));
+              $('#edit-test-payment-method').val(selectedOption.data('payment_method') || '');
               $('#modal-edit-test').modal('show');
           });
 
@@ -1900,7 +1975,7 @@
                   success: function(response) {
                       if(response.success) {
                           let t = response.test;
-                          let newOption = `<option value="${t.name}" data-id="${t.id}" data-price="${t.price}">${t.name}</option>`;
+                          let newOption = `<option value="${t.name}" data-id="${t.id}" data-price="${t.price}" data-payment_method="${t.payment_method || ''}">${t.name}</option>`;
                           
                           // Update all test selects
                           $('.test-name-select').each(function() {
@@ -1952,6 +2027,8 @@
                                   opt.text(t.name);
                                   opt.data('price', t.price);
                                   opt.attr('data-price', t.price);
+                                  opt.data('payment_method', t.payment_method);
+                                  opt.attr('data-payment_method', t.payment_method);
                               }
                           });
 

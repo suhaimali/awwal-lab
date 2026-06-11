@@ -21,6 +21,7 @@ class Patient extends Model
         'total_amount',
         'discount',
         'balance',
+        'payment_method',
     ];
     public function appointments()
     {

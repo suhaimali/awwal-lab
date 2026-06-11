@@ -117,12 +117,12 @@ Route::middleware(['auth'])->group(function () {
     
     // Sidebar Toggle
     Route::post('/sidebar-toggle', [HomeController::class, 'toggleSidebar'])->name('sidebar.toggle');
-});
 
-// Doctor Routes
-Route::get('/doctors/suggestions', [HomeController::class, 'getDoctorSuggestions'])->name('doctors.suggestions');
-Route::post('/doctors', [HomeController::class, 'storeDoctor'])->name('doctors.store');
-Route::put('/doctors/{id}', [HomeController::class, 'updateDoctor'])->name('doctors.update');
-Route::delete('/doctors/{id}', [HomeController::class, 'deleteDoctor'])->name('doctors.delete');
+    // Doctor Routes
+    Route::get('/doctors/suggestions', [HomeController::class, 'getDoctorSuggestions'])->name('doctors.suggestions');
+    Route::post('/doctors', [HomeController::class, 'storeDoctor'])->name('doctors.store');
+    Route::put('/doctors/{id}', [HomeController::class, 'updateDoctor'])->name('doctors.update');
+    Route::delete('/doctors/{id}', [HomeController::class, 'deleteDoctor'])->name('doctors.delete');
+});
 
 

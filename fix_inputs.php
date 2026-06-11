@@ -1,5 +1,5 @@
 <?php
-$dir = "e:/lab/awwal-lab.in/resources/views";
+$dir = "d:/lab/awwal-lab/resources/views";
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
 
 $counter = 1000;

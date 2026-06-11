@@ -569,13 +569,13 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label  class="form-label">Sample Received On</label>
+							<label for="field_1105"  class="form-label">Sample Received On</label>
 							<input type="datetime-local" class="form-control" name="sample_received_on" required autocomplete="off" id="field_1105">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label  class="form-label">Report Released On</label>
+							<label for="field_1106"  class="form-label">Report Released On</label>
 							<input type="datetime-local" class="form-control" name="report_released_on" required autocomplete="off" id="field_1106">
 						</div>
 					</div>
@@ -584,7 +584,7 @@
 				<div class="row mb-3">
 					<div class="col-md-6 col-12">
 						<div class="form-group">
-							<label  class="form-label">Authorized Signature</label>
+							<label for="field_1107"  class="form-label">Authorized Signature</label>
 							<div class="input-group flex-nowrap">
 								<select class="form-select report-signature-select" name="report_signature_id" autocomplete="off" id="field_1107">
 									<option value="">No signature</option>
@@ -597,7 +597,7 @@
 					</div>
 					<div class="col-md-6 col-12">
 						<div class="form-group">
-							<label  class="form-label">PIN</label>
+							<label for="field_1108"  class="form-label">PIN</label>
 							<input type="password" class="form-control signature-pin-input" name="signature_pin" autocomplete="new-password" placeholder="PIN" id="field_1108">
 						</div>
 					</div>
@@ -606,7 +606,7 @@
 				<div class="row mt-2">
 					<div class="col-12">
 						<div class="form-group">
-							<label  class="form-label">Report Notes</label>
+							<label for="field_1109"  class="form-label">Report Notes</label>
 							<textarea class="form-control" name="notes" rows="2" placeholder="Notes to show in the PDF" autocomplete="off" id="field_1109"></textarea>
 						</div>
 					</div>
@@ -916,7 +916,7 @@
                     <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
                     <div class="row g-3 align-items-end">
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
+                            <label for="field_1110"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select report-category-select" name="test_category[]" autocomplete="off" id="field_1110">
                                     <option value="">Sub</option>
@@ -931,7 +931,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
+                            <label for="field_1111"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select report-subcategory-select" name="test_subcategory[]" autocomplete="off" id="field_1111">
                                     <option value="">None</option>
@@ -946,7 +946,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
+                            <label for="field_1112"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1112">
                                     <option value="">-- Select Test --</option>
@@ -976,7 +976,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
+                            <label for="field_1113"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1113">
                                     <option value="">-- Select Observed --</option>
@@ -991,7 +991,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
+                            <label for="field_1114"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off" id="field_1114">
                                     <option value="">Unit</option>
@@ -1006,7 +1006,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Ref. Template</label>
+                            <label for="field_1115"  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Referral Range</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1115">
                                     <option value="">-- Select --</option>
@@ -1021,7 +1021,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
+                            <label for="field_1116"  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select flag-selector" name="test_flag[]" autocomplete="off" id="field_1116">
                                     <option value="">-- Select --</option>
@@ -1036,7 +1036,7 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12">
-                            <label  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
+                            <label for="field_1117"  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
                             <div class="input-group flex-nowrap">
                                 <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off" id="field_1117">
                                     <option value="">-- Select --</option>
@@ -1144,6 +1144,82 @@
 	                  .sort((a, b) => parseInt(b.age_min || 0, 10) - parseInt(a.age_min || 0, 10))[0] || null;
 	          }
 
+          function calculateCBC(containerSelector) {
+              let rbc = null;
+              let hb = null;
+              let hct = null;
+              
+              let rbcRow = null;
+              let hbRow = null;
+              let hctRow = null;
+              
+              let mcvRow = null;
+              let mchRow = null;
+              let mchcRow = null;
+              
+              // Iterate over all rows in this container
+              $(containerSelector).find('.test-item-row').each(function() {
+                  let testSelect = $(this).find('.test-selector-dynamic');
+                  let testName = (testSelect.val() || '').toLowerCase().trim();
+                  let observedVal = parseFloat($(this).find('.report-observed-select').val());
+                  
+                  // Check test names
+                  if (testName === 'rbc' || testName === 'rbc count' || testName.indexOf('red blood cell') > -1) {
+                      rbc = observedVal;
+                      rbcRow = $(this);
+                  } else if (testName === 'hemoglobin' || testName === 'hb' || testName === 'hgb') {
+                      hb = observedVal;
+                      hbRow = $(this);
+                  } else if (testName === 'pcv' || testName === 'hct' || testName === 'hematocrit' || testName === 'packed cell volume') {
+                      hct = observedVal;
+                      hctRow = $(this);
+                  } else if (testName === 'mcv' || testName.indexOf('mean corpuscular volume') > -1) {
+                      mcvRow = $(this);
+                  } else if (testName === 'mch' || testName.indexOf('mean corpuscular hemoglobin') > -1 && testName.indexOf('concentration') === -1) {
+                      mchRow = $(this);
+                  } else if (testName === 'mchc' || testName.indexOf('mchc') > -1 || testName.indexOf('mean corpuscular hemoglobin concentration') > -1) {
+                      mchcRow = $(this);
+                  }
+              });
+              
+              if (window._isCalculatingCBC) return;
+              window._isCalculatingCBC = true;
+              
+              try {
+                  // MCV = (HCT / RBC) * 10
+                  if (mcvRow && rbc !== null && hct !== null && !isNaN(rbc) && !isNaN(hct) && rbc > 0) {
+                      let mcv = ((hct / rbc) * 10).toFixed(1);
+                      let observedSelect = mcvRow.find('.report-observed-select');
+                      setSelectValueWithDefault(observedSelect, mcv);
+                      observedSelect.trigger('change');
+                  }
+                  
+                  // MCH = (Hb / RBC) * 10
+                  if (mchRow && rbc !== null && hb !== null && !isNaN(rbc) && !isNaN(hb) && rbc > 0) {
+                      let mch = ((hb / rbc) * 10).toFixed(1);
+                      let observedSelect = mchRow.find('.report-observed-select');
+                      setSelectValueWithDefault(observedSelect, mch);
+                      observedSelect.trigger('change');
+                  }
+                  
+                  // MCHC = (Hb / HCT) * 100
+                  if (mchcRow && hb !== null && hct !== null && !isNaN(hb) && !isNaN(hct) && hct > 0) {
+                      let mchc = ((hb / hct) * 100).toFixed(1);
+                      let observedSelect = mchcRow.find('.report-observed-select');
+                      setSelectValueWithDefault(observedSelect, mchc);
+                      observedSelect.trigger('change');
+                  }
+              } finally {
+                  window._isCalculatingCBC = false;
+              }
+          }
+
+          // Trigger CBC calculation when observed values change or test parameter is selected
+          $(document).on('change', '.report-observed-select, .test-selector-dynamic', function() {
+              let container = $(this).closest('#dynamic-tests-container').length ? '#dynamic-tests-container' : '#edit-dynamic-tests-container';
+              calculateCBC(container);
+          });
+
           // Re-trigger calculation when patient (gender) changes
           $(document).on('change', 'select[name="patient_id"]', function() {
               let modal = $(this).closest('.modal');
@@ -1172,6 +1248,10 @@
           function setSelectValueWithDefault(select, value) {
               if (value === undefined || value === null) {
                   select.val('');
+                  return;
+              }
+              if (select.is('input')) {
+                  select.val(value);
                   return;
               }
               let strVal = String(value);
@@ -1984,7 +2064,7 @@
                      <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
                      <div class="row g-3 align-items-end">
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
+                             <label for="field_1118"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select report-category-select" name="test_category[]" autocomplete="off" id="field_1118">
                                      \${catOptions}
@@ -1996,7 +2076,7 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
+                             <label for="field_1119"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select report-subcategory-select" name="test_subcategory[]" autocomplete="off" id="field_1119">
                                      \${subOptions}
@@ -2008,9 +2088,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
+                             <label for="field_1003"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off">
+                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1003">
                                      ${testOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2020,7 +2100,7 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
+                             <label for="field_1121"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1121">
                                      <option value="">-- Select Observed --</option>
@@ -2035,7 +2115,7 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
+                             <label for="field_1122"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off" id="field_1122">
                                      <option value="">Unit</option>
@@ -2050,7 +2130,7 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
+                             <label for="field_1123"  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Referral Range</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1123">
                                      <option value="">-- Select --</option>
@@ -2065,7 +2145,7 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
+                             <label for="field_1124"  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select flag-selector" name="test_flag[]" autocomplete="off" id="field_1124">
                                      \${flagOptions}
@@ -2077,7 +2157,7 @@
                              </div>
                          </div>
                          <div class="col-md-8 col-sm-12">
-                             <label  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range (Display)</label>
+                             <label for="field_1125"  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range (Display)</label>
                              <div class="input-group flex-nowrap">
                                  <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off" id="field_1125">
                                      <option value="">-- Select --</option>
@@ -2649,7 +2729,7 @@
                       // Share API available but no file support — share link/text
                       navigator.share({
                           title: `Lab Report - ${p.first_name} ${p.last_name}`,
-                          text: `Lab Report for ${p.first_name} ${p.last_name} (ID: ${p.patient_id}). Generated from SUHAIM SOFT Management System.`,
+                          text: `Lab Report for ${p.first_name} ${p.last_name} (ID: ${p.patient_id}). Generated from SUHAIM SOFT LAB Management System.`,
                       }).catch(err => console.warn('Share failed:', err));
                   } else {
                       // Desktop fallback: WhatsApp + auto-download
@@ -2723,19 +2803,19 @@
 			<form id="form-add-report-doctor">
 				@csrf
 				<div class="form-group">
-					<label  class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
+					<label for="field_1126"  class="form-label-aw">Doctor Name <span class="text-danger">*</span></label>
 					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Dr. John Doe" autocomplete="off" id="field_1126">
 				</div>
 				<div class="form-group mt-3">
-					<label  class="form-label-aw">Qualification</label>
+					<label for="field_1127"  class="form-label-aw">Qualification</label>
 					<input type="text" class="form-control-aw" name="qualification" placeholder="e.g. MBBS, MD" autocomplete="off" id="field_1127">
 				</div>
 				<div class="form-group mt-3">
-					<label  class="form-label-aw">Phone No</label>
+					<label for="field_1128"  class="form-label-aw">Phone No</label>
 					<input type="text" class="form-control-aw" name="phone" placeholder="Phone Number" autocomplete="off" id="field_1128">
 				</div>
 				<div class="form-group mt-3">
-					<label  class="form-label-aw">Email</label>
+					<label for="field_1129"  class="form-label-aw">Email</label>
 					<input type="email" class="form-control-aw" name="email" placeholder="Email Address" autocomplete="new-password" id="field_1129">
 				</div>
 			</form>
@@ -2798,7 +2878,7 @@
 			<form id="form-add-report-category">
 				@csrf
 				<div class="form-group">
-					<label  class="form-label-aw">Category Name <span class="text-danger">*</span></label>
+					<label for="field_1130"  class="form-label-aw">Category Name <span class="text-danger">*</span></label>
 					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. BIOCHEMISTRY" autocomplete="off" id="field_1130">
 				</div>
 			</form>
@@ -2858,7 +2938,7 @@
 					</select>
 				</div>
 				<div class="form-group mt-3">
-					<label  class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
+					<label for="field_1131"  class="form-label-aw">Sub-Category Name <span class="text-danger">*</span></label>
 					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. SEROLOGY" autocomplete="off" id="field_1131">
 				</div>
 			</form>
@@ -2919,7 +2999,7 @@
                    <form id="form-add-report-reference">
                        @csrf
                        <div class="form-group">
-                           <label  class="form-label">Template Name</label>
+                           <label for="field_1132"  class="form-label">Template Name</label>
                            <input type="text" class="form-control" name="name" required placeholder="e.g. 70 - 110 mg/dl" autocomplete="off" id="field_1132">
                        </div>
                    </form>
@@ -2970,7 +3050,7 @@
                    <form id="form-add-report-flag">
                        @csrf
                        <div class="form-group">
-                           <label  class="form-label">Flag Name</label>
+                           <label for="field_1134"  class="form-label">Flag Name</label>
                            <input type="text" class="form-control" name="name" required placeholder="e.g. H, L, N" autocomplete="off" id="field_1134">
                        </div>
                    </form>
@@ -3019,7 +3099,7 @@
                    <form id="form-add-report-observed">
                        @csrf
                        <div class="form-group">
-                           <label  class="form-label">Template Name</label>
+                           <label for="field_1136"  class="form-label">Template Name</label>
                            <input type="text" class="form-control" name="name" required placeholder="e.g. Negative, Positive, Trace" autocomplete="off" id="field_1136">
                        </div>
                    </form>
@@ -3069,11 +3149,11 @@
 			<form id="form-add-report-test">
 				@csrf
 				<div class="form-group mb-3">
-					<label  class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
+					<label for="field_1138"  class="form-label-aw">Parameter Name <span class="text-danger">*</span></label>
 					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. Glucose Fasting" autocomplete="off" id="field_1138">
 				</div>
 				<div class="form-group mb-3">
-					<label  class="form-label-aw">Unit</label>
+					<label for="field_1139"  class="form-label-aw">Unit</label>
 					<select class="form-select form-control-aw" name="unit" autocomplete="off" id="field_1139">
 						<option value="">-- Select Unit --</option>
 						@foreach($units as $u)
@@ -3082,7 +3162,7 @@
 					</select>
 				</div>
 				<div class="form-group mb-3">
-					<label  class="form-label-aw">Biological Reference</label>
+					<label for="field_1140"  class="form-label-aw">Biological Reference</label>
 					<input type="text" class="form-control-aw" name="biological_reference" placeholder="e.g. 70 - 110" autocomplete="off" id="field_1140">
 				</div>
 			</form>
@@ -3146,7 +3226,7 @@
 			<form id="form-add-report-unit">
 				@csrf
 				<div class="form-group">
-					<label  class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
+					<label for="field_1141"  class="form-label-aw">Unit Name <span class="text-danger">*</span></label>
 					<input type="text" class="form-control-aw" name="name" required placeholder="e.g. mg/dL" autocomplete="off" id="field_1141">
 				</div>
 			</form>

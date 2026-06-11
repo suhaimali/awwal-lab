@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login - SUHAIM SOFT')
+@section('title', 'Login - SUHAIM SOFT LAB')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
@@ -16,7 +16,7 @@
             <div class="brand-icon">
                 <i class="fa-solid fa-flask"></i>
             </div>
-            <h1>SUHAIM SOFT</h1>
+            <h1>SUHAIM SOFT LAB</h1>
             <p>Advanced Laboratory Management System</p>
         </div>
 
@@ -60,7 +60,7 @@
                         required
                         autofocus
                         {{ $lockedOut ? 'disabled' : '' }}
-                    >
+                     autocomplete="off">
                     <i class="fa-regular fa-envelope input-icon"></i>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                         placeholder="••••••••"
                         required
                         {{ $lockedOut ? 'disabled' : '' }}
-                    >
+                     autocomplete="off">
                     <i class="fa-solid fa-lock input-icon"></i>
                     <button type="button" class="btn-toggle-password" id="toggle-password" {{ $lockedOut ? 'disabled' : '' }}>
                         <i class="fa-regular fa-eye" id="toggle-icon"></i>

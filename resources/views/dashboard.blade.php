@@ -78,8 +78,8 @@
             <div style="position:absolute; right:-20px; top:-20px; width:180px; height:180px; background:rgba(255,255,255,0.07); border-radius:50%;"></div>
             <div style="position:absolute; right:60px; bottom:-40px; width:140px; height:140px; background:rgba(255,255,255,0.06); border-radius:50%;"></div>
             <div class="aw-card-body" style="position:relative; z-index:1; padding:32px;">
-                <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; opacity:0.75; margin-bottom:8px;">Laboratory Management System</div>
-                <h2 style="font-size:24px; font-weight:800; margin-bottom:10px; line-height:1.2;">Welcome to SUHAIM SOFT </h2>
+                <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; opacity:0.75; margin-bottom:8px;">Advanced Lab System</div>
+                <h2 style="font-size:24px; font-weight:800; margin-bottom:10px; line-height:1.2;">Welcome to SUHAIM SOFT LAB</h2>
                 <p style="font-size:13.5px; opacity:0.85; max-width:480px; line-height:1.6;">Streamline your daily workflow with our beautifully designed, responsive management system. Manage patients, track appointments, and generate accurate reports.</p>
                 <div style="display:flex; gap:12px; margin-top:20px; flex-wrap:wrap;">
                     <a href="{{ route('patients') }}" style="background:rgba(255,255,255,0.2); color:#fff; padding:9px 20px; border-radius:9px; text-decoration:none; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:7px; backdrop-filter:blur(4px); transition:all 0.2s; border:1px solid rgba(255,255,255,0.3);" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">

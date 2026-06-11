@@ -250,52 +250,54 @@
             </div>
             
             <div class="card border-0 shadow-sm" style="background:#f8fafc; border-radius:12px; border-top: 3px solid #64748b !important;">
-                <div class="card-header bg-transparent border-0 pb-0 pt-3 px-3"><h6 class="mb-0 fw-bold" style="color:#64748b;"><i class="fa fa-plus-circle me-2"></i>Add Advanced Interval</h6></div>
+                <div class="card-header bg-transparent border-0 pb-0 pt-3 px-3"><h6 class="mb-0 fw-bold" style="color:#64748b;"><i class="fa fa-plus-circle me-2"></i><span id="interval-form-title">Add Advanced Interval</span></h6></div>
                 <div class="card-body p-3">
                     <form id="form-add-interval">
                         <input type="hidden" name="lab_test_id" id="interval-test-id">
+                        <input type="hidden" name="interval_id" id="interval-id">
                         <div class="row g-2">
                             <div class="col-md-2">
-                                <label class="form-label-aw" style="font-size: 10px;">Gender</label>
-                                <select class="form-select" name="gender" autocomplete="off" required>
+                                <label for="field_1004" class="form-label-aw" style="font-size: 10px;">Gender</label>
+                                <select class="form-select" name="gender" autocomplete="off" required id="field_1004">
                                     <option value="Any">Any</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
                             </div>
                             <div class="col-md-1">
-                                <label class="form-label-aw" style="font-size: 10px;">Age Min</label>
-                                <input type="number" step="0.1" class="form-control-aw" name="age_min" autocomplete="off">
+                                <label for="field_1005" class="form-label-aw" style="font-size: 10px;">Age Min</label>
+                                <input type="number" step="0.1" class="form-control-aw" name="age_min" autocomplete="off" id="field_1005">
                             </div>
                             <div class="col-md-1">
-                                <label class="form-label-aw" style="font-size: 10px;">Age Max</label>
-                                <input type="number" step="0.1" class="form-control-aw" name="age_max" autocomplete="off">
+                                <label for="field_1006" class="form-label-aw" style="font-size: 10px;">Age Max</label>
+                                <input type="number" step="0.1" class="form-control-aw" name="age_max" autocomplete="off" id="field_1006">
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label-aw" style="font-size: 10px;">Age Type</label>
-                                <select class="form-select" name="age_type" autocomplete="off">
+                                <label for="field_1007" class="form-label-aw" style="font-size: 10px;">Age Type</label>
+                                <select class="form-select" name="age_type" autocomplete="off" id="field_1007">
                                     <option value="Years">Years</option>
                                     <option value="Months">Months</option>
                                     <option value="Days">Days</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label-aw" style="font-size: 10px;">Reference Text</label>
-                                <input type="text" class="form-control-aw" name="reference_text" autocomplete="off">
+                                <label for="field_1008" class="form-label-aw" style="font-size: 10px;">Reference Text</label>
+                                <input type="text" class="form-control-aw" name="reference_text" autocomplete="off" id="field_1008">
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex gap-2">
                                     <div class="flex-grow-1">
-                                        <label class="form-label-aw" style="font-size: 10px;">Min Val</label>
-                                        <input type="number" step="0.01" class="form-control-aw" name="min_value" autocomplete="off">
+                                        <label for="field_1009" class="form-label-aw" style="font-size: 10px;">Min Val</label>
+                                        <input type="number" step="0.01" class="form-control-aw" name="min_value" autocomplete="off" id="field_1009">
                                     </div>
                                     <div class="flex-grow-1">
-                                        <label class="form-label-aw" style="font-size: 10px;">Max Val</label>
-                                        <input type="number" step="0.01" class="form-control-aw" name="max_value" autocomplete="off">
+                                        <label for="field_1010" class="form-label-aw" style="font-size: 10px;">Max Val</label>
+                                        <input type="number" step="0.01" class="form-control-aw" name="max_value" autocomplete="off" id="field_1010">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 text-end mt-2">
+                                <button type="button" class="btn-aw-outline btn-aw-sm" id="btn-cancel-edit-interval" style="display:none;"><i class="fa fa-times me-1"></i> Cancel Edit</button>
                                 <button type="submit" class="btn-aw-primary btn-aw-sm" id="btn-submit-interval"><i class="fa fa-plus me-1"></i> Add Interval</button>
                             </div>
                         </div>
@@ -366,10 +368,11 @@
                           tbody.append(`
                               <tr>
                                   <td style="font-size:12px;font-weight:600;"><span class="badge-aw bg-light text-dark border">${inv.gender}</span></td>
-                                  <td style="font-size:12px;">${inv.age_min || '-'} to ${inv.age_max || '-'} ${inv.age_type || 'Years'}</td>
+                                  <td style="font-size:12px;">${inv.age_min !== null ? inv.age_min : '-'} to ${inv.age_max !== null ? inv.age_max : '-'} ${inv.age_type || 'Years'}</td>
                                   <td style="font-size:12px;">${inv.reference_text || '-'}</td>
-                                  <td style="font-size:12px;">${inv.min_value || '-'} / ${inv.max_value || '-'}</td>
+                                  <td style="font-size:12px;">${inv.min_value !== null ? inv.min_value : '-'} / ${inv.max_value !== null ? inv.max_value : '-'}</td>
                                   <td class="text-end">
+                                      <button type="button" class="btn-aw-success btn-aw-sm btn-edit-interval" data-id="${inv.id}" data-gender="${inv.gender}" data-age_min="${inv.age_min !== null ? inv.age_min : ''}" data-age_max="${inv.age_max !== null ? inv.age_max : ''}" data-age_type="${inv.age_type || 'Years'}" data-ref_text="${inv.reference_text || ''}" data-min_val="${inv.min_value !== null ? inv.min_value : ''}" data-max_val="${inv.max_value !== null ? inv.max_value : ''}"><i class="fa fa-edit"></i></button>
                                       <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-interval" data-id="${inv.id}"><i class="fa fa-trash"></i></button>
                                   </td>
                               </tr>
@@ -383,17 +386,61 @@
               });
 		  });
 
-          // Add Interval
+          // Edit Interval Row Clicked
+          $(document).on('click', '.btn-edit-interval', function() {
+              let id = $(this).data('id');
+              let gender = $(this).data('gender');
+              let ageMin = $(this).data('age_min');
+              let ageMax = $(this).data('age_max');
+              let ageType = $(this).data('age_type');
+              let refText = $(this).data('ref_text');
+              let minVal = $(this).data('min_val');
+              let maxVal = $(this).data('max_val');
+
+              $('#interval-id').val(id);
+              $('#form-add-interval select[name="gender"]').val(gender);
+              $('#form-add-interval input[name="age_min"]').val(ageMin);
+              $('#form-add-interval input[name="age_max"]').val(ageMax);
+              $('#form-add-interval select[name="age_type"]').val(ageType);
+              $('#form-add-interval input[name="reference_text"]').val(refText);
+              $('#form-add-interval input[name="min_value"]').val(minVal);
+              $('#form-add-interval input[name="max_value"]').val(maxVal);
+
+              $('#interval-form-title').text('Edit Advanced Interval');
+              $('#btn-submit-interval').html('<i class="fa fa-check me-1"></i> Update Interval');
+              $('#btn-cancel-edit-interval').show();
+          });
+
+          // Cancel Edit Clicked
+          $('#btn-cancel-edit-interval').click(function() {
+              resetIntervalForm();
+          });
+
+          function resetIntervalForm() {
+              $('#interval-id').val('');
+              $('#form-add-interval')[0].reset();
+              $('#interval-form-title').text('Add Advanced Interval');
+              $('#btn-submit-interval').html('<i class="fa fa-plus me-1"></i> Add Interval');
+              $('#btn-cancel-edit-interval').hide();
+          }
+
+          // Reset the form when setup modal opens/reloads to clear any edit state
+          $('#modal-edit-params').on('show.bs.modal', function() {
+              resetIntervalForm();
+          });
+
+          // Add/Update Interval
           $('#form-add-interval').submit(function(e) {
               e.preventDefault();
               let btn = $('#btn-submit-interval');
-              btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-1"></i> Saving...');
+              let isEdit = $('#interval-id').val() ? true : false;
+              btn.prop('disabled', true).html(isEdit ? '<i class="fa fa-spinner fa-spin me-1"></i> Updating...' : '<i class="fa fa-spinner fa-spin me-1"></i> Saving...');
               let testId = $('#interval-test-id').val();
               $.post("/test-parameters/" + testId + "/intervals", $(this).serialize(), function(res) {
                   location.reload();
               }).fail(function() {
-                  alert('Error saving interval.');
-                  btn.prop('disabled', false).html('<i class="fa fa-plus me-1"></i> Add Interval');
+                  alert(isEdit ? 'Error updating interval.' : 'Error saving interval.');
+                  btn.prop('disabled', false).html(isEdit ? '<i class="fa fa-check me-1"></i> Update Interval' : '<i class="fa fa-plus me-1"></i> Add Interval');
               });
           });
 

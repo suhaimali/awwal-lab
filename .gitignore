@@ -17,3 +17,4 @@ Thumbs.db
 .phpunit.result.cache
 /public/build/
 /public/storage
+/bootstrap/cache/*.php

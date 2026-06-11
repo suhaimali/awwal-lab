@@ -313,7 +313,7 @@
             font-weight: 700;
             text-transform: uppercase; 
             letter-spacing: 0.8px;
-            padding: 16px 20px;
+            padding: 10px 14px;
             border-bottom: 2px solid #e2e8f0;
             white-space: nowrap;
             vertical-align: middle;
@@ -330,7 +330,7 @@
             box-shadow: inset 0 0 0 9999px rgba(26,86,219,0.06), inset 3px 0 0 var(--primary);
         }
         .table-modern tbody td {
-            padding: 16px 20px;
+            padding: 10px 14px;
             font-size: 13.5px;
             color: #334155;
             border-bottom: 1px solid #f1f5f9;

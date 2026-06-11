@@ -1220,7 +1220,7 @@
 					  doc.setFont("helvetica", "bold");
 					  doc.setFontSize(22);
 					  doc.setTextColor(0);
-					  doc.text("SUHAIM SOFT LAB", 20, 20);
+					  doc.text("AWWAL LAB", 20, 20);
 					  
 					  doc.setFontSize(10);
 					  doc.setFont("helvetica", "normal");

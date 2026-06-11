@@ -509,11 +509,29 @@
             
             /* Mobile Modal Responsiveness */
             .modal-dialog {
-                margin: 10px;
+                margin: 10px auto;
                 max-width: calc(100% - 20px) !important;
+            }
+            .modal-aw .modal-content {
+                border-radius: 12px;
+            }
+            .modal-aw .modal-header {
+                padding: 14px 16px;
+                border-radius: 12px 12px 0 0;
             }
             .modal-aw .modal-body {
                 padding: 16px;
+                overflow-x: hidden;
+            }
+            .modal-aw .modal-footer {
+                padding: 12px 16px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .modal-aw .modal-footer .btn,
+            .modal-aw .modal-footer button {
+                flex: 1 1 100%;
+                margin: 0 !important;
             }
 
             /* Fix input groups with many buttons wrapping nicely */

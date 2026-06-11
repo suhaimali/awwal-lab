@@ -671,7 +671,7 @@
 							</div>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light text-muted"><i class="fa fa-pencil"></i></span>
+                                    <span class="input-group-text bg-light text-primary"><i class="fa fa-pencil"></i></span>
                                     <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1051" name="name_1052">
                                     <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
                                 </div>

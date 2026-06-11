@@ -568,6 +568,10 @@
         div.dataTables_wrapper {
             padding: 16px 20px;
         }
+        /* Hide the built-in DataTables search box — custom inputs are used on all pages */
+        .dataTables_wrapper .dataTables_filter {
+            display: none !important;
+        }
         .dataTables_wrapper .dataTables_filter input {
             border: 1.5px solid var(--border-color);
             border-radius: 8px; padding: 6px 12px;

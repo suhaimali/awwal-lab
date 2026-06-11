@@ -293,7 +293,7 @@
 
     // Initialize DataTables for Payments
     var paymentsTable = $('#payments-table').DataTable({
-        dom: "<'row mb-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-none'f>>" +
+        dom: "<'row mb-3'<'col-sm-12 col-md-6'l>>" +
              "<'row'<'col-sm-12'tr>>" +
              "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         pageLength: 10,

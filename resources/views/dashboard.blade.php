@@ -89,8 +89,25 @@
                     }
                 @endphp
                 <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; opacity:0.75; margin-bottom:8px;">Command Center</div>
-                <h2 style="font-size:24px; font-weight:800; margin-bottom:10px; line-height:1.2;">{{ $greeting }}, {{ auth()->user()->name ?? 'Administrator' }}</h2>
+                <h2 style="font-size:24px; font-weight:800; margin-bottom:10px; line-height:1.2;">
+                    <span id="dashboard-dynamic-greeting">{{ $greeting }}</span>, {{ auth()->user()->name ?? 'Administrator' }}
+                </h2>
                 <p style="font-size:13.5px; opacity:0.85; max-width:550px; line-height:1.6;">Your diagnostic center dashboard is active. Today, you have registered <strong>{{ $totalPatients }} patients</strong> and finalized <strong>{{ $totalCompleted }} test reports</strong>. There are currently <strong>{{ $pendingReports }} pending reports</strong> awaiting action.</p>
+                <script>
+                    (function() {
+                        const hour = new Date().getHours();
+                        let greeting = 'Good Evening';
+                        if (hour < 12) {
+                            greeting = 'Good Morning';
+                        } else if (hour < 17) {
+                            greeting = 'Good Afternoon';
+                        }
+                        const greetingEl = document.getElementById('dashboard-dynamic-greeting');
+                        if (greetingEl) {
+                            greetingEl.textContent = greeting;
+                        }
+                    })();
+                </script>
                 <div style="display:flex; gap:12px; margin-top:20px; flex-wrap:wrap;">
                     <a href="{{ route('patients') }}" style="background:rgba(255,255,255,0.2); color:#fff; padding:9px 20px; border-radius:9px; text-decoration:none; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:7px; backdrop-filter:blur(4px); transition:all 0.2s; border:1px solid rgba(255,255,255,0.3);" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
                         <i class="fa fa-users"></i> Manage Patients

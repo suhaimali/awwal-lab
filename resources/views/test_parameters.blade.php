@@ -18,11 +18,7 @@
 
 
     @media (max-width: 767px) {
-    
-        .table-patients tbody td:last-child { border-bottom: none !important; }
-        .table-patients tbody td::before { content: attr(data-label); font-weight: 700; text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .table-patients .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 15px !important; }
-        .table-patients .btn-edit-params { width: 100%; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+        .table-modern .btn-edit-params { width: 100%; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-top: 8px; }
     }
 </style>
 

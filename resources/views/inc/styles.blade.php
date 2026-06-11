@@ -503,6 +503,48 @@
             #awlab-main { margin-left: 0 !important; padding: 20px 16px 0; }
             #awlab-footer { margin-left: 0 !important; }
         }
+
+        /* ── MOBILE CARD HEADER: stack search + title on small screens ── */
+        @media (max-width: 640px) {
+            .aw-card-header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
+                padding: 14px 16px !important;
+            }
+            .aw-card-header > div,
+            .aw-card-header > span {
+                width: 100%;
+            }
+            /* Make search input stretch full width */
+            .aw-card-header [style*="position:relative"],
+            .aw-card-header div[style*="position: relative"] {
+                width: 100% !important;
+            }
+            .aw-card-header input[type="text"] {
+                width: 100% !important;
+                box-sizing: border-box;
+            }
+            .aw-card-header .d-flex {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            /* Page header stack on small mobile */
+            .page-header-aw {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px;
+            }
+            .page-header-aw .btn-aw-primary {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Page title smaller on mobile */
+            .page-header-aw .page-title-aw {
+                font-size: 18px !important;
+            }
+        }
+
         @media (max-width: 575px) {
             .header-clock { display: none; }
             #awlab-main { padding: 14px 12px 0; }

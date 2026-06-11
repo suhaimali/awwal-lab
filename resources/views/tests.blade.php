@@ -30,10 +30,7 @@
     .btn-icon-circle.edit:hover { color: #3b82f6; border-color: #bfdbfe; background: #eff6ff; }
     .btn-icon-circle.sliders:hover { color: #10b981; border-color: #a7f3d0; background: #ecfdf5; }
     .btn-icon-circle.delete:hover { color: #ef4444; border-color: #fecaca; background: #fef2f2; }
-    @media (max-width: 767px) {
-        .table-modern .text-end { justify-content: center; width: 100%; border-top: 1px solid #f1f5f9 !important; margin-top: 15px; padding-top: 15px !important; }
-        .action-btn-group { width: 100%; justify-content: center; gap: 16px; }
-    }
+
 </style>
 
 <div class="aw-card mb-4">

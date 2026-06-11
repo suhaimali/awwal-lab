@@ -149,7 +149,7 @@
             </div>
             <div class="aw-card-body p-0">
                 <div class="table-responsive-modern">
-                    <table class="table table-modern">
+                    <table class="table-modern">
                         <thead>
                             <tr>
                                 <th>Patient</th>
@@ -206,7 +206,7 @@
     </div>
     <div class="aw-card-body p-0">
         <div class="table-responsive-modern">
-            <table class="table table-modern">
+            <table class="table-modern">
                 <thead>
                     <tr>
                         <th>Billing Date</th>

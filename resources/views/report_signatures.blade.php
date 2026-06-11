@@ -64,7 +64,7 @@
             </div>
             <div class="aw-card-body p-0">
                 <div class="table-responsive-modern">
-                    <table class="table table-modern" id="signatures-table">
+                    <table class="table-modern" id="signatures-table">
                         <thead>
                             <tr>
                                 <th>Name</th>

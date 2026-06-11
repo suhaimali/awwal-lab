@@ -27,7 +27,7 @@
     </div>
     <div class="aw-card-body" style="padding:0;">
         <div class="table-responsive-modern">
-<table class="table table-modern" id="payments-table">
+<table class="table-modern" id="payments-table">
     <thead>
         <tr>
             <th>SL No</th>

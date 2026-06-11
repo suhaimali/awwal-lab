@@ -39,7 +39,7 @@
             transition: var(--transition);
             overflow: hidden;
         }
-        body.sidebar-collapsed #awlab-sidebar { width: var(--sidebar-collapsed); }
+
 
         .sidebar-brand {
             height: var(--header-h);
@@ -64,7 +64,7 @@
             color: var(--primary); white-space: nowrap;
             transition: var(--transition);
         }
-        body.sidebar-collapsed .sidebar-brand .brand-name { opacity: 0; width: 0; }
+
 
         .sidebar-nav {
             flex: 1;
@@ -85,7 +85,7 @@
             overflow: hidden;
             transition: var(--transition);
         }
-        body.sidebar-collapsed .sidebar-section-label { opacity: 0; }
+
 
         .nav-item-link {
             display: flex; align-items: center;
@@ -115,28 +115,9 @@
             font-size: 15px; flex-shrink: 0;
         }
         .nav-item-link .nav-label { flex: 1; transition: var(--transition); }
-        body.sidebar-collapsed .nav-item-link .nav-label { opacity: 0; width: 0; overflow: hidden; }
-        body.sidebar-collapsed .nav-item-link { justify-content: center; padding: 12px; }
-        body.sidebar-collapsed .nav-item-link .nav-icon { margin: 0; }
 
-        /* Tooltip for collapsed state */
-        body.sidebar-collapsed .nav-item-link::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            left: calc(var(--sidebar-collapsed) + 8px);
-            top: 50%; transform: translateY(-50%);
-            background: var(--text-dark);
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            z-index: 2000;
-        }
-        body.sidebar-collapsed .nav-item-link:hover::after { opacity: 1; }
+
+
 
         .sidebar-footer {
             padding: 12px 14px;
@@ -148,7 +129,7 @@
             overflow: hidden;
             white-space: nowrap;
         }
-        body.sidebar-collapsed .sidebar-footer { opacity: 0; }
+
 
         /* ── HEADER ── */
         #awlab-header {
@@ -165,7 +146,7 @@
             z-index: 1030;
             transition: left var(--transition);
         }
-        body.sidebar-collapsed #awlab-header { left: var(--sidebar-collapsed); }
+
 
         .header-toggle-btn {
             width: 36px; height: 36px;
@@ -222,7 +203,7 @@
             padding: 28px 28px 0;
             transition: margin-left var(--transition);
         }
-        body.sidebar-collapsed #awlab-main { margin-left: var(--sidebar-collapsed); }
+
 
         /* ── FOOTER ── */
         #awlab-footer {
@@ -235,7 +216,7 @@
             display: flex; align-items: center; justify-content: space-between;
             transition: margin-left var(--transition);
         }
-        body.sidebar-collapsed #awlab-footer { margin-left: var(--sidebar-collapsed); }
+
         #awlab-footer a { color: var(--primary); text-decoration: none; }
         #awlab-footer a:hover { text-decoration: underline; }
 
@@ -733,5 +714,38 @@
                 width: 100% !important;
                 justify-content: flex-end !important;
             }
+        }
+
+        /* ── DESKTOP ONLY COLLAPSED SIDEBAR RULES ── */
+        @media (min-width: 992px) {
+            body.sidebar-collapsed #awlab-sidebar { width: var(--sidebar-collapsed); }
+            body.sidebar-collapsed .sidebar-brand .brand-name { opacity: 0; width: 0; }
+            body.sidebar-collapsed .sidebar-section-label { opacity: 0; }
+            body.sidebar-collapsed .nav-item-link .nav-label { opacity: 0; width: 0; overflow: hidden; }
+            body.sidebar-collapsed .nav-item-link { justify-content: center; padding: 12px; }
+            body.sidebar-collapsed .nav-item-link .nav-icon { margin: 0; }
+            body.sidebar-collapsed .sidebar-footer { opacity: 0; }
+            body.sidebar-collapsed #awlab-header { left: var(--sidebar-collapsed); }
+            body.sidebar-collapsed #awlab-main { margin-left: var(--sidebar-collapsed); }
+            body.sidebar-collapsed #awlab-footer { margin-left: var(--sidebar-collapsed); }
+            
+            /* Tooltip for collapsed state */
+            body.sidebar-collapsed .nav-item-link::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                left: calc(var(--sidebar-collapsed) + 8px);
+                top: 50%; transform: translateY(-50%);
+                background: var(--text-dark);
+                color: #fff;
+                padding: 5px 10px;
+                border-radius: 6px;
+                font-size: 12px;
+                white-space: nowrap;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.15s;
+                z-index: 2000;
+            }
+            body.sidebar-collapsed .nav-item-link:hover::after { opacity: 1; }
         }
     </style>

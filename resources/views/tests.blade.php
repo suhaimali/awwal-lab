@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($tests as $test)
+                        @foreach($tests as $test)
                         <tr>
                             <td data-label="SL No"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#{{ $test->id }}</span></td>
                             <td data-label="Test Name" style="font-weight:600; color:#1e293b;">
@@ -94,16 +94,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center" style="padding:48px;color:var(--text-muted);">
-                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                    <i class="fa fa-flask" style="font-size:40px;margin-bottom:12px;opacity:0.4;"></i>
-                                    <span style="font-size:15px;">No laboratory tests found.</span>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -240,6 +231,7 @@
 				  info: "Showing _START_ to _END_ of _TOTAL_ tests",
 				  infoEmpty: "Showing 0 to 0 of 0 tests",
 				  infoFiltered: "(filtered from _MAX_ total tests)",
+				  emptyTable: "No laboratory tests found.",
 				  paginate: {
 					  previous: "<i class='fa fa-angle-left'></i>",
 					  next: "<i class='fa fa-angle-right'></i>"

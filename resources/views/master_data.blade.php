@@ -45,7 +45,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($units as $i => $unit)
+                            @foreach($units as $i => $unit)
                             <tr>
                                 <td data-label="SL. NO"><span class="badge-aw badge-blue">{{ $i + 1 }}</span></td>
                                 <td data-label="Unit Name" style="font-weight:600;">{{ $unit->name }}</td>
@@ -60,14 +60,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
-                                    <i class="fa fa-flask" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
-                                    No units added yet.
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -106,7 +99,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($templates as $i => $template)
+                            @foreach($templates as $i => $template)
                             <tr>
                                 <td data-label="SL. NO"><span class="badge-aw badge-green">{{ $i + 1 }}</span></td>
                                 <td data-label="Template Name" style="font-weight:600; color:#059669;">{{ $template->name }}</td>
@@ -121,14 +114,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
-                                    <i class="fa fa-list-check" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
-                                    No result templates added yet.
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -169,7 +155,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($referenceTemplates as $i => $ref)
+                            @foreach($referenceTemplates as $i => $ref)
                             <tr>
                                 <td data-label="SL. NO"><span class="badge-aw text-primary" style="background:#e0f2fe;">{{ $i + 1 }}</span></td>
                                 <td data-label="Template Value" style="font-weight:600; color:#2563eb;">{{ $ref->name }}</td>
@@ -184,14 +170,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
-                                    <i class="fa fa-file-medical" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
-                                    No reference templates added yet.
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -230,7 +209,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($flagTemplates as $i => $flg)
+                            @foreach($flagTemplates as $i => $flg)
                             <tr>
                                 <td data-label="SL. NO"><span class="badge-aw text-warning" style="background:#fef3c7;">{{ $i + 1 }}</span></td>
                                 <td data-label="Flag Value" style="font-weight:600; color:#d97706;">{{ $flg->name }}</td>
@@ -245,14 +224,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center" style="padding:32px;color:var(--text-muted);">
-                                    <i class="fa fa-flag" style="font-size:30px;display:block;margin-bottom:10px;opacity:0.4;"></i>
-                                    No flag templates added yet.
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -302,6 +274,7 @@
             language: {
                 lengthMenu: "Show _MENU_",
                 infoEmpty: "",
+                emptyTable: "No units added yet.",
                 paginate: {
                     previous: "<i class='fa fa-angle-left'></i>",
                     next: "<i class='fa fa-angle-right'></i>"
@@ -323,6 +296,7 @@
             language: {
                 lengthMenu: "Show _MENU_",
                 infoEmpty: "",
+                emptyTable: "No result templates added yet.",
                 paginate: {
                     previous: "<i class='fa fa-angle-left'></i>",
                     next: "<i class='fa fa-angle-right'></i>"
@@ -344,6 +318,7 @@
             language: {
                 lengthMenu: "Show _MENU_",
                 infoEmpty: "",
+                emptyTable: "No reference templates added yet.",
                 paginate: {
                     previous: "<i class='fa fa-angle-left'></i>",
                     next: "<i class='fa fa-angle-right'></i>"

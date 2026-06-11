@@ -217,7 +217,7 @@
             </tr>
         </thead>
         <tbody>
-        @forelse($appointments as $booking)
+        @foreach($appointments as $booking)
         <tr>
             <td data-label="Booking ID"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#B-{{ $booking->id }}</span></td>
             <td data-label="Patient Name" style="font-weight:600; color:#1e293b;">
@@ -245,14 +245,7 @@
                 </div>
             </td>
         </tr>
-        @empty
-        <tr>
-            <td colspan="7" class="text-center" style="padding:48px;color:var(--text-muted);">
-                <i class="fa fa-folder-open" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
-                <span style="font-size:15px;">No laboratory bookings found.</span>
-            </td>
-        </tr>
-        @endforelse
+        @endforeach
         </tbody>
     </table>
 </div>
@@ -942,6 +935,7 @@
 				  info: "Showing _START_ to _END_ of _TOTAL_ bookings",
 				  infoEmpty: "Showing 0 to 0 of 0 bookings",
 				  infoFiltered: "(filtered from _MAX_ total bookings)",
+				  emptyTable: "No laboratory bookings found.",
 				  paginate: {
 					  previous: "<i class='fa fa-angle-left'></i>",
 					  next: "<i class='fa fa-angle-right'></i>"

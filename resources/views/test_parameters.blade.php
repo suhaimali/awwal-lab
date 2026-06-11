@@ -54,7 +54,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($tests as $i => $test)
+                        @foreach($tests as $i => $test)
                         <tr>
                             <td data-label="Sl. No."><span class="badge-aw badge-blue">{{ $i + 1 }}</span></td>
                             <td data-label="Test Name" style="font-weight:600;">{{ $test->name }}</td>
@@ -96,17 +96,7 @@
                                 </button>
                             </td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td colspan="8" class="text-center py-5">
-                                <div style="color:var(--text-muted);">
-                                    <i class="fa fa-sliders fa-3x mb-3" style="opacity: 0.5;"></i>
-                                    <br>
-                                    <span style="font-size:15px;">No tests found.</span>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -324,6 +314,7 @@
 				  info: "Showing _START_ to _END_ of _TOTAL_ parameters",
 				  infoEmpty: "Showing 0 to 0 of 0 parameters",
 				  infoFiltered: "(filtered from _MAX_ total parameters)",
+				  emptyTable: "No tests found.",
 				  paginate: {
 					  previous: "<i class='fa fa-angle-left'></i>",
 					  next: "<i class='fa fa-angle-right'></i>"

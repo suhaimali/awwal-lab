@@ -489,7 +489,7 @@
 									</tr>
 								</thead>
 								<tbody>
-                                     @forelse($reports as $report)
+                                     @foreach($reports as $report)
 									<tr>
 										<td data-label="SL No"><span class="badge-aw badge-blue">#{{ $report->id }}</span></td>
 										<td style="font-weight:600;" data-label="Patient Name">{{ $report->patient->first_name }} {{ $report->patient->last_name }}</td>
@@ -503,14 +503,7 @@
                                              </div>
 										</td>
 									</tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center" style="padding:48px; color:var(--text-muted);">
-                                            <i class="fa fa-folder-open" style="font-size:40px; display:block; margin-bottom:12px; opacity:0.4;"></i>
-                                            <span style="font-size:15px;">No test reports generated yet.</span>
-                                        </td>
-                                    </tr>
-                                    @endforelse
+                                    @endforeach
 								</tbody>
 							  </table>
 						</div>				
@@ -898,6 +891,7 @@
 				  info: "Showing _START_ to _END_ of _TOTAL_ reports",
 				  infoEmpty: "Showing 0 to 0 of 0 reports",
 				  infoFiltered: "(filtered from _MAX_ total reports)",
+				  emptyTable: "No test reports generated yet.",
 				  paginate: {
 					  previous: "<i class='fa fa-angle-left'></i>",
 					  next: "<i class='fa fa-angle-right'></i>"

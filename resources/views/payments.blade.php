@@ -71,14 +71,6 @@
             </td>
         </tr>
         @endforeach
-        @if(count($payments) == 0)
-        <tr>
-            <td colspan="10" class="text-center" style="padding:48px;color:var(--text-muted);">
-                <i class="fa fa-credit-card" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
-                <span style="font-size:15px;">No payment records found.</span>
-            </td>
-        </tr>
-        @endif
     </tbody>
 </table>
         </div>
@@ -312,6 +304,7 @@
             info: "Showing _START_ to _END_ of _TOTAL_ payments",
             infoEmpty: "Showing 0 to 0 of 0 payments",
             infoFiltered: "(filtered from _MAX_ total payments)",
+            emptyTable: "No payment records found.",
             paginate: {
                 previous: "<i class='fa fa-angle-left'></i>",
                 next: "<i class='fa fa-angle-right'></i>"

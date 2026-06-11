@@ -115,7 +115,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($categories as $category)
+                        @foreach($categories as $category)
                         <tr>
                             <td data-label="SL No">
                                 <span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#{{ str_pad($category->id, 4, '0', STR_PAD_LEFT) }}</span>
@@ -146,14 +146,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td colspan="5" class="text-center" style="padding:48px;color:var(--text-muted);">
-                                <i class="fa fa-tags" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
-                                <span style="font-size:15px;">No categories found.</span>
-                            </td>
-                        </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -260,6 +253,7 @@
 				  info: "Showing _START_ to _END_ of _TOTAL_ categories",
 				  infoEmpty: "Showing 0 to 0 of 0 categories",
 				  infoFiltered: "(filtered from _MAX_ total categories)",
+				  emptyTable: "No categories found.",
 				  paginate: {
 					  previous: "<i class='fa fa-angle-left'></i>",
 					  next: "<i class='fa fa-angle-right'></i>"

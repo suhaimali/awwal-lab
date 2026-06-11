@@ -400,7 +400,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($patients as $patient)
+                        @foreach($patients as $patient)
                             @php
                                 $latestApp = $patient->appointments->last();
                                 $totalPrice = $latestApp->test_price ?? 0;
@@ -519,14 +519,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center" style="padding:48px;color:var(--text-muted);">
-                                    <i class="fa fa-user-slash" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
-                                    <span style="font-size:15px;">No patients found in the database.</span>
-                                </td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -1205,6 +1198,7 @@
 				  info: "Showing _START_ to _END_ of _TOTAL_ patients",
 				  infoEmpty: "Showing 0 to 0 of 0 patients",
 				  infoFiltered: "(filtered from _MAX_ total patients)",
+				  emptyTable: "No patients found in the database.",
 				  paginate: {
 					  previous: "<i class='fa fa-angle-left'></i>",
 					  next: "<i class='fa fa-angle-right'></i>"

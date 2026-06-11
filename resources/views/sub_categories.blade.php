@@ -154,15 +154,6 @@
                             </td>
                         </tr>
                         @endforelse
-                        <tr class="no-results-row" style="display: none;">
-                            <td colspan="5" class="text-center py-5">
-                                <div style="color:var(--text-muted);">
-                                    <i class="fa fa-search fa-3x mb-3" style="opacity: 0.5;"></i>
-                                    <br>
-                                    <span style="font-size:15px;">No matching sub-categories found.</span>
-                                </div>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -28,27 +28,11 @@
             --error: #ef4444;
             --success: #10b981;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-dark);
-            padding: 20px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
     </style>
     @yield('styles')
 </head>
-<body>
+<body class="auth-body">
 
     @yield('content')
 

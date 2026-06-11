@@ -340,6 +340,7 @@
             language: {
                 lengthMenu: "Show _MENU_",
                 infoEmpty: "",
+                emptyTable: "No flag templates added yet.",
                 paginate: {
                     previous: "<i class='fa fa-angle-left'></i>",
                     next: "<i class='fa fa-angle-right'></i>"

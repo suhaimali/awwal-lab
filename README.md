@@ -14,6 +14,11 @@ SUHAIM SOFT is a comprehensive, highly secure, and modern Laboratory Information
 * **Master Data Configuration:** Manage clinical units of measurement, reference text templates, and flag templates from a centralized UI.
 * **Progressive Web App (PWA):** Fully PWA-ready with service workers, manifest configuration, and installability on mobile/desktop devices.
 
+### Recent Updates
+* **Database Optimization:** Removed all traces of SQLite (`database.sqlite`, fallback connections) to enforce a strict, 100% MySQL architecture.
+* **UI Enhancements:** Improved styling and color schemes for edit icons in the Patient Custom Test selection workflow.
+* **Queue Cleanup:** Removed unused default queue tables (`jobs`, `job_batches`, `failed_jobs`) and set `QUEUE_CONNECTION=sync` for immediate synchronous processing.
+
 ## 🛡️ Enterprise-Grade Security & Architecture
 
 * **100% SQL Driven:** All application state is securely stored in MySQL using Eloquent ORM.

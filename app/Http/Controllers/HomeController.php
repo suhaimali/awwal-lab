@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -172,7 +173,7 @@ class HomeController extends Controller
             'doctor_name' => $request->doctor_name,
             'sample_received_on' => $request->sample_received_on,
             'report_released_on' => $request->report_released_on,
-            'barcode' => rand(100000, 999999),
+            'barcode' => now()->format('ymd') . mt_rand(1000, 9999),
             'status' => $request->status ?? 'Completed',
             'notes' => $request->notes,
             'report_signature_id' => $signatureId,
@@ -374,9 +375,11 @@ class HomeController extends Controller
         ]);
 
         if (empty($validated['patient_id'])) {
-            $latest = \App\Models\Patient::latest()->first();
-            $nextId = ($latest ? $latest->id : 0) + 1;
-            $validated['patient_id'] = date('Y') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+            $validated['patient_id'] = DB::transaction(function () {
+                $latest = \App\Models\Patient::lockForUpdate()->latest('id')->first();
+                $nextId = ($latest ? $latest->id : 0) + 1;
+                return date('Y') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+            });
         }
 
         // Calculate totals from input test arrays
@@ -527,6 +530,11 @@ class HomeController extends Controller
     public function deletePatient($id)
     {
         $patient = \App\Models\Patient::findOrFail($id);
+
+        if (\App\Models\TestReport::where('patient_id', $patient->id)->exists()) {
+            return response()->json(['error' => 'Cannot delete patient with existing reports. Delete or reassign reports first.'], 409);
+        }
+
         $patient->delete();
 
         return response()->json(['success' => 'Patient deleted successfully!']);
@@ -724,6 +732,10 @@ class HomeController extends Controller
 
     public function updateReportStatus(\Illuminate\Http\Request $request, $id)
     {
+        $request->validate([
+            'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
+        ]);
+
         $report = \App\Models\TestReport::findOrFail($id);
         $report->update(['status' => $request->status]);
         return response()->json(['success' => 'Report status updated live!']);
@@ -834,6 +846,11 @@ class HomeController extends Controller
     public function deleteLabTest($id)
     {
         $test = \App\Models\LabTest::findOrFail($id);
+
+        if (\App\Models\TestReportItem::where('lab_test_id', $test->id)->exists()) {
+            return response()->json(['error' => 'Cannot delete test that is used in existing reports.'], 409);
+        }
+
         $test->delete();
 
         return response()->json(['success' => 'Laboratory test removed successfully!']);
@@ -947,16 +964,16 @@ class HomeController extends Controller
 
     public function storeUnit(\Illuminate\Http\Request $request)
     {
-        $request->validate(['name' => 'required|unique:units']);
-        $unit = \App\Models\Unit::create($request->all());
+        $validated = $request->validate(['name' => 'required|unique:units']);
+        $unit = \App\Models\Unit::create($validated);
         return response()->json(['success' => 'Unit added successfully!', 'unit' => $unit]);
     }
 
     public function updateUnit(\Illuminate\Http\Request $request, $id)
     {
-        $request->validate(['name' => 'required|unique:units,name,'.$id]);
+        $validated = $request->validate(['name' => 'required|unique:units,name,'.$id]);
         $unit = \App\Models\Unit::findOrFail($id);
-        $unit->update($request->all());
+        $unit->update($validated);
         return response()->json(['success' => 'Unit updated!', 'unit' => $unit]);
     }
 
@@ -968,16 +985,16 @@ class HomeController extends Controller
 
     public function storeResultTemplate(\Illuminate\Http\Request $request)
     {
-        $request->validate(['name' => 'required|unique:result_templates']);
-        \App\Models\ResultTemplate::create($request->all());
+        $validated = $request->validate(['name' => 'required|unique:result_templates']);
+        \App\Models\ResultTemplate::create($validated);
         return response()->json(['success' => 'Result template added!']);
     }
 
     public function updateResultTemplate(\Illuminate\Http\Request $request, $id)
     {
-        $request->validate(['name' => 'required|unique:result_templates,name,'.$id]);
+        $validated = $request->validate(['name' => 'required|unique:result_templates,name,'.$id]);
         $template = \App\Models\ResultTemplate::findOrFail($id);
-        $template->update($request->all());
+        $template->update($validated);
         return response()->json(['success' => 'Template updated!']);
     }
 
@@ -989,16 +1006,16 @@ class HomeController extends Controller
 
     public function storeReferenceTemplate(\Illuminate\Http\Request $request)
     {
-        $request->validate(['name' => 'required|unique:reference_templates']);
-        \App\Models\ReferenceTemplate::create($request->all());
+        $validated = $request->validate(['name' => 'required|unique:reference_templates']);
+        \App\Models\ReferenceTemplate::create($validated);
         return response()->json(['success' => 'Reference template added!']);
     }
 
     public function updateReferenceTemplate(\Illuminate\Http\Request $request, $id)
     {
-        $request->validate(['name' => 'required|unique:reference_templates,name,'.$id]);
+        $validated = $request->validate(['name' => 'required|unique:reference_templates,name,'.$id]);
         $template = \App\Models\ReferenceTemplate::findOrFail($id);
-        $template->update($request->all());
+        $template->update($validated);
         return response()->json(['success' => 'Template updated!']);
     }
 
@@ -1010,16 +1027,16 @@ class HomeController extends Controller
 
     public function storeFlagTemplate(\Illuminate\Http\Request $request)
     {
-        $request->validate(['name' => 'required|unique:flag_templates']);
-        \App\Models\FlagTemplate::create($request->all());
+        $validated = $request->validate(['name' => 'required|unique:flag_templates']);
+        \App\Models\FlagTemplate::create($validated);
         return response()->json(['success' => 'Flag template added!']);
     }
 
     public function updateFlagTemplate(\Illuminate\Http\Request $request, $id)
     {
-        $request->validate(['name' => 'required|unique:flag_templates,name,'.$id]);
+        $validated = $request->validate(['name' => 'required|unique:flag_templates,name,'.$id]);
         $template = \App\Models\FlagTemplate::findOrFail($id);
-        $template->update($request->all());
+        $template->update($validated);
         return response()->json(['success' => 'Template updated!']);
     }
 
@@ -1333,7 +1350,7 @@ class HomeController extends Controller
             'max_value' => 'nullable|numeric',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['gender', 'age_min', 'age_max', 'age_type', 'reference_text', 'min_value', 'max_value']);
         // Database requires age_min to be non-null. Default to 0.
         if (empty($data['age_min'])) {
             $data['age_min'] = 0;

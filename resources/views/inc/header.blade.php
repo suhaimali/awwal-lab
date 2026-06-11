@@ -34,10 +34,13 @@
                 </div>
             </li>
             <li>
-                <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ route('logout') }}"
-                   style="font-size:13px; font-weight:500; color:#dc2626;">
-                    <i class="fa fa-power-off"></i> Logout
-                </a>
+                <form method="POST" action="{{ route('logout') }}" id="logout-form">
+                    @csrf
+                    <button type="submit" class="dropdown-item d-flex align-items-center gap-2 py-2"
+                       style="font-size:13px; font-weight:500; color:#dc2626; border:none; background:none; width:100%; text-align:left;">
+                        <i class="fa fa-power-off"></i> Logout
+                    </button>
+                </form>
             </li>
         </ul>
     </div>

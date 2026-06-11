@@ -105,7 +105,7 @@
                                 window.location.href = '/login';
                             });
                         } else {
-                            window.location.href = '/logout';
+                            document.getElementById('logout-form').submit();
                         }
                     });
                 }, SESSION_MS - WARN_BEFORE_MS);

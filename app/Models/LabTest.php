@@ -25,11 +25,6 @@ class LabTest extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
-    public function appointments()
-    {
-        return $this->belongsToMany(Appointment::class, 'appointment_test');
-    }
-
     public function parameter()
     {
         return $this->hasOne(TestParameter::class, 'lab_test_id');

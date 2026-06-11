@@ -929,12 +929,27 @@
 			  });
 		  });
 
-		  // Live Search for Bookings
+		  // Initialize DataTables for Bookings
+		  var bookingTable = $('#booking-table').DataTable({
+			  dom: "<'row mb-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-none'f>>" +
+				   "<'row'<'col-sm-12'tr>>" +
+				   "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+			  pageLength: 10,
+			  lengthMenu: [5, 10, 25, 50, 100],
+			  ordering: false,
+			  language: {
+				  lengthMenu: "Show _MENU_ records",
+				  info: "Showing _START_ to _END_ of _TOTAL_ bookings",
+				  infoEmpty: "Showing 0 to 0 of 0 bookings",
+				  infoFiltered: "(filtered from _MAX_ total bookings)",
+				  paginate: {
+					  previous: "<i class='fa fa-angle-left'></i>",
+					  next: "<i class='fa fa-angle-right'></i>"
+				  }
+			  }
+		  });
 		  $("#booking-search").on("keyup", function() {
-			  var value = $(this).val().toLowerCase();
-			  $("#booking-table tbody tr").filter(function() {
-				  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			  });
+			  bookingTable.search($(this).val()).draw();
 		  });
 
 		  // Auto-fill test price and calculate net

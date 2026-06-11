@@ -236,23 +236,27 @@
 			  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 		  });
 
-		  // Live Search for Tests
-		  $("#test-search").on("keyup", function() {
-			  var value = $(this).val().toLowerCase();
-			  let rows = $('#tests-table tbody tr:not(.no-results-row)');
-			  let matched = 0;
-			  
-			  rows.each(function() {
-				  let matches = $(this).text().toLowerCase().indexOf(value) > -1;
-				  $(this).toggle(matches);
-				  if (matches) matched++;
-			  });
-			  
-			  if (matched === 0) {
-				  $('.no-results-row').show();
-			  } else {
-				  $('.no-results-row').hide();
+		  // Initialize DataTables for Tests
+		  var testsTable = $('#tests-table').DataTable({
+			  dom: "<'row mb-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-none'f>>" +
+				   "<'row'<'col-sm-12'tr>>" +
+				   "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+			  pageLength: 10,
+			  lengthMenu: [5, 10, 25, 50, 100],
+			  ordering: false,
+			  language: {
+				  lengthMenu: "Show _MENU_ records",
+				  info: "Showing _START_ to _END_ of _TOTAL_ tests",
+				  infoEmpty: "Showing 0 to 0 of 0 tests",
+				  infoFiltered: "(filtered from _MAX_ total tests)",
+				  paginate: {
+					  previous: "<i class='fa fa-angle-left'></i>",
+					  next: "<i class='fa fa-angle-right'></i>"
+				  }
 			  }
+		  });
+		  $("#test-search").on("keyup", function() {
+			  testsTable.search($(this).val()).draw();
 		  });
 
 		  // Save Test

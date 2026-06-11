@@ -291,36 +291,88 @@
 <script>
     $(document).ready(function() {
 
-        // Live search — Units
+        // Initialize DataTables for Units
+        var unitsTable = $('#units-table').DataTable({
+            dom: "<'row mb-2'<'col-12'l>>" +
+                 "<'row'<'col-12'tr>>" +
+                 "<'row mt-2'<'col-12'p>>",
+            pageLength: 5,
+            lengthMenu: [5, 10, 25, 50],
+            ordering: false,
+            language: {
+                lengthMenu: "Show _MENU_",
+                infoEmpty: "",
+                paginate: {
+                    previous: "<i class='fa fa-angle-left'></i>",
+                    next: "<i class='fa fa-angle-right'></i>"
+                }
+            }
+        });
         $('#unit-search').on('keyup', function() {
-            let val = $(this).val().toLowerCase();
-            $('#units-table tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
-            });
+            unitsTable.search($(this).val()).draw();
         });
 
-        // Live search — Templates
+        // Initialize DataTables for Templates
+        var templatesTable = $('#templates-table').DataTable({
+            dom: "<'row mb-2'<'col-12'l>>" +
+                 "<'row'<'col-12'tr>>" +
+                 "<'row mt-2'<'col-12'p>>",
+            pageLength: 5,
+            lengthMenu: [5, 10, 25, 50],
+            ordering: false,
+            language: {
+                lengthMenu: "Show _MENU_",
+                infoEmpty: "",
+                paginate: {
+                    previous: "<i class='fa fa-angle-left'></i>",
+                    next: "<i class='fa fa-angle-right'></i>"
+                }
+            }
+        });
         $('#template-search').on('keyup', function() {
-            let val = $(this).val().toLowerCase();
-            $('#templates-table tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
-            });
+            templatesTable.search($(this).val()).draw();
         });
 
-        // Live search — References
+        // Initialize DataTables for References
+        var referencesTable = $('#references-table').DataTable({
+            dom: "<'row mb-2'<'col-12'l>>" +
+                 "<'row'<'col-12'tr>>" +
+                 "<'row mt-2'<'col-12'p>>",
+            pageLength: 5,
+            lengthMenu: [5, 10, 25, 50],
+            ordering: false,
+            language: {
+                lengthMenu: "Show _MENU_",
+                infoEmpty: "",
+                paginate: {
+                    previous: "<i class='fa fa-angle-left'></i>",
+                    next: "<i class='fa fa-angle-right'></i>"
+                }
+            }
+        });
         $('#reference-search').on('keyup', function() {
-            let val = $(this).val().toLowerCase();
-            $('#references-table tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
-            });
+            referencesTable.search($(this).val()).draw();
         });
 
-        // Live search — Flags
+        // Initialize DataTables for Flags
+        var flagsTable = $('#flags-table').DataTable({
+            dom: "<'row mb-2'<'col-12'l>>" +
+                 "<'row'<'col-12'tr>>" +
+                 "<'row mt-2'<'col-12'p>>",
+            pageLength: 5,
+            lengthMenu: [5, 10, 25, 50],
+            ordering: false,
+            language: {
+                lengthMenu: "Show _MENU_",
+                infoEmpty: "",
+                paginate: {
+                    previous: "<i class='fa fa-angle-left'></i>",
+                    next: "<i class='fa fa-angle-right'></i>"
+                }
+            }
+        });
         $('#flag-search').on('keyup', function() {
-            let val = $(this).val().toLowerCase();
-            $('#flags-table tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
-            });
+            flagsTable.search($(this).val()).draw();
         });
 
         // ADD Unit

@@ -885,12 +885,27 @@
               }
           });
 
-		  // Live Search for Reports
+		  // Initialize DataTables for Reports
+		  var reportsTable = $('#report-table').DataTable({
+			  dom: "<'row mb-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-none'f>>" +
+				   "<'row'<'col-sm-12'tr>>" +
+				   "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+			  pageLength: 10,
+			  lengthMenu: [5, 10, 25, 50, 100],
+			  ordering: false,
+			  language: {
+				  lengthMenu: "Show _MENU_ records",
+				  info: "Showing _START_ to _END_ of _TOTAL_ reports",
+				  infoEmpty: "Showing 0 to 0 of 0 reports",
+				  infoFiltered: "(filtered from _MAX_ total reports)",
+				  paginate: {
+					  previous: "<i class='fa fa-angle-left'></i>",
+					  next: "<i class='fa fa-angle-right'></i>"
+				  }
+			  }
+		  });
 		  $("#report-search").on("keyup", function() {
-			  var value = $(this).val().toLowerCase();
-			  $("#report-table tbody tr").filter(function() {
-				  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			  });
+			  reportsTable.search($(this).val()).draw();
 		  });
 
           // Standard Tests Dictionary for Auto-Fill

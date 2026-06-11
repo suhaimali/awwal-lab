@@ -565,6 +565,9 @@
         }
 
         /* DataTables override */
+        div.dataTables_wrapper {
+            padding: 16px 20px;
+        }
         .dataTables_wrapper .dataTables_filter input {
             border: 1.5px solid var(--border-color);
             border-radius: 8px; padding: 6px 12px;
@@ -573,6 +576,24 @@
         .dataTables_wrapper .dataTables_length select {
             border: 1.5px solid var(--border-color);
             border-radius: 8px; padding: 4px 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+        }
+        .dataTables_wrapper .dataTables_length label {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .dataTables_wrapper .dataTables_info {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+            padding-top: 8px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border: none !important;
+            padding: 4px 10px !important;
+            margin: 0 2px !important;
         }
         .dataTables_wrapper .dataTables_paginate .paginate_button.current {
             background: var(--primary) !important;
@@ -585,6 +606,25 @@
             border-color: var(--primary-light) !important;
             color: var(--primary) !important;
             border-radius: 6px;
+        }
+        /* Mobile spacing for DataTables */
+        @media (max-width: 767px) {
+            div.dataTables_wrapper {
+                padding: 12px 10px;
+            }
+            div.dataTables_wrapper .dataTables_length,
+            div.dataTables_wrapper .dataTables_info,
+            div.dataTables_wrapper .dataTables_paginate {
+                text-align: center !important;
+                justify-content: center !important;
+                display: flex;
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+            div.dataTables_wrapper .dataTables_paginate .pagination {
+                justify-content: center !important;
+                display: flex;
+            }
         }
 
         /* Select2 override */

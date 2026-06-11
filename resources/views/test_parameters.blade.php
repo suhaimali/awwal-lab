@@ -320,23 +320,27 @@
 	  $(document).ready(function() {
 		  $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
 
-		  // Live search
-		  $('#param-search').on('keyup', function() {
-			  let val = $(this).val().toLowerCase();
-			  let rows = $('#parameters-table tbody tr:not(.no-results-row)');
-			  let matched = 0;
-			  
-			  rows.each(function() {
-				  let matches = $(this).text().toLowerCase().indexOf(val) > -1;
-				  $(this).toggle(matches);
-				  if (matches) matched++;
-			  });
-			  
-			  if (matched === 0) {
-				  $('.no-results-row').show();
-			  } else {
-				  $('.no-results-row').hide();
+		  // Initialize DataTables for Parameters
+		  var parametersTable = $('#parameters-table').DataTable({
+			  dom: "<'row mb-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-none'f>>" +
+				   "<'row'<'col-sm-12'tr>>" +
+				   "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+			  pageLength: 10,
+			  lengthMenu: [5, 10, 25, 50, 100],
+			  ordering: false,
+			  language: {
+				  lengthMenu: "Show _MENU_ records",
+				  info: "Showing _START_ to _END_ of _TOTAL_ parameters",
+				  infoEmpty: "Showing 0 to 0 of 0 parameters",
+				  infoFiltered: "(filtered from _MAX_ total parameters)",
+				  paginate: {
+					  previous: "<i class='fa fa-angle-left'></i>",
+					  next: "<i class='fa fa-angle-right'></i>"
+				  }
 			  }
+		  });
+		  $('#param-search').on('keyup', function() {
+			  parametersTable.search($(this).val()).draw();
 		  });
 
 		  // Populate edit modal

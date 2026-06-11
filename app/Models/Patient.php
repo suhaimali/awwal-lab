@@ -27,4 +27,9 @@ class Patient extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+
+    public function vitalSigns()
+    {
+        return $this->hasMany(VitalSign::class);
+    }
 }

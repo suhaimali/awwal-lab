@@ -25,6 +25,13 @@
             <span class="nav-label">Patients</span>
         </a>
 
+        <a href="{{ route('vital-signs.index') }}"
+           class="nav-item-link {{ request()->routeIs('vital-signs*') ? 'active' : '' }}"
+           data-tooltip="Vital Signs">
+            <span class="nav-icon"><i class="fa fa-heartbeat"></i></span>
+            <span class="nav-label">Vital Signs</span>
+        </a>
+
         <a href="{{ route('appointments') }}"
            class="nav-item-link {{ request()->routeIs('appointments*') ? 'active' : '' }}"
            data-tooltip="Book Appointment">

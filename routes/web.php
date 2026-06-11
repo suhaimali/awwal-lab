@@ -123,6 +123,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/doctors', [HomeController::class, 'storeDoctor'])->name('doctors.store');
     Route::put('/doctors/{id}', [HomeController::class, 'updateDoctor'])->name('doctors.update');
     Route::delete('/doctors/{id}', [HomeController::class, 'deleteDoctor'])->name('doctors.delete');
+
+    // Vital Signs Routes
+    Route::get('/vital-signs', [HomeController::class, 'vitalSigns'])->name('vital-signs.index');
+    Route::post('/vital-signs/store', [HomeController::class, 'storeVitalSign'])->name('vital-signs.store');
+    Route::get('/vital-signs/{id}', [HomeController::class, 'getVitalSign'])->name('vital-signs.show');
+    Route::post('/vital-signs/update/{id}', [HomeController::class, 'updateVitalSign'])->name('vital-signs.update');
+    Route::delete('/vital-signs/{id}', [HomeController::class, 'deleteVitalSign'])->name('vital-signs.delete');
 });
 
 

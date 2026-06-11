@@ -1381,6 +1381,85 @@ class HomeController extends Controller
 
         return response()->json(['success' => 'Report permanently deleted!']);
     }
+
+    // ── VITAL SIGNS METHODS ──
+
+    public function vitalSigns()
+    {
+        $vitalSigns = \App\Models\VitalSign::with('patient')->latest()->get();
+        $patients = \App\Models\Patient::orderBy('first_name')->get();
+        return view('vital_signs', compact('vitalSigns', 'patients'));
+    }
+
+    public function storeVitalSign(\Illuminate\Http\Request $request)
+    {
+        $validated = $request->validate([
+            'patient_id'       => 'required|exists:patients,id',
+            'temperature'      => 'nullable|numeric|between:50,120',
+            'pulse'            => 'nullable|integer|between:10,300',
+            'respiratory_rate' => 'nullable|integer|between:2,100',
+            'blood_pressure'   => 'nullable|string|max:20',
+            'spo2'             => 'nullable|integer|between:0,100',
+            'weight'           => 'nullable|numeric|between:0.1,500',
+            'height'           => 'nullable|numeric|between:10,300',
+            'notes'            => 'nullable|string|max:1000',
+        ]);
+
+        // Auto-calculate BMI if weight and height are provided
+        if (!empty($validated['weight']) && !empty($validated['height'])) {
+            $heightInMeters = $validated['height'] / 100;
+            $validated['bmi'] = round($validated['weight'] / ($heightInMeters * $heightInMeters), 1);
+        } else {
+            $validated['bmi'] = null;
+        }
+
+        \App\Models\VitalSign::create($validated);
+
+        return response()->json(['success' => 'Vital Signs recorded successfully!']);
+    }
+
+    public function getVitalSign($id)
+    {
+        $vitalSign = \App\Models\VitalSign::with('patient')->findOrFail($id);
+        return response()->json($vitalSign);
+    }
+
+    public function updateVitalSign(\Illuminate\Http\Request $request, $id)
+    {
+        $vitalSign = \App\Models\VitalSign::findOrFail($id);
+
+        $validated = $request->validate([
+            'patient_id'       => 'required|exists:patients,id',
+            'temperature'      => 'nullable|numeric|between:50,120',
+            'pulse'            => 'nullable|integer|between:10,300',
+            'respiratory_rate' => 'nullable|integer|between:2,100',
+            'blood_pressure'   => 'nullable|string|max:20',
+            'spo2'             => 'nullable|integer|between:0,100',
+            'weight'           => 'nullable|numeric|between:0.1,500',
+            'height'           => 'nullable|numeric|between:10,300',
+            'notes'            => 'nullable|string|max:1000',
+        ]);
+
+        // Auto-calculate BMI if weight and height are provided
+        if (!empty($validated['weight']) && !empty($validated['height'])) {
+            $heightInMeters = $validated['height'] / 100;
+            $validated['bmi'] = round($validated['weight'] / ($heightInMeters * $heightInMeters), 1);
+        } else {
+            $validated['bmi'] = null;
+        }
+
+        $vitalSign->update($validated);
+
+        return response()->json(['success' => 'Vital Signs updated successfully!']);
+    }
+
+    public function deleteVitalSign($id)
+    {
+        $vitalSign = \App\Models\VitalSign::findOrFail($id);
+        $vitalSign->delete();
+
+        return response()->json(['success' => 'Vital Signs deleted successfully!']);
+    }
 }
 
 

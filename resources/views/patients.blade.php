@@ -664,13 +664,14 @@
 									@foreach($labTests as $test)
 										<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>
 									@endforeach
-									<option value="__custom__">&#xf040; Custom (type below)</option>
+									<option value="__custom__">Custom (type below)</option>
 								</select>
 								<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
 								<button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
 							</div>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted"><i class="fa fa-pencil"></i></span>
                                     <input type="text" class="form-control test-name-custom-input" placeholder="Enter custom test name" autocomplete="off" id="field_1051" name="name_1052">
                                     <button type="button" class="btn btn-outline-secondary btn-back-to-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
                                 </div>

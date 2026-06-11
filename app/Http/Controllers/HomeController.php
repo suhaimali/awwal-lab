@@ -1374,30 +1374,6 @@ class HomeController extends Controller
         return response()->json(['success' => 'Interval deleted successfully']);
     }
 
-    public function reportsTrash()
-    {
-        $reports = \App\Models\TestReport::onlyTrashed()->with('patient')->latest()->get();
-        return view('reports_trash', compact('reports'));
-    }
-
-    public function restoreReport($id)
-    {
-        $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
-        $report->restore();
-        
-        $this->auditReport($report, 'restored', null, $this->reportSnapshot($report->fresh(['patient', 'items', 'signature'])));
-
-        return response()->json(['success' => 'Report restored successfully!']);
-    }
-
-    public function forceDeleteReport($id)
-    {
-        $report = \App\Models\TestReport::onlyTrashed()->findOrFail($id);
-        $this->auditReport($report, 'permanently_deleted', $this->reportSnapshot($report), null);
-        $report->forceDelete();
-
-        return response()->json(['success' => 'Report permanently deleted!']);
-    }
 
     // ── VITAL SIGNS METHODS ──
 

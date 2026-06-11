@@ -308,10 +308,8 @@
 <div class="modal fade modal-aw" id="modal-add-vitals" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 shadow-lg">
-            <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
-                <h5 class="modal-title" style="font-weight:700; color:#1e293b; font-size:18px;">
-                    <i class="fa fa-heartbeat text-danger me-2"></i> Record Patient Vitals
-                </h5>
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-heartbeat me-2"></i>Record Patient Vitals</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body px-4 py-3">
@@ -411,10 +409,8 @@
 <div class="modal fade modal-aw" id="modal-edit-vitals" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 shadow-lg">
-            <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
-                <h5 class="modal-title" style="font-weight:700; color:#1e293b; font-size:18px;">
-                    <i class="fa fa-heartbeat text-primary me-2"></i> Edit Vital Signs
-                </h5>
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-heartbeat me-2"></i>Edit Vital Signs</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body px-4 py-3">

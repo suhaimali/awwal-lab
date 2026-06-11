@@ -28,8 +28,8 @@
                     <span>Automated Printable PDF Reports</span>
                 </div>
                 <div class="auth-feature-item">
-                    <div class="feat-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <span>Secure, Role-Based Access Control</span>
+                    <div class="feat-icon"><i class="fa-solid fa-lock"></i></div>
+                    <span>End-to-End Encrypted & Secure System</span>
                 </div>
                 <div class="auth-feature-item">
                     <div class="feat-icon"><i class="fa-solid fa-chart-line"></i></div>

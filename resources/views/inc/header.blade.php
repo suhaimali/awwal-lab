@@ -1,4 +1,5 @@
 <header id="awlab-header">
+    <!-- Toggle button -->
     <button class="header-toggle-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
         <i class="fa fa-bars" style="font-size:15px;"></i>
     </button>

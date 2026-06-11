@@ -30,9 +30,6 @@ class SecurityHeaders
         // Prevent XSS in older browsers
         $response->headers->set('X-XSS-Protection', '1; mode=block');
 
-        // Content Security Policy
-        $response->headers->set('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data: https:;");
-
         return $response;
     }
 }

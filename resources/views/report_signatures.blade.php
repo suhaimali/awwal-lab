@@ -73,7 +73,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($signatures as $signature)
+                            @foreach($signatures as $signature)
                                 <tr>
                                     <td data-label="Name" style="font-weight:600;">{{ $signature->name }}</td>
                                     <td data-label="Signature Preview">
@@ -98,14 +98,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center" style="padding:48px; color:var(--text-muted);">
-                                        <i class="fa fa-folder-open" style="font-size:40px; display:block; margin-bottom:12px; opacity:0.4;"></i>
-                                        <span style="font-size:15px;">No report signatures added yet.</span>
-                                    </td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -165,6 +158,7 @@
                 info: "Showing _START_ to _END_ of _TOTAL_ signatures",
                 infoEmpty: "Showing 0 to 0 of 0 signatures",
                 infoFiltered: "(filtered from _MAX_ total signatures)",
+                emptyTable: "No report signatures added yet.",
                 paginate: {
                     previous: "<i class='fa fa-angle-left'></i>",
                     next: "<i class='fa fa-angle-right'></i>"

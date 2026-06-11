@@ -168,19 +168,19 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-body p-0">
                 <div class="table-responsive" style="border-radius:16px;">
-                    <table class="table table-hover align-middle responsive-vitals-table mb-0" id="vitals-table" style="min-width:100%;">
-                        <thead class="table-light">
+                    <table class="table-modern responsive-vitals-table" id="vitals-table">
+                        <thead>
                             <tr>
-                                <th style="padding:16px 20px; font-weight:600; font-size:13px; color:#475569;">Patient</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">Temperature</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">Pulse</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">Resp. Rate</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">Blood Pressure</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">SpO2</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">Weight & Height</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">BMI</th>
-                                <th style="padding:16px 12px; font-weight:600; font-size:13px; color:#475569;">Recorded Date</th>
-                                <th style="padding:16px 20px; font-weight:600; font-size:13px; color:#475569;" class="text-end">Actions</th>
+                                <th>Patient</th>
+                                <th>Temperature</th>
+                                <th>Pulse</th>
+                                <th>Resp. Rate</th>
+                                <th>Blood Pressure</th>
+                                <th>SpO2</th>
+                                <th>Weight & Height</th>
+                                <th>BMI</th>
+                                <th>Recorded Date</th>
+                                <th class="text-end">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

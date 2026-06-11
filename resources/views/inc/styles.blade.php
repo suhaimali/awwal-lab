@@ -284,41 +284,56 @@
         .table-modern { 
             width: 100%; 
             border-collapse: separate; 
-            border-spacing: 0; 
-            margin: 0 !important;
+            border-spacing: 0 10px; 
+            margin: -10px 0 0 0 !important;
         }
         .table-modern thead th {
-            background: #f8fafc;
-            color: var(--text-muted);
+            background: transparent;
+            color: #64748b;
             font-size: 11.5px; 
             font-weight: 700;
             text-transform: uppercase; 
-            letter-spacing: 0.8px;
-            padding: 10px 14px;
-            border-bottom: 2px solid #e2e8f0;
+            letter-spacing: 1.2px;
+            padding: 12px 18px 4px 18px;
+            border-bottom: none;
             white-space: nowrap;
             vertical-align: middle;
         }
         .table-modern tbody tr { 
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
             background: var(--white);
-        }
-        .table-modern tbody tr:hover { 
-            background: #eef2ff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: relative;
         }
         .table-modern tbody tr:hover:not(:has(td[colspan])):not(.no-results-row) { 
-            background: #eef2ff;
-            box-shadow: inset 0 0 0 9999px rgba(26,86,219,0.06), inset 3px 0 0 var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(26,86,219,0.08), 0 4px 8px rgba(26,86,219,0.04);
+            z-index: 10;
         }
         .table-modern tbody td {
-            padding: 10px 14px;
+            padding: 16px 18px;
             font-size: 13.5px;
-            color: #334155;
-            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+            border: none;
             vertical-align: middle;
+            background: var(--white);
         }
-        .table-modern tbody tr:last-child td {
-            border-bottom: none;
+        .table-modern tbody td:first-child {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            border-left: 3px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .table-modern tbody td:last-child {
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .table-modern tbody tr:hover:not(:has(td[colspan])):not(.no-results-row) td:first-child {
+            border-left-color: var(--primary);
+        }
+        .table-modern tbody tr:has(td[colspan]) td {
+            background: transparent;
+            box-shadow: none;
         }
         /* DataTables Overrides for Modern Look */
         div.dataTables_wrapper div.dataTables_filter input {
@@ -651,18 +666,26 @@
                 display: none !important;
             }
             .table-modern tbody tr {
-                background: var(--white) !important;
-                border-radius: 12px !important;
+                background: transparent !important;
+                border-radius: 0 !important;
                 margin-bottom: 16px !important;
-                padding: 12px 16px !important;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.04) !important;
-                border: 1px solid var(--border-color) !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
                 position: relative;
+            }
+            .table-modern tbody tr:not(:has(td[colspan])):not(.no-results-row) {
+                background: var(--white) !important;
+                border-radius: 16px !important;
+                padding: 16px !important;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.04) !important;
+                border: 1px solid #f1f5f9 !important;
             }
             .table-modern tbody tr:hover,
             .table-modern tbody tr:hover:not(:has(td[colspan])):not(.no-results-row) {
                 background: var(--white) !important;
-                box-shadow: 0 4px 15px rgba(26,86,219,0.08) !important;
+                box-shadow: 0 8px 25px rgba(26,86,219,0.08) !important;
+                transform: translateY(-2px);
             }
             .table-modern tbody td {
                 display: flex !important;

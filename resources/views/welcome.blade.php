@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'SUHAIM SOFT LAB') }} | Digital Healthcare Transformation</title>
-    <meta name="description" content="{{ config('app.name', 'SUHAIM SOFT LAB') }} is a cutting-edge Laboratory Information Management System (LIMS) and EMR software built for diagnostic centers to automate medical testing, manage patients, and deliver reports instantly.">
-    <meta name="keywords" content="laboratory management system, lims, emr, lab software, diagnostics LIS, medical reports automation, whatsapp lab reports, suhaim soft lab">
+    <meta name="description" content="{{ config('app.name', 'SUHAIM SOFT LAB') }} is a cutting-edge Laboratory Information Management System (LIMS) built for diagnostic centers to automate medical testing, manage patients, and deliver reports instantly.">
+    <meta name="keywords" content="laboratory management system, lims, lab software, diagnostics LIS, medical reports automation, whatsapp lab reports, suhaim soft lab">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
     
@@ -690,7 +690,7 @@
                     <div class="process-card-simple">
                         <div class="step-number-simple">2.</div>
                         <h4 class="fw-bold mb-3 text-dark">Seamless Integration</h4>
-                        <p class="text-muted">Our team handles the heavy lifting, migrating your existing data and integrating our EMR into your workflow.</p>
+                        <p class="text-muted">Our team handles the heavy lifting, migrating your existing data and integrating {{ config('app.name', 'SUHAIM SOFT LAB') }} into your workflow.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -709,7 +709,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Key Features</h2>
-                <p>Explore the core functionalities that set our EMR system apart.</p>
+                <p>Explore the core functionalities that set {{ config('app.name', 'SUHAIM SOFT LAB') }} apart.</p>
             </div>
             <div class="row g-4">
                 <div class="col-md-4">

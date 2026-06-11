@@ -75,13 +75,13 @@
                         <tbody>
                             @forelse($signatures as $signature)
                                 <tr>
-                                    <td style="font-weight:600;">{{ $signature->name }}</td>
-                                    <td>
+                                    <td data-label="Name" style="font-weight:600;">{{ $signature->name }}</td>
+                                    <td data-label="Signature Preview">
                                         <div style="background:#f8fafc; border:1px dashed var(--border-color); border-radius:8px; display:inline-block; padding:6px; max-width:160px;">
                                             <img src="{{ route('report-signatures.image', $signature->id) }}" alt="{{ $signature->name }}" style="max-height: 48px; object-fit: contain; display:block;">
                                         </div>
                                     </td>
-                                    <td class="text-end">
+                                    <td data-label="Action" class="text-end">
                                         <div class="d-flex justify-content-end gap-2">
                                             <button type="button"
                                                 class="btn-aw-primary btn-aw-sm btn-edit-signature"

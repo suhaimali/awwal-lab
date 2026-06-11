@@ -481,9 +481,9 @@
             <table class="table table-modern" id="report-table">
 								<thead>
 									<tr>
-										<th class="d-none d-md-table-cell">SL No</th>
+										<th>SL No</th>
 										<th>Patient Name</th>
-										<th class="d-none d-lg-table-cell">Doctor Name</th>
+										<th>Doctor Name</th>
 										<th>Date Released</th>
 										<th class="text-end">Action</th>
 									</tr>
@@ -491,11 +491,11 @@
 								<tbody>
                                      @forelse($reports as $report)
 									<tr>
-										<td class="d-none d-md-table-cell"><span class="badge-aw badge-blue">#{{ $report->id }}</span></td>
-										<td style="font-weight:600;" data-label="Patient">{{ $report->patient->first_name }} {{ $report->patient->last_name }}</td>
-										<td class="d-none d-lg-table-cell" style="color:var(--text-muted);" data-label="Doctor">{{ $report->doctor_name }}</td>
-										<td data-label="Date">{{ \Carbon\Carbon::parse($report->report_released_on)->format('d M Y') }}</td>
-										<td class="text-end">
+										<td data-label="SL No"><span class="badge-aw badge-blue">#{{ $report->id }}</span></td>
+										<td style="font-weight:600;" data-label="Patient Name">{{ $report->patient->first_name }} {{ $report->patient->last_name }}</td>
+										<td style="color:var(--text-muted);" data-label="Doctor Name">{{ $report->doctor_name }}</td>
+										<td data-label="Date Released">{{ \Carbon\Carbon::parse($report->report_released_on)->format('d M Y') }}</td>
+										<td class="text-end" data-label="Action">
                                              <div class="d-flex justify-content-end gap-2">
                                                  <button class="btn-aw-outline btn-aw-sm btn-view" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-report" title="View / PDF" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-file-pdf"></i></button>
                                                  <button class="btn-aw-primary btn-aw-sm btn-edit" data-id="{{ $report->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-report" title="Edit Report" style="width: 32px; height: 32px; padding: 0; justify-content: center;"><i class="fa fa-edit"></i></button>

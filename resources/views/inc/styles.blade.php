@@ -606,4 +606,88 @@
             border-top-right-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
         }
+
+        /* ── MOBILE TABLE RESPONSIVENESS (STACKING CARD VIEW) ── */
+        @media (max-width: 767px) {
+            .table-responsive-modern {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                overflow-x: visible !important;
+            }
+            .table-modern, 
+            .table-modern tbody, 
+            .table-modern tr, 
+            .table-modern td {
+                display: block !important;
+                width: 100% !important;
+            }
+            .table-modern thead {
+                display: none !important;
+            }
+            .table-modern tbody tr {
+                background: var(--white) !important;
+                border-radius: 12px !important;
+                margin-bottom: 16px !important;
+                padding: 12px 16px !important;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.04) !important;
+                border: 1px solid var(--border-color) !important;
+                position: relative;
+            }
+            .table-modern tbody tr:hover,
+            .table-modern tbody tr:hover:not(:has(td[colspan])):not(.no-results-row) {
+                background: var(--white) !important;
+                box-shadow: 0 4px 15px rgba(26,86,219,0.08) !important;
+            }
+            .table-modern tbody td {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                text-align: right !important;
+                padding: 8px 0 !important;
+                border-bottom: 1px dashed #f1f5f9 !important;
+                font-size: 13px !important;
+            }
+            .table-modern tbody td:last-child {
+                border-bottom: none !important;
+            }
+            .table-modern tbody td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                font-size: 10px;
+                letter-spacing: 0.5px;
+                text-align: left;
+                padding-right: 12px;
+                flex-shrink: 0;
+            }
+            /* If cell has no data-label, display normally */
+            .table-modern tbody td:not([data-label]) {
+                justify-content: flex-end !important;
+            }
+            .table-modern tbody td:not([data-label])::before {
+                display: none !important;
+            }
+            /* Exclude empty/no results state rows from stacking layout */
+            .table-modern tbody tr:has(td[colspan]) {
+                display: block !important;
+                text-align: center !important;
+                padding: 24px 16px !important;
+            }
+            .table-modern tbody tr:has(td[colspan]) td {
+                display: block !important;
+                text-align: center !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+            .table-modern tbody tr:has(td[colspan]) td::before {
+                display: none !important;
+            }
+            /* Action alignment inside card */
+            .action-btn-group, .action-buttons {
+                width: 100% !important;
+                justify-content: flex-end !important;
+            }
+        }
     </style>

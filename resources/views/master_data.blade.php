@@ -47,9 +47,9 @@
                         <tbody>
                             @forelse($units as $i => $unit)
                             <tr>
-                                <td><span class="badge-aw badge-blue">{{ $i + 1 }}</span></td>
-                                <td style="font-weight:600;">{{ $unit->name }}</td>
-                                <td class="text-end">
+                                <td data-label="SL. NO"><span class="badge-aw badge-blue">{{ $i + 1 }}</span></td>
+                                <td data-label="Unit Name" style="font-weight:600;">{{ $unit->name }}</td>
+                                <td data-label="Action" class="text-end">
                                     <div class="d-flex justify-content-end gap-2">
                                         <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-unit" data-id="{{ $unit->id }}" data-name="{{ $unit->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit">
                                             <i class="fa fa-edit"></i>
@@ -108,9 +108,9 @@
                         <tbody>
                             @forelse($templates as $i => $template)
                             <tr>
-                                <td><span class="badge-aw badge-green">{{ $i + 1 }}</span></td>
-                                <td style="font-weight:600; color:#059669;">{{ $template->name }}</td>
-                                <td class="text-end">
+                                <td data-label="SL. NO"><span class="badge-aw badge-green">{{ $i + 1 }}</span></td>
+                                <td data-label="Template Name" style="font-weight:600; color:#059669;">{{ $template->name }}</td>
+                                <td data-label="Action" class="text-end">
                                     <div class="d-flex justify-content-end gap-2">
                                         <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-template" data-id="{{ $template->id }}" data-name="{{ $template->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit" style="background:#059669;">
                                             <i class="fa fa-edit"></i>
@@ -171,9 +171,9 @@
                         <tbody>
                             @forelse($referenceTemplates as $i => $ref)
                             <tr>
-                                <td><span class="badge-aw text-primary" style="background:#e0f2fe;">{{ $i + 1 }}</span></td>
-                                <td style="font-weight:600; color:#2563eb;">{{ $ref->name }}</td>
-                                <td class="text-end">
+                                <td data-label="SL. NO"><span class="badge-aw text-primary" style="background:#e0f2fe;">{{ $i + 1 }}</span></td>
+                                <td data-label="Template Value" style="font-weight:600; color:#2563eb;">{{ $ref->name }}</td>
+                                <td data-label="Action" class="text-end">
                                     <div class="d-flex justify-content-end gap-2">
                                         <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-reference" data-id="{{ $ref->id }}" data-name="{{ $ref->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit" style="background:#2563eb;">
                                             <i class="fa fa-edit"></i>
@@ -232,9 +232,9 @@
                         <tbody>
                             @forelse($flagTemplates as $i => $flg)
                             <tr>
-                                <td><span class="badge-aw text-warning" style="background:#fef3c7;">{{ $i + 1 }}</span></td>
-                                <td style="font-weight:600; color:#d97706;">{{ $flg->name }}</td>
-                                <td class="text-end">
+                                <td data-label="SL. NO"><span class="badge-aw text-warning" style="background:#fef3c7;">{{ $i + 1 }}</span></td>
+                                <td data-label="Flag Value" style="font-weight:600; color:#d97706;">{{ $flg->name }}</td>
+                                <td data-label="Action" class="text-end">
                                     <div class="d-flex justify-content-end gap-2">
                                         <button type="button" class="btn-aw-primary btn-aw-sm btn-edit-flag" data-id="{{ $flg->id }}" data-name="{{ $flg->name }}" data-bs-toggle="modal" data-bs-target="#modal-edit-master" title="Edit" style="background:#d97706;">
                                             <i class="fa fa-edit"></i>

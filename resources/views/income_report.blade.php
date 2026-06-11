@@ -161,20 +161,20 @@
                         <tbody>
                             @forelse($recentTransactions as $txn)
                                 <tr>
-                                    <td>
+                                    <td data-label="Patient">
                                         <div style="font-weight:600;">{{ $txn->patient ? $txn->patient->first_name . ' ' . $txn->patient->last_name : 'Unknown' }}</div>
                                         <div style="font-size:11px; color:var(--text-muted);">ID: {{ $txn->patient ? $txn->patient->patient_id : 'N/A' }}</div>
                                     </td>
-                                    <td>
+                                    <td data-label="Date">
                                         <div>{{ \Carbon\Carbon::parse($txn->bill_date)->format('d M Y') }}</div>
                                         <div style="font-size:11px; color:var(--text-muted);">{{ \Carbon\Carbon::parse($txn->created_at)->format('h:i A') }}</div>
                                     </td>
-                                    <td>
+                                    <td data-label="Method">
                                         <span class="badge-aw {{ str_contains(strtolower($txn->payment_method), 'cash') ? 'badge-green' : 'badge-blue' }}">
                                             {{ $txn->payment_method }}
                                         </span>
                                     </td>
-                                    <td class="text-end">
+                                    <td data-label="Amount" class="text-end">
                                         <div style="font-weight:700;">₹{{ number_format($txn->net_amount, 2) }}</div>
                                         @if($txn->balance_due > 0)
                                             <div style="font-size:11px; color:#ef4444; font-weight:500;">Due: ₹{{ number_format($txn->balance_due, 2) }}</div>
@@ -218,17 +218,17 @@
                 <tbody>
                     @forelse($dailyTrend as $trend)
                         <tr>
-                            <td>
+                            <td data-label="Billing Date">
                                 <div style="font-weight:600;">{{ \Carbon\Carbon::parse($trend['date'])->format('d M Y') }}</div>
                                 <div style="font-size:11px; color:var(--text-muted);">{{ \Carbon\Carbon::parse($trend['date'])->format('l') }}</div>
                             </td>
-                            <td class="text-center">
+                            <td data-label="Transactions" class="text-center">
                                 <span class="badge-aw badge-blue">{{ $trend['transactions'] }} txns</span>
                             </td>
-                            <td class="text-end">
+                            <td data-label="Avg. Revenue/Txn" class="text-end">
                                 <span style="font-weight:500; color:var(--primary);">₹{{ number_format($trend['average'], 2) }}</span>
                             </td>
-                            <td class="text-end">
+                            <td data-label="Daily Total" class="text-end">
                                 <div style="font-weight:700; color:#10b981;">₹{{ number_format($trend['income'], 2) }}</div>
                             </td>
                         </tr>

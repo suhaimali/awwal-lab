@@ -390,12 +390,12 @@
                 <table class="table-modern" id="patient-table">
                     <thead>
                         <tr>
-                            <th class="d-none d-md-table-cell">SL No</th>
+                            <th>SL No</th>
                             <th>Patient Details</th>
-                            <th class="d-none d-sm-table-cell">Contact</th>
-                            <th class="d-none d-md-table-cell">Financial Status</th>
-                            <th class="d-none d-lg-table-cell">Payment Mode</th>
-                            <th class="d-none d-lg-table-cell">Status</th>
+                            <th>Contact</th>
+                            <th>Financial Status</th>
+                            <th>Payment Mode</th>
+                            <th>Status</th>
                             <th class="text-end">Actions</th>
                         </tr>
                     </thead>
@@ -424,12 +424,12 @@
                             @endphp
                             <tr>
                                 <!-- ID Column -->
-                                <td class="d-none d-md-table-cell">
+                                <td data-label="SL No">
                                     <span class="patient-id-badge">{{ str_replace(['#P-', '#'], '', $patient->patient_id) }}</span>
                                 </td>
                                 
                                 <!-- Patient Details (Avatar, Name, Gender, Age) -->
-                                <td>
+                                <td data-label="Patient Details">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="patient-avatar" style="background-color: {{ $avatarBg }}; color: {{ $avatarText }};">
                                             {{ $initials }}
@@ -446,7 +446,7 @@
                                 </td>
                                 
                                 <!-- Contact Details (Phone, Email) -->
-                                <td class="d-none d-sm-table-cell">
+                                <td data-label="Contact">
                                     <div class="contact-info">
                                         <div class="contact-item">
                                             <i class="fa-solid fa-phone"></i>
@@ -462,7 +462,7 @@
                                 </td>
                                 
                                 <!-- Financial Status (Amount, Discount, Balance) -->
-                                <td class="d-none d-md-table-cell">
+                                <td data-label="Financial Status">
                                     <div class="financial-block">
                                         @if($netBalance == 0)
                                             <div class="net-balance paid">
@@ -483,7 +483,7 @@
                                 </td>
                                 
                                 <!-- Payment Mode -->
-                                <td class="d-none d-lg-table-cell">
+                                <td data-label="Payment Mode">
                                     @if($patient->payment_method)
                                         <span class="payment-mode-badge">
                                             <i class="fa-solid fa-wallet"></i>{{ $patient->payment_method }}
@@ -494,7 +494,7 @@
                                 </td>
 
                                 <!-- Status (Active / Inactive) -->
-                                <td class="d-none d-lg-table-cell">
+                                <td data-label="Status">
                                     <span class="status-dot-badge {{ strtolower($patient->status) == 'active' ? 'active' : 'inactive' }}">
                                         <span class="status-dot {{ strtolower($patient->status) == 'active' ? 'active' : 'inactive' }}"></span>
                                         {{ $patient->status }}
@@ -502,7 +502,7 @@
                                 </td>
                                 
                                 <!-- Action Buttons -->
-                                <td class="text-end">												
+                                <td class="text-end" data-label="Actions">												
                                     <div class="action-buttons justify-content-end">
                                         <button class="btn-action-circle btn-view" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-patient" title="View Details">
                                             <i class="fa fa-eye"></i>

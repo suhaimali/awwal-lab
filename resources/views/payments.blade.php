@@ -31,13 +31,13 @@
     <thead>
         <tr>
             <th>SL No</th>
-            <th class="d-none d-sm-table-cell">Bill Date</th>
+            <th>Bill Date</th>
             <th>Patient</th>
-            <th class="d-none d-md-table-cell">Total</th>
-            <th class="d-none d-md-table-cell">Discount</th>
-            <th class="d-none d-lg-table-cell">Advance</th>
+            <th>Total</th>
+            <th>Discount</th>
+            <th>Advance</th>
             <th>Balance</th>
-            <th class="d-none d-lg-table-cell">Method</th>
+            <th>Method</th>
             <th>Status</th>
             <th class="text-end">Actions</th>
         </tr>
@@ -45,25 +45,25 @@
     <tbody>
         @foreach($payments as $p)
         <tr>
-            <td><span class="badge-aw badge-blue">#{{ $p->id }}</span></td>
-            <td class="d-none d-sm-table-cell" style="color:var(--text-muted);font-size:12px;">{{ \Carbon\Carbon::parse($p->bill_date)->format('d M Y') }}</td>
-            <td style="font-weight:600;">{{ optional($p->patient)->first_name }} {{ optional($p->patient)->last_name }}</td>
-            <td class="d-none d-md-table-cell" style="font-weight:700;color:var(--primary);">₹{{ number_format($p->total_amount ?? 0, 2) }}</td>
-            <td class="d-none d-md-table-cell" style="color:#dc2626;">₹{{ number_format($p->discount ?? 0, 2) }}</td>
-            <td class="d-none d-lg-table-cell">₹{{ number_format($p->advance_paid ?? 0, 2) }}</td>
-            <td style="font-weight:700;color:#059669;">₹{{ number_format($p->balance_due ?? 0, 2) }}</td>
-            <td class="d-none d-lg-table-cell">
+            <td data-label="SL No"><span class="badge-aw badge-blue">#{{ $p->id }}</span></td>
+            <td data-label="Bill Date" style="color:var(--text-muted);font-size:12px;">{{ \Carbon\Carbon::parse($p->bill_date)->format('d M Y') }}</td>
+            <td data-label="Patient" style="font-weight:600;">{{ optional($p->patient)->first_name }} {{ optional($p->patient)->last_name }}</td>
+            <td data-label="Total" style="font-weight:700;color:var(--primary);">₹{{ number_format($p->total_amount ?? 0, 2) }}</td>
+            <td data-label="Discount" style="color:#dc2626;">₹{{ number_format($p->discount ?? 0, 2) }}</td>
+            <td data-label="Advance">₹{{ number_format($p->advance_paid ?? 0, 2) }}</td>
+            <td data-label="Balance" style="font-weight:700;color:#059669;">₹{{ number_format($p->balance_due ?? 0, 2) }}</td>
+            <td data-label="Method">
                 @php $method = $p->payment_method ?? 'Cash'; @endphp
                 <span class="badge-aw {{ $method == 'Cash' ? 'badge-green' : ($method == 'UPI' ? 'badge-purple' : ($method == 'Card' ? 'badge-blue' : 'badge-orange')) }}">
                     <i class="fa {{ $method == 'Cash' ? 'fa-money-bill' : ($method == 'UPI' ? 'fa-mobile' : ($method == 'Card' ? 'fa-credit-card' : 'fa-building-columns')) }} me-1"></i>{{ $method }}
                 </span>
             </td>
-            <td>
+            <td data-label="Status">
                 <span class="badge-aw {{ $p->payment_status == 'Paid' ? 'badge-green' : ($p->payment_status == 'Partial' ? 'badge-orange' : 'badge-red') }}">
                     {{ $p->payment_status }}
                 </span>
             </td>
-            <td class="text-end">
+            <td data-label="Actions" class="text-end">
                 <div class="d-flex justify-content-end gap-2">
                     <button class="btn-aw-primary btn-aw-sm btn-edit" data-id="{{ $p->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-payment" title="Edit"><i class="fa fa-pen"></i></button>
                     <button class="btn-aw-danger btn-aw-sm btn-delete" data-id="{{ $p->id }}" data-bs-toggle="modal" data-bs-target="#modal-delete-payment" title="Delete"><i class="fa fa-trash"></i></button>

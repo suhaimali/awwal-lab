@@ -207,11 +207,11 @@
     <table class="table-modern" id="booking-table">
         <thead>
             <tr>
-                <th class="d-none d-md-table-cell">Booking ID</th>
+                <th>Booking ID</th>
                 <th>Patient Name</th>
-                <th class="d-none d-lg-table-cell">Test Name</th>
+                <th>Test Name</th>
                 <th>Date</th>
-                <th class="d-none d-sm-table-cell">Amount</th>
+                <th>Amount</th>
                 <th>Status</th>
                 <th class="text-end">Action</th>
             </tr>
@@ -219,16 +219,16 @@
         <tbody>
         @forelse($appointments as $booking)
         <tr>
-            <td class="d-none d-md-table-cell" data-label="SL No"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#B-{{ $booking->id }}</span></td>
+            <td data-label="Booking ID"><span class="badge-aw" style="background:#f1f5f9;color:#475569;font-family:monospace;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #e2e8f0;">#B-{{ $booking->id }}</span></td>
             <td data-label="Patient Name" style="font-weight:600; color:#1e293b;">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div class="cat-icon-box" style="width:32px;height:32px;font-size:14px;"><i class="fa fa-user"></i></div>
                     {{ $booking->patient->first_name }} {{ $booking->patient->last_name }}
                 </div>
             </td>
-            <td class="d-none d-lg-table-cell" data-label="Test Name" style="color:#64748b;">{{ $booking->test_name }}</td>
+            <td data-label="Test Name" style="color:#64748b;">{{ $booking->test_name }}</td>
             <td data-label="Date" style="color:#64748b;font-size:13px;"><i class="fa fa-calendar-alt me-2" style="opacity:0.5;"></i>{{ \Carbon\Carbon::parse($booking->appointment_date)->format('d M Y') }}</td>
-            <td class="d-none d-sm-table-cell" data-label="Amount" style="font-weight:600;color:#3b82f6;">₹{{ number_format($booking->test_price, 2) }}</td>
+            <td data-label="Amount" style="font-weight:600;color:#3b82f6;">₹{{ number_format($booking->test_price, 2) }}</td>
             <td data-label="Status">
                 @if($booking->status == 'Completed')
                     <span class="badge-aw" style="background:#dcfce7;color:#166534;border:1px solid #bbf7d0;">Completed</span>

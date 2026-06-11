@@ -184,7 +184,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($vitalSigns as $vital)
+                            @foreach($vitalSigns as $vital)
                                 <tr>
                                     <td style="padding:14px 20px;" data-label="Patient">
                                         <div class="d-flex align-items-center">
@@ -295,14 +295,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="10" class="text-center py-5 text-muted">
-                                        <i class="fa fa-heartbeat mb-3 d-block" style="font-size:32px; color:#cbd5e1;"></i>
-                                        No vital signs recorded yet. Click <strong>Record Vital Signs</strong> to get started.
-                                    </td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

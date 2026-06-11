@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'lab@gmail.com'],
             [
-                'name' => 'Lab User',
+                'name' => 'Safwan',
                 'password' => '12345678', // Auto-hashed via User model cast
             ]
         );

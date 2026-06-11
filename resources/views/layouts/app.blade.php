@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="AWWAL LAB - Advanced Laboratory Management System">
-    <meta name="keywords" content="lims dashboard, patient records, diagnostic reports, laboratory software, clinical results, awwal lab">
+    <meta name="description" content="SUHAIM SOFT LAB - Advanced Laboratory Management System">
+    <meta name="keywords" content="lims dashboard, patient records, diagnostic reports, laboratory software, clinical results, suhaim soft lab">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="author" content="AWWAL LAB">
+    <meta name="author" content="SUHAIM SOFT LAB">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <title>{{ config('app.name', 'AWWAL LAB') }} @yield('title')</title>
+    <title>{{ config('app.name', 'SUHAIM SOFT LAB') }} @yield('title')</title>
 
     <!-- PWA -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">

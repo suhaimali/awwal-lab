@@ -6,7 +6,7 @@
 
     <!-- Page title (dynamic) -->
     <div class="header-page-title" id="header-page-title">
-        @yield('page-title', config('app.name', 'AWWAL LAB'))
+        @yield('page-title', config('app.name', 'SUHAIM SOFT LAB'))
     </div>
 
     <!-- Clock -->

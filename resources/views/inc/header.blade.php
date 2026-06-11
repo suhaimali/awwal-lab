@@ -4,13 +4,6 @@
         <i class="fa fa-bars" style="font-size:15px;"></i>
     </button>
 
-    <!-- PWA Navigation Buttons -->
-    <button class="header-toggle-btn" onclick="window.history.back()" title="Go Back">
-        <i class="fa fa-arrow-left" style="font-size:15px;"></i>
-    </button>
-    <button class="header-toggle-btn" onclick="window.location.reload()" title="Reload Page">
-        <i class="fa fa-rotate-right" style="font-size:15px;"></i>
-    </button>
 
     <!-- Page title (dynamic) -->
     <div class="header-page-title" id="header-page-title">

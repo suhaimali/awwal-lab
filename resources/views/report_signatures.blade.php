@@ -32,7 +32,7 @@
                 <div class="aw-card-title"><i class="fa fa-plus-circle" style="color:var(--primary);"></i> Add Signature</div>
             </div>
             <div class="aw-card-body">
-                <form action="{{ route('report-signatures.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('report-signatures.store') }}" method="POST" enctype="multipart/form-data" id="form-add-signature">
                     @csrf
                     <div class="mb-3">
                         <label for="field_1144" class="form-label-aw">Name <span class="text-danger">*</span></label>
@@ -174,14 +174,42 @@
         $(document).on('click', '.btn-delete-signature', function() {
             if (!confirm('Delete this signature? Reports using it will no longer show it.')) return;
 
-            $.ajax({
-                url: '/report-signatures/' + $(this).data('id'),
-                type: 'DELETE',
-                success: function() { location.reload(); },
-                error: function(xhr) {
-                    alert(xhr.responseJSON?.message || 'Could not delete signature.');
-                }
-            });
+            var $btn = $(this);
+            var originalHtml = $btn.html();
+            $btn.html('<i class="fa fa-spinner fa-spin"></i>');
+            $btn.prop('disabled', true);
+
+            setTimeout(function() {
+                $.ajax({
+                    url: '/report-signatures/' + $btn.data('id'),
+                    type: 'DELETE',
+                    success: function() { location.reload(); },
+                    error: function(xhr) {
+                        $btn.html(originalHtml);
+                        $btn.prop('disabled', false);
+                        alert(xhr.responseJSON?.message || 'Could not delete signature.');
+                    }
+                });
+            }, 2000);
+        });
+
+        $('#form-add-signature, #form-edit-signature').on('submit', function(e) {
+            var $form = $(this);
+            var $btn = $form.find('button[type="submit"]');
+            
+            if ($btn.data('is-submitting')) {
+                return;
+            }
+            
+            e.preventDefault();
+            $btn.data('is-submitting', true);
+            var originalText = $btn.html();
+            $btn.html('<i class="fa fa-spinner fa-spin"></i> Processing...');
+            $btn.prop('disabled', true);
+            
+            setTimeout(function() {
+                $form[0].submit();
+            }, 2000);
         });
     });
 </script>

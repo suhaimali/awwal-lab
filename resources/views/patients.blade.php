@@ -580,7 +580,7 @@
 						<div class="form-group">
 							<label for="field_1040" class="form-label">Age</label>
 							<div class="input-group flex-nowrap">
-								<input type="number" class="form-control" name="age" placeholder="Age" autocomplete="off" id="field_1040">
+								<input type="number" class="form-control" name="age" placeholder="Age" autocomplete="off" id="field_1040" min="0" max="150">
 								<select class="form-select" name="age_type" autocomplete="off" style="max-width: 110px;" id="field_1000">
 									<option value="Years">Years</option>
 									<option value="Months">Months</option>
@@ -822,7 +822,7 @@
 						<div class="form-group">
 							<label for="edit-age" class="form-label">Age</label>
 							<div class="input-group flex-nowrap">
-								<input type="number" class="form-control" id="edit-age" name="age" placeholder="Age" autocomplete="off">
+								<input type="number" class="form-control" id="edit-age" name="age" placeholder="Age" autocomplete="off" min="0" max="150">
 								<select class="form-select" id="edit-age-type" name="age_type" autocomplete="off" style="max-width: 110px;">
 									<option value="Years">Years</option>
 									<option value="Months">Months</option>

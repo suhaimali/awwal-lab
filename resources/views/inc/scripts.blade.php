@@ -58,6 +58,72 @@
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         });
+
+        // ── Session Timeout Warning
+        // Session lifetime = 120 minutes. Warn at 118 min, expire at 120 min.
+        (function() {
+            const SESSION_MINUTES = {{ config('session.lifetime', 120) }};
+            const WARN_BEFORE_MS  = 2 * 60 * 1000;  // warn 2 minutes before expiry
+            const SESSION_MS      = SESSION_MINUTES * 60 * 1000;
+            let warningShown = false;
+            let sessionTimer, expireTimer;
+
+            function resetTimers() {
+                clearTimeout(sessionTimer);
+                clearTimeout(expireTimer);
+                warningShown = false;
+
+                // Show warning 2 minutes before session expires
+                sessionTimer = setTimeout(function() {
+                    if (warningShown) return;
+                    warningShown = true;
+                    Swal.fire({
+                        title: '<i class="fa fa-clock" style="color:#f59e0b;"></i> Session Expiring Soon',
+                        html: 'Your session will expire in <strong>2 minutes</strong>.<br>Do you want to stay logged in?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '<i class="fa fa-refresh"></i> Stay Logged In',
+                        cancelButtonText: 'Logout Now',
+                        confirmButtonColor: '#1a56db',
+                        cancelButtonColor: '#dc2626',
+                        timer: 120000,
+                        timerProgressBar: true,
+                        allowOutsideClick: false,
+                    }).then(function(result) {
+                        if (result.isConfirmed) {
+                            // Ping server to keep session alive
+                            $.get('/dashboard-stats').done(function() {
+                                resetTimers();
+                                Swal.fire({
+                                    title: 'Session Extended',
+                                    text: 'You are still logged in.',
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+                            }).fail(function() {
+                                window.location.href = '/login';
+                            });
+                        } else {
+                            window.location.href = '/logout';
+                        }
+                    });
+                }, SESSION_MS - WARN_BEFORE_MS);
+
+                // Hard redirect when session expires
+                expireTimer = setTimeout(function() {
+                    window.location.href = '/login';
+                }, SESSION_MS);
+            }
+
+            // Start timers on page load
+            resetTimers();
+
+            // Reset timers on any user activity (clicks, key presses)
+            $(document).on('click keydown', function() {
+                if (!warningShown) resetTimers();
+            });
+        })();
     </script>
 
     @stack('scripts')

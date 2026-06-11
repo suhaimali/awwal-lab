@@ -297,14 +297,14 @@ class HomeController extends Controller
     public function storePayment(\Illuminate\Http\Request $request)
     {
         $validated = $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'total_amount' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'advance_paid' => 'nullable|numeric',
-            'payment_status' => 'required',
-            'payment_method' => 'required',
-            'bill_date' => 'required|date',
-            'remarks' => 'nullable'
+            'patient_id'     => 'required|exists:patients,id',
+            'total_amount'   => 'required|numeric|min:0',
+            'discount'       => 'nullable|numeric|min:0',
+            'advance_paid'   => 'nullable|numeric|min:0',
+            'payment_status' => 'required|in:Paid,Partial,Unpaid,Refunded',
+            'payment_method' => 'required|in:Cash,Card,Bank Transfer,Online,Other',
+            'bill_date'      => 'required|date',
+            'remarks'        => 'nullable|string|max:500',
         ]);
 
         $validated['discount'] = $validated['discount'] ?? 0;
@@ -328,14 +328,14 @@ class HomeController extends Controller
         $payment = \App\Models\Payment::findOrFail($id);
         
         $validated = $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'total_amount' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'advance_paid' => 'nullable|numeric',
-            'payment_status' => 'required',
-            'payment_method' => 'required',
-            'bill_date' => 'required|date',
-            'remarks' => 'nullable'
+            'patient_id'     => 'required|exists:patients,id',
+            'total_amount'   => 'required|numeric|min:0',
+            'discount'       => 'nullable|numeric|min:0',
+            'advance_paid'   => 'nullable|numeric|min:0',
+            'payment_status' => 'required|in:Paid,Partial,Unpaid,Refunded',
+            'payment_method' => 'required|in:Cash,Card,Bank Transfer,Online,Other',
+            'bill_date'      => 'required|date',
+            'remarks'        => 'nullable|string|max:500',
         ]);
 
         $validated['discount'] = $validated['discount'] ?? 0;
@@ -359,18 +359,18 @@ class HomeController extends Controller
     public function storePatient(\Illuminate\Http\Request $request)
     {
         $validated = $request->validate([
-            'patient_id' => 'nullable|unique:patients',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'age' => 'required|numeric',
-            'age_type' => 'nullable|in:Years,Months,Days',
-            'phone' => 'nullable',
-            'email' => 'nullable|email|unique:patients,email',
-            'reference_dr' => 'nullable',
-            'status' => 'nullable',
-            'address' => 'nullable',
-            'payment_method' => 'nullable|string',
+            'patient_id'     => 'nullable|unique:patients',
+            'first_name'     => 'required|string|max:100',
+            'last_name'      => 'required|string|max:100',
+            'gender'         => 'required|in:Male,Female,Other',
+            'age'            => 'required|numeric|min:0|max:150',
+            'age_type'       => 'nullable|in:Years,Months,Days',
+            'phone'          => 'nullable|string|max:20',
+            'email'          => 'nullable|email|max:255|unique:patients,email',
+            'reference_dr'   => 'nullable|string|max:150',
+            'status'         => 'nullable|string|max:50',
+            'address'        => 'nullable|string|max:500',
+            'payment_method' => 'nullable|string|max:50',
         ]);
 
         if (empty($validated['patient_id'])) {
@@ -438,18 +438,18 @@ class HomeController extends Controller
         $patient = \App\Models\Patient::findOrFail($id);
         
         $validated = $request->validate([
-            'patient_id' => 'required|unique:patients,patient_id,' . $id,
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'age' => 'required|numeric',
-            'age_type' => 'nullable|in:Years,Months,Days',
-            'phone' => 'nullable',
-            'email' => 'nullable|email|unique:patients,email,' . $id,
-            'reference_dr' => 'nullable',
-            'status' => 'nullable',
-            'address' => 'nullable',
-            'payment_method' => 'nullable|string',
+            'patient_id'     => 'required|unique:patients,patient_id,' . $id,
+            'first_name'     => 'required|string|max:100',
+            'last_name'      => 'required|string|max:100',
+            'gender'         => 'required|in:Male,Female,Other',
+            'age'            => 'required|numeric|min:0|max:150',
+            'age_type'       => 'nullable|in:Years,Months,Days',
+            'phone'          => 'nullable|string|max:20',
+            'email'          => 'nullable|email|max:255|unique:patients,email,' . $id,
+            'reference_dr'   => 'nullable|string|max:150',
+            'status'         => 'nullable|string|max:50',
+            'address'        => 'nullable|string|max:500',
+            'payment_method' => 'nullable|string|max:50',
         ]);
 
         // Calculate totals from input test arrays
@@ -538,17 +538,17 @@ class HomeController extends Controller
     public function storeAppointment(\Illuminate\Http\Request $request)
     {
         $validated = $request->validate([
-            'patient_id' => 'required',
-            'doctor_name' => 'nullable',
-            'test_name' => 'required',
-            'test_price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
+            'patient_id' => 'required|exists:patients,id',
+            'doctor_name' => 'nullable|string|max:150',
+            'test_name' => 'required|string|max:255',
+            'test_price' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
             'balance' => 'nullable|numeric',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required',
-            'status' => 'required',
-            'reason' => 'nullable',
-            'notes' => 'nullable',
+            'status' => 'required|in:Pending,Completed,Cancelled',
+            'reason' => 'nullable|string|max:500',
+            'notes' => 'nullable|string|max:1000',
         ]);
 
         // Auto-fill fields
@@ -573,16 +573,16 @@ class HomeController extends Controller
         $appointment = \App\Models\Appointment::findOrFail($id);
         
         $validated = $request->validate([
-            'patient_id' => 'required',
-            'doctor_name' => 'required',
-            'test_name' => 'required',
-            'test_price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
+            'patient_id' => 'required|exists:patients,id',
+            'doctor_name' => 'required|string|max:150',
+            'test_name' => 'required|string|max:255',
+            'test_price' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
             'balance' => 'nullable|numeric',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required',
-            'status' => 'required',
-            'notes' => 'nullable',
+            'status' => 'required|in:Pending,Completed,Cancelled',
+            'notes' => 'nullable|string|max:1000',
         ]);
 
         $validated['total_amount'] = $validated['test_price'];

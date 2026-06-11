@@ -1395,7 +1395,8 @@ class HomeController extends Controller
     {
         $validated = $request->validate([
             'patient_id'       => 'required|exists:patients,id',
-            'temperature'      => 'nullable|numeric|between:50,120',
+            'temperature'      => 'nullable|numeric|between:10,120',
+            'temp_unit'        => 'nullable|in:C,F',
             'pulse'            => 'nullable|integer|between:10,300',
             'respiratory_rate' => 'nullable|integer|between:2,100',
             'blood_pressure'   => 'nullable|string|max:20',
@@ -1404,6 +1405,10 @@ class HomeController extends Controller
             'height'           => 'nullable|numeric|between:10,300',
             'notes'            => 'nullable|string|max:1000',
         ]);
+
+        if (empty($validated['temp_unit'])) {
+            $validated['temp_unit'] = 'F';
+        }
 
         // Auto-calculate BMI if weight and height are provided
         if (!empty($validated['weight']) && !empty($validated['height'])) {
@@ -1430,7 +1435,8 @@ class HomeController extends Controller
 
         $validated = $request->validate([
             'patient_id'       => 'required|exists:patients,id',
-            'temperature'      => 'nullable|numeric|between:50,120',
+            'temperature'      => 'nullable|numeric|between:10,120',
+            'temp_unit'        => 'nullable|in:C,F',
             'pulse'            => 'nullable|integer|between:10,300',
             'respiratory_rate' => 'nullable|integer|between:2,100',
             'blood_pressure'   => 'nullable|string|max:20',
@@ -1439,6 +1445,10 @@ class HomeController extends Controller
             'height'           => 'nullable|numeric|between:10,300',
             'notes'            => 'nullable|string|max:1000',
         ]);
+
+        if (empty($validated['temp_unit'])) {
+            $validated['temp_unit'] = 'F';
+        }
 
         // Auto-calculate BMI if weight and height are provided
         if (!empty($validated['weight']) && !empty($validated['height'])) {

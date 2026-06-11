@@ -203,7 +203,7 @@
                                     </td>
                                     <td style="padding:14px 12px;" data-label="Temperature">
                                         @if($vital->temperature)
-                                            <span style="font-weight:500; color:#334155;">{{ $vital->temperature }} °F</span>
+                                            <span style="font-weight:500; color:#334155;">{{ $vital->temperature }} °{{ $vital->temp_unit ?? 'F' }}</span>
                                         @else
                                             <span class="text-muted">—</span>
                                         @endif
@@ -332,8 +332,14 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="add-temp" class="form-label">Temperature (°F)</label>
-                                <input type="number" step="0.1" class="form-control" name="temperature" id="add-temp" placeholder="e.g. 98.6">
+                                <label for="add-temp" class="form-label">Temperature</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.1" class="form-control" name="temperature" id="add-temp" placeholder="e.g. 98.6">
+                                    <select class="form-select" name="temp_unit" id="add-temp-unit" style="max-width: 80px; font-weight: 500;">
+                                        <option value="F">°F</option>
+                                        <option value="C">°C</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -434,8 +440,14 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="edit-temp" class="form-label">Temperature (°F)</label>
-                                <input type="number" step="0.1" class="form-control" name="temperature" id="edit-temp" placeholder="e.g. 98.6">
+                                <label for="edit-temp" class="form-label">Temperature</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.1" class="form-control" name="temperature" id="edit-temp" placeholder="e.g. 98.6">
+                                    <select class="form-select" name="temp_unit" id="edit-temp-unit" style="max-width: 80px; font-weight: 500;">
+                                        <option value="F">°F</option>
+                                        <option value="C">°C</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -625,6 +637,7 @@
                 $('#edit-vital-id').val(data.id);
                 $('#edit-patient-id').val(data.patient_id);
                 $('#edit-temp').val(data.temperature);
+                $('#edit-temp-unit').val(data.temp_unit || 'F');
                 $('#edit-pulse').val(data.pulse);
                 $('#edit-rr').val(data.respiratory_rate);
                 $('#edit-bp').val(data.blood_pressure);

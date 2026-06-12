@@ -104,71 +104,22 @@
         border-radius: 6px;
     }
 
-    /* Stacking responsive table layout rules */
-    @media (max-width: 991px) {
-        .responsive-vitals-table thead {
-            display: none;
-        }
-        .responsive-vitals-table tbody tr {
-            display: block;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            padding: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .responsive-vitals-table tbody td {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f1f5f9 !important;
-            padding: 10px 0 !important;
-            font-size: 13.5px;
-            text-align: right;
-        }
-        .responsive-vitals-table tbody td:last-child {
-            border-bottom: none !important;
-            padding-top: 15px !important;
-            justify-content: center;
-        }
-        .responsive-vitals-table tbody td::before {
-            content: attr(data-label);
-            font-weight: 600;
-            color: #94a3b8;
-            font-size: 11px;
-            text-transform: uppercase;
-            text-align: left;
-            margin-right: 15px;
-        }
-        .action-btn-group {
-            width: 100%;
-            justify-content: center;
-        }
-    }
 </style>
 
-<div class="row">
-    <div class="col-md-12">
-        <!-- Search and Statistics panel -->
-        <div class="card border-0 shadow-sm rounded-4 mb-4">
-            <div class="card-body p-3">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3">
-                    <div class="position-relative flex-grow-1" style="max-width: 450px;">
-                        <span class="position-absolute top-50 translate-middle-y text-muted" style="left:15px;">
-                            <i class="fa fa-search"></i>
-                        </span>
-                        <input type="text" class="form-control" id="vitals-search" placeholder="Search patient names, bp, notes..." style="padding-left:40px; border-radius:10px; border:1.5px solid #e2e8f0; font-size:14px; height:42px;">
-                    </div>
-                </div>
+<div class="aw-card mb-4">
+    <div class="aw-card-header">
+        <div class="aw-card-title"><i class="fa fa-heartbeat" style="color:var(--primary);"></i> Vitals Directory</div>
+        <div class="d-flex align-items-center gap-3">
+            <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ $vitalSigns->count() }} total records</span>
+            <div style="position:relative;">
+                <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
+                <input type="text" id="vitals-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search vitals..." autocomplete="off">
             </div>
         </div>
-
-        <!-- Vitals Table Card -->
-        <div class="card border-0 shadow-sm rounded-4">
-            <div class="card-body p-0">
-                <div class="table-responsive" style="border-radius:16px;">
-                    <table class="table-modern responsive-vitals-table" id="vitals-table">
+    </div>
+    <div class="aw-card-body" style="padding:0;">
+        <div class="table-responsive-modern">
+            <table class="table-modern" id="vitals-table">
                         <thead>
                             <tr>
                                 <th>Patient</th>
@@ -298,8 +249,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
         </div>
     </div>
 </div>

@@ -303,7 +303,11 @@
 					  location.reload();
 				  },
 				  error: function(xhr) {
-					  alert(xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : "Failed to delete test.");
+					  let msg = "Failed to delete test.";
+					  if (xhr.responseJSON) {
+						  msg = xhr.responseJSON.error || xhr.responseJSON.message || msg;
+					  }
+					  alert(msg);
 					  btn.prop('disabled', false).html('Delete Permanently');
 				  }
 			  });

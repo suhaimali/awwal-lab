@@ -610,23 +610,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="field_1043" class="form-label">Reference Dr.</label>
-							<div class="reference-dr-container">
-								<input type="hidden" class="reference-dr-value" name="reference_dr" value="" id="field_1043">
-								<div class="input-group flex-nowrap reference-dr-input-group">
-									<select class="form-select reference-dr-select" autocomplete="off" id="field_1044" name="name_1045">
-										<option value="">-- Select Doctor --</option>
-									</select>
-									<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
-									<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
-									<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
-								</div>
-								<div class="reference-dr-custom-wrap" style="display:none;">
-									<div class="input-group">
-										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name" autocomplete="off" id="field_1046" name="name_1047">
-										<button type="button" class="btn btn-outline-secondary btn-back-to-dr-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
-									</div>
-								</div>
+							<label for="field_1044" class="form-label">Reference Dr. (Optional)</label>
+							<div class="input-group flex-nowrap">
+								<select class="form-select reference-dr-select" autocomplete="off" id="field_1044" name="reference_dr">
+									<option value="">-- Select Doctor --</option>
+								</select>
+								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
 							</div>
 						</div>
 					</div>
@@ -668,6 +659,7 @@
 								</select>
 								<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
 								<button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-danger btn-delete-test" style="background-color: #fee2e2; color: #dc2626; border-color: #cbd5e1;" title="Delete Selected Test"><i class="fa fa-trash"></i></button>
 							</div>
                             <div class="test-name-custom-wrap" style="display:none;">
                                 <div class="input-group">
@@ -685,7 +677,8 @@
                             <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
 							<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00" autocomplete="off" id="field_1054">
 						</div>
-						<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+						<div class="col-md-1 col-12 pt-md-0 pt-3 d-flex justify-content-between align-items-center">
+							<div class="d-md-none fw-bold fs-11 text-uppercase text-muted">Action</div>
 							<button type="button" class="btn btn-success btn-sm btn-add-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>
 						</div>
 					</div>
@@ -721,9 +714,9 @@
           <div class="vp-name" id="view-full-name">Patient Name</div>
           <div class="vp-meta">
             <span class="vp-id-badge" id="view-patient-id">#0000</span>
-            <span>·</span>
+            <span>Â·</span>
             <span id="view-gender">—</span>
-            <span>·</span>
+            <span>Â·</span>
             <span id="view-age">—</span>
           </div>
         </div>
@@ -853,23 +846,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="field_1056" class="form-label">Reference Dr.</label>
-							<div class="reference-dr-container">
-								<input type="hidden" class="reference-dr-value" name="reference_dr" value="" id="field_1056">
-								<div class="input-group flex-nowrap reference-dr-input-group">
-									<select class="form-select reference-dr-select" id="edit-reference-dr" autocomplete="off" name="name_1057">
-										<option value="">-- Select Doctor --</option>
-									</select>
-									<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
-									<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
-									<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
-								</div>
-								<div class="reference-dr-custom-wrap" style="display:none;">
-									<div class="input-group">
-										<input type="text" class="form-control reference-dr-custom-input" placeholder="Enter custom doctor name" autocomplete="off" id="field_1058" name="name_1059">
-										<button type="button" class="btn btn-outline-secondary btn-back-to-dr-select" title="Back to dropdown" style="font-size:12px;"><i class="fa fa-list"></i></button>
-									</div>
-								</div>
+							<label for="edit-reference-dr" class="form-label">Reference Dr. (Optional)</label>
+							<div class="input-group flex-nowrap">
+								<select class="form-select reference-dr-select" id="edit-reference-dr" autocomplete="off" name="reference_dr">
+									<option value="">-- Select Doctor --</option>
+								</select>
+								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
 							</div>
 						</div>
 					</div>
@@ -1377,7 +1361,6 @@
 					  let qual = doctor.qualification ? doctor.qualification : '';
 					  options += '<option value="' + doctor.name + '" data-id="'+doctor.id+'" data-phone="'+phone+'" data-email="'+email+'" data-qualification="'+qual+'">' + doctor.name + '</option>';
 				  });
-				  options += '<option value="__custom__">✏️ Custom (type below)</option>';
 				  $('.reference-dr-select').html(options);
                    if (selectedValue) {
                        $('.reference-dr-select').val(selectedValue).trigger('change');
@@ -1394,7 +1377,7 @@
           $(document).on('click', '.btn-edit-doctor', function() {
               let select = $(this).siblings('.reference-dr-select');
               let selectedOption = select.find('option:selected');
-              let docId = selectedOption.data('id');
+              let docId = selectedOption.attr('data-id');
               
               if (!docId) {
                   alert('Please select a valid doctor to edit.');
@@ -1403,16 +1386,16 @@
               
               $('#edit-doc-id').val(docId);
               $('#edit-doc-name').val(selectedOption.val());
-              $('#edit-doc-qualification').val(selectedOption.data('qualification'));
-              $('#edit-doc-phone').val(selectedOption.data('phone'));
-              $('#edit-doc-email').val(selectedOption.data('email'));
+              $('#edit-doc-qualification').val(selectedOption.attr('data-qualification'));
+              $('#edit-doc-phone').val(selectedOption.attr('data-phone'));
+              $('#edit-doc-email').val(selectedOption.attr('data-email'));
               $('#modal-edit-doctor').modal('show');
           });
 
           $(document).on('click', '.btn-delete-doctor', function() {
               let select = $(this).siblings('.reference-dr-select');
               let selectedOption = select.find('option:selected');
-              let docId = selectedOption.data('id');
+              let docId = selectedOption.attr('data-id');
               
               if (!docId) {
                   alert('Please select a valid doctor to delete.');
@@ -1583,17 +1566,15 @@
 				  $('#edit-email').val(data.email);
 				  let refDr = data.reference_dr || '';
 				  let refDrSelect = $('#edit-reference-dr');
-				  let isCustomDr = refDr !== '' && !refDrSelect.find(`option[value="${refDr}"]`).length;
-				  
-				  if (isCustomDr) {
-					  refDrSelect.val('__custom__').trigger('change').closest('.reference-dr-input-group').hide();
-					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-wrap').show();
-					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-input').val(refDr);
+				  if (refDrSelect.find("option[value='" + refDr + "']").length) {
+					  refDrSelect.val(refDr).trigger('change');
+				  } else if (refDr) {
+					  // Not found in options, it must have been a custom name or self, so we add it dynamically and select it
+                      refDrSelect.append('<option value="' + refDr + '">' + refDr + '</option>');
+					  refDrSelect.val(refDr).trigger('change');
 				  } else {
-					  refDrSelect.val(refDr).trigger('change').closest('.reference-dr-input-group').show();
-					  refDrSelect.closest('.reference-dr-container').find('.reference-dr-custom-wrap').hide();
-				  }
-				  refDrSelect.closest('.reference-dr-container').find('.reference-dr-value').val(refDr);
+                      refDrSelect.val('Self').trigger('change');
+                  }
 				  $('#edit-status').val(data.status).trigger('change');
 				  $('#edit-payment-method').val(data.payment_method || '').trigger('change');
 				  $('#edit-address').val(data.address);
@@ -1615,7 +1596,7 @@
                           @foreach($labTests as $test)
                               optionsHtml += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}" ${!isCustom && app.test_name == '{{ $test->name }}' ? 'selected' : ''}>{{ $test->name }}</option>`;
                           @endforeach
-                          optionsHtml += `<option value="__custom__">✏️ Custom (type below)</option>`;
+                          optionsHtml += `<option value="__custom__">âœï¸ Custom (type below)</option>`;
 
                           testRowsHtml += `
                             <div class="row test-row mb-2 align-items-center">
@@ -1629,6 +1610,7 @@
                                         </select>
                                         <button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
                                         <button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger btn-delete-test" style="background-color: #fee2e2; color: #dc2626; border-color: #cbd5e1;" title="Delete Selected Test"><i class="fa fa-trash"></i></button>
                                     </div>
                                     <div class="test-name-custom-wrap" ${isCustom ? '' : 'style="display:none;"'}>
                                         <div class="input-group">
@@ -1656,7 +1638,7 @@
                       @foreach($labTests as $test)
                           emptyOptions += `<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>`;
                       @endforeach
-                      emptyOptions += `<option value="__custom__">✏️ Custom (type below)</option>`;
+                      emptyOptions += `<option value="__custom__">âœï¸ Custom (type below)</option>`;
 
                       testRowsHtml = `
                         <div class="row test-row mb-2 align-items-center">
@@ -1669,6 +1651,7 @@
                                     </select>
                                     <button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
                                     <button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger btn-delete-test" style="background-color: #fee2e2; color: #dc2626; border-color: #cbd5e1;" title="Delete Selected Test"><i class="fa fa-trash"></i></button>
                                 </div>
                                 <div class="test-name-custom-wrap" style="display:none;">
                                     <div class="input-group">
@@ -1685,7 +1668,8 @@
                                 <div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
                                 <input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" placeholder="0.00" value="0.00" autocomplete="off" id="field_1081">
                             </div>
-                            <div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+                            <div class="col-md-1 col-12 pt-md-0 pt-3 d-flex justify-content-between align-items-center">
+                                <div class="d-md-none fw-bold fs-11 text-uppercase text-muted">Action</div>
                                 <button type="button" class="btn btn-success btn-sm btn-edit-add-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>`;
@@ -1709,10 +1693,11 @@
 							@foreach($labTests as $test)
 								<option value="{{ $test->name }}" data-id="{{ $test->id }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>
 							@endforeach
-							<option value="__custom__">✏️ Custom (type below)</option>
+							<option value="__custom__">âœï¸ Custom (type below)</option>
 						</select>
 						<button type="button" class="btn btn-success btn-add-test" style="background-color: #d1fae5; color: #059669; border-color: #cbd5e1;" title="Add New Test"><i class="fa fa-plus"></i></button>
 						<button type="button" class="btn btn-primary btn-edit-test" style="background-color: #dbeafe; color: #2563eb; border-color: #cbd5e1;" title="Edit Selected Test"><i class="fa fa-edit"></i></button>
+						<button type="button" class="btn btn-danger btn-delete-test" style="background-color: #fee2e2; color: #dc2626; border-color: #cbd5e1;" title="Delete Selected Test"><i class="fa fa-trash"></i></button>
 					</div>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
@@ -1729,7 +1714,8 @@
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
 					<input type="number" step="0.01" class="form-control add-patient-test-discount" name="test_discount[]" value="0.00" autocomplete="off" id="field_1088">
 				</div>
-				<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+				<div class="col-md-1 col-12 pt-md-0 pt-3 d-flex justify-content-between align-items-center">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted">Action</div>
 					<button type="button" class="btn btn-danger btn-sm btn-add-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>
 				</div>
 			</div>`;
@@ -1756,7 +1742,7 @@
 						@foreach($labTests as $test)
 							<option value="{{ $test->name }}" data-price="{{ $test->price }}" data-payment_method="{{ $test->payment_method }}">{{ $test->name }}</option>
 						@endforeach
-						<option value="__custom__">✏️ Custom (type below)</option>
+						<option value="__custom__">âœï¸ Custom (type below)</option>
 					</select>
 					<div class="test-name-custom-wrap" style="display:none;">
 						<div class="input-group">
@@ -1773,7 +1759,8 @@
 					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted mb-1">Discount</div>
 					<input type="number" step="0.01" class="form-control edit-patient-test-discount" name="test_discount[]" value="0.00" autocomplete="off" id="field_1096">
 				</div>
-				<div class="col-md-1 col-12 text-center pt-md-0 pt-2">
+				<div class="col-md-1 col-12 pt-md-0 pt-3 d-flex justify-content-between align-items-center">
+					<div class="d-md-none fw-bold fs-11 text-uppercase text-muted">Action</div>
 					<button type="button" class="btn btn-danger btn-sm btn-remove-test-row" style="height: 38px; width: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fa fa-trash"></i></button>
 				</div>
 			</div>`;
@@ -1837,32 +1824,7 @@
 		  });
 		  // ── End custom test name logic ─────────────────────────────────────
 
-		  // ── Custom reference doctor name toggle logic ─────────────────────────
-		  $(document).on('change', '.reference-dr-select', function() {
-			  let val = $(this).val();
-			  let container = $(this).closest('.reference-dr-container');
-			  if (val === '__custom__') {
-				  $(this).closest('.reference-dr-input-group').hide();
-				  container.find('.reference-dr-custom-wrap').show();
-				  container.find('.reference-dr-custom-input').focus();
-				  container.find('.reference-dr-value').val('');
-			  } else {
-				  container.find('.reference-dr-value').val(val);
-			  }
-		  });
 
-		  $(document).on('input', '.reference-dr-custom-input', function() {
-			  $(this).closest('.reference-dr-container').find('.reference-dr-value').val($(this).val().trim());
-		  });
-
-		  $(document).on('click', '.btn-back-to-dr-select', function() {
-			  let container = $(this).closest('.reference-dr-container');
-			  container.find('.reference-dr-custom-wrap').hide();
-			  container.find('.reference-dr-custom-input').val('');
-			  container.find('.reference-dr-value').val('');
-			  container.find('.reference-dr-select').val('').closest('.reference-dr-input-group').show();
-		  });
-		  // ── End custom reference doctor logic ─────────────────────────────────
 
 		  // Auto-fill price and calculate net (kept for backward compat; now handled in .test-name-select change)
 		  $(document).on('change', '.add-patient-test-name', function() {
@@ -1937,6 +1899,13 @@
 				  success: function(response) {
 					  alert(response.success);
 					  location.reload();
+				  },
+				  error: function(xhr) {
+					  let msg = "Error deleting patient.";
+					  if (xhr.responseJSON) {
+						  msg = xhr.responseJSON.error || xhr.responseJSON.message || msg;
+					  }
+					  alert(msg);
 				  }
 			  });
 		  });
@@ -1953,7 +1922,7 @@
           $(document).on('click', '.btn-edit-test', function() {
               currentTestSelect = $(this).siblings('.test-name-select');
               let selectedOption = currentTestSelect.find('option:selected');
-              let testId = selectedOption.data('id');
+              let testId = selectedOption.attr('data-id');
               
               if (!testId || currentTestSelect.val() === '__custom__' || currentTestSelect.val() === '') {
                   alert('Please select a valid test from the dropdown to edit.');
@@ -1962,9 +1931,37 @@
 
               $('#edit-test-id').val(testId);
               $('#edit-test-name').val(selectedOption.val());
-              $('#edit-test-price').val(selectedOption.data('price'));
-              $('#edit-test-payment-method').val(selectedOption.data('payment_method') || '');
+              $('#edit-test-price').val(selectedOption.attr('data-price'));
+              $('#edit-test-payment-method').val(selectedOption.attr('data-payment_method') || '');
               $('#modal-edit-test').modal('show');
+          });
+
+          $(document).on('click', '.btn-delete-test', function() {
+              let select = $(this).siblings('.test-name-select');
+              let selectedOption = select.find('option:selected');
+              let testId = selectedOption.attr('data-id');
+              
+              if (!testId || select.val() === '__custom__' || select.val() === '') {
+                  alert('Please select a valid test from the dropdown to delete.');
+                  return;
+              }
+              
+              if (confirm('Are you sure you want to delete ' + selectedOption.val() + '?')) {
+                  $.ajax({
+                      url: "/lab-tests/" + testId,
+                      type: 'DELETE',
+                      data: {
+                          _token: '{{ csrf_token() }}'
+                      },
+                      success: function(response) {
+                          alert(response.success || 'Test deleted successfully.');
+                          location.reload();
+                      },
+                      error: function(xhr) {
+                          alert('Error: ' + xhr.responseText);
+                      }
+                  });
+              }
           });
 
           $('#btn-save-test').click(function() {
@@ -2063,6 +2060,7 @@
   @endpush
 
 @endsection
+
 
 
 

@@ -2573,13 +2573,13 @@
                   if (showHeader) {
                       const hProps = doc.getImageProperties(REPORT_HEADER_IMAGE);
                       const hHeight = (hProps.height * pageW) / hProps.width;
-                      doc.addImage(REPORT_HEADER_IMAGE, 'PNG', 0, 0, pageW, hHeight);
+                      doc.addImage(REPORT_HEADER_IMAGE, 'PNG', 0, 0, pageW, hHeight, undefined, 'FAST');
                   }
 
                   const fProps = doc.getImageProperties(REPORT_FOOTER_IMAGE);
                   const fHeight = (fProps.height * pageW) / fProps.width;
                   const actualFooterTop = pageH - fHeight;
-                  doc.addImage(REPORT_FOOTER_IMAGE, 'PNG', 0, actualFooterTop, pageW, fHeight);
+                  doc.addImage(REPORT_FOOTER_IMAGE, 'PNG', 0, actualFooterTop, pageW, fHeight, undefined, 'FAST');
                   doc.setTextColor(0);
                   doc.setDrawColor(0);
                   doc.setLineWidth(0.25);

@@ -861,6 +861,53 @@
 			  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 		  });
 
+          // Function to refresh reports table without a full page reload
+          window.refreshReportsPageData = function(modalToCloseId = null, btnToReset = null, defaultBtnText = '') {
+              if (modalToCloseId) {
+                  $(modalToCloseId).modal('hide');
+              }
+              if (btnToReset) {
+                  btnToReset.html(defaultBtnText).prop('disabled', false);
+              }
+              
+              let currentUrl = window.location.href;
+              $.get(currentUrl, function(html) {
+                  let newDoc = new DOMParser().parseFromString(html, 'text/html');
+                  let newTableContent = $(newDoc).find('.table-responsive-modern').html();
+                  
+                  if (newTableContent) {
+                      if($.fn.DataTable.isDataTable('#report-table')) {
+                          $('#report-table').DataTable().destroy();
+                      }
+                      $('.table-responsive-modern').html(newTableContent);
+                      
+                      // Re-initialize reports table
+                      var reportsTable = $('#report-table').DataTable({
+                          dom: "<'row mb-3'<'col-sm-12 col-md-6'l>>" +
+                               "<'row'<'col-sm-12'tr>>" +
+                               "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                          pageLength: 10,
+                          lengthMenu: [5, 10, 25, 50, 100],
+                          ordering: false,
+                          language: {
+                              lengthMenu: "Show _MENU_ records",
+                              info: "Showing _START_ to _END_ of _TOTAL_ reports",
+                              infoEmpty: "Showing 0 to 0 of 0 reports",
+                              infoFiltered: "(filtered from _MAX_ total reports)",
+                              emptyTable: "No test reports generated yet.",
+                              paginate: {
+                                  previous: "<i class='fa fa-angle-left'></i>",
+                                  next: "<i class='fa fa-angle-right'></i>"
+                              }
+                          }
+                      });
+                      $("#report-search").on("keyup", function() {
+                          reportsTable.search($(this).val()).draw();
+                      });
+                  }
+              });
+          };
+
           // Fix overlapping modal backdrops z-index
           $(document).on('show.bs.modal', '.modal', function () {
               const zIndex = 1060 + (10 * $('.modal:visible').length);
@@ -2005,7 +2052,9 @@
 			  
 			  $.post("{{ route('reports.store') }}", $('#form-add-report').serialize(), function(response) {
 				  alert(response.success);
-				  location.reload();
+				  refreshReportsPageData('#modal-add-report', btn, 'Generate Report');
+                  $('#form-add-report')[0].reset();
+                  $('#dynamic-tests-container').empty();
 			  }).fail(function(xhr) {
                   let errorMsg = xhr.responseJSON.message || "Error saving report. Please check all fields.";
 				  alert(errorMsg);
@@ -2220,7 +2269,7 @@
                   data: $('#form-edit-report').serialize(),
                   success: function(response) {
                       alert(response.success);
-                      location.reload();
+                      refreshReportsPageData('#modal-edit-report', btn, 'Update Report');
                   },
                   error: function(xhr) {
                       alert(xhr.responseJSON.message || "Error updating report.");
@@ -2790,7 +2839,7 @@
                       type: 'DELETE',
                       success: function(response) {
                           alert(response.success);
-                          location.reload();
+                          refreshReportsPageData();
                       }
                   });
               }
@@ -3624,7 +3673,7 @@
                               } else if (type === 'flag') {
                                   fetchReportFlags();
                               } else {
-                                  location.reload();
+                                  refreshReportsPageData();
                               }
                           },
                           error: function(xhr) {

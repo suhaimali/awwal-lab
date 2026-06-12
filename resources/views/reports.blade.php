@@ -861,7 +861,7 @@
 			  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 		  });
 
-          // Function to refresh reports table without a full page reload
+          // Function to refresh reports table and dropdowns without a full page reload
           window.refreshReportsPageData = function(modalToCloseId = null, btnToReset = null, defaultBtnText = '') {
               if (modalToCloseId) {
                   $(modalToCloseId).modal('hide');
@@ -871,47 +871,80 @@
               }
               
               let currentUrl = window.location.href;
-              $.get(currentUrl, function(html) {
-                  let newDoc = new DOMParser().parseFromString(html, 'text/html');
-                  
-                  // 1. Update the main reports table
-                  let newTableWrapper = $(newDoc).find('#report-table').closest('.table-responsive-modern').html();
-                  if (newTableWrapper) {
-                      if($.fn.DataTable.isDataTable('#report-table')) {
-                          $('#report-table').DataTable().destroy();
-                      }
-                      // Specifically target the wrapper of report-table to avoid affecting modal tables
-                      $('#report-table').closest('.table-responsive-modern').html(newTableWrapper);
+              $.ajax({
+                  url: currentUrl,
+                  type: 'GET',
+                  cache: false, // PREVENT AGGRESSIVE BROWSER CACHING
+                  success: function(html) {
+                      let newDoc = new DOMParser().parseFromString(html, 'text/html');
                       
-                      // Re-initialize reports table
-                      var reportsTable = $('#report-table').DataTable({
-                          dom: "<'row mb-3'<'col-sm-12 col-md-6'l>>" +
-                               "<'row'<'col-sm-12'tr>>" +
-                               "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                          pageLength: 10,
-                          lengthMenu: [5, 10, 25, 50, 100],
-                          ordering: false,
-                          language: {
-                              lengthMenu: "Show _MENU_ records",
-                              info: "Showing _START_ to _END_ of _TOTAL_ reports",
-                              infoEmpty: "Showing 0 to 0 of 0 reports",
-                              infoFiltered: "(filtered from _MAX_ total reports)",
-                              emptyTable: "No test reports generated yet.",
-                              paginate: {
-                                  previous: "<i class='fa fa-angle-left'></i>",
-                                  next: "<i class='fa fa-angle-right'></i>"
+                      // 1. Update the main reports table
+                      let newTableWrapper = $(newDoc).find('#report-table').closest('.table-responsive-modern').html();
+                      if (newTableWrapper) {
+                          let dtState = { page: 0, length: 10, search: '' };
+                          if($.fn.DataTable.isDataTable('#report-table')) {
+                              let dt = $('#report-table').DataTable();
+                              dtState.page = dt.page();
+                              dtState.length = dt.page.len();
+                              dtState.search = dt.search();
+                              dt.destroy();
+                          }
+                          
+                          // Specifically target the wrapper of report-table to avoid affecting modal tables
+                          $('#report-table').closest('.table-responsive-modern').html(newTableWrapper);
+                          
+                          // Re-initialize reports table with preserved state
+                          var reportsTable = $('#report-table').DataTable({
+                              dom: "<'row mb-3'<'col-sm-12 col-md-6'l>>" +
+                                   "<'row'<'col-sm-12'tr>>" +
+                                   "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                              pageLength: dtState.length,
+                              search: { search: dtState.search },
+                              lengthMenu: [5, 10, 25, 50, 100],
+                              ordering: false,
+                              language: {
+                                  lengthMenu: "Show _MENU_ records",
+                                  info: "Showing _START_ to _END_ of _TOTAL_ reports",
+                                  infoEmpty: "Showing 0 to 0 of 0 reports",
+                                  infoFiltered: "(filtered from _MAX_ total reports)",
+                                  emptyTable: "No test reports generated yet.",
+                                  paginate: {
+                                      previous: "<i class='fa fa-angle-left'></i>",
+                                      next: "<i class='fa fa-angle-right'></i>"
+                                  }
                               }
+                          });
+                          
+                          reportsTable.page(dtState.page).draw('page');
+
+                          $("#report-search").off("keyup").on("keyup", function() {
+                              reportsTable.search($(this).val()).draw();
+                          });
+                      }
+
+                      // 2. Update the "View Details" modal tables so "all pop" stay refreshed
+                      let newModalDetail = $(newDoc).find('#modal-view-detail .modal-body').html();
+                      if (newModalDetail) {
+                          $('#modal-view-detail .modal-body').html(newModalDetail);
+                      }
+                      
+                      // 3. Dynamically update ALL dropdown <select> contents without destroying bindings
+                      const selectNamesToUpdate = [
+                          'patient_id', 'doctor_name', 'report_signature_id', 'category_id', 'unit',
+                          'test_category[]', 'test_subcategory[]', 'test_name[]', 'observed_value[]', 
+                          'test_unit[]', 'normal_value[]', 'test_flag[]', 'biological_reference[]'
+                      ];
+                      
+                      selectNamesToUpdate.forEach(name => {
+                          let newOptions = $(newDoc).find(`select[name="${name}"]`).first().html();
+                          if (newOptions) {
+                              $(`select[name="${name}"]`).each(function() {
+                                  let currentVal = $(this).val();
+                                  $(this).html(newOptions);
+                                  $(this).val(currentVal); // Restore user selection if still exists
+                              });
                           }
                       });
-                      $("#report-search").off("keyup").on("keyup", function() {
-                          reportsTable.search($(this).val()).draw();
-                      });
-                  }
-
-                  // 2. Update the "View Details" modal tables so "all pop" stay refreshed
-                  let newModalDetail = $(newDoc).find('#modal-view-detail .modal-body').html();
-                  if (newModalDetail) {
-                      $('#modal-view-detail .modal-body').html(newModalDetail);
                   }
               });
           };

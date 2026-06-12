@@ -593,7 +593,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="field_1041" class="form-label">Email</label>
+							<label for="field_1041" class="form-label">Email <small class="text-muted">(Optional)</small></label>
 							<input type="email" class="form-control" name="email" placeholder="Email (Optional)" autocomplete="new-password" id="field_1041">
 						</div>
 					</div>
@@ -836,7 +836,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="edit-email" class="form-label">Email</label>
+							<label for="edit-email" class="form-label">Email <small class="text-muted">(Optional)</small></label>
 							<input type="email" class="form-control" id="edit-email" name="email" placeholder="Email" autocomplete="new-password">
 						</div>
 					</div>

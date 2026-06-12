@@ -955,9 +955,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1112"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
+                            <label for="field_1112"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1112">
+                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" autocomplete="off" id="field_1112">
                                     <option value="">-- Select Test --</option>
                                     @foreach($tests as $test)
                                         <option value="{{ $test->name }}" 
@@ -985,9 +985,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1113"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
+                            <label for="field_1113"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1113">
+                                <select class="form-select report-observed-select" name="observed_value[]" autocomplete="off" id="field_1113">
                                     <option value="">-- Select Observed --</option>
                                     @foreach($templates as $tmpl)
                                         <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>
@@ -2097,9 +2097,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label for="field_1003"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name <span class="text-danger">*</span></label>
+                             <label for="field_1003"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" required autocomplete="off" id="field_1003">
+                                 <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" autocomplete="off" id="field_1003">
                                      ${testOptions}
                                  </select>
                                  <button type="button" class="btn btn-success btn-sm btn-add-report-test" title="Add Parameter" style="padding: 0.25rem 0.5rem;"><i class="fa fa-plus"></i></button>
@@ -2109,9 +2109,9 @@
                              </div>
                          </div>
                          <div class="col-md-4 col-sm-6">
-                             <label for="field_1121"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value <span class="text-danger">*</span></label>
+                             <label for="field_1121"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value</label>
                              <div class="input-group flex-nowrap">
-                                 <select class="form-select report-observed-select" name="observed_value[]" required autocomplete="off" id="field_1121">
+                                 <select class="form-select report-observed-select" name="observed_value[]" autocomplete="off" id="field_1121">
                                      <option value="">-- Select Observed --</option>
                                      @foreach($templates as $tmpl)
                                          <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>

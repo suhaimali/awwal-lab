@@ -160,8 +160,8 @@ class HomeController extends Controller
             'notes' => 'nullable|string',
             'report_signature_id' => 'nullable|exists:report_signatures,id',
             'signature_pin' => 'required_with:report_signature_id|nullable|string',
-            'test_name.*' => 'required',
-            'observed_value.*' => 'required',
+            'test_name.*' => 'nullable',
+            'observed_value.*' => 'nullable',
         ]);
 
         $patient = \App\Models\Patient::findOrFail($request->patient_id);
@@ -205,8 +205,8 @@ class HomeController extends Controller
             'notes' => 'nullable|string',
             'report_signature_id' => 'nullable|exists:report_signatures,id',
             'signature_pin' => 'required_with:report_signature_id|nullable|string',
-            'test_name.*' => 'required',
-            'observed_value.*' => 'required',
+            'test_name.*' => 'nullable',
+            'observed_value.*' => 'nullable',
         ]);
 
         $oldData = $this->reportSnapshot($report->load(['patient', 'items', 'signature']));
@@ -367,7 +367,7 @@ class HomeController extends Controller
             'age'            => 'required|numeric|min:0|max:150',
             'age_type'       => 'nullable|in:Years,Months,Days',
             'phone'          => 'nullable|string|max:20',
-            'email'          => 'nullable|email|max:255|unique:patients,email',
+            'email'          => 'nullable|email|max:255',
             'reference_dr'   => 'nullable|string|max:150',
             'status'         => 'nullable|string|max:50',
             'address'        => 'nullable|string|max:500',
@@ -448,7 +448,7 @@ class HomeController extends Controller
             'age'            => 'required|numeric|min:0|max:150',
             'age_type'       => 'nullable|in:Years,Months,Days',
             'phone'          => 'nullable|string|max:20',
-            'email'          => 'nullable|email|max:255|unique:patients,email,' . $id,
+            'email'          => 'nullable|email|max:255',
             'reference_dr'   => 'nullable|string|max:150',
             'status'         => 'nullable|string|max:50',
             'address'        => 'nullable|string|max:500',
@@ -1102,6 +1102,11 @@ class HomeController extends Controller
         $items = [];
 
         foreach ($request->test_name ?? [] as $key => $name) {
+            // Skip empty rows — Dynamic Test Results is fully optional
+            if (empty(trim((string) $name))) {
+                continue;
+            }
+
             $labTest = $tests->get($name);
             $parameter = $labTest?->parameter;
             $reference = $this->resolveReferenceInterval($labTest, $patient);
@@ -1120,7 +1125,7 @@ class HomeController extends Controller
                 'category' => ($request->test_category[$key] ?? '') ?: 'General',
                 'subcategory' => $request->test_subcategory[$key] ?? '',
                 'name' => $name,
-                'observed_value' => $request->observed_value[$key],
+                'observed_value' => $request->observed_value[$key] ?? null,
                 'unit' => $unit,
                 'normal_value' => $normalValue,
                 'biological_reference' => $request->biological_reference[$key] ?? $normalValue,

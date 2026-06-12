@@ -873,13 +873,15 @@
               let currentUrl = window.location.href;
               $.get(currentUrl, function(html) {
                   let newDoc = new DOMParser().parseFromString(html, 'text/html');
-                  let newTableContent = $(newDoc).find('.table-responsive-modern').html();
                   
-                  if (newTableContent) {
+                  // 1. Update the main reports table
+                  let newTableWrapper = $(newDoc).find('#report-table').closest('.table-responsive-modern').html();
+                  if (newTableWrapper) {
                       if($.fn.DataTable.isDataTable('#report-table')) {
                           $('#report-table').DataTable().destroy();
                       }
-                      $('.table-responsive-modern').html(newTableContent);
+                      // Specifically target the wrapper of report-table to avoid affecting modal tables
+                      $('#report-table').closest('.table-responsive-modern').html(newTableWrapper);
                       
                       // Re-initialize reports table
                       var reportsTable = $('#report-table').DataTable({
@@ -901,9 +903,15 @@
                               }
                           }
                       });
-                      $("#report-search").on("keyup", function() {
+                      $("#report-search").off("keyup").on("keyup", function() {
                           reportsTable.search($(this).val()).draw();
                       });
+                  }
+
+                  // 2. Update the "View Details" modal tables so "all pop" stay refreshed
+                  let newModalDetail = $(newDoc).find('#modal-view-detail .modal-body').html();
+                  if (newModalDetail) {
+                      $('#modal-view-detail .modal-body').html(newModalDetail);
                   }
               });
           };

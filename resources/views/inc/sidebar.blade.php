@@ -107,6 +107,12 @@
             <span class="nav-icon"><i class="fa fa-chart-line"></i></span>
             <span class="nav-label">Income Report</span>
         </a>
+        <a href="{{ route('daily-collection') }}"
+           class="nav-item-link {{ request()->routeIs('daily-collection*') ? 'active' : '' }}"
+           data-tooltip="Daily Collection">
+            <span class="nav-icon"><i class="fa fa-cash-register"></i></span>
+            <span class="nav-label">Daily Collection</span>
+        </a>
     </nav>
 
     <div class="sidebar-footer">

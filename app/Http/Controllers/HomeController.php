@@ -676,6 +676,32 @@ class HomeController extends Controller
     // PAYMENT MANAGEMENT
     // ==========================================
 
+    public function dailyCollection(\Illuminate\Http\Request $request)
+    {
+        $date = $request->input('date', date('Y-m-d'));
+        
+        $payments = \App\Models\Payment::with('patient')
+            ->whereDate('bill_date', $date)
+            ->get();
+
+        $totalCollection = $payments->sum('net_amount');
+        $totalTransactions = $payments->count();
+
+        // Group by payment method
+        $methods = collect();
+        foreach($payments->groupBy('payment_method') as $method => $group) {
+            $methods->push([
+                'method' => $method ?: 'Unknown',
+                'amount' => $group->sum('net_amount'),
+                'count' => $group->count()
+            ]);
+        }
+
+        return view('daily_collection', compact(
+            'date', 'payments', 'totalCollection', 'totalTransactions', 'methods'
+        ));
+    }
+
     public function incomeReport(\Illuminate\Http\Request $request)
     {
         if (!$request->session()->get('income_report_unlocked')) {

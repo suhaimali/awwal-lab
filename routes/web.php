@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/income-report', [HomeController::class, 'incomeReport'])->name('income-report');
     Route::post('/income-report/unlock', [HomeController::class, 'unlockIncomeReport'])->name('income-report.unlock');
 
+    // Daily Collection
+    Route::get('/daily-collection', [HomeController::class, 'dailyCollection'])->name('daily-collection');
+
     // Patient AJAX Routes
     Route::post('/patients/store', [HomeController::class, 'storePatient'])->name('patients.store');
     Route::get('/patients/{id}', [HomeController::class, 'getPatient'])->name('patients.show');

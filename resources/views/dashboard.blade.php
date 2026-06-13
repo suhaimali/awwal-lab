@@ -151,11 +151,19 @@
                     </div>
                     <i class="fa fa-chevron-right ms-auto" style="font-size:11px;color:var(--text-muted);"></i>
                 </a>
-                <a href="#" onclick="openIncomeReport(event)" class="d-flex align-items-center gap-12 p-10 rounded-3 text-decoration-none" style="gap:12px; padding:10px 12px; border-radius:10px; transition:all 0.2s; color:var(--text-dark);" onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background='transparent'">
+                <a href="#" onclick="openIncomeReport(event)" class="d-flex align-items-center gap-12 p-10 rounded-3 mb-2 text-decoration-none" style="gap:12px; padding:10px 12px; border-radius:10px; transition:all 0.2s; color:var(--text-dark);" onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background='transparent'">
                     <div style="width:36px;height:36px;background:#f3e8ff;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa fa-chart-line" style="color:#9333ea;"></i></div>
                     <div>
                         <div style="font-size:13px;font-weight:600;">Income Report</div>
                         <div style="font-size:11px;color:var(--text-muted);">Financial overview</div>
+                    </div>
+                    <i class="fa fa-chevron-right ms-auto" style="font-size:11px;color:var(--text-muted);"></i>
+                </a>
+                <a href="{{ route('daily-collection') }}" class="d-flex align-items-center gap-12 p-10 rounded-3 text-decoration-none" style="gap:12px; padding:10px 12px; border-radius:10px; transition:all 0.2s; color:var(--text-dark);" onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background='transparent'">
+                    <div style="width:36px;height:36px;background:#dcfce7;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa fa-cash-register" style="color:#16a34a;"></i></div>
+                    <div>
+                        <div style="font-size:13px;font-weight:600;">Daily Collection</div>
+                        <div style="font-size:11px;color:var(--text-muted);">EOD cash tally</div>
                     </div>
                     <i class="fa fa-chevron-right ms-auto" style="font-size:11px;color:var(--text-muted);"></i>
                 </a>

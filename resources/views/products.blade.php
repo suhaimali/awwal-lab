@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($products as $product)
+                    @foreach($products as $product)
                         <tr>
                             <td data-label="Product Name" style="font-weight:600;">{{ $product->name }}</td>
                             <td data-label="Description" style="color:var(--text-muted);">{{ $product->description ?: '-' }}</td>
@@ -77,11 +77,11 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label class="form-label-aw">Product Name *</label>
-                                                <input type="text" class="form-control-aw" name="name" value="{{ $product->name }}" required>
+                                                <input type="text" class="form-control-aw" name="name" value="{{ $product->name }}" placeholder="Enter product name" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label-aw">Description</label>
-                                                <textarea class="form-control-aw" name="description" rows="2">{{ $product->description }}</textarea>
+                                                <textarea class="form-control-aw" name="description" rows="2" placeholder="Brief description (optional)">{{ $product->description }}</textarea>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
@@ -106,14 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-5 text-muted">
-                                <i class="fa fa-boxes" style="font-size:30px; opacity:0.4; display:block; margin-bottom:10px;"></i>
-                                No products found. Click "Add Product" to create one.
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -133,11 +126,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label-aw">Product Name *</label>
-                        <input type="text" class="form-control-aw" name="name" required>
+                        <input type="text" class="form-control-aw" name="name" placeholder="Enter product name" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label-aw">Description</label>
-                        <textarea class="form-control-aw" name="description" rows="2"></textarea>
+                        <textarea class="form-control-aw" name="description" rows="2" placeholder="Brief description (optional)"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">

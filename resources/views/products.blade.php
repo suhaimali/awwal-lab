@@ -12,10 +12,6 @@
         </div>
     </div>
     <div class="page-actions-aw">
-        <div style="position:relative; width:220px;" class="md-search-wrap">
-            <i class="fa fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:13px;"></i>
-            <input type="text" id="product-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:100%;" placeholder="Search products..." autocomplete="off">
-        </div>
         <button class="btn-aw-primary" data-bs-toggle="modal" data-bs-target="#modal-add-product">
             <i class="fa fa-plus"></i> Add Product
         </button>
@@ -23,6 +19,16 @@
 </div>
 
 <div class="aw-card">
+    <div class="aw-card-header d-flex justify-content-between align-items-center">
+        <div class="aw-card-title mb-0"><i class="fa fa-boxes" style="color:var(--primary);"></i> Product List</div>
+        <div class="d-flex align-items-center gap-2">
+            <span style="font-size:12px;color:var(--text-muted);"><i class="fa fa-circle-info me-1"></i>{{ $products->count() }} total products</span>
+            <div style="position:relative;">
+                <i class="fa fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;"></i>
+                <input type="text" id="product-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:220px;" placeholder="Search products..." autocomplete="off">
+            </div>
+        </div>
+    </div>
     <div class="aw-card-body p-0">
         <div class="table-responsive-modern md-dt-wrap">
             <table class="table-modern" id="product-table">

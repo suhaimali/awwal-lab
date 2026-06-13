@@ -350,11 +350,10 @@
                           tbody.append(`
                               <tr>
                                   <td data-label="Gender" style="font-size:12px;font-weight:600;"><span class="badge-aw bg-light text-dark border">${inv.gender}</span></td>
-                                  <td data-label="Age Min/Max" style="font-size:12px;">${inv.age_min !== null ? inv.age_min : '-'} to ${inv.age_max !== null ? inv.age_max : '-'} ${inv.age_type || 'Years'}</td>
+                                  <td data-label="Age Min/Max" style="font-size:12px;">${(inv.age_min === null && inv.age_max === null) ? '-' : (inv.age_min !== null ? inv.age_min : '-') + ' to ' + (inv.age_max !== null ? inv.age_max : '-') + ' ' + (inv.age_type || 'Years')}</td>
                                   <td data-label="Reference Text" style="font-size:12px;">${inv.reference_text || '-'}</td>
-                                  <td data-label="Min/Max Value" style="font-size:12px;">${inv.min_value !== null ? inv.min_value : '-'} / ${inv.max_value !== null ? inv.max_value : '-'}</td>
+                                  <td data-label="Min/Max Value" style="font-size:12px;">${(inv.min_value === null && inv.max_value === null) ? '-' : (inv.min_value !== null ? inv.min_value : '-') + ' / ' + (inv.max_value !== null ? inv.max_value : '-')}</td>
                                   <td data-label="Action" class="text-end">
-                                      <button type="button" class="btn-aw-success btn-aw-sm btn-edit-interval" data-id="${inv.id}" data-gender="${inv.gender}" data-age_min="${inv.age_min !== null ? inv.age_min : ''}" data-age_max="${inv.age_max !== null ? inv.age_max : ''}" data-age_type="${inv.age_type || 'Years'}" data-ref_text="${inv.reference_text || ''}" data-min_val="${inv.min_value !== null ? inv.min_value : ''}" data-max_val="${inv.max_value !== null ? inv.max_value : ''}"><i class="fa fa-edit"></i></button>
                                       <button type="button" class="btn-aw-danger btn-aw-sm btn-delete-interval" data-id="${inv.id}"><i class="fa fa-trash"></i></button>
                                   </td>
                               </tr>

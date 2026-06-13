@@ -36,7 +36,7 @@
         
         .results-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
         .results-table th { background-color: #0e609e; color: #fff; text-align: left; padding: 8px; font-size: 12px; border: 1px solid #0e609e; }
-        .results-table td { padding: 7px 8px; border-bottom: 1px solid #e0e0e0; border-left: 1px solid #eee; border-right: 1px solid #eee; font-size: 12px; vertical-align: middle; }
+        .results-table td { padding: 7px 8px; border-bottom: 1px solid #e0e0e0; border-left: 1px solid #eee; border-right: 1px solid #eee; font-size: 12px; vertical-align: middle; word-wrap: break-word; word-break: break-word; }
         .results-table tr:nth-child(even) td { background-color: #fdfdfd; }
         
         .results-table th.center, .results-table td.center { text-align: center; }

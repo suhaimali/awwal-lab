@@ -535,6 +535,18 @@ class HomeController extends Controller
         if (\App\Models\TestReport::where('patient_id', $patient->id)->exists()) {
             return response()->json(['error' => 'Cannot delete patient with existing reports. Delete or reassign reports first.'], 409);
         }
+        
+        if (\App\Models\Appointment::where('patient_id', $patient->id)->exists()) {
+            return response()->json(['error' => 'Cannot delete patient with existing appointments. Delete appointments first.'], 409);
+        }
+        
+        if (\App\Models\Payment::where('patient_id', $patient->id)->exists()) {
+            return response()->json(['error' => 'Cannot delete patient with existing payment records. Delete payments first.'], 409);
+        }
+        
+        if (\App\Models\VitalSign::where('patient_id', $patient->id)->exists()) {
+            return response()->json(['error' => 'Cannot delete patient with existing vital signs. Delete vital signs first.'], 409);
+        }
 
         $patient->delete();
 

@@ -91,6 +91,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/test-parameters/{id}/intervals', [HomeController::class, 'storeReferenceInterval'])->name('reference-intervals.store');
     Route::get('/test-parameters/{id}/intervals', [HomeController::class, 'getReferenceIntervals'])->name('reference-intervals.get');
     Route::delete('/test-parameters/intervals/{id}', [HomeController::class, 'deleteReferenceInterval'])->name('reference-intervals.delete');
+
+
+
     // Category Routes
     Route::get('/categories', [HomeController::class, 'categories'])->name('categories.index');
     Route::post('/categories', [HomeController::class, 'storeCategory'])->name('categories.store');

@@ -78,7 +78,6 @@ class HomeController extends Controller
         $referenceTemplates = \App\Models\ReferenceTemplate::orderBy('name')->get();
         $flagTemplates = \App\Models\FlagTemplate::orderBy('name')->get();
         $signatures = \App\Models\ReportSignature::orderBy('name')->get();
-
         return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates', 'referenceTemplates', 'flagTemplates', 'signatures'));
     }
 

@@ -607,7 +607,9 @@
 
                 <div class="d-flex justify-content-between align-items-center mt-2 mb-3 border-bottom pb-2">
                     <h4 class="text-primary mb-0">Dynamic Test Results</h4>
-                    <button type="button" class="btn btn-sm btn-success" id="btn-add-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <button type="button" class="btn btn-sm btn-success" id="btn-add-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
+                    </div>
                 </div>
 				
                 <div id="dynamic-tests-container">
@@ -716,7 +718,9 @@
 
                 <div class="d-flex justify-content-between align-items-center mt-2 mb-3 border-bottom pb-2">
                     <h4 class="text-primary mb-0">Dynamic Test Results</h4>
-                    <button type="button" class="btn btn-sm btn-success" id="btn-add-edit-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <button type="button" class="btn btn-sm btn-success" id="btn-add-edit-test-row"><i class="fa fa-plus me-1"></i> Add Test Item</button>
+                    </div>
                 </div>
 				
                 <div id="edit-dynamic-tests-container">
@@ -1379,11 +1383,13 @@
 
           function initDynamicSelect2() {
               // Revert all select elements inside the reports modals to standard native HTML selects
-              $('#modal-add-report select, #modal-edit-report select').each(function() {
-                  if ($(this).hasClass('select2-hidden-accessible')) {
-                      $(this).select2('destroy');
-                  }
-              });
+              if ($.fn.select2) {
+                  $('#modal-add-report select, #modal-edit-report select').each(function() {
+                      if ($(this).hasClass('select2-hidden-accessible')) {
+                          $(this).select2('destroy');
+                      }
+                  });
+              }
           }
 
           // Modal clearing logic to fix 'titles not clearing'
@@ -1420,6 +1426,8 @@
               updateRowSlNo(target);
               initDynamicSelect2();
           });
+
+
 
           $(document).on('click', '.remove-row', function() {
               let target = $(this).closest('.test-item-row').parent();

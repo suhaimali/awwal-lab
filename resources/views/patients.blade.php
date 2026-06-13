@@ -618,6 +618,7 @@
 								<select class="form-select reference-dr-select" autocomplete="off" id="field_1044" name="reference_dr">
 									<option value="">-- Select Doctor --</option>
 								</select>
+								<button type="button" class="btn btn-secondary btn-clear-doctor" title="Clear Selection"><i class="fa fa-times"></i></button>
 								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
 								<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
@@ -638,8 +639,9 @@
 					</div>
 				</div>
 				
-				<h5 class="mt-4 mb-2 text-primary fw-bold"><i class="fa fa-flask me-2"></i>Select Tests & Financial Details</h5>
-				
+				<div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+					<h5 class="text-primary fw-bold mb-0"><i class="fa fa-flask me-2"></i>Select Tests & Financial Details</h5>
+				</div>
                 <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">
                     <div class="col-md-5">Test Name</div>
                     <div class="col-md-3">Amount (₹)</div>
@@ -910,6 +912,7 @@
 								<select class="form-select reference-dr-select" id="edit-reference-dr" autocomplete="off" name="reference_dr">
 									<option value="">-- Select Doctor --</option>
 								</select>
+								<button type="button" class="btn btn-secondary btn-clear-doctor" title="Clear Selection"><i class="fa fa-times"></i></button>
 								<button type="button" class="btn btn-success btn-add-doctor" title="Add New"><i class="fa fa-plus"></i></button>
 								<button type="button" class="btn btn-warning btn-edit-doctor" title="Edit Selected"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-danger btn-delete-doctor" title="Delete Selected"><i class="fa fa-trash"></i></button>
@@ -930,7 +933,9 @@
 					</div>
 				</div>
 
-				<h5 class="mt-4 mb-2 text-primary fw-bold"><i class="fa fa-flask me-2"></i>Select Tests & Financial Details</h5>
+				<div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+					<h5 class="text-primary fw-bold mb-0"><i class="fa fa-flask me-2"></i>Select Tests & Financial Details</h5>
+				</div>
 				
                 <div class="d-none d-md-flex row fw-bold text-muted mb-2 px-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">
                     <div class="col-md-5">Test Name</div>
@@ -1216,11 +1221,13 @@
           // Select2 initialization function
           function initDynamicSelect2() {
               // Revert all select elements inside the patient modals to standard native HTML selects
-              $('#modal-add-patient select, #modal-edit-patient select, #modal-patient-book-test select').each(function() {
-                  if ($(this).hasClass('select2-hidden-accessible')) {
-                      $(this).select2('destroy');
-                  }
-              });
+              if ($.fn.select2) {
+                  $('#modal-add-patient select, #modal-edit-patient select, #modal-patient-book-test select').each(function() {
+                      if ($(this).hasClass('select2-hidden-accessible')) {
+                          $(this).select2('destroy');
+                      }
+                  });
+              }
           }
 
           $(document).on('shown.bs.modal', '#modal-add-patient, #modal-edit-patient, #modal-patient-book-test', function() {
@@ -1474,6 +1481,11 @@
                       }
                   });
               }
+          });
+
+          $(document).on('click', '.btn-clear-doctor', function() {
+              let select = $(this).siblings('.reference-dr-select');
+              select.val('');
           });
 
           $('#btn-save-doctor').click(function() {
@@ -1783,6 +1795,8 @@
 			  $('#add-patient-tests-container').append(addTestRowTemplate);
               initDynamicSelect2();
 		  });
+
+
 
 		  $(document).on('click', '.btn-add-remove-test-row', function() {
 			  $(this).closest('.test-row').remove();

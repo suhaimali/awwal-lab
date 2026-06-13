@@ -53,6 +53,16 @@ Route::middleware(['auth'])->group(function () {
     // Daily Collection
     Route::get('/daily-collection', [HomeController::class, 'dailyCollection'])->name('daily-collection');
 
+    // Accounts & Purchase Management
+    Route::get('/products', [HomeController::class, 'productsIndex'])->name('products.index');
+    Route::post('/products/store', [HomeController::class, 'storeProduct'])->name('products.store');
+    Route::post('/products/{id}', [HomeController::class, 'updateProduct'])->name('products.update');
+    Route::delete('/products/{id}', [HomeController::class, 'deleteProduct'])->name('products.destroy');
+
+    Route::get('/purchases', [HomeController::class, 'purchasesIndex'])->name('purchases.index');
+    Route::post('/purchases/store', [HomeController::class, 'storePurchase'])->name('purchases.store');
+    Route::get('/purchases/api-products', [HomeController::class, 'apiProducts'])->name('purchases.api-products');
+
     // Patient AJAX Routes
     Route::post('/patients/store', [HomeController::class, 'storePatient'])->name('patients.store');
     Route::get('/patients/{id}', [HomeController::class, 'getPatient'])->name('patients.show');

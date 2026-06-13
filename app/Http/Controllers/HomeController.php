@@ -1521,6 +1521,126 @@ class HomeController extends Controller
 
         return response()->json(['success' => 'Vital Signs deleted successfully!']);
     }
+    // ==========================================
+    // ACCOUNTS & PURCHASE MANAGEMENT
+    // ==========================================
+
+    public function productsIndex()
+    {
+        $products = \App\Models\Product::orderBy('name')->get();
+        return view('products', compact('products'));
+    }
+
+    public function storeProduct(\Illuminate\Http\Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'unit' => 'nullable',
+            'unit_price' => 'nullable|numeric',
+            'stock_quantity' => 'nullable|integer',
+        ]);
+
+        if (empty($validated['unit'])) $validated['unit'] = 'pcs';
+        if (empty($validated['unit_price'])) $validated['unit_price'] = 0;
+        if (empty($validated['stock_quantity'])) $validated['stock_quantity'] = 0;
+
+        $product = \App\Models\Product::create($validated);
+
+        return response()->json(['success' => 'Product added successfully!', 'product' => $product]);
+    }
+
+    public function updateProduct(\Illuminate\Http\Request $request, $id)
+    {
+        $product = \App\Models\Product::findOrFail($id);
+        
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'unit' => 'nullable',
+            'unit_price' => 'nullable|numeric',
+            'stock_quantity' => 'nullable|integer',
+        ]);
+
+        if (empty($validated['unit'])) $validated['unit'] = 'pcs';
+        if (empty($validated['unit_price'])) $validated['unit_price'] = 0;
+        if (empty($validated['stock_quantity'])) $validated['stock_quantity'] = 0;
+
+        $product->update($validated);
+
+        return response()->json(['success' => 'Product updated successfully!']);
+    }
+
+    public function deleteProduct($id)
+    {
+        $product = \App\Models\Product::findOrFail($id);
+        
+        // Prevent deletion if linked to purchases
+        if (\App\Models\PurchaseItem::where('product_id', $product->id)->exists()) {
+            return response()->json(['error' => 'Cannot delete product linked to purchase receipts.'], 409);
+        }
+
+        $product->delete();
+        return response()->json(['success' => 'Product deleted successfully!']);
+    }
+
+    public function purchasesIndex()
+    {
+        $receipts = \App\Models\PurchaseReceipt::with('items.product')->orderBy('purchase_date', 'desc')->get();
+        $products = \App\Models\Product::orderBy('name')->get();
+        return view('purchases', compact('receipts', 'products'));
+    }
+
+    public function storePurchase(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'vendor_name' => 'nullable|string',
+            'purchase_date' => 'required|date',
+            'notes' => 'nullable|string',
+            'items' => 'required|string', // JSON string of items
+        ]);
+
+        $items = json_decode($request->items, true);
+        if (empty($items)) {
+            return response()->json(['error' => 'At least one item is required.'], 422);
+        }
+
+        $totalAmount = 0;
+        foreach($items as $item) {
+            $totalAmount += $item['quantity'] * $item['unit_price'];
+        }
+
+        $receipt = \App\Models\PurchaseReceipt::create([
+            'receipt_no' => 'PR-' . strtoupper(uniqid()),
+            'vendor_name' => $request->vendor_name,
+            'purchase_date' => $request->purchase_date,
+            'total_amount' => $totalAmount,
+            'notes' => $request->notes,
+        ]);
+
+        foreach($items as $item) {
+            \App\Models\PurchaseItem::create([
+                'purchase_receipt_id' => $receipt->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['unit_price'],
+                'total_price' => $item['quantity'] * $item['unit_price']
+            ]);
+
+            // Update product stock automatically
+            $product = \App\Models\Product::find($item['product_id']);
+            if ($product) {
+                $product->increment('stock_quantity', $item['quantity']);
+            }
+        }
+
+        return response()->json(['success' => 'Purchase Receipt created successfully!']);
+    }
+
+    public function apiProducts()
+    {
+        return response()->json(\App\Models\Product::orderBy('name')->get());
+    }
 }
 
 

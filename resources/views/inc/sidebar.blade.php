@@ -113,6 +113,22 @@
             <span class="nav-icon"><i class="fa fa-cash-register"></i></span>
             <span class="nav-label">Daily Collection</span>
         </a>
+
+        <div class="sidebar-section-label" style="margin-top:8px;">Inventory & Accounts</div>
+
+        <a href="{{ route('products.index') }}"
+           class="nav-item-link {{ request()->routeIs('products*') ? 'active' : '' }}"
+           data-tooltip="Products">
+            <span class="nav-icon"><i class="fa fa-boxes"></i></span>
+            <span class="nav-label">Products</span>
+        </a>
+
+        <a href="{{ route('purchases.index') }}"
+           class="nav-item-link {{ request()->routeIs('purchases*') ? 'active' : '' }}"
+           data-tooltip="Purchase Receipts">
+            <span class="nav-icon"><i class="fa fa-file-invoice-dollar"></i></span>
+            <span class="nav-label">Purchase Receipts</span>
+        </a>
     </nav>
 
     <div class="sidebar-footer">

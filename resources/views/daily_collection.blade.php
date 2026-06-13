@@ -113,10 +113,12 @@
                     <thead>
                         <tr>
                             <th>Time</th>
-                            <th>Patient Name</th>
-                            <th>Patient ID</th>
+                            <th>Patient Details</th>
                             <th>Method</th>
-                            <th class="text-end">Amount</th>
+                            <th class="text-end">Total</th>
+                            <th class="text-end">Advance</th>
+                            <th class="text-end">Balance</th>
+                            <th class="text-end">Net Amt</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,22 +127,29 @@
                                 <td data-label="Time">
                                     {{ \Carbon\Carbon::parse($payment->created_at)->format('h:i A') }}
                                 </td>
-                                <td data-label="Patient Name">
+                                <td data-label="Patient Details">
                                     <div style="font-weight:600;">{{ $payment->patient ? $payment->patient->first_name . ' ' . $payment->patient->last_name : 'Unknown Patient' }}</div>
-                                </td>
-                                <td data-label="Patient ID">
-                                    {{ $payment->patient ? $payment->patient->patient_id : 'N/A' }}
+                                    <div style="font-size:11px; color:var(--text-muted);">ID: {{ $payment->patient ? $payment->patient->patient_id : 'N/A' }}</div>
                                 </td>
                                 <td data-label="Method">
                                     <span class="badge-aw badge-blue">{{ $payment->payment_method ?: 'N/A' }}</span>
                                 </td>
-                                <td data-label="Amount" class="text-end" style="font-weight:700;">
+                                <td data-label="Total" class="text-end">
+                                    ₹{{ number_format($payment->total_amount, 2) }}
+                                </td>
+                                <td data-label="Advance" class="text-end" style="color:#059669; font-weight:600;">
+                                    ₹{{ number_format($payment->advance_paid, 2) }}
+                                </td>
+                                <td data-label="Balance" class="text-end" style="color:#ef4444;">
+                                    ₹{{ number_format($payment->balance_due, 2) }}
+                                </td>
+                                <td data-label="Net Amt" class="text-end" style="font-weight:700;">
                                     ₹{{ number_format($payment->net_amount, 2) }}
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-5 text-muted">
+                                <td colspan="7" class="text-center py-5 text-muted">
                                     <i class="fa fa-box-open" style="font-size:30px; opacity:0.4; display:block; margin-bottom:10px;"></i>
                                     No transactions found.
                                 </td>
@@ -150,7 +159,7 @@
                     @if($payments->count() > 0)
                     <tfoot>
                         <tr style="background:#f1f5f9; font-weight:700;">
-                            <td colspan="4" class="text-end py-3">TOTAL COLLECTION:</td>
+                            <td colspan="6" class="text-end py-3">TOTAL COLLECTION:</td>
                             <td class="text-end py-3" style="font-size:18px; color:#16a34a;">₹{{ number_format($totalCollection, 2) }}</td>
                         </tr>
                     </tfoot>

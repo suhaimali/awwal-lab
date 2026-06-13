@@ -12,6 +12,10 @@
         </div>
     </div>
     <div class="page-actions-aw">
+        <div style="position:relative; width:220px;" class="md-search-wrap">
+            <i class="fa fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:13px;"></i>
+            <input type="text" id="product-search" style="border:1.5px solid var(--border-color);border-radius:9px;padding:8px 12px 8px 32px;font-size:13px;outline:none;width:100%;" placeholder="Search products..." autocomplete="off">
+        </div>
         <button class="btn-aw-primary" data-bs-toggle="modal" data-bs-target="#modal-add-product">
             <i class="fa fa-plus"></i> Add Product
         </button>
@@ -20,8 +24,8 @@
 
 <div class="aw-card">
     <div class="aw-card-body p-0">
-        <div class="table-responsive-modern">
-            <table class="table-modern">
+        <div class="table-responsive-modern md-dt-wrap">
+            <table class="table-modern" id="product-table">
                 <thead>
                     <tr>
                         <th>Product Name</th>
@@ -221,5 +225,31 @@
             });
         }
     }
+
+    $(document).ready(function() {
+        var productTable = $('#product-table').DataTable({
+            dom: "<'row mb-3'<'col-sm-12 col-md-6'l>>" +
+                 "<'row'<'col-sm-12'tr>>" +
+                 "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            pageLength: 10,
+            lengthMenu: [10, 25, 50, 100],
+            ordering: false,
+            language: {
+                lengthMenu: "Show _MENU_ records",
+                info: "Showing _START_ to _END_ of _TOTAL_ products",
+                infoEmpty: "Showing 0 to 0 of 0 products",
+                infoFiltered: "(filtered from _MAX_ total products)",
+                emptyTable: "No products found in the database.",
+                paginate: {
+                    previous: "<i class='fa fa-angle-left'></i>",
+                    next: "<i class='fa fa-angle-right'></i>"
+                }
+            }
+        });
+
+        $("#product-search").on("keyup", function() {
+            productTable.search($(this).val()).draw();
+        });
+    });
 </script>
 @endpush

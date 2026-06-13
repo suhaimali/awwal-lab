@@ -1214,25 +1214,25 @@
 	              let max = ageInterval ? ageInterval.max_value : (gender === 'Male' ? selected.attr('data-male-max') : selected.attr('data-female-max'));
 
 	              if (!isNaN(criticalLow) && val <= criticalLow) {
-	                  setSelectValueWithDefault(flagSelector, 'C');
+	                  setSelectValueWithDefault(flagSelector, '↓↓');
 	                  return;
 	              }
 
 	              if (!isNaN(criticalHigh) && val >= criticalHigh) {
-	                  setSelectValueWithDefault(flagSelector, 'C');
+	                  setSelectValueWithDefault(flagSelector, '↑↑');
 	                  return;
 	              }
 
               if (isImmuno) {
                   // Immunoassay logic: <0.9 Neg, 0.9-1.1 Bord, >1.1 Pos
-                  if (val < 0.9) setSelectValueWithDefault(flagSelector, 'N');
-                  else if (val >= 0.9 && val <= 1.1) setSelectValueWithDefault(flagSelector, 'B');
-                  else if (val > 1.1) setSelectValueWithDefault(flagSelector, 'P');
+                  if (val < 0.9) setSelectValueWithDefault(flagSelector, '-');
+                  else if (val >= 0.9 && val <= 1.1) setSelectValueWithDefault(flagSelector, '+/-');
+                  else if (val > 1.1) setSelectValueWithDefault(flagSelector, '+');
               } else if (min !== undefined && max !== undefined) {
                   // Standard Min-Max logic
-	                  if (val < min) setSelectValueWithDefault(flagSelector, 'L');
-	                  else if (val > max) setSelectValueWithDefault(flagSelector, 'H');
-	                  else setSelectValueWithDefault(flagSelector, 'N');
+	                  if (val < min) setSelectValueWithDefault(flagSelector, '↓');
+	                  else if (val > max) setSelectValueWithDefault(flagSelector, '↑');
+	                  else setSelectValueWithDefault(flagSelector, '');
 	              }
 	          });
 

@@ -452,19 +452,23 @@ $(document).ready(function () {
     /* ── ADD handlers ─────────────────────────────────────── */
     $('#form-add-unit').submit(function (e) {
         e.preventDefault();
-        $.post("{{ route('units.store') }}", $(this).serialize(), function () { location.reload(); });
+        $.post("{{ route('units.store') }}", $(this).serialize(), function () { location.reload(); })
+         .fail(function(xhr) { alert('Error: ' + (xhr.responseJSON?.message || 'Failed to add unit.')); });
     });
     $('#form-add-template').submit(function (e) {
         e.preventDefault();
-        $.post("{{ route('result-templates.store') }}", $(this).serialize(), function () { location.reload(); });
+        $.post("{{ route('result-templates.store') }}", $(this).serialize(), function () { location.reload(); })
+         .fail(function(xhr) { alert('Error: ' + (xhr.responseJSON?.message || 'Failed to add template.')); });
     });
     $('#form-add-reference').submit(function (e) {
         e.preventDefault();
-        $.post("{{ route('reference-templates.store') }}", $(this).serialize(), function () { location.reload(); });
+        $.post("{{ route('reference-templates.store') }}", $(this).serialize(), function () { location.reload(); })
+         .fail(function(xhr) { alert('Error: ' + (xhr.responseJSON?.message || 'Failed to add reference template.')); });
     });
     $('#form-add-flag').submit(function (e) {
         e.preventDefault();
-        $.post("{{ route('flag-templates.store') }}", $(this).serialize(), function () { location.reload(); });
+        $.post("{{ route('flag-templates.store') }}", $(this).serialize(), function () { location.reload(); })
+         .fail(function(xhr) { alert('Error: ' + (xhr.responseJSON?.message || 'Failed to add flag template.')); });
     });
 
     /* ── DELETE handlers ──────────────────────────────────── */

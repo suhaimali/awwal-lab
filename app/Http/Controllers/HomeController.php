@@ -82,6 +82,7 @@ class HomeController extends Controller
         return view('reports', compact('reports', 'patients', 'tests', 'categories', 'subCategories', 'units', 'templates', 'referenceTemplates', 'flagTemplates', 'signatures'));
     }
 
+
     public function reportSignatures()
     {
         $signatures = \App\Models\ReportSignature::latest()->get();
@@ -270,7 +271,7 @@ class HomeController extends Controller
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.report', $data);
         
         $filename = 'Report_' . str_replace(' ', '_', $patient->first_name) . '_' . $report->id . '.pdf';
-        return $pdf->download($filename);
+        return $pdf->stream($filename);
     }
 
     public function patients()
@@ -1208,21 +1209,21 @@ class HomeController extends Controller
         $value = (float) $observedValue;
 
         if ($parameter->critical_low !== null && $parameter->critical_low !== '' && $value <= (float) $parameter->critical_low) {
-            return 'C';
+            return '↓↓';
         }
 
         if ($parameter->critical_high !== null && $parameter->critical_high !== '' && $value >= (float) $parameter->critical_high) {
-            return 'C';
+            return '↑↑';
         }
 
         if ($parameter->is_immunoassay) {
             if ($value < 0.9) {
-                return 'N';
+                return '-';
             }
             if ($value <= 1.1) {
-                return 'B';
+                return '+/-';
             }
-            return 'P';
+            return '+';
         }
 
         $min = $reference['min'] ?? null;
@@ -1235,14 +1236,14 @@ class HomeController extends Controller
         }
 
         if ($min !== null && $value < (float) $min) {
-            return 'L';
+            return '↓';
         }
 
         if ($max !== null && $value > (float) $max) {
-            return 'H';
+            return '↑';
         }
 
-        return ($min !== null || $max !== null) ? 'N' : null;
+        return ($min !== null || $max !== null) ? '' : null;
     }
 
     private function serializeReportItem(\App\Models\TestReportItem $item): array

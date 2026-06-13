@@ -1,332 +1,162 @@
-<style>
-        @@page { margin: 0; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Lab Report - {{ $patient->first_name }}</title>
+    <style>
+        @page { margin: 120px 40px 80px 40px; }
+        body { margin: 0; padding: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 13px; color: #222; }
+        
+        header { position: fixed; top: -100px; left: 0px; right: 0px; height: 90px; }
+        footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
+        
+        .header-img { width: 100%; height: 100%; object-fit: contain; }
+        .footer-img { width: 100%; height: 100%; object-fit: contain; }
+        
+        /* Fallbacks */
+        .fallback-header { border-bottom: 2px solid #0e609e; padding-bottom: 10px; }
+        .fallback-brand { float: left; width: 60%; }
+        .fallback-name { font-size: 28px; font-weight: bold; color: #0e609e; letter-spacing: 2px; }
+        .fallback-sub { font-size: 11px; font-weight: bold; color: #555; }
+        .fallback-address { float: right; width: 40%; text-align: right; font-size: 11px; color: #444; line-height: 1.4; }
+        .clear { clear: both; }
 
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .report-container {
-            margin: 0;
-            font-family: "Times New Roman", Times, serif;
-            font-size: 14px;
-            color: #000;
-        }
-
-        .page-header {
-            height: 95px;
-        }
-
-        .page-header img,
-        .page-footer img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .letterhead-fallback {
-            padding: 13px 44px 0 44px;
-            border-bottom: 1px solid #35a777;
-            height: 81px;
-            box-sizing: border-box;
-        }
-
-        .fallback-brand {
-            float: left;
-            width: 52%;
-            text-align: center;
-        }
-
-        .fallback-tagline {
-            font-size: 10px;
-            font-style: italic;
-            color: #555;
-        }
-
-        .fallback-name {
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 34px;
-            line-height: 32px;
-            color: #8a277d;
-            letter-spacing: 4px;
-        }
-
-        .fallback-sub {
-            font-family: Helvetica, Arial, sans-serif;
-            color: #149447;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .fallback-site {
-            color: #8a277d;
-            font-size: 12px;
-            letter-spacing: 3px;
-        }
-
-        .fallback-address {
-            float: right;
-            width: 38%;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 11px;
-            line-height: 1.2;
-            color: #444;
-        }
-
-        .footer-fallback {
-            width: 100%;
-            height: 82px;
-            color: #fff;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 82px;
-            text-align: center;
-        }
-
-        .footer-fallback-left,
-        .footer-fallback-right {
-            float: left;
-            width: 50%;
-            height: 82px;
-        }
-
-        .footer-fallback-left { background: #07984f; }
-        .footer-fallback-right { background: #932486; }
-
-        .page-footer {
-            height: 82px;
-        }
-
-        .report-body {
-            margin: 32px 60px 20px 60px;
-        }
-
-        .patient-info {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 4px;
-            font-size: 15px;
-        }
-
-        .patient-info td {
-            padding: 2px 4px;
-            vertical-align: top;
-            line-height: 1.25;
-        }
-
-        .patient-info .label {
-            width: 130px;
-        }
-
-        .patient-info .sep {
-            width: 10px;
-            font-weight: bold;
-        }
-
-        .patient-info .right-label {
-            width: 105px;
-        }
-
-        .patient-info strong {
-            font-weight: 700;
-        }
-
-        .patient-rule {
-            border: 0;
-            border-top: 1px solid #000;
-            margin: 4px -60px 28px -60px;
-        }
-
-        .category-title {
-            text-align: center;
-            font-weight: 700;
-            font-size: 16px;
-            margin: 14px 0 13px;
-            text-transform: uppercase;
-        }
-
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 14px;
-            font-size: 14px;
-        }
-
-        .results-table th,
-        .results-table td {
-            border: 1px solid #000;
-            padding: 4px 7px;
-            vertical-align: top;
-            line-height: 1.18;
-        }
-
-        .results-table th {
-            text-align: center;
-            font-weight: 700;
-            font-size: 15px;
-        }
-
-        .sl-col { width: 6%; text-align: center; }
-        .param-col { width: 29%; }
-        .value-col { width: 16%; text-align: center; }
-        .unit-col { width: 14%; text-align: center; }
-        .ref-col { width: 26%; }
-        .flag-col { width: 9%; text-align: center; }
-
-        .observed-number {
-            font-weight: 700;
-        }
-
-        .section-row td {
-            font-weight: 700;
-        }
-
-        .flag-critical {
-            color: #d00000;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .flag-cell {
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .report-closing {
-            width: 100%;
-            margin-top: 34px;
-            border-collapse: collapse;
-            page-break-inside: avoid;
-        }
-
-        .report-note {
-            width: 62%;
-            vertical-align: top;
-            font-size: 14px;
-            line-height: 1.35;
-        }
-
-        .report-note-label {
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .signature {
-            width: 38%;
-            text-align: center;
-            vertical-align: bottom;
-            padding-right: 6px;
-            font-size: 14px;
-        }
-
-        .signature img {
-            max-width: 150px;
-            max-height: 58px;
-            object-fit: contain;
-            display: inline-block;
-            margin-bottom: 4px;
-        }
-
-        .signature-name {
-            font-weight: 700;
-        }
+        .patient-box { width: 100%; border: 1px solid #0e609e; border-radius: 6px; margin-top: 10px; margin-bottom: 20px; border-collapse: separate; border-spacing: 0; overflow: hidden; }
+        .patient-box td { padding: 8px 12px; border-bottom: 1px solid #eee; border-right: 1px solid #eee; vertical-align: middle; }
+        .patient-box tr:last-child td { border-bottom: none; }
+        .patient-box td:last-child { border-right: none; }
+        
+        .pb-label { font-size: 10px; color: #777; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 3px; }
+        .pb-val { font-size: 13px; font-weight: bold; color: #111; }
+        .pb-val-large { font-size: 16px; font-weight: bold; color: #0e609e; }
+        
+        .report-title { text-align: center; font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #333; text-transform: uppercase; letter-spacing: 2px; background: #f4f4f4; padding: 6px; border: 1px solid #ddd; }
+        
+        .category-title { background-color: #f0f4f8; border-left: 4px solid #0e609e; padding: 6px 10px; font-weight: bold; font-size: 14px; margin: 15px 0 8px; color: #0e609e; text-transform: uppercase; }
+        
+        .results-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .results-table th { background-color: #0e609e; color: #fff; text-align: left; padding: 8px; font-size: 12px; border: 1px solid #0e609e; }
+        .results-table td { padding: 7px 8px; border-bottom: 1px solid #e0e0e0; border-left: 1px solid #eee; border-right: 1px solid #eee; font-size: 12px; vertical-align: middle; }
+        .results-table tr:nth-child(even) td { background-color: #fdfdfd; }
+        
+        .results-table th.center, .results-table td.center { text-align: center; }
+        .results-table .sl-col { width: 5%; text-align: center; }
+        
+        .section-row td { font-weight: bold; background-color: #eef5fa !important; color: #0e609e; padding: 5px 8px; font-size: 11px; text-transform: uppercase; }
+        
+        .flag-high { color: #d00000; font-weight: bold; font-size: 14px; }
+        .flag-low { color: #0055d0; font-weight: bold; font-size: 14px; }
+        .val-abnormal { font-weight: bold; font-size: 13px; }
+        
+        .end-of-report { text-align: center; font-weight: bold; margin-top: 30px; font-size: 12px; border-top: 1px dashed #aaa; padding-top: 10px; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .report-note { margin-top: 20px; font-size: 11px; line-height: 1.5; color: #444; }
+        .report-note strong { color: #000; }
+        
+        .signature-area { width: 100%; margin-top: 40px; border-collapse: collapse; page-break-inside: avoid; }
+        .signature-area td { vertical-align: bottom; }
+        .sig-box { text-align: center; width: 220px; float: right; }
+        .sig-box img { max-width: 160px; max-height: 60px; display: block; margin: 0 auto; }
+        .sig-name { font-weight: bold; border-top: 1px solid #333; padding-top: 5px; margin-top: 5px; font-size: 12px; }
+        
+        .pagenum:before { content: counter(page); }
+        .page-footer-text { text-align: center; font-size: 10px; padding-top: 10px; color: #777; border-top: 1px solid #eee; margin-top: 10px; }
     </style>
-
-<div class="report-container">
-    <div class="page-header">
-        @if (extension_loaded('gd'))
-            <img src="{{ public_path('images/report-header-awwal.png') }}" alt="SUHAIM SOFT LAB">
+</head>
+<body>
+    <header>
+        @if (extension_loaded('gd') && file_exists(public_path('images/report-header-awwal.png')))
+            <img src="{{ public_path('images/report-header-awwal.png') }}" class="header-img" alt="Header">
         @else
-            <div class="letterhead-fallback">
+            <div class="fallback-header">
                 <div class="fallback-brand">
-                    <div class="fallback-tagline">"Accurate Diagnosis for Effective Treatment"</div>
-                    <div class="fallback-name">awwal LABS</div>
-                    <div class="fallback-sub">QUALITY DIAGNOSTIC LABS</div>
-                    <div class="fallback-site">www.awwallabs.in</div>
+                    <div class="fallback-name">AWWAL LABS</div>
+                    <div class="fallback-sub">QUALITY DIAGNOSTIC LABS | Accurate Diagnosis for Effective Treatment</div>
                 </div>
                 <div class="fallback-address">
-                    A Muhammed's Complex<br>
-                    Chenaykunnu Road Jn.<br>
+                    A Muhammed's Complex, Chenaykunnu Road Jn.<br>
                     <strong>PATHAPPIRIYAM</strong>, Vayanasala<br>
-                    Ph : 7034 250 209, 7559 049 948<br>
-                    Email : awwallabppm@gmail.com
+                    Ph: 7034 250 209, 7559 049 948 | www.awwallabs.in
                 </div>
+                <div class="clear"></div>
             </div>
         @endif
-    </div>
+    </header>
 
-    <div class="report-body">
+    <footer>
+        @if (extension_loaded('gd') && file_exists(public_path('images/report-footer-awwal.png')))
+            <img src="{{ public_path('images/report-footer-awwal.png') }}" class="footer-img" alt="Footer">
+        @else
+            <div class="page-footer-text">
+                QUALITY OF OUR LABORATORY IS CONTROLLED BY CMC VELLORE | Working Hours: 6.30 am To 9.00 pm (Sunday 7.00 am To 12.00 pm)<br>
+                Page <span class="pagenum"></span> - Printed: {{ date('d-M-Y h:i A') }}
+            </div>
+        @endif
+    </footer>
+
+    <main>
         @php
             $title = '';
             $ageVal = (int) $patient->age;
             $ageType = $patient->age_type ?: 'Years';
-            
             if (strtolower($patient->gender ?? '') === 'male') {
                 $title = ($ageVal < 13 && $ageType === 'Years') || $ageType !== 'Years' ? 'MASTER. ' : 'MR. ';
             } elseif (strtolower($patient->gender ?? '') === 'female') {
                 $title = ($ageVal < 13 && $ageType === 'Years') || $ageType !== 'Years' ? 'BABY. ' : 'MRS. ';
             }
-            
             $patientName = trim(strtoupper($title . $patient->first_name . ' ' . $patient->last_name));
             $referenceNo = str_replace(['#P-', '#'], '', $patient->patient_id);
             $sex = strtoupper($patient->gender ?? '');
-            
             $ageDisplay = $patient->age . ' ' . ($ageType === 'Years' ? 'Yrs' : $ageType);
-            
-            $reportDate = optional($report->sample_received_on)->format('d-M-Y - h:i:s A');
-            $printedDate = now()->format('d-M-Y - h:i:s A');
+            $reportDate = optional($report->sample_received_on)->format('d-M-Y h:i A');
         @endphp
 
-        <table class="patient-info">
+        <table class="patient-box">
             <tr>
-                <td class="label">Patient Name</td>
-                <td class="sep">:</td>
-                <td style="width: 35%;"><strong>{{ $patientName }}</strong></td>
-                <td class="right-label">Age</td>
-                <td class="sep">:</td>
-                <td>{{ $ageDisplay }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sex : {{ $sex }}</td>
+                <td style="width: 50%;">
+                    <span class="pb-label">Patient Name</span>
+                    <span class="pb-val-large">{{ $patientName }}</span>
+                </td>
+                <td style="width: 25%;">
+                    <span class="pb-label">Age / Gender</span>
+                    <span class="pb-val">{{ $ageDisplay }} / {{ $sex }}</span>
+                </td>
+                <td style="width: 25%;">
+                    <span class="pb-label">Patient ID</span>
+                    <span class="pb-val">{{ $referenceNo }}</span>
+                </td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right-label">Specimen</td>
-                <td class="sep">:</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Reference No</td>
-                <td class="sep">:</td>
-                <td>{{ $referenceNo }}</td>
-                <td class="right-label">Date</td>
-                <td class="sep">:</td>
-                <td>{{ $reportDate }}</td>
-            </tr>
-            <tr>
-                <td>Referred By</td>
-                <td class="sep">:</td>
-                <td><strong>{{ $report->doctor_name }}</strong></td>
-                <td class="right-label">Printed Date</td>
-                <td class="sep">:</td>
-                <td>{{ $printedDate }}</td>
+                <td>
+                    <span class="pb-label">Referred By</span>
+                    <span class="pb-val">{{ $report->doctor_name ?: 'Self' }}</span>
+                </td>
+                <td>
+                    <span class="pb-label">Report Date</span>
+                    <span class="pb-val">{{ $reportDate }}</span>
+                </td>
+                <td>
+                    <span class="pb-label">Barcode / SID</span>
+                    <span class="pb-val" style="font-family: monospace;">{{ $report->id }}-{{ date('ymd', strtotime($report->created_at)) }}</span>
+                </td>
             </tr>
         </table>
 
-        <hr class="patient-rule">
+        <div class="report-title">LABORATORY INVESTIGATION REPORT</div>
 
         @foreach ($groupedResults as $category => $results)
             <div class="category-title">{{ $category }}</div>
             <table class="results-table">
                 <thead>
                     <tr>
-                                <th class="sl-col">SL No</th>
-	                            <th class="param-col">Parameter</th>
-	                            <th class="value-col">Observed Value</th>
-	                            <th class="unit-col">Unit</th>
-	                            <th class="ref-col">Reference Value</th>
-	                            <th class="flag-col">Flag</th>
-	                        </tr>
-	                    </thead>
+                        <th class="sl-col">#</th>
+                        <th style="width: 35%;">Investigation</th>
+                        <th class="center" style="width: 15%;">Observed Value</th>
+                        <th class="center" style="width: 10%;">Unit</th>
+                        <th style="width: 25%;">Biological Reference</th>
+                        <th class="center" style="width: 10%;">Flag</th>
+                    </tr>
+                </thead>
                 <tbody>
                     @php $lastSubheading = null; $slNo = 1; @endphp
                     @foreach ($results as $r)
@@ -334,63 +164,57 @@
                             $subheading = trim($r['subcategory'] ?? '');
                             $value = trim((string)($r['observed_value'] ?? ''));
                             $unit = trim((string)($r['unit'] ?? ''));
+                            $flag = $r['flag'] ?? '';
+                            $isAbnormal = in_array($flag, ['↑', '↓', '↑↑', '↓↓', 'H', 'L', 'C']);
+                            $flagClass = ($flag === '↑' || $flag === '↑↑' || $flag === 'H') ? 'flag-high' : (($flag === '↓' || $flag === '↓↓' || $flag === 'L') ? 'flag-low' : '');
                         @endphp
 
                         @if ($subheading !== '' && $subheading !== $lastSubheading)
                             <tr class="section-row">
-                                    <td></td>
-	                                <td>{{ strtoupper($subheading) }}</td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                            </tr>
+                                <td></td>
+                                <td colspan="5">{{ strtoupper($subheading) }}</td>
+                            </tr>
                             @php $lastSubheading = $subheading; @endphp
                         @endif
 
                         <tr>
                             <td class="sl-col">{{ $slNo++ }}</td>
                             <td>{{ $r['name'] ?? '' }}</td>
-                            <td style="text-align: center;">
-                                <span class="observed-number">{{ $value }}</span>
-                            </td>
-                            <td style="text-align: center;">{{ $unit }}</td>
+                            <td class="center {{ $isAbnormal ? 'val-abnormal' : '' }}">{!! $isAbnormal ? '<span style="color:#0e609e;">'.$value.'</span>' : $value !!}</td>
+                            <td class="center">{{ $unit }}</td>
                             <td>{!! nl2br(e($r['normal_value'] ?: ($r['biological_reference'] ?? ''))) !!}</td>
-                            <td class="{{ ($r['flag'] ?? '') === 'C' ? 'flag-critical' : 'flag-cell' }}">{{ $r['flag'] ?? '' }}</td>
+                            <td class="center {{ $flagClass }}">{{ $flag }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         @endforeach
 
-        <table class="report-closing">
+        <div class="end-of-report">*** End of Report ***</div>
+
+        <table class="signature-area">
             <tr>
-                <td class="report-note">
-                    <div class="report-note-label">Note :</div>
+                <td style="width: 60%;">
                     @if($report->notes)
-                        <div>{!! nl2br(e($report->notes)) !!}</div>
+                        <div class="report-note">
+                            <strong>Note:</strong><br>
+                            {!! nl2br(e($report->notes)) !!}
+                        </div>
                     @endif
                 </td>
-                <td class="signature">
-                    @if($report->signature && is_file($report->signature->imageAbsolutePath()))
-                        <img src="{{ $report->signature->imageAbsolutePath() }}" alt="{{ $report->signature->name }}">
-                        <div class="signature-name">{{ $report->signature->name }}</div>
-                    @else
-                        <div class="signature-name">Medi Technician</div>
-                    @endif
+                <td style="width: 40%;">
+                    <div class="sig-box">
+                        @if($report->signature && is_file($report->signature->imageAbsolutePath()))
+                            <img src="{{ $report->signature->imageAbsolutePath() }}" alt="Signature">
+                            <div class="sig-name">{{ strtoupper($report->signature->name) }}</div>
+                        @else
+                            <br><br><br>
+                            <div class="sig-name">AUTHORIZED SIGNATORY</div>
+                        @endif
+                    </div>
                 </td>
             </tr>
         </table>
-    </div>
-
-    <div class="page-footer">
-        @if (extension_loaded('gd'))
-            <img src="{{ public_path('images/report-footer-awwal.png') }}" alt="Working Hours">
-        @else
-            <div class="footer-fallback">
-                <div class="footer-fallback-left">QUALITY OF OUR LABORATORY IS CONTROLLED BY CMC VELLORE</div>
-                <div class="footer-fallback-right">Working Hours : 6.30 am To 9.00 pm Sunday 7.00 am To 12.00 pm</div>
-            </div>
-        @endif
-    </div>
-</div>
+    </main>
+</body>
+</html>

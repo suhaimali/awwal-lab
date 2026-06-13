@@ -36,7 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report-signatures/{id}/image', [HomeController::class, 'reportSignatureImage'])->name('report-signatures.image');
     Route::put('/report-signatures/{id}', [HomeController::class, 'updateReportSignature'])->name('report-signatures.update');
     Route::delete('/report-signatures/{id}', [HomeController::class, 'deleteReportSignature'])->name('report-signatures.delete');
-    
 
     Route::get('/patients', [HomeController::class, 'patients'])->name('patients');
 

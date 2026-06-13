@@ -105,7 +105,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-sliders me-2"></i>Clinical Setup: <span id="setup-test-name" style="color:#ffffff;"></span></h5>
+                <h5 class="modal-title"><i class="fa fa-sliders me-2"></i>Clinical Setup: <span id="setup-test-name" class="text-primary ms-1"></span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 		  <div class="modal-body">

@@ -507,6 +507,9 @@
                                         <button class="btn-action-circle btn-view" data-id="{{ $patient->id }}" data-bs-toggle="modal" data-bs-target="#modal-view-patient" title="View Details">
                                             <i class="fa fa-eye"></i>
                                         </button>
+                                        <button class="btn-action-circle btn-followup" data-id="{{ $patient->id }}" data-name="{{ $patient->first_name }} {{ $patient->last_name }}" data-bs-toggle="modal" data-bs-target="#modal-followup-patient" title="Book Follow-up">
+                                            <i class="fa fa-calendar-check text-primary"></i>
+                                        </button>
                                         <button class="btn-action-circle btn-invoice" data-id="{{ $patient->id }}" title="PDF Invoice">
                                             <i class="fa fa-file-pdf"></i>
                                         </button>
@@ -762,6 +765,62 @@
     </div>
   </div>
 
+<!-- Book Follow-up Modal -->
+<div class="modal fade modal-aw" id="modal-followup-patient" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-calendar-check me-2 text-primary"></i>Book Follow-up</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-followup-patient">
+                    <input type="hidden" name="patient_id" id="followup-patient-id">
+                    <input type="hidden" name="status" value="Pending">
+                    <input type="hidden" name="test_price" value="0">
+                    <input type="hidden" name="discount" value="0">
+                    <input type="hidden" name="balance" value="0">
+                    
+                    <div class="mb-3">
+                        <label class="form-label-aw">Patient Name</label>
+                        <input type="text" id="followup-patient-name" class="form-control-aw bg-light" readonly>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label-aw">Follow-up Date <span class="text-danger">*</span></label>
+                            <input type="date" name="appointment_date" class="form-control-aw" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label-aw">Time <span class="text-danger">*</span></label>
+                            <input type="time" name="appointment_time" class="form-control-aw" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label-aw">Consultation / Test Name <span class="text-danger">*</span></label>
+                        <input type="text" name="test_name" class="form-control-aw" value="Follow-up Consultation" required autocomplete="off">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label-aw">Doctor Name</label>
+                        <input type="text" name="doctor_name" class="form-control-aw" placeholder="Leave empty for Self" autocomplete="off">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label-aw">Notes / Reason</label>
+                        <textarea name="notes" class="form-control-aw" rows="2" placeholder="Brief reason for follow-up..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-aw-primary" id="btn-save-followup"><i class="fa fa-save"></i> Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+</div>
+
   <!-- Edit Modal -->
   <div class="modal fade modal-aw" id="modal-edit-patient" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog modal-lg">
@@ -928,9 +987,9 @@
   <div class="modal center-modal fade" id="modal-patient-book-test" tabindex="-1" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
-		  <div class="modal-header bg-primary">
-			<h5 class="modal-title text-white">Book Lab Test for <span id="book-test-patient-name"></span></h5>
-			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+		  <div class="modal-header">
+			<h5 class="modal-title">Book Lab Test for <span id="book-test-patient-name" class="text-primary ms-1"></span></h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 			<form id="form-quick-book">
@@ -2055,12 +2114,76 @@
               });
           });
 
+          // =============================================
+          // FOLLOW-UP BOOKING JS
+          // =============================================
+          $(document).on('click', '.btn-followup', function() {
+              let patientId = $(this).data('id');
+              let patientName = $(this).data('name');
+              
+              $('#form-followup-patient')[0].reset();
+              $('#followup-patient-id').val(patientId);
+              $('#followup-patient-name').val(patientName);
+              
+              // Set default date to today
+              let today = new Date().toISOString().split('T')[0];
+              $('#form-followup-patient input[name="appointment_date"]').val(today);
+              
+              // Set default time to current time rounded to nearest 30 mins
+              let d = new Date();
+              d.setMinutes(Math.round(d.getMinutes()/30) * 30);
+              let timeStr = d.toTimeString().substring(0, 5);
+              $('#form-followup-patient input[name="appointment_time"]').val(timeStr);
+              
+              // Ensure defaults for hidden fields
+              $('#form-followup-patient input[name="status"]').val('Pending');
+              $('#form-followup-patient input[name="test_price"]').val('0');
+              $('#form-followup-patient input[name="discount"]').val('0');
+              $('#form-followup-patient input[name="balance"]').val('0');
+              $('#form-followup-patient input[name="test_name"]').val('Follow-up Consultation');
+          });
+
+          $('#btn-save-followup').click(function() {
+              let form = $('#form-followup-patient');
+              
+              if(!form[0].checkValidity()) {
+                  form[0].reportValidity();
+                  return;
+              }
+
+              let btn = $(this);
+              let originalHtml = btn.html();
+              btn.html('<i class="fa fa-spinner fa-spin me-1"></i>Booking...').prop('disabled', true);
+
+              $.ajax({
+                  url: "{{ route('appointments.store') }}",
+                  type: 'POST',
+                  data: form.serialize(),
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  success: function(response) {
+                      $('#modal-followup-patient').modal('hide');
+                      Swal.fire({
+                          icon: 'success',
+                          title: 'Success!',
+                          text: response.success || 'Follow-up booked successfully',
+                          timer: 2000,
+                          showConfirmButton: false
+                      }).then(() => {
+                          // redirect to appointments page
+                          window.location.href = "{{ route('appointments') }}";
+                      });
+                  },
+                  error: function(xhr) {
+                      alert('Error: ' + (xhr.responseJSON?.message || 'Failed to book follow-up.'));
+                      btn.html(originalHtml).prop('disabled', false);
+                  }
+              });
+          });
+
 	  });
   </script>
   @endpush
 
 @endsection
-
-
-
-

@@ -1,10 +1,15 @@
 <aside id="awlab-sidebar">
     <!-- Brand -->
-    <div class="sidebar-brand">
-        <div class="brand-icon">
-            <i class="fa fa-flask"></i>
+    <div class="sidebar-brand d-flex justify-content-between align-items-center w-100">
+        <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon">
+                <i class="fa fa-flask"></i>
+            </div>
+            <span class="brand-name">AWWAL LAB</span>
         </div>
-        <span class="brand-name">AWWAL LAB</span>
+        <button class="btn btn-sm btn-light d-lg-none" onclick="closeSidebar()" style="padding: 2px 8px; border-radius: 6px;">
+            <i class="fa fa-times"></i>
+        </button>
     </div>
 
     <!-- Nav -->

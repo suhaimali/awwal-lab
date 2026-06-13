@@ -80,10 +80,6 @@
                 }
             });
 
-            // Handle Sidebar Collapse
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
         });
 
         // Global fix for Enter key form submission in modals/cards using AJAX buttons

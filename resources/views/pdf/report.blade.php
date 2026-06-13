@@ -260,9 +260,9 @@
             $ageVal = (int) $patient->age;
             $ageType = $patient->age_type ?: 'Years';
             
-            if (strtolower($patient->gender) === 'male') {
+            if (strtolower($patient->gender ?? '') === 'male') {
                 $title = ($ageVal < 13 && $ageType === 'Years') || $ageType !== 'Years' ? 'MASTER. ' : 'MR. ';
-            } elseif (strtolower($patient->gender) === 'female') {
+            } elseif (strtolower($patient->gender ?? '') === 'female') {
                 $title = ($ageVal < 13 && $ageType === 'Years') || $ageType !== 'Years' ? 'BABY. ' : 'MRS. ';
             }
             

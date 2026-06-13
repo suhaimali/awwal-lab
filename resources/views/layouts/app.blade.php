@@ -85,6 +85,47 @@
                 $('#sidebar').toggleClass('active');
             });
         });
+
+        // Global fix for Enter key form submission in modals/cards using AJAX buttons
+        document.addEventListener('submit', function(e) {
+            let form = e.target;
+            let container = form.closest('.modal') || form.closest('.aw-card');
+            if (container) {
+                let btn = container.querySelector('button.btn-aw-primary, button.btn-primary');
+                if (btn && btn.type === 'button') {
+                    e.preventDefault(); // Stop native submission
+                    if (form.checkValidity()) {
+                        btn.click();
+                    } else {
+                        form.reportValidity();
+                    }
+                }
+            }
+        }, true);
+
+        // Global fix for HTML5 validation on AJAX save/update buttons
+        document.addEventListener('click', function(e) {
+            let target = e.target.closest('button[type="button"]');
+            if (target && target.id) {
+                let formId = null;
+                if (target.id.startsWith('btn-save-')) {
+                    formId = target.id.replace('btn-save-', 'form-add-');
+                } else if (target.id.startsWith('btn-update-')) {
+                    formId = target.id.replace('btn-update-', 'form-edit-');
+                }
+                
+                if (formId) {
+                    let form = document.getElementById(formId);
+                    if (form) {
+                        if (!form.checkValidity()) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            form.reportValidity();
+                        }
+                    }
+                }
+            }
+        }, true);
     </script>
 </body>
 </html>

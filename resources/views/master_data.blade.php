@@ -404,7 +404,7 @@
 
 {{-- Universal Edit Modal --}}
 <div class="modal fade modal-aw" id="modal-edit-master" tabindex="-1">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-0 pb-0">
                 <h5 class="modal-title"><i class="fa fa-pen me-2"></i>Edit Entry</h5>
@@ -416,13 +416,13 @@
                     <input type="hidden" id="edit-type" name="name_1033">
                     <div class="mb-2">
                         <label for="edit-name" class="form-label-aw">Name / Value</label>
-                        <input type="text" id="edit-name" name="name" class="form-control-aw" required autocomplete="off">
+                        <input type="text" id="edit-name" name="name" class="form-control-aw w-100" required autocomplete="off">
                     </div>
                 </form>
             </div>
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn-aw-outline" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn-aw-primary" id="btn-update-master">
+            <div class="modal-footer border-0 pt-0 d-flex flex-wrap flex-sm-nowrap gap-2 w-100">
+                <button type="button" class="btn-aw-outline flex-fill w-100" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-aw-primary flex-fill w-100" id="btn-update-master">
                     <i class="fa fa-check me-1"></i> Update
                 </button>
             </div>

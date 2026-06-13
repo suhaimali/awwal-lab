@@ -59,6 +59,19 @@
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         });
 
+        // ── Global Toast Function
+        function showToast(message, type = 'success') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                icon: type,
+                title: message
+            });
+        }
+
         // ── Session Timeout Warning
         // Session lifetime = 120 minutes. Warn at 118 min, expire at 120 min.
         (function() {

@@ -2,6 +2,51 @@
 @section('title', ' | Products')
 @section('page-title', 'Products Management')
 
+@push('styles')
+<style>
+    /* Action buttons styling */
+    .action-buttons {
+        display: inline-flex;
+        gap: 6px;
+    }
+
+    .btn-action-circle {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+    .btn-action-circle:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: var(--primary-light);
+        transform: translateY(-1px);
+    }
+
+    .btn-action-circle.btn-edit:hover {
+        border-color: #3b82f6;
+        color: #3b82f6;
+        background: #eff6ff;
+    }
+
+    .btn-action-circle.btn-delete:hover {
+        border-color: #dc2626;
+        color: #dc2626;
+        background: #fee2e2;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="page-header-aw">
     <div class="page-title-aw">
@@ -59,12 +104,12 @@
                                 @endif
                             </td>
                             <td data-label="Actions" class="text-center">
-                                <div class="action-buttons-center">
-                                    <button class="btn-icon" data-bs-toggle="modal" data-bs-target="#modal-edit-product-{{ $product->id }}" title="Edit">
-                                        <i class="fa fa-edit text-primary"></i>
+                                <div class="action-buttons justify-content-center">
+                                    <button class="btn-action-circle btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit-product-{{ $product->id }}" title="Edit">
+                                        <i class="fa fa-pen"></i>
                                     </button>
-                                    <button class="btn-icon" onclick="deleteProduct({{ $product->id }})" title="Delete">
-                                        <i class="fa fa-trash text-danger"></i>
+                                    <button class="btn-action-circle btn-delete" onclick="deleteProduct({{ $product->id }})" title="Delete">
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
                             </td>

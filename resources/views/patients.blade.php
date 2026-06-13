@@ -544,7 +544,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="field_1035" class="form-label">Patient ID</label>
-							<input type="text" class="form-control" name="patient_id" placeholder="Auto-generated if blank" autocomplete="new-password" id="field_1035">
+							<input type="text" class="form-control" name="patient_id" placeholder="Auto-generated if blank" value="{{ $nextPatientId ?? '' }}" readonly autocomplete="new-password" id="field_1035">
 						</div>
 					</div>
 					<div class="col-md-6">

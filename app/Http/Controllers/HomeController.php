@@ -278,7 +278,12 @@ class HomeController extends Controller
     {
         $patients = \App\Models\Patient::with('appointments')->latest()->get();
         $labTests = \App\Models\LabTest::orderBy('name')->get();
-        return view('patients', compact('patients', 'labTests'));
+        
+        $latest = \App\Models\Patient::latest('id')->first();
+        $nextId = ($latest ? $latest->id : 0) + 1;
+        $nextPatientId = date('Y') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+        
+        return view('patients', compact('patients', 'labTests', 'nextPatientId'));
     }
 
     /**

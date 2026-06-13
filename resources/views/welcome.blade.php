@@ -623,10 +623,14 @@
                         <a class="nav-link" href="#benefits">Benefits</a>
                     </li>
                 </ul>
-                <div class="d-flex gap-2 mt-3 mt-lg-0 align-items-center">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
-                    <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" style="background: var(--primary-blue); border: none;">Login <i class="fa-solid fa-right-to-bracket ms-1"></i></a>
-                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#enrollModal" class="nav-link fw-bold" style="color: var(--primary-blue) !important;">Enroll Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="{{ route('login') }}" style="color: var(--primary-blue) !important;">Login</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

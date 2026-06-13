@@ -166,8 +166,9 @@
             font-size: 15px;
         }
 
-        .param-col { width: 35%; }
-        .value-col { width: 25%; }
+        .sl-col { width: 6%; text-align: center; }
+        .param-col { width: 31%; }
+        .value-col { width: 23%; }
         .ref-col { width: 30%; }
         .flag-col { width: 10%; }
 
@@ -255,9 +256,22 @@
 
     <div class="report-body">
         @php
-            $patientName = trim(strtoupper($patient->first_name . ' ' . $patient->last_name));
+            $title = '';
+            $ageVal = (int) $patient->age;
+            $ageType = $patient->age_type ?: 'Years';
+            
+            if (strtolower($patient->gender) === 'male') {
+                $title = ($ageVal < 13 && $ageType === 'Years') || $ageType !== 'Years' ? 'MASTER. ' : 'MR. ';
+            } elseif (strtolower($patient->gender) === 'female') {
+                $title = ($ageVal < 13 && $ageType === 'Years') || $ageType !== 'Years' ? 'BABY. ' : 'MRS. ';
+            }
+            
+            $patientName = trim(strtoupper($title . $patient->first_name . ' ' . $patient->last_name));
             $referenceNo = str_replace(['#P-', '#'], '', $patient->patient_id);
             $sex = strtoupper($patient->gender ?? '');
+            
+            $ageDisplay = $patient->age . ' ' . ($ageType === 'Years' ? 'Yrs' : $ageType);
+            
             $reportDate = optional($report->sample_received_on)->format('d-M-Y - h:i:s A');
             $printedDate = now()->format('d-M-Y - h:i:s A');
         @endphp
@@ -269,7 +283,7 @@
                 <td style="width: 35%;"><strong>{{ $patientName }}</strong></td>
                 <td class="right-label">Age</td>
                 <td class="sep">:</td>
-                <td>{{ $patient->age }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sex : {{ $sex }}</td>
+                <td>{{ $ageDisplay }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sex : {{ $sex }}</td>
             </tr>
             <tr>
                 <td></td>
@@ -304,6 +318,7 @@
             <table class="results-table">
                 <thead>
                     <tr>
+                                <th class="sl-col">SL No</th>
 	                            <th class="param-col">Parameter</th>
 	                            <th class="value-col">Observed Value</th>
 	                            <th class="ref-col">Reference Value</th>
@@ -311,7 +326,7 @@
 	                        </tr>
 	                    </thead>
                 <tbody>
-                    @php $lastSubheading = null; @endphp
+                    @php $lastSubheading = null; $slNo = 1; @endphp
                     @foreach ($results as $r)
                         @php
                             $subheading = trim($r['subcategory'] ?? '');
@@ -321,6 +336,7 @@
 
                         @if ($subheading !== '' && $subheading !== $lastSubheading)
                             <tr class="section-row">
+                                    <td></td>
 	                                <td>{{ strtoupper($subheading) }}</td>
 	                                <td></td>
 	                                <td></td>
@@ -330,6 +346,7 @@
                         @endif
 
                         <tr>
+                            <td class="sl-col">{{ $slNo++ }}</td>
                             <td>{{ $r['name'] ?? '' }}</td>
                             <td>
                                 <span class="observed-number">{{ $value }}</span>

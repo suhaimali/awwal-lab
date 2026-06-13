@@ -1010,12 +1010,13 @@
             <div class="test-item-row card border-0 shadow-sm mb-3" style="background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 12px; position: relative; overflow: hidden;">
                 <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #6366f1;"></div>
                 <div class="card-body p-3">
+                    <span class="badge bg-primary text-white position-absolute row-sl-no" style="top: 10px; left: 15px; z-index: 10; border-radius: 6px;">SL 1</span>
                     <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
-                    <div class="row g-3 align-items-end">
+                    <div class="row g-3 align-items-end mt-3">
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1110"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
+                            <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-category-select" name="test_category[]" autocomplete="off" id="field_1110">
+                                <select class="form-select report-category-select" name="test_category[]" autocomplete="off">
                                     <option value="">-- Select Category --</option>
                                     @foreach($categories as $cat)
                                         <option value="{{ $cat->name }}" data-id="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -1028,9 +1029,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1111"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
+                            <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Sub Category</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-subcategory-select" name="test_subcategory[]" autocomplete="off" id="field_1111">
+                                <select class="form-select report-subcategory-select" name="test_subcategory[]" autocomplete="off">
                                     <option value="">-- Select Sub Category --</option>
                                     @foreach($subCategories as $sub)
                                         <option value="{{ $sub->name }}" data-id="{{ $sub->id }}">{{ $sub->name }}</option>
@@ -1043,9 +1044,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1112"  class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name</label>
+                            <label class="form-label text-primary fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Parameter / Test Name</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" autocomplete="off" id="field_1112">
+                                <select class="form-select test-selector-dynamic border-primary shadow-none" name="test_name[]" autocomplete="off">
                                     <option value="">-- Select Test --</option>
                                     @foreach($tests as $test)
                                         <option value="{{ str_replace(['`', '${'], ['\`', '\${'], $test->name) }}" 
@@ -1073,9 +1074,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1113"  class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value</label>
+                            <label class="form-label text-success fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Observed Value</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-observed-select" name="observed_value[]" autocomplete="off" id="field_1113">
+                                <select class="form-select report-observed-select" name="observed_value[]" autocomplete="off">
                                     <option value="">-- Select Observed --</option>
                                     @foreach($templates as $tmpl)
                                         <option value="{{ $tmpl->name }}" data-id="{{ $tmpl->id }}">{{ $tmpl->name }}</option>
@@ -1088,9 +1089,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1114"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
+                            <label class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Unit</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off" id="field_1114">
+                                <select class="form-select report-unit-select" name="test_unit[]" autocomplete="off">
                                     <option value="">-- Select Unit --</option>
                                     @foreach($units as $u)
                                         <option value="{{ $u->name }}" data-id="{{ $u->id }}">{{ $u->name }}</option>
@@ -1103,9 +1104,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1115"  class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Referral Range</label>
+                            <label class="form-label text-info fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Referral Range</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off" id="field_1115">
+                                <select class="form-select normal-val-dynamic" name="normal_value[]" autocomplete="off">
                                     <option value="">-- Select Reference --</option>
                                     @foreach($referenceTemplates as $ref)
                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
@@ -1118,9 +1119,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label for="field_1116"  class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
+                            <label class="form-label text-warning fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Flag</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select flag-selector" name="test_flag[]" autocomplete="off" id="field_1116">
+                                <select class="form-select flag-selector" name="test_flag[]" autocomplete="off">
                                     <option value="">-- Select Flag --</option>
                                     @foreach($flagTemplates as $flg)
                                         <option value="{{ str_replace(['`', '${'], ['\`', '\${'], $flg->name) }}" data-id="{{ $flg->id }}">{{ str_replace(['`', '${'], ['\`', '\${'], $flg->name) }}</option>
@@ -1133,9 +1134,9 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12">
-                            <label for="field_1117"  class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
+                            <label class="form-label text-dark fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Normal Range</label>
                             <div class="input-group flex-nowrap">
-                                <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off" id="field_1117">
+                                <select class="form-select bio-val-dynamic" name="biological_reference[]" autocomplete="off">
                                     <option value="">-- Select Range --</option>
                                     @foreach($referenceTemplates as $ref)
                                         <option value="{{ $ref->name }}" data-id="{{ $ref->id }}">{{ $ref->name }}</option>
@@ -1164,14 +1165,22 @@
 	              
 	              // Set Reference Interval based on Gender
 	              let ageInterval = getMatchingReferenceInterval(selected, gender, age);
-	              let ref = ageInterval ? ageInterval.reference_text : (gender === 'Male' ? selected.attr('data-male-ref') : selected.attr('data-female-ref'));
-	              if (!ref) ref = selected.attr('data-male-ref') || selected.attr('data-female-ref') || selected.attr('data-normal') || '';
+	              let ref = ageInterval ? ageInterval.reference_text : '';
+                  if (!ref) {
+                      let mRef = selected.attr('data-male-ref');
+                      let fRef = selected.attr('data-female-ref');
+                      if (mRef && fRef && mRef !== fRef) {
+                          ref = "Male: " + mRef + "\nFemale: " + fRef;
+                      } else {
+                          ref = mRef || fRef || selected.attr('data-normal') || '';
+                      }
+                  }
               
-              row.find('.normal-val-dynamic').val(ref);
+              setSelectValueWithDefault(row.find('.normal-val-dynamic'), ref);
               
               // Keep legacy JSON field filled for older reports while printing the normal value column.
               let masterBio = selected.attr('data-bio-ref');
-              row.find('.bio-val-dynamic').val(masterBio || ref);
+              setSelectValueWithDefault(row.find('.bio-val-dynamic'), masterBio || ref);
               
                // Trigger calculation if value exists
                row.find('.report-observed-select').trigger('change');
@@ -1179,7 +1188,7 @@
 
           $(document).on('change', '.normal-val-dynamic', function() {
               let val = $(this).val();
-              $(this).closest('.test-item-row').find('.bio-val-dynamic').val(val);
+              setSelectValueWithDefault($(this).closest('.test-item-row').find('.bio-val-dynamic'), val);
           });
 
           // Keep hidden flag values compatible with older saved reports.
@@ -1399,14 +1408,23 @@
           
           initDynamicSelect2();
 
+          function updateRowSlNo(target) {
+              $(target).find('.test-item-row').each(function(index) {
+                  $(this).find('.row-sl-no').text('SL ' + (index + 1));
+              });
+          }
+
           $('#btn-add-test-row, #btn-add-edit-test-row').click(function() {
               let target = $(this).attr('id') === 'btn-add-test-row' ? '#dynamic-tests-container' : '#edit-dynamic-tests-container';
               $(target).append(trTemplate);
+              updateRowSlNo(target);
               initDynamicSelect2();
           });
 
           $(document).on('click', '.remove-row', function() {
+              let target = $(this).closest('.test-item-row').parent();
               $(this).closest('.test-item-row').remove();
+              updateRowSlNo(target);
           });
 
           // =============================================

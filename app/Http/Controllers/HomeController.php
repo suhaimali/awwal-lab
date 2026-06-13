@@ -1174,16 +1174,26 @@ class HomeController extends Controller
             return [];
         }
 
+        $maleRef = $parameter->male_reference;
+        $femaleRef = $parameter->female_reference;
+        
+        $textStr = '';
+        if ($maleRef && $femaleRef && $maleRef !== $femaleRef) {
+            $textStr = "Male: " . $maleRef . "\nFemale: " . $femaleRef;
+        } else {
+            $textStr = ($gender === 'female') ? ($femaleRef ?: $parameter->biological_reference) : ($maleRef ?: $parameter->biological_reference);
+        }
+
         if ($gender === 'female') {
             return [
-                'text' => $parameter->female_reference ?: $parameter->biological_reference,
+                'text' => $textStr,
                 'min' => $parameter->female_min,
                 'max' => $parameter->female_max,
             ];
         }
 
         return [
-            'text' => $parameter->male_reference ?: $parameter->biological_reference,
+            'text' => $textStr,
             'min' => $parameter->male_min,
             'max' => $parameter->male_max,
         ];

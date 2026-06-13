@@ -2178,8 +2178,9 @@
              <div class="test-item-row card border-0 shadow-sm mb-3" style="background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 12px; position: relative; overflow: hidden;">
                  <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #6366f1;"></div>
                  <div class="card-body p-3">
+                     <span class="badge bg-primary text-white position-absolute row-sl-no" style="top: 10px; left: 15px; z-index: 10; border-radius: 6px;">SL 1</span>
                      <button type="button" class="btn btn-sm btn-danger position-absolute remove-row" style="top: 10px; right: 10px; z-index: 10; border-radius: 8px;" title="Remove Test"><i class="fa fa-trash"></i></button>
-                     <div class="row g-3 align-items-end">
+                     <div class="row g-3 align-items-end mt-3">
                          <div class="col-md-4 col-sm-6">
                              <label for="field_1118"  class="form-label text-muted fs-11 fw-bold text-uppercase mb-1" style="font-size:11px;">Master Category</label>
                              <div class="input-group flex-nowrap">
@@ -2302,9 +2303,11 @@
                            setSelectValueWithDefault(newRow.find('.normal-val-dynamic'), item.normal_value);
                            setSelectValueWithDefault(newRow.find('.bio-val-dynamic'), item.biological_reference);
                       });
+                      updateRowSlNo(container);
                       initDynamicSelect2();
                   } else {
                       container.append(trTemplate);
+                      updateRowSlNo(container);
                       initDynamicSelect2();
                   }
               });

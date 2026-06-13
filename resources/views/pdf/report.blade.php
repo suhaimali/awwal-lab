@@ -167,10 +167,11 @@
         }
 
         .sl-col { width: 6%; text-align: center; }
-        .param-col { width: 31%; }
-        .value-col { width: 23%; }
-        .ref-col { width: 30%; }
-        .flag-col { width: 10%; }
+        .param-col { width: 29%; }
+        .value-col { width: 16%; text-align: center; }
+        .unit-col { width: 14%; text-align: center; }
+        .ref-col { width: 26%; }
+        .flag-col { width: 9%; text-align: center; }
 
         .observed-number {
             font-weight: 700;
@@ -321,6 +322,7 @@
                                 <th class="sl-col">SL No</th>
 	                            <th class="param-col">Parameter</th>
 	                            <th class="value-col">Observed Value</th>
+	                            <th class="unit-col">Unit</th>
 	                            <th class="ref-col">Reference Value</th>
 	                            <th class="flag-col">Flag</th>
 	                        </tr>
@@ -341,6 +343,7 @@
 	                                <td></td>
 	                                <td></td>
 	                                <td></td>
+	                                <td></td>
 	                            </tr>
                             @php $lastSubheading = $subheading; @endphp
                         @endif
@@ -348,15 +351,13 @@
                         <tr>
                             <td class="sl-col">{{ $slNo++ }}</td>
                             <td>{{ $r['name'] ?? '' }}</td>
-                            <td>
+                            <td style="text-align: center;">
                                 <span class="observed-number">{{ $value }}</span>
-                                @if ($unit !== '')
-                                    &nbsp;{{ $unit }}
-                                @endif
                             </td>
-	                            <td>{!! nl2br(e($r['normal_value'] ?? $r['biological_reference'] ?? '')) !!}</td>
-	                            <td class="{{ ($r['flag'] ?? '') === 'C' ? 'flag-critical' : 'flag-cell' }}">{{ $r['flag'] ?? '' }}</td>
-	                        </tr>
+                            <td style="text-align: center;">{{ $unit }}</td>
+                            <td>{!! nl2br(e($r['normal_value'] ?: ($r['biological_reference'] ?? ''))) !!}</td>
+                            <td class="{{ ($r['flag'] ?? '') === 'C' ? 'flag-critical' : 'flag-cell' }}">{{ $r['flag'] ?? '' }}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

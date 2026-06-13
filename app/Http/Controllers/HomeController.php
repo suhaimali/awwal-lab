@@ -1148,13 +1148,17 @@ class HomeController extends Controller
         $ageType = strtolower((string) ($patient->age_type ?: 'Years'));
         $interval = $labTest->referenceIntervals
             ->filter(function ($interval) use ($age, $gender, $ageType) {
-                $genderMatches = !$interval->gender || strtolower($interval->gender) === $gender;
+                $genderMatches = !$interval->gender || strtolower($interval->gender) === $gender || strtolower($interval->gender) === 'any';
                 $minMatches = $interval->age_min === null || $age >= (int) $interval->age_min;
                 $maxMatches = $interval->age_max === null || $age <= (int) $interval->age_max;
-                $ageTypeMatches = !$interval->age_type || strtolower($interval->age_type) === $ageType;
+                $ageTypeMatches = !$interval->age_type || strtolower($interval->age_type) === $ageType || strtolower($interval->age_type) === 'any';
                 return $genderMatches && $minMatches && $maxMatches && $ageTypeMatches;
             })
-            ->sortByDesc('age_min')
+            ->sortBy(function ($interval) {
+                $min = $interval->age_min ?? 0;
+                $max = $interval->age_max ?? 200;
+                return $max - $min;
+            })
             ->first();
 
         if ($interval) {

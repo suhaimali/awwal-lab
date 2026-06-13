@@ -241,6 +241,36 @@
         }
         .aw-card-body { padding: 20px 24px; }
 
+        /* ── WELCOME BANNER ── */
+        .welcome-banner {
+            background: linear-gradient(135deg, #1a56db 0%, #3b82f6 60%, #60a5fa 100%);
+            border: none;
+            color: #fff;
+            min-height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wb-bg-circle-1 { position: absolute; right: -20px; top: -20px; width: 180px; height: 180px; background: rgba(255,255,255,0.07); border-radius: 50%; }
+        .wb-bg-circle-2 { position: absolute; right: 60px; bottom: -40px; width: 140px; height: 140px; background: rgba(255,255,255,0.06); border-radius: 50%; }
+        .welcome-banner-body { position: relative; z-index: 1; padding: 32px; }
+        .wb-subtitle { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; opacity: 0.75; margin-bottom: 8px; }
+        .wb-title { font-size: 24px; font-weight: 800; margin-bottom: 10px; line-height: 1.2; }
+        .wb-text { font-size: 13.5px; opacity: 0.85; max-width: 550px; line-height: 1.6; }
+        
+        .wb-actions { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+        .wb-btn {
+            background: rgba(255,255,255,0.2); color: #fff; padding: 9px 20px; border-radius: 9px;
+            text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;
+            backdrop-filter: blur(4px); transition: all 0.2s; border: 1px solid rgba(255,255,255,0.3);
+        }
+        .wb-btn:hover { background: rgba(255,255,255,0.3); color: #fff; }
+        .wb-btn-outline {
+            background: rgba(255,255,255,0.1); color: #fff; padding: 9px 20px; border-radius: 9px;
+            text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;
+            border: 1px solid rgba(255,255,255,0.25); transition: all 0.2s;
+        }
+        .wb-btn-outline:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
         /* ── STAT CARDS ── */
         .stat-card-new {
             background: var(--white);
@@ -552,6 +582,14 @@
             .header-clock { display: none; }
             #awlab-main { padding: 14px 12px 0; }
             
+            /* Welcome Banner Mobile */
+            .welcome-banner-body { padding: 20px 16px; }
+            .wb-title { font-size: 20px; }
+            .wb-text { font-size: 12.5px; }
+            .wb-actions { flex-direction: column; width: 100%; gap: 10px; }
+            .wb-actions a { width: 100%; justify-content: center; }
+            .aw-card-body { padding: 15px 15px; }
+
             /* Mobile Modal Responsiveness */
             .modal-dialog {
                 margin: 10px auto;
